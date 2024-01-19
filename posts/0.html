@@ -1,0 +1,719 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>嘻哈磕碜のBlogs | 嘻哈磕碜のBlogs</title><meta name="author" content="hihopkc"><meta name="copyright" content="hihopkc"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#f7f9fe"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="嘻哈磕碜のBlogs"><meta name="application-name" content="嘻哈磕碜のBlogs"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#f7f9fe"><meta property="og:type" content="article"><meta property="og:title" content="嘻哈磕碜のBlogs"><meta property="og:url" content="https://hihopkc.github.io/posts/0.html"><meta property="og:site_name" content="嘻哈磕碜のBlogs"><meta property="og:description" content="title: 【THM】REmux The Tmux-Learn categories:  网络安全 TryHackMe Learncover: ‘https:&amp;#x2F;&amp;#x2F;hihopkc-blog.oss-cn-shenzhen.aliyuncs.com&amp;#x2F;img&amp;#x2F;202401181642772.png‘ab"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://hihopkc.github.io/img/default_cover.jpg"><meta property="article:author" content="hihopkc"><meta property="article:tag"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://hihopkc.github.io/img/default_cover.jpg"><meta name="description" content="title: 【THM】REmux The Tmux-Learn categories:  网络安全 TryHackMe Learncover: ‘https:&amp;#x2F;&amp;#x2F;hihopkc-blog.oss-cn-shenzhen.aliyuncs.com&amp;#x2F;img&amp;#x2F;202401181642772.png‘ab"><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="https://hihopkc.github.io/posts/0"><link rel="preconnect" href="//cdn.cbd.int"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="google-site-verification" content="xxx"/><meta name="baidu-site-verification" content="code-xxx"/><meta name="msvalidate.01" content="xxx"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/swiper/swiper.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  linkPageTop: undefined,
+  peoplecanvas: undefined,
+  postHeadAiDescription: {"enable":true,"gptName":"AnZhiYu","mode":"tianli","switchBtn":false,"btnLink":"https://afdian.net/item/886a79d4db6711eda42a52540025c377","randomNum":3,"basicWordCount":1000,"key":"00af80c1b4c617346c21","Referer":"https://hihopkc.github.io/"},
+  diytitle: {"enable":true,"leaveTitle":"w(ﾟДﾟ)w 不要走！再看看嘛！","backTitle":"♪(^∇^*)欢迎肥来！"},
+  LA51: undefined,
+  greetingBox: undefined,
+  twikooEnvId: 'https://hihopkc.space/',
+  commentBarrageConfig:undefined,
+  root: '/',
+  preloader: {"source":3},
+  friends_vue_info: {"apiurl":"https://www.hihopkc.site/"},
+  navMusic: false,
+  mainTone: undefined,
+  authorStatus: {"skills":null},
+  algolia: {"appId":"R27EJ0K44Q","apiKey":"2631264c2276b5498f37a67d587bc878","indexName":"Demo","hits":{"per_page":6},"languages":{"input_placeholder":"输入关键词后按下回车查找","hits_empty":"找不到您查询的内容：${query}","hits_stats":"找到 ${hits} 条结果，用时 ${time} 毫秒"}},
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简","rightMenuMsgToTraditionalChinese":"转为繁体","rightMenuMsgToSimplifiedChinese":"转为简体"},
+  noticeOutdate: {"limitDay":365,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":330},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    simplehomepage: true,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"copy":true,"copyrightEbable":false,"limitCount":50,"languages":{"author":"作者: hihopkc","link":"链接: ","source":"来源: 嘻哈磕碜のBlogs","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
+  lightbox: 'mediumZoom',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#425AEF","bgDark":"#425AEF","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  shortcutKey: undefined,
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: '嘻哈磕碜のBlogs',
+  title: '嘻哈磕碜のBlogs',
+  postAI: '',
+  pageFillDescription: 'Task 2 Starting tmux Sessions and default tmux prefix, Task 3 Manage tmux Panes, ctrl b shift , ctrl b shift %, ctrl b ltarrow keygt, ctrl b o, ctrl b shift }, ctrl b shift {, ctrl b esc 4, Task 4 Manage tmux Windows, ctrl b c, ctrl b , ctrl b shift !, ctrl b shift amp, ctrl b shift , Task 5 Tmux copy mode, Task 6 Oh My Tmux and beyond, Task 7 Oreo’s open-source .tmux.conf file网络安全要启动新的会话只需运行不带参数的命令即可第一个会话创建的名称为默认情况下状态栏将为绿色会话名称位于左侧窗口在中间窗口名称在中间主机名时间和日期位于底部绿色栏的右侧不允许在中创建嵌套的除非您强制这样做再次运行命令时我们可以尝试将当前的会话名称从更改为在此之前我们可以首先了解是如何被调用的会话中的所有命令都以前缀开头而默认情况下的前缀组合键为在组合键前缀之后我们可以再添加按键来改变当前会话的名称所以完整的键盘输入为如果需要在当前会话中创建另一个会话将参数与命令一起使用在不附加到它的情况下生成新的会话在下面的示例图像中参数用于指定新会话的会话名称键入为退出会话而不关闭它可以使用前缀来完成使用命令再次检查两个会话中都缺少这意味着会话处于活动状态但我们是分离的无法与任何一个会话交互重新连接到活动的会话使用选项和运行后跟所需的会话名称按会话名称删除单个会话使用的选项完成在下面的示例中有许多会话处于打开状态交换会话的另一种方法而无需分离并重新附加到另一个会话是使用前缀后跟键以列出所有打开的会话使用向上或向下箭头键导航到所需的会话然后回车以选择新会话如果我们需要杀死除了一个指定会话外的所有会话那么我们可以在使用命令时附加参数来关闭除了参数所指定的会话之外的所有会话如下例所示除了一个名为的会话之外我们将关闭所有会话最终结果可以通过命令来进行检查后跟将上面更新的起始目录或基本目录作为完成在目录中开始创建一个新窗格尽管在开始时不允许在中嵌套通过连接在另一台计算机上附加或启动新的会话可以制作嵌套的没问题只需更改以下命令之前使用的前缀数量即可可以确定哪个会话获取命令和这将在机器的第二个嵌套会话上运行前缀和命令这将在第一个会话上运行在当前计算机的上运行的会话在当前会话窗口中窗格用于将当前会话划分为多个大小的终端这允许多个命令在同一会话窗口中运行水平拆分当前选定的窗格命令可用于关闭当前选定的窗格可以使用前缀移动到同一窗口中的另一个窗格后跟箭头键在打开两个以上的窗格时在最常用的窗格之间切换是更好的选择在仅打开两个窗格时效果更好如果窗格没有响应并且也不能解决这个问题那么我们还可以强制关闭或杀死当前所选择的窗格管理窗格位置的另一种方法是使用的五个内置布局这可以通过在前缀组合键后附加转义或键以及从到中的某个数字来完成请注意布局结果取决于当前打开的窗格数量我们还可以使用前缀组合键加上空格键来一次一个地循环浏览当前窗口内置的窗格布局当只有两个窗格在当前的窗口中打开时我们也可以使用顺时针或逆时针选项切换窗格来作为的替代方案最后在管理窗格方面可能需要在两个窗格之间交换位置循环窗格时不会创建所需的窗格布局在进行窗格交换之前我们可以使用组合键来标识窗格号这将帮助我们查看窗格的编号以及窗格的大小为了实现窗格位置交换我们首先要进入提示符或者命令模式这可以通过组合键来完成成功进入命令模式之后我们可以使用以下命令来进行窗格交换我们还可以在命令模式下使用以下命令来进行窗格交换窗口就像一个新的终端选项卡你可以轻松地切换这些窗口我们可以在会话中使用组合键来创建一个新的空窗口在新窗口中会自动显示该窗口的编号和名称并且在窗口名称末尾会用或通配符星号来标记我们当前所选中的窗口如果我们想更改当前的窗口名称我们可以先使用组合键然后再重新输入新窗口名称并按回车键保存更改即可当我们在某个窗口中使用了命令之后由于界面原因我们无法很好地查看的输出结果此时我们就可以使用组合键来将当前的窗格中的输出结果发送到一个新的窗口中以方便我们进行查看如上图所示我们可以看到命令的输出结果被发送到了一个名为的新窗口中如果想在多个窗口之间进行切换我们可以使用来切换到下一个窗口或者使用切换到前一个窗口此外我们还可以选择使用组合键来切换到我们所需的窗口此组合键需要我们结合方向键和键来选择我们具体想要切换到的窗口见下图移回侦察窗口显示窗格已移动并且有更多工作空间如果一个窗口已经失效并且需要被快速终止那么我们就需要关闭该窗口在关闭窗口时还将关闭当前所选择的窗口中已经打开的任何窗格如果我们要杀死或者关闭一个窗口那么我们首先需要使用组合键然后再加上键来确认关闭当前的窗口或者继续输入键来保持当前的窗口为打开状态命令后提示关闭侦察窗口名称将从下面的状态栏中删除在此任务的前面部分演示了如何将窗格分解到其自己的窗口中但是有时需要将两个窗口融合在一起作为单个窗口我们需要先输入组合键然后在提示符中输入或者其中表示源窗口名称表示目标窗口名称按下回车键来运行连接窗格命令即可复制模式可用于上下滚动以查看页面内容如果会话中的文本内容大于窗格的长度或者窗口的大小那么我们就需要启动复制模式我们可以输入组合键来进入复制模式然后就可以上下滚动以查看页面此时我们还可以使用键来退出复制模式在复制模式下我们可以键入和我们要搜索的字符串或关键词来向上查找页面内容然后按住键并再次按键就可以让我们跳转到下一个字符串位置并且按下回车键还可以让我们恢复到页面滚动状态此时鼠标光标将停止在我们所搜索的字符串位置在复制模式下我们还可以使用并附加字符串来向下搜索页面按住键并再次按键可以让我们跳转到下一个字符串位置并且按下回车键可以让我们恢复到页面滚动状态此时鼠标光标将停止在我们所搜索的字符串位置在复制模式下执行复制和粘贴操作需要个步骤注意这个方法只适用于剪贴板按下组合键来进入复制模式滚动到要复制的文本块的开头使用空格键启用高亮显示然后使用方向键向上选择所有文本如果我们从顶部开始就使用向下的方向键使用键来复制所有高亮显示的文本到剪贴板中创建一个新文件然后再用组合键来粘贴最终的文本内容如果我们想检查当前复制到剪贴板中的文本那么我们可以使用组合键来完成请注意即使文本内容可能看起来被破坏了也不要担心它的粘贴情况因为它是在终端文件编辑器中复制的我们按键退出复制模式然后回到终端界面创建文件并粘贴我们所复制的文本内容即可在默认情况下并没有默认的配置文件但是我们也可以创建一个自定义的配置文件在为制作自定义配置文件之前可以先显示默认值的所有选项我们使用命令即可显示的全局参数我们所需要创建的配置脚本的文件名为它的保存路径为我们现在分析一下上图中的配置文件内容配置文件内容中的这一行用来修改状态栏的颜色配置文件内容中的这一行将为当前所选定的窗口名称添加白色高亮显示效果配置文件内容中的这一行可将前缀组合键从默认的更改为如果需要也可以使用键而不是键例如将前缀组合键设置为这将使得前缀组合键从默认的更改为重要提示配置文件内容中的或选项允许我们添加额外的热键选项并且可以不覆盖默认热键当然也可以通过设置选项覆盖默认的热键只要把更新后的热键写入文件即可使用与和可以添加额外的方法来实现窗口分割和创建一个新的窗格并且以结尾的参数能够允许不同目录中的任何新窗格都能保留其初始目录路径即使该路径不是会话开始时的目录设置热键用于水平分割窗口设置热键用于垂直分割窗口通过设置历史限制还允许我们让复制模式具有更高级别的最大字符限制这对于复制超出默认历史限制的输出内容非常有用配置文件内容中这一行允许我们设置历史限制以便修改在复制模式下的最大字符限制针对状态栏的左侧我们可以使用或中的来进行自定义设置在下面的例子中第一行内容中的被设置为该设置的作用是定义可以在状态栏左侧显示的字符总数第二行内容则是用命令来显示字符串然后我们可以用以下方法来重新加载配置文件在会话中按下然后输入或者即可配置文件也可以通过关闭并重新启动一个新的会话来进行重新加载或者我们也可以使用以下命令来重新加载配置文件最后我们实现的效果如下所示状态栏内容将发生变化当我们将命令的输出通过写入配置文件来添加到状态栏时有时候配置文件中的命令将不会正常工作为了解决这个问题我们可以将所需要执行的一行代码或脚本放入一个单独文件中然后再使用使其变得可执行最后再将其写入到配置文件中我们将包含命令的脚本的相关路径写入到配置文件中然后重新加载文件即可除了能够调用脚本之外配置文件还可以调用一些自定义插件例如以下来自于的插件保存会话以便在系统重启后恢复该插件用于创建命令历史记录以供以后查看该插件用于从剪贴板外部复制文本以便文本内容与其他程序一起使用如以下示例所示我们将加载一个插件这是一个可以获取窗格截图每个窗格的历史以及的完整历史记录的插件重新加载配置文件如果我们要为当前所选定的窗格记录命令历史可以使用组合键这将在当前系统用户的主目录中启动一个日志文件当我们重新加载了配置文件之后又出现了一个新的问题之前我们所添加的脚本包含命令会在状态栏中打印一个重复的字符串这是因为我们之前在添加脚本时对选项使用了或参数这样当我们重新加载配置文件时就会重复打印内容而这个问题可以通过在配置文件内容中使用或参数来解决现在重新加载文件可以看到仅使用全局参数能够让我们从状态栏右侧删除主机名时间和日期并且不会重复打印字符串但是如果我们想获得与使用参数相同格式的状态栏输出而仅去除重复打印字符串的缺陷那么我们可以在配置文件内容中使用以下参数表示主机名的占位符表示是时钟中的小时和分钟表示日月年然后我们再重新加载配置文件我们可以看到状态栏的显示一切正常并且在我们以后尝试重新加载配置文件时也不会再因为而重复打印字符串如果我们不喜欢复制模式的快捷键在默认情况下它们被设置为我们可以通过向配置文件添加参数内容来进行更改完成内容添加之后我们再保存脚本并重新加载脚本即可我们将基于配置文件的设置并按照以下步骤来进行内容复制按下组合键进入复制模式使用方向箭头键来选中我们想要复制的内容按下空格键并后跟方向箭头键来突出显示所有被选中要进行复制的文本按下键复制高亮显示部分的文本内容到剪贴板中按下组合键粘贴剪贴板中的内容为了让复制模式变得更像是在文件编辑器中进行文本块复制操作我们可以继续向配置文件添加如下几行内容以上设置将允许我们打开鼠标模式这能让我们使用鼠标来调整窗格的大小或者滚动中的内容而无需先使用快捷键进入复制模式上图内容中的最后几行参数还将允许我们使用来保存辅助组合键辅助组合键是这意味着我们在复制文本时将从缓冲区处进行粘贴而不是将需要被复制的文本局限在中构建自定义配置脚本的替代方法是使用开源的脚本例如使用中的存储库我们也可以使用谷歌搜索引擎搜索来找到一些开源的脚本在访问上述存储库之前我们首先需要修改现存的自定义配置文件的名称以便完成备份操作我们可以将现存的自定义配置文件备份为然后我们再使用命令来安装上述的存储库并将该存储库中隐藏的文件复制到主目录下注意下图所使用的命令是在我们使用了命令之后再执行的最后我们可以运行一个新的会话或者重新加载配置文件以便查看窗口的更改情况如果我们要将配置脚本更改回来那就需要再次替换主目录中的配置文件或者在启动新的会话时使用参数来调用我们所需要的文件注意无论自定义的文件是否已被删除或替换我们都可以通过终止服务来将重置为默认配置但是在我们开始尝试执行命令之前请在每个已经打开的会话窗口和窗格中备份并保存所有内容因为命令将终止所有会话的状态我们可以使用以下命令来加载与本文实验示例相关的开源文件',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-01-19 11:19:01',
+  postMainColor: '',
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f7f9fe')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/style.css"><meta name="generator" content="Hexo 6.3.0"></head><body data-type="anzhiyu"><div id="web_bg"></div><div id="an_music_bg"></div><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><img class="loading-img nolazyload" alt="加载头像" src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202303232356277.png"/><div class="loading-image-dot"></div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.getElementById('loading-box').classList.add("loaded");
+  },
+  initLoading: () => {
+    document.getElementById('loading-box').classList.remove("loaded")
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+setTimeout(function(){preloader.endLoading();},10000)
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.10/progress_bar/progress_bar.css"/><script async="async" src="https://cdn.cbd.int/pace-js@1.2.4/pace.min.js" data-pace-options="{ &quot;restartOnRequestAfter&quot;:false,&quot;eventLag&quot;:false}"></script><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><a id="site-name" href="/" accesskey="h"><div class="title">嘻哈磕碜のBlogs</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 归档</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/fcircle/"><i class="anzhiyufont anzhiyu-icon-artstation faa-tada" style="font-size: 0.9em;"></i><span> 朋友圈</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/comments/"><i class="anzhiyufont anzhiyu-icon-envelope faa-tada" style="font-size: 0.9em;"></i><span> 留言板</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/music/"><i class="anzhiyufont anzhiyu-icon-music faa-tada" style="font-size: 0.9em;"></i><span> 音乐馆</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/bangumis/"><i class="anzhiyufont anzhiyu-icon-bilibili faa-tada" style="font-size: 0.9em;"></i><span> 追番页</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/album/"><i class="anzhiyufont anzhiyu-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于本人</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="anzhiyufont anzhiyu-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/equipment/"><i class="anzhiyufont anzhiyu-icon-dice-d20 faa-tada" style="font-size: 0.9em;"></i><span> 我的装备</span></a></li></ul></div></div></div><div id="nav-right"><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><div class="nav-button" id="search-button"><a class="site-page social-icon search" href="javascript:void(0);" title="搜索🔍" accesskey="s"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span> 搜索</span></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="中控台" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png" target="_blank"><img class="post-qr-code-img" alt="wechat" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png" target="_blank"><img class="post-qr-code-img" alt="alipay" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/ChatGpt/" style="font-size: 1.05rem;">ChatGpt<sup>2</sup></a><a href="/tags/Java/" style="font-size: 1.05rem;">Java<sup>1</sup></a><a href="/tags/MISC/" style="font-size: 1.05rem;">MISC<sup>2</sup></a><a href="/tags/MSF/" style="font-size: 1.05rem;">MSF<sup>1</sup></a><a href="/tags/Navicat/" style="font-size: 1.05rem;">Navicat<sup>1</sup></a><a href="/tags/Web%E5%AE%89%E5%85%A8/" style="font-size: 1.05rem;">Web安全<sup>9</sup></a><a href="/tags/binwalk/" style="font-size: 1.05rem;">binwalk<sup>1</sup></a><a href="/tags/docker/" style="font-size: 1.05rem;">docker<sup>4</sup></a><a href="/tags/java/" style="font-size: 1.05rem;">java<sup>1</sup></a><a href="/tags/mysql/" style="font-size: 1.05rem;">mysql<sup>1</sup></a><a href="/tags/oracle/" style="font-size: 1.05rem;">oracle<sup>1</sup></a><a href="/tags/owasp/" style="font-size: 1.05rem;">owasp<sup>1</sup></a><a href="/tags/phpstudy/" style="font-size: 1.05rem;">phpstudy<sup>1</sup></a><a href="/tags/python/" style="font-size: 1.05rem;">python<sup>1</sup></a><a href="/tags/redis/" style="font-size: 1.05rem;">redis<sup>1</sup></a><a href="/tags/shiro/" style="font-size: 1.05rem;">shiro<sup>1</sup></a><a href="/tags/sql/" style="font-size: 1.05rem;">sql<sup>1</sup></a><a href="/tags/ssrf/" style="font-size: 1.05rem;">ssrf<sup>1</sup></a><a href="/tags/xss/" style="font-size: 1.05rem;">xss<sup>2</sup></a><a href="/tags/%E5%AE%B9%E5%99%A8/" style="font-size: 1.05rem;">容器<sup>1</sup></a><a href="/tags/%E6%8A%A4%E7%BD%91/" style="font-size: 1.05rem;">护网<sup>1</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 1.05rem;">数据库<sup>2</sup></a><a href="/tags/%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7/" style="font-size: 1.05rem;">测试工具<sup>1</sup></a></div></div><hr/></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/" title="查看更多">
+    <i class="anzhiyufont anzhiyu-icon-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/01/"><span class="card-archive-list-date">一月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">9</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/12/"><span class="card-archive-list-date">十二月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">9</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/11/"><span class="card-archive-list-date">十一月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">14</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/10/"><span class="card-archive-list-date">十月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">13</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/09/"><span class="card-archive-list-date">九月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">12</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/08/"><span class="card-archive-list-date">八月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">10</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/07/"><span class="card-archive-list-date">七月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">3</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/06/"><span class="card-archive-list-date">六月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="article-meta tags"></span></div></div><h1 class="post-title" itemprop="name headline">无题</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2024-01-18T08:36:06.383Z" title="发表于 2024-01-18 16:36:06">2024-01-18</time><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-history post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2024-01-19T03:19:01.770Z" title="更新于 2024-01-19 11:19:01">2024-01-19</time></span></div><div class="meta-secondline"><span class="post-meta-separator"></span><span class="post-meta-wordcount"><i class="anzhiyufont anzhiyu-icon-file-word post-meta-icon" title="文章字数"></i><span class="post-meta-label" title="文章字数">字数总计:</span><span class="word-count" title="文章字数">5.2k</span><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-clock post-meta-icon" title="阅读时长"></i><span class="post-meta-label" title="阅读时长">阅读时长:</span><span>17分钟</span></span><span class="post-meta-separator"></span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="anzhiyufont anzhiyu-icon-fw-eye post-meta-icon"></i><span class="post-meta-label" title="阅读量">阅读量:</span><span id="busuanzi_value_page_pv"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-spin"></i></span></span><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为东莞"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>东莞</span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src="/img/default_cover.jpg"></div></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container" itemscope itemtype="https://hihopkc.github.io/posts/0.html"><header><h1 id="CrawlerTitle" itemprop="name headline">无题</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">hihopkc</span><time itemprop="dateCreated datePublished" datetime="2024-01-18T08:36:06.383Z" title="发表于 2024-01-18 16:36:06">2024-01-18</time><time itemprop="dateCreated datePublished" datetime="2024-01-19T03:19:01.770Z" title="更新于 2024-01-19 11:19:01">2024-01-19</time></header><p>title: 【THM】REmux The Tmux-Learn</p>
+<p>categories:</p>
+<ul>
+<li>网络安全</li>
+<li>TryHackMe</li>
+<li>Learn<br>cover: ‘<a target="_blank" rel="noopener" href="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401181642772.png">https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401181642772.png</a>‘<br>abbrlink: 15d0<br>date: 2024-01-18 16:36:06<br>tags:</li>
+</ul>
+<h1 id="Task-2-Starting-tmux-“Sessions”-and-default-tmux-“prefix”"><a href="#Task-2-Starting-tmux-“Sessions”-and-default-tmux-“prefix”" class="headerlink" title="Task 2 Starting tmux “Sessions” and default tmux “prefix”"></a>Task 2 Starting tmux “Sessions” and default tmux “prefix”</h1><p>要启动新的 tmux 会话，只需运行不带参数的 tmux 命令即可。第一个会话创建的名称为“0”。默认情况下，tmux 状态栏将为绿色。会话名称位于左侧。窗口在中间，窗口名称在中间。主机名、时间和日期位于底部绿色栏的右侧。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401181806823.png" alt="image-20240118180618737"></p>
+<p>Tmux 不允许在 tmux 中创建嵌套的 tmux，除非您强制这样做。再次运行 tmux 命令时。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401181818734.png" alt="image-20240118181847706"></p>
+<p>我们可以尝试将当前的tmux会话名称从“0”更改为“box-dev”。在此之前，我们可以首先了解tmux是如何被调用的，tmux会话中的所有命令都以tmux前缀开头，而默认情况下，tmux的前缀组合键为“Ctrl b”。</p>
+<p>在tmux组合键前缀之后，我们可以再添加按键“shift $”来改变当前tmux会话的名称，所以完整的键盘输入为：<strong>ctrl b shift $</strong></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401181819666.png" alt="image-20240118181926635"></p>
+<p>如果需要在当前会话中创建另一个 tmux 会话。将 -d 参数与 tmux 命令一起使用。在不附加到它的情况下生成新的 tmux 会话。在下面的示例图像中。-s 参数用于指定新会话的会话名称。键入为“tmux new -s tryhackme -d”。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tmux new -s &lt;new-session-name&gt; -d</span><br></pre></td></tr></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401181924306.png" alt="image-20240118192454276"></p>
+<p>退出 tmux 会话而不关闭它可以使用前缀来完成。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ctrl b d</span><br></pre></td></tr></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401181925106.png" alt="image-20240118192555083"></p>
+<p>使用 tmux ls 命令再次检查。两个会话中都缺少“（attached）”。这意味着会话处于活动状态，但我们是分离的，无法与任何一个会话交互。</p>
+<p>重新连接到活动的 tmux 会话。使用 attach 选项和 -t 运行 tmux，后跟所需的会话名称。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tmux attach -t tryhackme </span><br></pre></td></tr></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401181926327.png" alt="image-20240118192641304"></p>
+<p>按会话名称删除单个会话。使用 tmux 的 kill-session 选项完成。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tmux kill-session -t box-dev</span><br></pre></td></tr></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401181927809.png" alt="image-20240118192751783"></p>
+<p>在下面的示例中，有许多会话处于打开状态。交换会话的另一种方法，而无需分离并重新附加到另一个会话。是使用前缀。后跟 s 键以列出所有打开的会话。使用向上或向下箭头键导航到所需的 tmux 会话。然后回车以选择新会话。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401181929535.png" alt="image-20240118192915499"></p>
+<p>如果我们需要杀死除了一个指定会话外的所有tmux会话，那么我们可以在使用<code>tmux kill-session</code>命令时附加-a参数来关闭除了-t参数所指定的会话之外的所有会话。如下例所示，除了一个名为“is-0day-0k?”的会话之外，我们将关闭所有tmux会话，最终结果可以通过<code>tmux list-sessions</code>命令来进行检查。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tmux kill-session -t &lt;sessions-name&gt; -a</span><br></pre></td></tr></table></figure>
+
+<p><strong>ctrl b shift :</strong></p>
+<p>后跟“attach -c &#x2F;path&#x2F;to&#x2F;new&#x2F;starting&#x2F;directory”</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401181934884.png" alt="image-20240118193449862"></p>
+<p>将上面更新的起始目录或基本目录作为 &#x2F;dev&#x2F;shm 完成。在 &#x2F;dev&#x2F;shm 目录中开始创建一个新窗格。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401181948955.png" alt="image-20240118194859885"></p>
+<p>尽管在开始时 tmux 不允许在 tmux 中嵌套 tmux。通过 ssh 连接在另一台计算机上附加或启动新的 tmux 会话。可以制作嵌套的 tmux。没问题。只需更改以下命令之前使用的前缀数量即可。可以确定哪个会话获取命令。</p>
+<p>prefix、prefix 和 command。这将在 ssh ubuntu 机器的第二个嵌套 tmux 会话上运行。</p>
+<p>前缀和命令。这将在第一个 tmux 会话上运行。在当前计算机的 localhost 上运行的会话。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401181944725.png" alt="image-20240118194424695"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401181941983.png" alt="image-20240118194130936"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401181941030.png" alt="image-20240118194147983"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401181941374.png" alt="image-20240118194153349"></p>
+<h1 id="Task-3-Manage-tmux-“Panes”"><a href="#Task-3-Manage-tmux-“Panes”" class="headerlink" title="Task 3 Manage tmux “Panes”"></a>Task 3 Manage tmux “Panes”</h1><p>在当前 tmux 会话窗口中。Tmux 窗格用于将当前会话划分为多个大小的终端。这允许多个命令在同一会话窗口中运行。</p>
+<h2 id="ctrl-b-shift-“"><a href="#ctrl-b-shift-“" class="headerlink" title="ctrl b shift “"></a><strong>ctrl b shift “</strong></h2><p>水平拆分当前选定的窗格。Do the prefix. This followed by a shift “</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401181950761.png" alt="image-20240118195049738"></p>
+<h2 id="ctrl-b-shift"><a href="#ctrl-b-shift" class="headerlink" title="ctrl b shift %"></a><strong>ctrl b shift %</strong></h2><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401181951711.png" alt="image-20240118195108671"></p>
+<p>exit 命令可用于关闭当前选定的窗格。</p>
+<h2 id="ctrl-b"><a href="#ctrl-b" class="headerlink" title="ctrl b &lt;arrow key&gt;"></a><strong>ctrl b &lt;arrow key&gt;</strong></h2><p>可以使用前缀移动到同一窗口中的另一个窗格。后跟箭头键。</p>
+<h2 id="ctrl-b-o"><a href="#ctrl-b-o" class="headerlink" title="ctrl b o"></a><strong>ctrl b o</strong></h2><p>在打开两个以上的窗格时，在最常用的 tmux 窗格之间切换。“Ctrl B ;” 是更好的选择。“Ctrl B O”在仅打开两个窗格时效果更好。</p>
+<p>如果tmux窗格没有响应并且ctrl-c也不能解决这个问题，那么我们还可以强制关闭或杀死当前所选择的tmux窗格：<strong>ctrl b x y</strong></p>
+<h2 id="ctrl-b-shift-1"><a href="#ctrl-b-shift-1" class="headerlink" title="ctrl b shift }"></a><strong>ctrl b shift }</strong></h2><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401181954600.png" alt="image-20240118195457553"></p>
+<h2 id="ctrl-b-shift-2"><a href="#ctrl-b-shift-2" class="headerlink" title="ctrl b shift {"></a><strong>ctrl b shift {</strong></h2><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401182002192.png" alt="image-20240118200206161"></p>
+<h2 id="ctrl-b-esc-4"><a href="#ctrl-b-esc-4" class="headerlink" title="ctrl b esc 4"></a><strong>ctrl b esc 4</strong></h2><p>管理窗格位置的另一种方法是使用tmux的五个内置布局，这可以通过在前缀组合键后附加转义或esc键以及从1到5中的某个数字来完成：<strong>ctrl b esc 4</strong></p>
+<p>请注意，布局结果取决于当前打开的窗格数量。</p>
+<p>我们还可以使用前缀组合键加上空格键(<strong>ctrl b spacebar</strong>)来一次一个地循环浏览当前tmux窗口内置的窗格布局，当只有两个窗格在当前的tmux窗口中打开时，我们也可以使用顺时针或逆时针选项切换窗格来作为ctrl b spacebar的替代方案。</p>
+<p>最后，在管理窗格方面。可能需要在两个窗格之间交换位置。循环窗格时，不会创建所需的窗格布局。</p>
+<p>在进行窗格交换之前，我们可以使用<strong>ctrl b q</strong>组合键来标识窗格号，这将帮助我们查看窗格的编号以及窗格的大小。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401182006726.png" alt="image-20240118200615686"></p>
+<p>为了实现窗格位置交换，我们首先要进入tmux提示符或者命令模式，这可以通过组合键<code>ctrl b shift :</code>来完成；成功进入tmux命令模式之后，我们可以使用以下命令来进行窗格交换：<code>swap-pane -s &lt;source pane final swap location&gt; -t &lt;currently selected destination pane&gt;</code></p>
+<p>我们还可以在命令模式下使用以下命令来进行窗格交换：<code>swap-pane -t &lt;pane to swap with&gt; -s &lt;currently selected pane&gt;</code></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401182343974.png" alt="image-20240118234337927"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401182343122.png" alt="image-20240118234348075"></p>
+<h1 id="Task-4-Manage-tmux-“Windows”"><a href="#Task-4-Manage-tmux-“Windows”" class="headerlink" title="Task 4 Manage tmux “Windows”"></a>Task 4 Manage tmux “Windows”</h1><h2 id="ctrl-b-c"><a href="#ctrl-b-c" class="headerlink" title="ctrl b c"></a><strong>ctrl b c</strong></h2><p>Tmux窗口就像一个新的终端选项卡，你可以轻松地切换这些窗口。我们可以在tmux会话中使用组合键<code>ctrl b c</code>来创建一个新的tmux空窗口，在新窗口中会自动显示该窗口的编号和名称，并且在窗口名称末尾会用*或通配符星号来标记我们当前所选中的tmux窗口。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401182347440.png" alt="image-20240118234724412"></p>
+<h2 id="ctrl-b-1"><a href="#ctrl-b-1" class="headerlink" title="ctrl b ,"></a><strong>ctrl b ,</strong></h2><p>如果我们想更改当前的tmux窗口名称，我们可以先使用组合键<code>ctrl b ,</code>，然后再重新输入新窗口名称并按回车键保存更改即可。</p>
+<h2 id="ctrl-b-shift-3"><a href="#ctrl-b-shift-3" class="headerlink" title="ctrl b shift !"></a><strong>ctrl b shift !</strong></h2><p>当我们在某个tmux窗口中使用了nmap命令之后，由于界面原因我们无法很好地查看nmap的输出结果，此时我们就可以使用组合键<code>ctrl b shift !</code>来将当前的tmux窗格中的nmap输出结果发送到一个新的tmux窗口中以方便我们进行查看。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401182349532.png" alt="image-20240118234950496"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401182349852.png" alt="image-20240118234957813"></p>
+<p>如上图所示，我们可以看到nmap命令的输出结果被发送到了一个名为”bash”的新tmux窗口中。</p>
+<p>如果想在多个tmux窗口之间进行切换，我们可以使用<code>ctrl b n</code>来切换到下一个tmux窗口，或者使用<code>ctrl b p</code>切换到前一个tmux窗口；此外，我们还可以选择使用组合键<code>ctrl b w</code>来切换到我们所需的tmux窗口，此组合键需要我们结合方向键和Enter键来选择我们具体想要切换到的tmux窗口(见下图)。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401182354577.png" alt="image-20240118235445541"></p>
+<p>移回侦察窗口。显示 Nmap 窗格已移动，并且有更多工作空间。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401182355367.png" alt="image-20240118235511336"></p>
+<h2 id="ctrl-b-shift-4"><a href="#ctrl-b-shift-4" class="headerlink" title="ctrl b shift &amp;"></a><strong>ctrl b shift &amp;</strong></h2><p>如果一个tmux窗口已经失效并且需要被快速终止，那么我们就需要关闭该tmux窗口。在关闭tmux窗口时还将关闭当前所选择的tmux窗口中已经打开的任何tmux窗格。如果我们要杀死或者关闭一个tmux窗口，那么我们首先需要使用组合键<code>ctrl b shift &amp;</code>，然后再加上y键来确认关闭当前的tmux窗口，或者继续输入n键来保持当前的tmux窗口为打开状态。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401182356838.png" alt="image-20240118235615800"></p>
+<p>命令后提示。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401182356187.png" alt="image-20240118235649152"></p>
+<p>关闭侦察窗口。名称 recon 将从下面的状态栏中删除。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401182358543.png" alt="image-20240118235803506"></p>
+<h2 id="ctrl-b-shift-5"><a href="#ctrl-b-shift-5" class="headerlink" title="ctrl b shift :"></a><strong>ctrl b shift :</strong></h2><p>在此任务的前面部分，演示了如何将窗格分解到其自己的窗口中。但是，有时需要将两个窗口融合在一起作为单个窗口。</p>
+<p>我们需要先输入组合键<code>ctrl b shift :</code>，然后在tmux提示符中输入<code>join-pane -t &lt;window-name&gt;</code>或者<code>join-pane -s &lt;window-name&gt;</code>，其中-s表示源窗口名称，-t表示目标窗口名称。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401190009795.png" alt="image-20240119000937761"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401190013742.png" alt="image-20240119001301705"></p>
+<p>按下回车键来运行连接窗格命令即可：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401190015917.png" alt="image-20240119001527884"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401190015865.png" alt="image-20240119001525831"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401190017605.png" alt="image-20240119001730550"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401190017177.png" alt="image-20240119001739131"></p>
+<h1 id="Task-5-Tmux-“copy”-mode"><a href="#Task-5-Tmux-“copy”-mode" class="headerlink" title="Task 5 Tmux “copy” mode"></a>Task 5 Tmux “copy” mode</h1><p>tmux复制模式可用于上下滚动以查看页面内容，如果tmux会话中的文本内容大于tmux窗格的长度或者tmux窗口的大小，那么我们就需要启动复制模式。</p>
+<p>我们可以输入组合键<code>ctrl b [</code>来进入tmux复制模式，然后就可以上下滚动以查看页面，此时我们还可以使用q键来退出复制模式。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401191020343.png" alt="image-20240119102013240"></p>
+<p>在tmux复制模式下，我们可以键入<code>ctrl r</code>和我们要搜索的字符串或关键词来向上查找页面内容，然后按住ctrl键并再次按r键就可以让我们跳转到下一个字符串位置，并且按下回车键还可以让我们恢复到页面滚动状态，此时鼠标光标将停止在我们所搜索的字符串位置。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401191021746.png" alt="image-20240119102123705"></p>
+<p>在tmux复制模式下，我们还可以使用<code>ctrl s</code>并附加字符串来向下搜索页面，按住ctrl键并再次按s键可以让我们跳转到下一个字符串位置，并且按下回车键可以让我们恢复到页面滚动状态，此时鼠标光标将停止在我们所搜索的字符串位置。</p>
+<p>在tmux复制模式下执行复制和粘贴操作需要5个步骤。</p>
+<p>注意：这个方法只适用于tmux剪贴板。</p>
+<p>1.按下组合键<code>ctrl b [</code>来进入复制模式；</p>
+<p>2.滚动到要复制的文本块的开头</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401191023077.png" alt="image-20240119102307039"></p>
+<p>3.使用ctrl+空格键启用高亮显示，然后使用方向键向上选择所有文本，如果我们从顶部开始，就使用向下的方向键。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401191023593.png" alt="image-20240119102319555"></p>
+<p>4.使用<code>alt w</code>键来复制所有高亮显示的文本到tmux剪贴板中；</p>
+<p>5.创建一个新文件，然后再用<code>ctrl b ]</code>组合键来粘贴最终的文本内容。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401191023277.png" alt="image-20240119102338239"></p>
+<p>如果我们想检查当前复制到tmux剪贴板中的文本，那么我们可以使用组合键<code>ctrl b shift #</code>来完成。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401191024915.png" alt="image-20240119102412879"></p>
+<p>请注意：即使文本内容可能看起来被破坏了，也不要担心它的粘贴情况，因为它是在终端文件编辑器中复制的，我们按q键退出复制模式，然后回到终端界面创建文件并粘贴我们所复制的文本内容即可。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401191024277.png" alt="image-20240119102442240"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401191027250.png" alt="image-20240119102747188"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401191027837.png" alt="image-20240119102756787"></p>
+<h1 id="Task-6-Oh-My-Tmux-and-beyond"><a href="#Task-6-Oh-My-Tmux-and-beyond" class="headerlink" title="Task 6 Oh My Tmux and beyond"></a>Task 6 Oh My Tmux and beyond</h1><p>在默认情况下，Tmux并没有默认的配置文件，但是我们也可以创建一个自定义的tmux配置文件。</p>
+<p>在为tmux制作自定义配置文件之前，可以先显示tmux默认值的所有选项，我们使用<code>tmux show -g</code>命令即可显示tmux的全局参数。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401191030483.png" alt="image-20240119103042447"></p>
+<p>我们所需要创建的tmux配置脚本的文件名为.tmux.conf，它的保存路径为<code>/home/username/.tmux.conf</code>。</p>
+<p>我们现在分析一下上图中的配置文件内容：</p>
+<blockquote>
+<p>set -g status-style bg&#x3D;’#44475a’,fg&#x3D;’#8be9fd’</p>
+<p>配置文件内容中的这一行用来修改tmux状态栏的颜色。</p>
+</blockquote>
+<blockquote>
+<p>setw -g window-status-current-style fg&#x3D;black,bg&#x3D;white</p>
+<p>配置文件内容中的这一行将为当前所选定的tmux窗口名称添加白色高亮显示效果。</p>
+</blockquote>
+<blockquote>
+<p>set -g prefix C-a</p>
+<p>配置文件内容中的这一行可将前缀组合键从默认的ctrl b更改为ctrl a，如果需要也可以使用alt键而不是ctrl键，例如将前缀组合键设置为M-a，这将使得前缀组合键从默认的ctrl b更改为alt a。</p>
+</blockquote>
+<blockquote>
+<p>重要提示</p>
+<p>配置文件内容中的bind或bind -key选项允许我们添加额外的热键选项，并且可以不覆盖默认热键；当然也可以通过设置选项覆盖默认的tmux热键，只要把更新后的热键写入.tmux.conf文件即可。</p>
+</blockquote>
+<p>使用bind-key与|和-可以添加额外的方法来实现tmux窗口分割和创建一个新的tmux窗格，并且以“<code>#&#123;pane_current_path&#125;</code>”结尾的-c参数能够允许不同目录中的任何新窗格都能保留其初始目录路径，即使该路径不是tmux会话开始时的目录。</p>
+<ul>
+<li><strong>ctrl b shift | split-windows -h</strong> 设置热键用于水平分割tmux窗口；</li>
+<li><strong>ctrl b - split-windows -v</strong> 设置热键用于垂直分割tmux窗口。</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401191038772.png" alt="image-20240119103852736"></p>
+<p>通过设置历史限制还允许我们让tmux复制模式具有更高级别的最大字符限制，这对于复制超出默认tmux历史限制的输出内容非常有用。</p>
+<blockquote>
+<p>set -g history-limit 9001</p>
+<p>配置文件内容中这一行允许我们设置历史限制，以便修改在tmux复制模式下的最大字符限制</p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401191039350.png" alt="image-20240119103913309"></p>
+<p>针对tmux状态栏的左侧，我们可以使用set或set-option中的status-left来进行自定义设置。在下面的例子中：第一行内容中的status-left-length被设置为15，该设置的作用是定义可以在tmux状态栏左侧显示的字符总数；第二行内容则是用Linux命令echo来显示“Try harder”字符串。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401191109923.png" alt="image-20240119110926890"></p>
+<p>然后我们可以用以下方法来重新加载tmux配置文件：在tmux会话中按下<code>ctrl b shift:</code>然后输入<strong>source-file &#x2F;home&#x2F;username&#x2F;.tmux.conf</strong>或者<strong>source-file ~&#x2F;.tmux.conf</strong>即可。</p>
+<p>配置文件.tmux.conf也可以通过关闭并重新启动一个新的tmux会话来进行重新加载，或者我们也可以使用以下tmux命令来重新加载配置文件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tmux source /home/username/.tmux.conf</span><br></pre></td></tr></table></figure>
+
+<p>最后我们实现的效果如下所示(tmux状态栏内容将发生变化)：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401191109005.png" alt="image-20240119110948974"></p>
+<p>当我们将Linux命令的输出通过写入配置文件来添加到tmux状态栏时，有时候配置文件中的Linux命令将不会正常工作。为了解决这个问题，我们可以将所需要执行的一行Linux代码或脚本放入一个单独文件中，然后再使用chmod使其变得可执行，最后再将其写入到tmux配置文件中。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401191110096.png" alt="image-20240119111003061"></p>
+<p>我们将包含Linux命令的脚本的相关路径写入到tmux配置文件中，然后重新加载.tmux.conf文件即可。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401191110905.png" alt="image-20240119111025871"></p>
+<p>除了能够调用脚本之外，tmux配置文件.tmux.conf还可以调用一些自定义插件，例如以下来自于Github的插件：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/tmux-plugins/tmux-resurrect.git">https://github.com/tmux-plugins/tmux-resurrect.git</a> ：保存tmux会话以便在系统重启后恢复。</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/tmux-plugins/tmux-logging.git">https://github.com/tmux-plugins/tmux-logging.git</a> ：该插件用于创建命令历史记录以供以后查看。</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/tmux-plugins/tmux-yank.git">https://github.com/tmux-plugins/tmux-yank.git</a> ：该插件用于从tmux剪贴板外部复制文本以便文本内容与其他程序一起使用。</li>
+</ul>
+<p>如以下示例所示，我们将加载一个插件：tmux-logging(这是一个可以获取tmux窗格截图、每个tmux窗格的历史以及tmux的完整历史记录的插件)。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401191110522.png" alt="image-20240119111056487"></p>
+<p>重新加载tmux配置文件，如果我们要为当前所选定的tmux窗格记录命令历史，可以使用<strong>ctrl b shift P</strong>组合键，这将在当前系统用户的主目录中启动一个日志文件。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401191111080.png" alt="image-20240119111111045"></p>
+<p>当我们重新加载了tmux配置文件之后，又出现了一个新的问题：之前我们所添加的script.sh脚本(包含whoami命令)会在tmux状态栏中打印一个重复的字符串。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401191111879.png" alt="image-20240119111133847"></p>
+<p>这是因为我们之前在添加脚本时对set status-right选项使用了-a或append参数，这样当我们重新加载tmux配置文件.tmux.conf时就会重复打印内容，而这个问题可以通过在配置文件内容中使用-g或global参数来解决。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401191113693.png" alt="image-20240119111309654"></p>
+<p>现在重新加载.tmux.conf文件，可以看到仅使用全局参数-g能够让我们从tmux状态栏右侧删除主机名、时间和日期并且不会重复打印字符串。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401191113224.png" alt="image-20240119111318185"></p>
+<p>但是，如果我们想获得与使用-ga参数相同格式的状态栏输出而仅去除重复打印字符串的缺陷，那么我们可以在配置文件内容中使用以下参数：</p>
+<ul>
+<li><code>#H</code>：表示主机名的占位符。</li>
+<li><code>%H</code>：表示是时钟中的小时和分钟。</li>
+<li><code>%d-%b-%y</code>：表示日、月、年。</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401191113880.png" alt="image-20240119111330846"></p>
+<p>然后我们再重新加载配置文件，我们可以看到tmux状态栏的显示一切正常，并且在我们以后尝试重新加载配置文件时也不会再因为script.sh而重复打印字符串。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401191113743.png" alt="image-20240119111337708"></p>
+<p>如果我们不喜欢tmux复制模式的快捷键(在默认情况下，它们被设置为emacs)，我们可以通过向配置文件添加<code>set -g mode-keys vi</code>参数内容来进行更改。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401191113658.png" alt="image-20240119111347623"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401191113083.png" alt="image-20240119111356047"></p>
+<p>完成内容添加之后我们再保存.tmux.conf脚本并重新加载脚本即可，我们将基于配置文件的设置并按照以下步骤来进行tmux内容复制。</p>
+<ol>
+<li>按下**ctrl b [**组合键进入tmux复制模式；</li>
+<li>使用方向箭头键来选中我们想要复制的内容；</li>
+<li>按下<strong>spacebar</strong>空格键并后跟方向箭头键来突出显示所有被选中要进行复制的文本；</li>
+<li>按下<strong>enter</strong>键复制高亮显示部分的文本内容到tmux剪贴板中；</li>
+<li>按下**ctrl b ]**组合键粘贴tmux剪贴板中的内容。</li>
+</ol>
+<p>为了让tmux复制模式变得更像是在vi文件编辑器中进行文本块复制操作，我们可以继续向配置文件添加如下几行内容：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401191114931.png" alt="image-20240119111437889"></p>
+<p>以上设置将允许我们打开鼠标模式，这能让我们使用鼠标来调整tmux窗格的大小或者滚动tmux中的内容，而无需先使用快捷键进入tmux复制模式。</p>
+<p>上图内容中的最后几行参数还将允许我们使用vi y来保存Linux辅助组合键，辅助组合键是ctrl c ctrl v，这意味着我们在复制文本时将从ctrl v缓冲区处进行粘贴，而不是将需要被复制的文本局限在tmux中。</p>
+<p>构建自定义.tmux.conf配置脚本的替代方法是使用开源的.tmux.conf脚本，例如使用github中的tmuxconfig存储库：</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/chaosma/tmuxconfig.git">https://github.com/chaosma/tmuxconfig.git</a></p>
+<p>tips：我们也可以使用谷歌搜索引擎搜索Oh My Tmux来找到一些开源的.tmux.conf脚本。</p>
+<p>在访问上述Github存储库之前，我们首先需要修改现存的自定义配置文件的名称以便完成备份操作，我们可以将现存的自定义配置文件备份为custom-tmux.bak。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401191114661.png" alt="image-20240119111450627"></p>
+<p>然后我们再使用git clone命令来安装上述的tmuxconfig存储库，并将该存储库中隐藏的.tmux.conf文件复制到&#x2F;home&#x2F;username&#x2F;主目录下：</p>
+<p>注意：下图所使用的命令是在我们使用了git clone命令(<code>$ git clone https://github.com/chaosma/tmuxconfig</code>)之后再执行的。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401191115767.png" alt="image-20240119111503726"></p>
+<p>最后，我们可以运行一个新的tmux会话或者重新加载tmux配置文件.tmux.conf以便查看tmux窗口的更改情况。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401191115113.png" alt="image-20240119111514076"></p>
+<p>如果我们要将配置脚本更改回来，那就需要再次替换主目录中的.tmux.conf配置文件，或者在启动新的tmux会话时使用-f参数来调用我们所需要的.tmux.conf文件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tmux -f /home/username/custom-tmux.bak</span><br></pre></td></tr></table></figure>
+
+<p>注意：无论自定义的.tmux.conf文件是否已被删除或替换，我们都可以通过终止tmux服务(<code>tmux kill-server</code>)来将tmux重置为默认配置，但是在我们开始尝试执行kill-server命令之前，请在每个已经打开的tmux会话、窗口和窗格中备份并保存所有内容，因为kill-server命令将终止所有tmux会话的状态</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401191117225.png" alt="image-20240119111717168"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401191117413.png" alt="image-20240119111723365"></p>
+<h1 id="Task-7-Oreo’s-open-source-tmux-conf-file"><a href="#Task-7-Oreo’s-open-source-tmux-conf-file" class="headerlink" title="Task 7 Oreo’s open-source .tmux.conf file"></a>Task 7 Oreo’s open-source .tmux.conf file</h1><p>我们可以使用以下命令来加载与本文实验示例相关的开源.tmux.conf文件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">cd ~/</span><br><span class="line">git clone https://github.com/OreoByte/another_omt.git</span><br><span class="line">chmod +x ~/another_omt/thm_vpn</span><br><span class="line">chmod +x ~/another_omt/curl_thm_vpn</span><br><span class="line">cp ~/another_omt/simple_tmux.conf ~/.tmux.conf</span><br></pre></td></tr></table></figure>
+</article><div class="post-copyright"><div class="copyright-cc-box"><i class="anzhiyufont anzhiyu-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img class="post-copyright__author_img_back" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202303232356277.png" title="头像" alt="头像"><img class="post-copyright__author_img_front" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202303232356277.png" title="头像" alt="头像"></a><div class="post-copyright__author_name">hihopkc</div><div class="post-copyright__author_desc"></div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="https://hihopkc.github.io/posts/0.html">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('https://hihopkc.github.io/posts/0.html')">嘻哈磕碜のBlogs</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="rewardLeftButton"></div><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="anzhiyufont anzhiyu-icon-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="https://hihopkc.github.io/posts/0.html"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" target="_blank" href="https://service.weibo.com/share/share.php?title=嘻哈磕碜のBlogs&amp;url=https://hihopkc.github.io/posts/0.html&amp;pic=/img/default_cover.jpg" rel="external nofollow noreferrer noopener"><i class="anzhiyufont anzhiyu-icon-weibo"></i></a></div><script>function copyCurrentPageUrl() {
+  var currentPageUrl = window.location.href;
+  var input = document.createElement("input");
+  input.setAttribute("value", currentPageUrl);
+  document.body.appendChild(input);
+  input.select();
+  input.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  document.body.removeChild(input);
+}</script><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="copyCurrentPageUrl()"><i class="anzhiyufont anzhiyu-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://hihopkc.github.io" target="_blank">嘻哈磕碜のBlogs</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"></div></div></div><div class="post_share"><div class="social-share" data-image="/img/default_cover.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"/><script src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer="defer"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-full"><a href="/posts/6c7c.html"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401181540926.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">【THM】tmux-Learn</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="anzhiyufont anzhiyu-icon-comments"></i><span> 评论</span></div><div class="comment-randomInfo"><a onclick="anzhiyu.addRandomCommentInfo()" href="javascript:void(0)">匿名评论</a><a href="/privacy" style="margin-left: 4px">隐私政策</a></div><div class="comment-tips" id="comment-tips"><span>✅ 你无需删除空行，直接评论以获取最佳展示效果</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div><div class="comment-barrage"></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="author-info__sayhi" id="author-info__sayhi" onclick="anzhiyu.changeSayHelloText()"></div><div class="author-info-avatar"><img class="avatar-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202303232356277.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-status"><img class="g-status" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2023/08/24/64e6ce9c507bb.png" ait="status"/></div></div><div class="author-info__description">站在巨人的肩上</div><div class="author-info__bottom-group"><a class="author-info__bottom-group-left" href="/"><h1 class="author-info__name">hihopkc</h1><div class="author-info__desc"></div></a><div class="card-info-social-icons is-center"><a class="social-icon faa-parent animated-hover" href="https://github.com/hihopkc" target="_blank" title="Github"><i class="anzhiyufont anzhiyu-icon-github"></i></a><a class="social-icon faa-parent animated-hover" href="https://space.bilibili.com/56853573" target="_blank" title="BiliBili"><i class="anzhiyufont anzhiyu-icon-bilibili"></i></a></div></div></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bullhorn anzhiyu-shake"></i><span>公告</span></div><div class="announcement_content">欢迎来看我的博客鸭~</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Task-2-Starting-tmux-%E2%80%9CSessions%E2%80%9D-and-default-tmux-%E2%80%9Cprefix%E2%80%9D"><span class="toc-number">1.</span> <span class="toc-text">Task 2 Starting tmux “Sessions” and default tmux “prefix”</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Task-3-Manage-tmux-%E2%80%9CPanes%E2%80%9D"><span class="toc-number">2.</span> <span class="toc-text">Task 3 Manage tmux “Panes”</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ctrl-b-shift-%E2%80%9C"><span class="toc-number">2.1.</span> <span class="toc-text">ctrl b shift “</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ctrl-b-shift"><span class="toc-number">2.2.</span> <span class="toc-text">ctrl b shift %</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ctrl-b"><span class="toc-number">2.3.</span> <span class="toc-text">ctrl b &lt;arrow key&gt;</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ctrl-b-o"><span class="toc-number">2.4.</span> <span class="toc-text">ctrl b o</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ctrl-b-shift-1"><span class="toc-number">2.5.</span> <span class="toc-text">ctrl b shift }</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ctrl-b-shift-2"><span class="toc-number">2.6.</span> <span class="toc-text">ctrl b shift {</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ctrl-b-esc-4"><span class="toc-number">2.7.</span> <span class="toc-text">ctrl b esc 4</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Task-4-Manage-tmux-%E2%80%9CWindows%E2%80%9D"><span class="toc-number">3.</span> <span class="toc-text">Task 4 Manage tmux “Windows”</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ctrl-b-c"><span class="toc-number">3.1.</span> <span class="toc-text">ctrl b c</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ctrl-b-1"><span class="toc-number">3.2.</span> <span class="toc-text">ctrl b ,</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ctrl-b-shift-3"><span class="toc-number">3.3.</span> <span class="toc-text">ctrl b shift !</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ctrl-b-shift-4"><span class="toc-number">3.4.</span> <span class="toc-text">ctrl b shift &amp;</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ctrl-b-shift-5"><span class="toc-number">3.5.</span> <span class="toc-text">ctrl b shift :</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Task-5-Tmux-%E2%80%9Ccopy%E2%80%9D-mode"><span class="toc-number">4.</span> <span class="toc-text">Task 5 Tmux “copy” mode</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Task-6-Oh-My-Tmux-and-beyond"><span class="toc-number">5.</span> <span class="toc-text">Task 6 Oh My Tmux and beyond</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Task-7-Oreo%E2%80%99s-open-source-tmux-conf-file"><span class="toc-number">6.</span> <span class="toc-text">Task 7 Oreo’s open-source .tmux.conf file</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-history"></i><span>最近发布</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/posts/0.html" title="无题"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/default_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"/></a><div class="content"><a class="title" href="/posts/0.html" title="无题">无题</a><time datetime="2024-01-18T08:36:06.383Z" title="发表于 2024-01-18 16:36:06">2024-01-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/6c7c.html" title="【THM】tmux-Learn"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401181540926.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【THM】tmux-Learn"/></a><div class="content"><a class="title" href="/posts/6c7c.html" title="【THM】tmux-Learn">【THM】tmux-Learn</a><time datetime="2024-01-18T07:40:19.000Z" title="发表于 2024-01-18 15:40:19">2024-01-18</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/2f60.html" title="笔记内容仅供参考">笔记内容仅供参考</a><time datetime="2024-01-18T06:05:02.000Z" title="发表于 2024-01-18 14:05:02">2024-01-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/a278.html" title="【THM】Game Zone-Practice"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401181133676.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【THM】Game Zone-Practice"/></a><div class="content"><a class="title" href="/posts/a278.html" title="【THM】Game Zone-Practice">【THM】Game Zone-Practice</a><time datetime="2024-01-18T02:29:57.000Z" title="发表于 2024-01-18 10:29:57">2024-01-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/d8c8.html" title="【THM】HackPark-Practice"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202401161032959.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【THM】HackPark-Practice"/></a><div class="content"><a class="title" href="/posts/d8c8.html" title="【THM】HackPark-Practice">【THM】HackPark-Practice</a><time datetime="2024-01-16T02:31:13.000Z" title="发表于 2024-01-16 10:31:13">2024-01-16</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div id="footer_deal"><a class="deal_link" href="mailto:975025272@qq.com" title="email"><i class="anzhiyufont anzhiyu-icon-envelope"></i></a><img class="footer_mini_logo" title="返回顶部" alt="返回顶部" onclick="anzhiyu.scrollToDest(0, 500)" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hihopkc-blog.oss-cn-shenzhen.aliyuncs.com/img/202303232356277.png" size="50px"/><a class="deal_link" target="_blank" rel="noopener" href="https://github.com/hihopkc" title="Github"><i class="anzhiyufont anzhiyu-icon-github"></i></a></div><p id="ghbdages"><a class="github-badge" target="_blank" href="https://hexo.io/" style="margin-inline:5px" data-title="博客框架为Hexo_v5.4.0" title="博客框架为Hexo_v5.4.0"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@2.1.5/img/badge/Frame-Hexo.svg" alt="博客框架为Hexo_v5.4.0"/></a><a class="github-badge" target="_blank" href="https://blog.anheyu.com/" style="margin-inline:5px" data-title="本站使用AnZhiYu主题" title="本站使用AnZhiYu主题"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.9/img/Theme-AnZhiYu-2E67D3.svg" alt="本站使用AnZhiYu主题"/></a><a class="github-badge" target="_blank" href="https://github.com/" style="margin-inline:5px" data-title="本站项目由Github托管" title="本站项目由Github托管"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@2.1.5/img/badge/Source-Github.svg" alt="本站项目由Github托管"/></a><a class="github-badge" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" style="margin-inline:5px" data-title="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可" title="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@2.2.0/img/badge/Copyright-BY-NC-SA.svg" alt="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可"/></a></p></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"><div class="copyright">&copy;2023 - 2024 By <a class="footer-bar-link" href="/" title="hihopkc" target="_blank">hihopkc</a></div></div><div id="footer-type-tips"></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/anzhiyu-c/hexo-theme-anzhiyu" title="主题">主题</a></div></div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">115</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">23</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">32</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 归档</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/fcircle/"><i class="anzhiyufont anzhiyu-icon-artstation faa-tada" style="font-size: 0.9em;"></i><span> 朋友圈</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/comments/"><i class="anzhiyufont anzhiyu-icon-envelope faa-tada" style="font-size: 0.9em;"></i><span> 留言板</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/music/"><i class="anzhiyufont anzhiyu-icon-music faa-tada" style="font-size: 0.9em;"></i><span> 音乐馆</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/bangumis/"><i class="anzhiyufont anzhiyu-icon-bilibili faa-tada" style="font-size: 0.9em;"></i><span> 追番页</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/album/"><i class="anzhiyufont anzhiyu-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于本人</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="anzhiyufont anzhiyu-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/equipment/"><i class="anzhiyufont anzhiyu-icon-dice-d20 faa-tada" style="font-size: 0.9em;"></i><span> 我的装备</span></a></li></ul></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/ChatGpt/" style="font-size: 0.88rem;">ChatGpt<sup>2</sup></a><a href="/tags/Java/" style="font-size: 0.88rem;">Java<sup>1</sup></a><a href="/tags/MISC/" style="font-size: 0.88rem;">MISC<sup>2</sup></a><a href="/tags/MSF/" style="font-size: 0.88rem;">MSF<sup>1</sup></a><a href="/tags/Navicat/" style="font-size: 0.88rem;">Navicat<sup>1</sup></a><a href="/tags/Web%E5%AE%89%E5%85%A8/" style="font-size: 0.88rem;">Web安全<sup>9</sup></a><a href="/tags/binwalk/" style="font-size: 0.88rem;">binwalk<sup>1</sup></a><a href="/tags/docker/" style="font-size: 0.88rem;">docker<sup>4</sup></a><a href="/tags/java/" style="font-size: 0.88rem;">java<sup>1</sup></a><a href="/tags/mysql/" style="font-size: 0.88rem;">mysql<sup>1</sup></a><a href="/tags/oracle/" style="font-size: 0.88rem;">oracle<sup>1</sup></a><a href="/tags/owasp/" style="font-size: 0.88rem;">owasp<sup>1</sup></a><a href="/tags/phpstudy/" style="font-size: 0.88rem;">phpstudy<sup>1</sup></a><a href="/tags/python/" style="font-size: 0.88rem;">python<sup>1</sup></a><a href="/tags/redis/" style="font-size: 0.88rem;">redis<sup>1</sup></a><a href="/tags/shiro/" style="font-size: 0.88rem;">shiro<sup>1</sup></a><a href="/tags/sql/" style="font-size: 0.88rem;">sql<sup>1</sup></a><a href="/tags/ssrf/" style="font-size: 0.88rem;">ssrf<sup>1</sup></a><a href="/tags/xss/" style="font-size: 0.88rem;">xss<sup>2</sup></a><a href="/tags/%E5%AE%B9%E5%99%A8/" style="font-size: 0.88rem;">容器<sup>1</sup></a><a href="/tags/%E6%8A%A4%E7%BD%91/" style="font-size: 0.88rem;">护网<sup>1</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 0.88rem;">数据库<sup>2</sup></a><a href="/tags/%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7/" style="font-size: 0.88rem;">测试工具<sup>1</sup></a></div></div><hr/></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="anzhiyufont anzhiyu-icon-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="anzhiyufont anzhiyu-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="anzhiyufont anzhiyu-icon-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="anzhiyufont anzhiyu-icon-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="anzhiyufont anzhiyu-icon-xmark"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="anzhiyufont anzhiyu-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="anzhiyufont anzhiyu-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="anzhiyufont anzhiyu-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="anzhiyufont anzhiyu-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="anzhiyufont anzhiyu-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="anzhiyufont anzhiyu-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="anzhiyufont anzhiyu-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="anzhiyufont anzhiyu-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="anzhiyufont anzhiyu-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://y.qq.com/n/ryqq/playlist/8802438608&quot;, &quot;_blank&quot;);" style="display: none;"><i class="anzhiyufont anzhiyu-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="anzhiyufont anzhiyu-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="anzhiyufont anzhiyu-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.cbd.int/medium-zoom@1.0.8/dist/medium-zoom.min.js"></script><script src="https://cdn.cbd.int/instant.page@5.2.0/instantpage.js" type="module"></script><script src="https://cdn.cbd.int/vanilla-lazyload@17.8.4/dist/lazyload.iife.min.js"></script><script src="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.cbd.int/pangu@4.0.7/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (true){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><canvas id="universe"></canvas><script async src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/dark/dark.js"></script><script>// 消除控制台打印
+var HoldLog = console.log;
+console.log = function () {};
+let now1 = new Date();
+queueMicrotask(() => {
+  const Log = function () {
+    HoldLog.apply(console, arguments);
+  }; //在恢复前输出日志
+  const grt = new Date("02/18/2023 00:00:00"); //此处修改你的建站时间或者网站上线时间
+  now1.setTime(now1.getTime() + 250);
+  const days = (now1 - grt) / 1000 / 60 / 60 / 24;
+  const dnum = Math.floor(days);
+  const ascll = [
+    `欢迎使用安知鱼!`,
+    `生活明朗, 万物可爱`,
+    `
+        
+       █████╗ ███╗   ██╗███████╗██╗  ██╗██╗██╗   ██╗██╗   ██╗
+      ██╔══██╗████╗  ██║╚══███╔╝██║  ██║██║╚██╗ ██╔╝██║   ██║
+      ███████║██╔██╗ ██║  ███╔╝ ███████║██║ ╚████╔╝ ██║   ██║
+      ██╔══██║██║╚██╗██║ ███╔╝  ██╔══██║██║  ╚██╔╝  ██║   ██║
+      ██║  ██║██║ ╚████║███████╗██║  ██║██║   ██║   ╚██████╔╝
+      ╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝╚═╝   ╚═╝    ╚═════╝
+        
+        `,
+    "已上线",
+    dnum,
+    "天",
+    "©2023 By 安知鱼 V1.6.9",
+  ];
+  const ascll2 = [`NCC2-036`, `调用前置摄像头拍照成功，识别为【小笨蛋】.`, `Photo captured: `, `🤪`];
+
+  setTimeout(
+    Log.bind(
+      console,
+      `\n%c${ascll[0]} %c ${ascll[1]} %c ${ascll[2]} %c${ascll[3]}%c ${ascll[4]}%c ${ascll[5]}\n\n%c ${ascll[6]}\n`,
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      ""
+    )
+  );
+  setTimeout(
+    Log.bind(
+      console,
+      `%c ${ascll2[0]} %c ${ascll2[1]} %c \n${ascll2[2]} %c\n${ascll2[3]}\n`,
+      "color:white; background-color:#4fd953",
+      "",
+      "",
+      'background:url("https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/tinggge.gif") no-repeat;font-size:450%'
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c WELCOME %c 你好，小笨蛋.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(
+      console,
+      "%c ⚡ Powered by 安知鱼 %c 你正在访问 hihopkc 的博客.",
+      "color:white; background-color:#f0ad4e",
+      ""
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c W23-12 %c 你已打开控制台.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(console, "%c S013-782 %c 你现在正处于监控中.", "color:white; background-color:#d9534f", "")
+  );
+});</script><script async src="/anzhiyu/random.js"></script><script src="https://cdn.cbd.int/algoliasearch@4.18.0/dist/algoliasearch-lite.umd.js"></script><script src="https://cdn.cbd.int/instantsearch.js@4.56.5/dist/instantsearch.production.min.js"></script><script src="/js/search/algolia.js"></script><div class="js-pjax"><script>(() => {
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://hihopkc.space/',
+      region: '',
+      onCommentLoaded: () => {
+        anzhiyu.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') setTimeout(runFn,0)
+    else getScript('https://cdn.cbd.int/twikoo@1.6.21/dist/twikoo.all.min.js').then(runFn)
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://hihopkc.space/',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(res => {
+      countELement.textContent = res[0].count
+    }).catch(err => {
+      console.error(err)
+    })
+  }
+
+  const runFn = () => {
+    init();
+    
+  }
+
+  if ('Twikoo' === 'Twikoo' || !true) {
+    if (true) anzhiyu.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else {
+      loadTwikoo()
+    }
+  } else {
+    window.loadOtherComment = loadTwikoo
+  }
+})()</script><input type="hidden" name="page-type" id="page-type" value="post"></div><script>window.addEventListener('load', () => {
+  const changeContent = (content) => {
+    if (content === '') return content
+
+    content = content.replace(/<img.*?src="(.*?)"?[^\>]+>/ig, '[图片]') // replace image link
+    content = content.replace(/<a[^>]+?href=["']?([^"']+)["']?[^>]*>([^<]+)<\/a>/gi, '[链接]') // replace url
+    content = content.replace(/<pre><code>.*?<\/pre>/gi, '[代码]') // replace code
+    content = content.replace(/<[^>]+>/g,"") // remove html tag
+
+    if (content.length > 150) {
+      content = content.substring(0,150) + '...'
+    }
+    return content
+  }
+
+  const getComment = () => {
+    const runTwikoo = () => {
+      twikoo.getRecentComments({
+        envId: 'https://hihopkc.space/',
+        region: '',
+        pageSize: 6,
+        includeReply: true
+      }).then(function (res) {
+        const twikooArray = res.map(e => {
+          return {
+            'content': changeContent(e.comment),
+            'avatar': e.avatar,
+            'nick': e.nick,
+            'url': e.url + '#' + e.id,
+            'date': new Date(e.created).toISOString()
+          }
+        })
+
+        saveToLocal.set('twikoo-newest-comments', JSON.stringify(twikooArray), 10/(60*24))
+        generateHtml(twikooArray)
+      }).catch(function (err) {
+        const $dom = document.querySelector('#card-newest-comments .aside-list')
+        $dom.textContent= "无法获取评论，请确认相关配置是否正确"
+      })
+    }
+
+    if (typeof twikoo === 'object') {
+      runTwikoo()
+    } else {
+      getScript('https://cdn.cbd.int/twikoo@1.6.21/dist/twikoo.all.min.js').then(runTwikoo)
+    }
+  }
+
+  const generateHtml = array => {
+    let result = ''
+
+    if (array.length) {
+      for (let i = 0; i < array.length; i++) {
+        result += '<div class=\'aside-list-item\'>'
+
+        if (true) {
+          const name = 'data-lazy-src'
+          result += `<a href='${array[i].url}' class='thumbnail'><img ${name}='${array[i].avatar}' alt='${array[i].nick}'><div class='name'><span>${array[i].nick} </span></div></a>`
+        }
+        
+        result += `<div class='content'>
+        <a class='comment' href='${array[i].url}' title='${array[i].content}'>${array[i].content}</a>
+        <time datetime="${array[i].date}">${anzhiyu.diffDate(array[i].date, true)}</time></div>
+        </div>`
+      }
+    } else {
+      result += '没有评论'
+    }
+
+    let $dom = document.querySelector('#card-newest-comments .aside-list')
+    $dom.innerHTML= result
+    window.lazyLoadInstance && window.lazyLoadInstance.update()
+    window.pjax && window.pjax.refresh($dom)
+  }
+
+  const newestCommentInit = () => {
+    if (document.querySelector('#card-newest-comments .aside-list')) {
+      const data = saveToLocal.get('twikoo-newest-comments')
+      if (data) {
+        generateHtml(JSON.parse(data))
+      } else {
+        getComment()
+      }
+    }
+  }
+
+  newestCommentInit()
+  document.addEventListener('pjax:complete', newestCommentInit)
+})</script><script>var visitorMail = "visitor@anheyu.com";
+</script><script async data-pjax src="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/waterfall/waterfall.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/qrcodejs/1.0.0/qrcode.min.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.9/icon/ali_iconfont_css.css"><script type="text/javascript" src="/js/fps.js"></script><div id="fps"></div><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/aplayer/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.cbd.int/anzhiyu-blog-static@1.0.1/js/APlayer.min.js"></script><script src="https://cdn.cbd.int/hexo-anzhiyu-music@1.0.1/assets/js/Meting2.min.js"></script><script src="https://cdn.cbd.int/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["meta[property=\"og:image\"]","meta[property=\"og:title\"]","meta[property=\"og:url\"]","meta[property=\"og:type\"]","meta[property=\"og:site_name\"]","meta[property=\"og:description\"]","head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"]):not([href="/music/"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+  // removeEventListener scroll 
+  anzhiyu.removeGlobalFnEvent('pjax')
+  anzhiyu.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script charset="UTF-8" src="https://cdn.cbd.int/anzhiyu-theme-static@1.1.5/accesskey/accesskey.js"></script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="anzhiyufont anzhiyu-icon-arrow-circle-right"></i></div></div></div></body></html>
